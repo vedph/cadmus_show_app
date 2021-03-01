@@ -1,0 +1,1 @@
+- categories (string[]): the list of category IDs.

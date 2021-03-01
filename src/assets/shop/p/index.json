@@ -1,11 +1,16 @@
 [
   {
+    "id": "it.vedph.categories",
+    "project": "shell",
+    "name": "categories",
+    "tip": "Categories from a thesaurus.",
+    "tags": ["tags"]
+  },
+  {
     "id": "it.vedph.note",
     "project": "shell",
     "name": "note",
     "tip": "General-purpose rich text note.",
-    "tags": [
-      "note"
-    ]
+    "tags": ["note"]
   }
 ]
