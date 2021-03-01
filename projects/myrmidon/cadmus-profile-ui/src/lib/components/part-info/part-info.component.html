@@ -21,10 +21,17 @@
         </div>
       </mat-tab>
       <!-- gallery -->
-      <mat-tab label="gallery">
+      <mat-tab label="gallery" *ngIf="(model.slides?.length || 0) > 1">
         <cadmus-screen-gallery
           [slides]="model.slides || []"
         ></cadmus-screen-gallery>
+      </mat-tab>
+      <!-- single image -->
+      <mat-tab label="image" *ngIf="(model.slides?.length || 0) === 1">
+        <figure>
+          <img [src]="'assets/shop/' + $any(model.slides)[0].id" />
+          <figcaption>{{$any(model.slides)[0].label}}</figcaption>
+        </figure>
       </mat-tab>
     </mat-tab-group>
   </mat-card-content>
