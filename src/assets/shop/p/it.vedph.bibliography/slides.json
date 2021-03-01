@@ -1,0 +1,22 @@
+[
+  {
+    "id": "bibliography01.png",
+    "label": "bibliography - list of entries",
+    "tip": "The list of bibliographic entries in the part."
+  },
+  {
+    "id": "bibliography02.png",
+    "label": "bibliography entry - general",
+    "tip": "General properties of a bibliography entry."
+  },
+  {
+    "id": "bibliography03.png",
+    "label": "bibliography entry - container",
+    "tip": "Container properties of a bibliography entry."
+  },
+  {
+    "id": "bibliography04.png",
+    "label": "bibliography entry - keywords",
+    "tip": "Keywords associated to a bibliography entry."
+  }
+]

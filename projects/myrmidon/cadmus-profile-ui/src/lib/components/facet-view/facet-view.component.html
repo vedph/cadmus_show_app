@@ -14,6 +14,7 @@
           <!-- edit facet -->
           <button
             mat-icon-button
+            color="primary"
             matTooltip="Edit this facet's metadata"
             (click)="editFacet()"
           >
@@ -63,6 +64,15 @@
               <mat-icon>format_paint</mat-icon>
             </button>
           </form>
+          <!-- edit part -->
+          <button
+            mat-icon-button
+            matTooltip="Edit the selected part"
+            [disabled]="!selectedPartId"
+            (click)="editSelectedPart()"
+          >
+            <mat-icon>edit_location_alt</mat-icon>
+          </button>
           <!-- save facet -->
           <button
             type="button"

@@ -21,5 +21,12 @@
         (editorClose)="onFacetEditorClose()"
       ></cadmus-facet-metadata-editor>
     </mat-tab>
+
+    <!-- part editor -->
+    <mat-tab label="part" *ngIf="editedPart">
+      <cadmus-part-definition-editor
+        [definition]="editedPart"
+      ></cadmus-part-definition-editor>
+    </mat-tab>
   </mat-tab-group>
 </div>

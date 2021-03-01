@@ -65,6 +65,9 @@ export class FacetViewComponent implements OnInit {
   public editFacetMetadata: EventEmitter<GroupingFacet>;
 
   @Output()
+  public editPart: EventEmitter<GroupedPartDefinition>;
+
+  @Output()
   public viewPartInfo: EventEmitter<GroupedPartDefinition>;
 
   /**
@@ -93,6 +96,7 @@ export class FacetViewComponent implements OnInit {
     this.editFacetMetadata = new EventEmitter<GroupingFacet>();
     this.facetChange = new EventEmitter<GroupingFacet>();
     this.viewPartInfo = new EventEmitter<GroupedPartDefinition>();
+    this.editPart = new EventEmitter<GroupedPartDefinition>();
     this.dirty = false;
     this._subs = [];
     // form
@@ -255,6 +259,19 @@ export class FacetViewComponent implements OnInit {
       return;
     }
     this.viewPartInfo.emit(
+      this._facet?.groups[gi.groupIndex].partDefinitions[gi.partIndex]
+    );
+  }
+
+  public editSelectedPart(): void {
+    if (!this.selectedPartId) {
+      return;
+    }
+    const gi = this.findPart(this.selectedPartId);
+    if (!gi) {
+      return;
+    }
+    this.editPart.emit(
       this._facet?.groups[gi.groupIndex].partDefinitions[gi.partIndex]
     );
   }

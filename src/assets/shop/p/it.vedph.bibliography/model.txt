@@ -1,0 +1,16 @@
+- typeId (string): the type identifier for the entry and its container: e.g. book, journal article, book article, proceedings article, journal review, ebook, site, magazine, newspaper, tweet, TV series, etc. Usually the ID is drawn from a thesaurus.
+- authors: 1 or more authors, each having a first name, a last name, and an optional role ID. The role IDs are usually drawn from a thesaurus, and mostly used for contributors.
+- title
+- language: the ISO 639-3 letters (primary) language code of the bibliographic entry, drawn from a thesaurus.
+- container: the optional container: a journal, a book, a collection of proceedings, etc.
+- contributors: 0 or more contributors, with the same properties of the authors. Usually they also have some role specified, e.g. "editor" for the editor of a book collecting a number of articles from different authors, "translator", "organization", etc.
+- edition: the optional edition number. Default is 0.
+- number: the optional alphanumeric number (e.g. for a journal).
+- publisher: the optional publisher name.
+- yearPub: the optional year of publication. Default is 0.
+- placePub: the optional place of publication.
+- location: the location identifier for the bibliographic item, e.g. an URL or a DOI.
+- accessDate: the optional last access date, typically used for web resources.
+- firstPage, lastPage: the optional pages range. Default values are 0.
+- keywords: any number of optional keywords assigned to the entry, each with its language and value.
+- note: an optional free text note.

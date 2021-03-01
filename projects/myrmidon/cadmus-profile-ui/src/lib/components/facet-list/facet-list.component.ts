@@ -3,8 +3,6 @@ import { deepCopy } from 'projects/myrmidon/cadmus-profile-core/src/lib/utils';
 import { FacetDefinition } from 'projects/myrmidon/cadmus-profile-core/src/public-api';
 import { CadmusShopAssetService } from 'projects/myrmidon/cadmus-shop-asset/src/public-api';
 import { CadmusModel } from 'projects/myrmidon/cadmus-shop-core/src/public-api';
-import { Observable, concat } from 'rxjs';
-import { take } from 'rxjs/operators';
 import { FacetListQuery } from './store/facet-list.query';
 import { GroupedPartDefinition, GroupingFacet } from './store/facet-list.store';
 
@@ -20,6 +18,7 @@ export class FacetListComponent implements OnInit {
   public editedFacet: FacetDefinition | undefined;
   public tabIndex: number;
   public currentModel: CadmusModel | undefined;
+  public editedPart: GroupedPartDefinition | undefined;
 
   constructor(
     query: FacetListQuery,
