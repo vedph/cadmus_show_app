@@ -20,6 +20,7 @@ import { ModelLookupComponent } from './components/model-lookup/model-lookup.com
 import { PartInfoComponent } from './components/part-info/part-info.component';
 import { ScreenGalleryComponent } from './components/screen-gallery/screen-gallery.component';
 import { GalleryModule } from 'ng-gallery';
+import { MarkdownModule } from 'ngx-markdown';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { GalleryModule } from 'ng-gallery';
     NgxMatColorPickerModule,
     NgJsonEditorModule,
     GalleryModule,
+    MarkdownModule.forChild(),
     CadmusMaterialModule,
     CadmusProfileCoreModule,
     CadmusShowUiModule,

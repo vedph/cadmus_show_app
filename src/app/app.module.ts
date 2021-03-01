@@ -20,6 +20,7 @@ import { NgJsonEditorModule } from 'ang-jsoneditor';
 import { GalleryModule } from 'ng-gallery';
 import { FacetListPageComponent } from './components/facet-list-page/facet-list-page.component';
 import { FacetListCodePageComponent } from './components/facet-list-code-page/facet-list-code-page.component';
+import { MarkdownModule } from 'ngx-markdown';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,8 @@ import { FacetListCodePageComponent } from './components/facet-list-code-page/fa
     BrowserAnimationsModule,
     NgJsonEditorModule,
     GalleryModule,
+    // markdown
+    MarkdownModule.forRoot(),
     CadmusMaterialModule,
     CadmusProfileCoreModule,
     CadmusProfileUiModule,

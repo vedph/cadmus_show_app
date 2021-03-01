@@ -222,13 +222,13 @@ export class CadmusShopAssetService {
    */
   public getModelDetails(model: CadmusModel): Observable<CadmusModel> {
     // details are retrieved from:
-    // -dsc.html
+    // -dsc.md
     // -model.txt
     // -slides.json
     const basePath = (model.fragment ? 'f' : 'p') + '/' + model.id + '/';
 
     return forkJoin({
-      d: this.loadText(basePath + 'dsc.html'),
+      d: this.loadText(basePath + 'dsc.md'),
       m: this.loadText(basePath + 'model.txt'),
       s: this.loadObject<ImageSlide[]>(basePath + 'slides'),
     }).pipe(

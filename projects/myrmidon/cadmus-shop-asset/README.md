@@ -8,7 +8,7 @@ Cadmus shop asset-based service. This is used for a file-system based shop, incl
 │   ├── f
 │   │   └── index.json
 │   │       ├── <id-1>
-│   │       │   ├── dsc.html
+│   │       │   ├── dsc.md
 │   │       │   ├── model.txt
 │   │       │   ├── slides.json
 │   │       │       └── img
@@ -23,7 +23,7 @@ Cadmus shop asset-based service. This is used for a file-system based shop, incl
 
 - the shop has 2 sections: `f` for fragments, `p` for parts, with the same structure.
 - the `index.json` file is the index of all the units in each section.
-- each unit has its own folder, named after its ID. This folder includes a `dsc.html` file with its detailed description; a `model.txt` with its formal model; an optional `slides.json` with the list of its slides. The corresponding slides images and thumbnails are in an `img` subfolder.
+- each unit has its own folder, named after its ID. This folder includes a `dsc.md` file with its detailed description; a `model.txt` with its formal model; an optional `slides.json` with the list of its slides. The corresponding slides images and thumbnails are in an `img` subfolder.
 
 This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.1.2.
 

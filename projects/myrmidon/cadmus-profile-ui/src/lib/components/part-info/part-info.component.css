@@ -1,0 +1,15 @@
+figcaption {
+  color: silver;
+}
+.slide-tip {
+  font-size: 95%;
+  font-style: italic;
+}
+.model-prj {
+  border: 1px solid silver;
+  border-radius: 6px;
+  padding: 4px;
+}
+.model-id {
+  color:royalblue;
+}
