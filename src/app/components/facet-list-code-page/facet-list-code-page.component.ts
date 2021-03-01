@@ -16,7 +16,7 @@ export class FacetListCodePageComponent {
 
   public loadSample(): void {
     this._shopService
-      .loadText('samples/facets.json')
+      .loadObject<string>('samples/facets')
       .pipe(take(1))
       .subscribe((s) => {
         this.code = s;

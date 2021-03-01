@@ -6,7 +6,11 @@
         *ngFor="let f of facets"
         [facet]="f"
         (editFacetMetadata)="onEditFacet($event)"
+        (viewPartInfo)="onViewPartInfo($event)"
       ></cadmus-facet-view>
+
+      <!-- info -->
+      <cadmus-part-info [model]="currentModel"></cadmus-part-info>
     </mat-tab>
 
     <!-- facet editor -->

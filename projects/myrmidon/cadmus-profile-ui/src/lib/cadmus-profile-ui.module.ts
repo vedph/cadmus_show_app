@@ -17,6 +17,9 @@ import { NgJsonEditorModule } from 'ang-jsoneditor';
 import { FacetListCodeComponent } from './components/facet-list-code/facet-list-code.component';
 import { PartDefinitionEditorComponent } from './components/part-definition-editor/part-definition-editor.component';
 import { ModelLookupComponent } from './components/model-lookup/model-lookup.component';
+import { PartInfoComponent } from './components/part-info/part-info.component';
+import { ScreenGalleryComponent } from './components/screen-gallery/screen-gallery.component';
+import { GalleryModule } from 'ng-gallery';
 
 @NgModule({
   declarations: [
@@ -26,6 +29,8 @@ import { ModelLookupComponent } from './components/model-lookup/model-lookup.com
     FacetListCodeComponent,
     PartDefinitionEditorComponent,
     ModelLookupComponent,
+    PartInfoComponent,
+    ScreenGalleryComponent,
   ],
   imports: [
     CommonModule,
@@ -34,6 +39,7 @@ import { ModelLookupComponent } from './components/model-lookup/model-lookup.com
     DragDropModule,
     NgxMatColorPickerModule,
     NgJsonEditorModule,
+    GalleryModule,
     CadmusMaterialModule,
     CadmusProfileCoreModule,
     CadmusShowUiModule,
@@ -45,6 +51,8 @@ import { ModelLookupComponent } from './components/model-lookup/model-lookup.com
     FacetListComponent,
     FacetListCodeComponent,
     PartDefinitionEditorComponent,
+    PartInfoComponent,
+    ScreenGalleryComponent
   ],
 })
 export class CadmusProfileUiModule {}

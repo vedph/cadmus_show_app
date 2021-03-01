@@ -27,6 +27,7 @@
     "@myrmidon/cadmus-material": "0.0.5",
     "ang-jsoneditor": "^1.10.5",
     "jsoneditor": "^9.2.0",
+    "ng-gallery": "^5.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"

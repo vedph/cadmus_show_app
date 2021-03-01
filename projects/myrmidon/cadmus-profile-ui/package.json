@@ -6,6 +6,7 @@
     "@angular/core": "^11.1.2",
     "@angular-material-components/color-picker": "^5.0.2",
     "ang-jsoneditor": "^1.10.5",
+    "ng-gallery": "^5.0.0",
     "jsoneditor": "^9.2.0"
   },
   "dependencies": {

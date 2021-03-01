@@ -64,6 +64,9 @@ export class FacetViewComponent implements OnInit {
   @Output()
   public editFacetMetadata: EventEmitter<GroupingFacet>;
 
+  @Output()
+  public viewPartInfo: EventEmitter<GroupedPartDefinition>;
+
   /**
    * Emitted when facet is saved.
    */
@@ -89,6 +92,7 @@ export class FacetViewComponent implements OnInit {
     this.editable = true;
     this.editFacetMetadata = new EventEmitter<GroupingFacet>();
     this.facetChange = new EventEmitter<GroupingFacet>();
+    this.viewPartInfo = new EventEmitter<GroupedPartDefinition>();
     this.dirty = false;
     this._subs = [];
     // form
@@ -246,6 +250,13 @@ export class FacetViewComponent implements OnInit {
 
   public onPartClick(event: MouseEvent): void {
     this.selectedPartId = (event.currentTarget as HTMLElement).id;
+    const gi = this.findPart(this.selectedPartId);
+    if (!gi) {
+      return;
+    }
+    this.viewPartInfo.emit(
+      this._facet?.groups[gi.groupIndex].partDefinitions[gi.partIndex]
+    );
   }
 
   public onPartRemoved(event: MatChipEvent): void {

@@ -17,6 +17,7 @@ import { CadmusShowUiModule } from 'projects/myrmidon/cadmus-show-ui/src/public-
 import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 import { environment } from '../environments/environment';
 import { NgJsonEditorModule } from 'ang-jsoneditor';
+import { GalleryModule } from 'ng-gallery';
 import { FacetListPageComponent } from './components/facet-list-page/facet-list-page.component';
 import { FacetListCodePageComponent } from './components/facet-list-code-page/facet-list-code-page.component';
 
@@ -33,6 +34,7 @@ import { FacetListCodePageComponent } from './components/facet-list-code-page/fa
     CommonModule,
     BrowserAnimationsModule,
     NgJsonEditorModule,
+    GalleryModule,
     CadmusMaterialModule,
     CadmusProfileCoreModule,
     CadmusProfileUiModule,

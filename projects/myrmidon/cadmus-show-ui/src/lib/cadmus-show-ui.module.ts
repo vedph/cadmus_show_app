@@ -3,10 +3,12 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CadmusMaterialModule } from '@myrmidon/cadmus-material';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 
 @NgModule({
   declarations: [
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    SafeHtmlPipe
   ],
   imports: [
     CommonModule,
@@ -15,7 +17,8 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     CadmusMaterialModule
   ],
   exports: [
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    SafeHtmlPipe
   ],
 })
 export class CadmusShowUiModule {}

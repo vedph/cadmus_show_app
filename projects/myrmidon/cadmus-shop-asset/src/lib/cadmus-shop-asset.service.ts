@@ -4,8 +4,9 @@ import {
   CadmusModel,
   CadmusModelFilter,
   DataPage,
+  ImageSlide,
 } from 'projects/myrmidon/cadmus-shop-core/src/lib/shop-models';
-import { Observable, of } from 'rxjs';
+import { forkJoin, Observable, of } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
 /**
@@ -27,10 +28,12 @@ export class CadmusShopAssetService {
    * @param path The path (relative to the root folder).
    */
   public loadText(path: string): Observable<string> {
-    return this._http.get<string>('./assets/shop/' + path);
+    return this._http.get('./assets/shop/' + path, {
+      responseType: 'text',
+    });
   }
 
-  private loadObject<T>(path: string): Observable<T> {
+  public loadObject<T>(path: string): Observable<T> {
     return this._http.get<T>('./assets/shop/' + path + '.json');
   }
 
@@ -178,10 +181,10 @@ export class CadmusShopAssetService {
 
     if (fragment) {
       cachedMap = this._frModels;
-      path = 'f/index.json';
+      path = 'f/index';
     } else {
       cachedMap = this._partModels;
-      path = 'p/index.json';
+      path = 'p/index';
     }
 
     // if not cached:
@@ -210,5 +213,39 @@ export class CadmusShopAssetService {
       // else just use the cached map
       return of(cachedMap.get(id));
     }
+  }
+
+  /**
+   * Get a model with supplied details (description, code, slides).
+   *
+   * @param model The model to retrieve details for.
+   */
+  public getModelDetails(model: CadmusModel): Observable<CadmusModel> {
+    // details are retrieved from:
+    // -dsc.html
+    // -model.txt
+    // -slides.json
+    const basePath = (model.fragment ? 'f' : 'p') + '/' + model.id + '/';
+
+    return forkJoin({
+      d: this.loadText(basePath + 'dsc.html'),
+      m: this.loadText(basePath + 'model.txt'),
+      s: this.loadObject<ImageSlide[]>(basePath + 'slides'),
+    }).pipe(
+      map((r) => {
+        return {
+          ...model,
+          description: r.d,
+          code: r.m,
+          // supply full path relative to shop's root in slides
+          slides: r.s.map(slide => {
+            return {
+              ...slide,
+              id: basePath + 'img/' + slide.id
+            }
+          }),
+        };
+      })
+    );
   }
 }

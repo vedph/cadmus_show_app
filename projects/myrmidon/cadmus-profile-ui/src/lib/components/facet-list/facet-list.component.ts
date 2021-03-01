@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { deepCopy } from 'projects/myrmidon/cadmus-profile-core/src/lib/utils';
 import { FacetDefinition } from 'projects/myrmidon/cadmus-profile-core/src/public-api';
+import { CadmusShopAssetService } from 'projects/myrmidon/cadmus-shop-asset/src/public-api';
+import { CadmusModel } from 'projects/myrmidon/cadmus-shop-core/src/public-api';
+import { Observable, concat } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { FacetListQuery } from './store/facet-list.query';
-import { GroupingFacet } from './store/facet-list.store';
+import { GroupedPartDefinition, GroupingFacet } from './store/facet-list.store';
 
 @Component({
   selector: 'cadmus-facet-list',
@@ -15,8 +19,12 @@ export class FacetListComponent implements OnInit {
   public facets: GroupingFacet[];
   public editedFacet: FacetDefinition | undefined;
   public tabIndex: number;
+  public currentModel: CadmusModel | undefined;
 
-  constructor(query: FacetListQuery) {
+  constructor(
+    query: FacetListQuery,
+    private _shopService: CadmusShopAssetService
+  ) {
     this._editedFacetIndex = -1;
     this.facets = [];
     this.tabIndex = 0;
@@ -61,5 +69,16 @@ export class FacetListComponent implements OnInit {
     this.tabIndex = 0;
     this._editedFacetIndex = -1;
     this.editedFacet = undefined;
+  }
+
+  public onViewPartInfo(part: GroupedPartDefinition): void {
+    // TODO fragments
+    this._shopService.getModel(part.typeId, false).subscribe((m) => {
+      if (m) {
+        this._shopService.getModelDetails(m).subscribe((dm) => {
+          this.currentModel = dm;
+        });
+      }
+    });
   }
 }

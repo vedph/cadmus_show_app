@@ -1,0 +1,31 @@
+<mat-card *ngIf="model">
+  <mat-card-header>
+    <mat-card-title>
+      <h3>{{ model.name }}</h3>
+    </mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <p>{{ model.project }} - {{ model.id }}</p>
+    <mat-tab-group>
+      <!-- description -->
+      <mat-tab label="description">
+        <div [innerHTML]="model.description | safeHtml"></div>
+      </mat-tab>
+      <!-- model -->
+      <mat-tab label="model">
+        <div>
+          <code>
+            <pre>{{ model.code }}</pre>
+          </code>
+        </div>
+      </mat-tab>
+      <!-- gallery -->
+      <mat-tab label="gallery">
+        <cadmus-screen-gallery
+          [slides]="model.slides || []"
+        ></cadmus-screen-gallery>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card-content>
+</mat-card>

@@ -16,9 +16,10 @@ export interface CadmusModel {
   project: string;
   name: string;
   tip: string;
+  tags?: string[];
+  // supplied for details:
   code?: string;
   description?: string;
-  tags?: string[];
   slides?: ImageSlide[];
 }
 
