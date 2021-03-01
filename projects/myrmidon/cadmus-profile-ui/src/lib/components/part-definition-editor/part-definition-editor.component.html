@@ -1,0 +1,152 @@
+<form [formGroup]="form" (submit)="save()">
+  <div>
+    <!-- typeId -->
+    <mat-form-field>
+      <input matInput [formControl]="typeId" placeholder="typeId" />
+      <mat-error
+        *ngIf="typeId.errors?.required && (typeId.dirty || typeId.touched)"
+        >typeId required</mat-error
+      >
+      <mat-error
+        *ngIf="typeId.errors?.maxLength && (typeId.dirty || typeId.touched)"
+        >typeId too long</mat-error
+      >
+    </mat-form-field>
+  </div>
+  <div>
+    <cadmus-model-lookup
+      label="part model"
+      (itemChange)="onPartModelPicked($event)"
+    ></cadmus-model-lookup>
+  </div>
+
+  <div>
+    <!-- name -->
+    <mat-form-field>
+      <input matInput [formControl]="name" placeholder="name" />
+      <mat-error *ngIf="name.errors?.required && (name.dirty || name.touched)"
+        >name required</mat-error
+      >
+      <mat-error *ngIf="name.errors?.maxLength && (name.dirty || name.touched)"
+        >name too long</mat-error
+      >
+    </mat-form-field>
+    <!-- required -->
+    &nbsp;
+    <mat-checkbox [formControl]="required">required</mat-checkbox>
+  </div>
+
+  <div>
+    <!-- roleId -->
+    <mat-form-field>
+      <input matInput [formControl]="roleId" placeholder="role ID" />
+      <mat-error
+        *ngIf="roleId.errors?.required && (roleId.dirty || roleId.touched)"
+        >role ID required</mat-error
+      >
+      <mat-error
+        *ngIf="roleId.errors?.maxLength && (roleId.dirty || roleId.touched)"
+        >role ID too long</mat-error
+      >
+    </mat-form-field>
+  </div>
+  <div>
+    <cadmus-model-lookup
+      [fragment]="true"
+      label="fragment model"
+      (itemChange)="onFragmentModelPicked($event)"
+    ></cadmus-model-lookup>
+  </div>
+
+  <div>
+    <!-- description -->
+    <mat-form-field style="width: 100%; max-width: 800px">
+      <textarea
+        matInput
+        rows="2"
+        [formControl]="description"
+        placeholder="description"
+      ></textarea>
+      <mat-error
+        *ngIf="
+          description.errors?.required &&
+          (description.dirty || description.touched)
+        "
+        >description required</mat-error
+      >
+      <mat-error
+        *ngIf="
+          description.errors?.maxLength &&
+          (description.dirty || description.touched)
+        "
+        >description too long</mat-error
+      >
+    </mat-form-field>
+  </div>
+
+  <div>
+    <!-- colorKey -->
+    <mat-form-field style="width: 8em">
+      <input matInput [ngxMatColorPicker]="picker" [formControl]="colorKey" />
+      <ngx-mat-color-toggle matSuffix [for]="picker"></ngx-mat-color-toggle>
+      <ngx-mat-color-picker #picker></ngx-mat-color-picker>
+    </mat-form-field>
+
+    <!-- groupKey -->
+    &nbsp;
+    <mat-form-field>
+      <input matInput [formControl]="groupKey" placeholder="group key" />
+      <mat-error
+        *ngIf="groupKey.errors?.pattern && (groupKey.dirty || groupKey.touched)"
+        >invalid g-key</mat-error
+      >
+      <mat-error
+        *ngIf="
+          groupKey.errors?.maxLength && (groupKey.dirty || groupKey.touched)
+        "
+        >g-key too long</mat-error
+      >
+    </mat-form-field>
+
+    &nbsp;
+    <!-- sortKey -->
+    &nbsp;
+    <mat-form-field>
+      <input matInput [formControl]="sortKey" placeholder="sort key" />
+      <mat-error
+        *ngIf="sortKey.errors?.required && (sortKey.dirty || sortKey.touched)"
+        >s-key required</mat-error
+      >
+      <mat-error
+        *ngIf="sortKey.errors?.pattern && (sortKey.dirty || sortKey.touched)"
+        >s-key required</mat-error
+      >
+      <mat-error
+        *ngIf="sortKey.errors?.maxLength && (sortKey.dirty || sortKey.touched)"
+        >s-key too long</mat-error
+      >
+    </mat-form-field>
+  </div>
+
+  <!-- buttons -->
+  <div>
+    <button
+      type="button"
+      color="warn"
+      mat-icon-button
+      matTooltip="Discard changes"
+      (click)="cancel()"
+    >
+      <mat-icon>clear</mat-icon>
+    </button>
+    <button
+      type="submit"
+      color="primary"
+      mat-icon-button
+      matTooltip="Accept changes"
+      [disabled]="form.invalid || form.pristine"
+    >
+      <mat-icon>check_circle</mat-icon>
+    </button>
+  </div>
+</form>

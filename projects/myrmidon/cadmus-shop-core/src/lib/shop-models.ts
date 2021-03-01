@@ -14,7 +14,7 @@ export interface CadmusModel {
   fragment?: boolean;
   id: string;
   project: string;
-  title: string;
+  name: string;
   tip: string;
   code?: string;
   description?: string;
@@ -46,6 +46,8 @@ export interface DataPage<T> {
  */
 export interface CadmusModelFilter extends PagingOptions {
   project?: string;
-  title?: string;
+  typeId?: string;
+  name?: string;
   tags?: string[];
+  matchAny?: boolean;
 }

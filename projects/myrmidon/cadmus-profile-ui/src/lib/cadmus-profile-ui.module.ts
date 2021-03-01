@@ -15,6 +15,8 @@ import {
 import { FacetListComponent } from './components/facet-list/facet-list.component';
 import { NgJsonEditorModule } from 'ang-jsoneditor';
 import { FacetListCodeComponent } from './components/facet-list-code/facet-list-code.component';
+import { PartDefinitionEditorComponent } from './components/part-definition-editor/part-definition-editor.component';
+import { ModelLookupComponent } from './components/model-lookup/model-lookup.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import { FacetListCodeComponent } from './components/facet-list-code/facet-list-
     FacetMetadataEditorComponent,
     FacetListComponent,
     FacetListCodeComponent,
+    PartDefinitionEditorComponent,
+    ModelLookupComponent,
   ],
   imports: [
     CommonModule,
@@ -39,7 +43,8 @@ import { FacetListCodeComponent } from './components/facet-list-code/facet-list-
     FacetViewComponent,
     FacetMetadataEditorComponent,
     FacetListComponent,
-    FacetListCodeComponent
+    FacetListCodeComponent,
+    PartDefinitionEditorComponent,
   ],
 })
 export class CadmusProfileUiModule {}

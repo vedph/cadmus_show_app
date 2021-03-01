@@ -9,4 +9,5 @@ export * from './lib/components/facet-list/store/facet-list.service';
 export * from './lib/components/facet-list/store/facet-list.store';
 export * from './lib/components/facet-list-code/facet-list-code.component';
 export * from './lib/components/facet-view/facet-view.component';
+export * from './lib/components/part-definition-editor/part-definition-editor.component';
 export * from './lib/cadmus-profile-ui.module';

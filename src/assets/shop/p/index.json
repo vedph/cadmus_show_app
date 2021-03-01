@@ -2,7 +2,7 @@
   {
     "id": "it.vedph.note",
     "project": "shell",
-    "title": "Note",
+    "name": "note",
     "tip": "General-purpose rich text note.",
     "tags": [
       "note"

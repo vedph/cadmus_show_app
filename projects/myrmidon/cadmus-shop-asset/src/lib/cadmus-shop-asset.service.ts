@@ -21,6 +21,11 @@ export class CadmusShopAssetService {
 
   constructor(private _http: HttpClient) {}
 
+  /**
+   * Load a text from the specified path in the shop.
+   *
+   * @param path The path (relative to the root folder).
+   */
   public loadText(path: string): Observable<string> {
     return this._http.get<string>('./assets/shop/' + path);
   }
@@ -30,22 +35,41 @@ export class CadmusShopAssetService {
   }
 
   private matchFilter(model: CadmusModel, filter: CadmusModelFilter): boolean {
-    if (filter.project && model.project !== filter.project) {
+    if (filter.matchAny) {
+      if (filter.project && model.project === filter.project) {
+        return true;
+      }
+      if (
+        filter.name &&
+        model.name.toLowerCase().includes(filter.name.toLowerCase())
+      ) {
+        return true;
+      }
+      if (
+        filter.tags?.length &&
+        filter.tags.some((t) => model.tags?.includes(t))
+      ) {
+        return true;
+      }
       return false;
+    } else {
+      if (filter.project && model.project !== filter.project) {
+        return false;
+      }
+      if (
+        filter.name &&
+        !model.name.toLowerCase().includes(filter.name.toLowerCase())
+      ) {
+        return false;
+      }
+      if (
+        filter.tags?.length &&
+        filter.tags.every((t) => !model.tags?.includes(t))
+      ) {
+        return false;
+      }
+      return true;
     }
-    if (
-      filter.title &&
-      !model.title.toLowerCase().includes(filter.title.toLowerCase())
-    ) {
-      return false;
-    }
-    if (
-      filter.tags?.length &&
-      filter.tags.every((t) => !model.tags?.includes(t))
-    ) {
-      return false;
-    }
-    return true;
   }
 
   private getModelPage(
@@ -72,7 +96,7 @@ export class CadmusShopAssetService {
    * @param filter The filter.
    * @param fragment True to get fragments, false to get parts.
    */
-  getModels(
+  public getModels(
     filter: CadmusModelFilter,
     fragment: boolean
   ): Observable<DataPage<CadmusModel>> {
@@ -116,12 +140,39 @@ export class CadmusShopAssetService {
   }
 
   /**
+   * Lookup the first N models matching the specified filter.
+   *
+   * @param filter The title filter.
+   * @param fragment True to lookup fragments, false to lookup parts.
+   * @param limit The max number of results to return.
+   */
+  public lookupModels(
+    filter: string,
+    fragment: boolean,
+    limit = 10
+  ): Observable<CadmusModel[]> {
+    return this.getModels(
+      {
+        pageNumber: 1,
+        pageSize: limit,
+        name: filter,
+        typeId: filter,
+        matchAny: true,
+      },
+      fragment
+    ).pipe(map((p) => p.items));
+  }
+
+  /**
    * Get the part or fragment with the specified ID.
    *
    * @param id The part or fragment ID.
    * @param fragment True to get fragments, false to get parts.
    */
-  getModel(id: string, fragment: boolean): Observable<CadmusModel | undefined> {
+  public getModel(
+    id: string,
+    fragment: boolean
+  ): Observable<CadmusModel | undefined> {
     let cachedMap: Map<string, CadmusModel> | undefined;
     let path: string;
 

@@ -1,0 +1,31 @@
+<form [formGroup]="form">
+  <mat-autocomplete #lookupAuto="matAutocomplete" [displayWith]="getLookupName">
+    <mat-option
+      *ngFor="let item of items$ | async"
+      [value]="item"
+      (onSelectionChange)="pickItem(item)"
+    >
+      {{ item?.name }}
+    </mat-option>
+  </mat-autocomplete>
+
+  <mat-form-field>
+    <input
+      matInput
+      type="text"
+      [placeholder]="label || 'name'"
+      [formControl]="lookup"
+      [matAutocomplete]="lookupAuto"
+    />
+  </mat-form-field>
+  <button
+    type="button"
+    mat-icon-button
+    color="warn"
+    (click)="clear()"
+    [disabled]="!item"
+    matTooltip="Clear"
+  >
+    <mat-icon>clear</mat-icon>
+  </button>
+</form>
