@@ -1,0 +1,30 @@
+.f-label {
+  font-size: 110%;
+  padding: 6px;
+  border: 1px solid #d0d0d0;
+  border-radius: 6px;
+  margin-right: 4px;
+}
+.f-id {
+  color: silver;
+}
+.f-chip-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+.f-chip {
+  flex: 1 1;
+  width: 150px;
+  font-weight: normal;
+}
+.f-chip-selected {
+  border: 2px solid orange;
+}
+/* Animate items as they're being sorted. */
+.cdk-drop-list-dragging .cdk-drag {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+/* Animate an item that has been dropped. */
+.cdk-drag-animating {
+  transition: transform 300ms cubic-bezier(0, 0, 0.2, 1);
+}

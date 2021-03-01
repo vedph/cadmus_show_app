@@ -1,0 +1,2 @@
+- tag (string): generic tag.
+- note (string): Markdown text.

@@ -1,0 +1,26 @@
+footer {
+  background-color: #f9f9f9;
+  color: #808080;
+  padding: 4px;
+  text-align: center;
+  margin-top: 8px;
+  padding-top: 8px;
+  font-size: 95%;
+}
+
+footer a {
+  color: #808080;
+}
+
+.active {
+  font-size: 100% !important;
+}
+
+mat-icon.small-icon {
+  font-size: 85% !important;
+  margin-left: 8px;
+}
+
+.tb-fill-remaining-space {
+  flex: 1 1 auto;
+}

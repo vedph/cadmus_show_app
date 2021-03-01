@@ -1,0 +1,89 @@
+<form [formGroup]="form" (submit)="save()">
+  <!-- id -->
+  <div>
+    <mat-form-field>
+      <input matInput [formControl]="id" placeholder="ID" />
+      <mat-error *ngIf="id.errors?.required && (id.dirty || id.touched)"
+        >ID required</mat-error
+      >
+      <mat-error *ngIf="id.errors?.maxLength && (id.dirty || id.touched)"
+        >ID too long</mat-error
+      >
+      <mat-error *ngIf="id.errors?.pattern && (id.dirty || id.touched)"
+        >invalid ID</mat-error
+      >
+    </mat-form-field>
+  </div>
+
+  <!-- label -->
+  <div>
+    <mat-form-field>
+      <input matInput [formControl]="label" placeholder="label" />
+      <mat-error
+        *ngIf="label.errors?.required && (label.dirty || label.touched)"
+        >label required</mat-error
+      >
+      <mat-error
+        *ngIf="label.errors?.maxLength && (label.dirty || label.touched)"
+        >label too long</mat-error
+      >
+    </mat-form-field>
+  </div>
+
+  <!-- colorKey -->
+  <div>
+    <mat-form-field style="width: 8em">
+      <input matInput [ngxMatColorPicker]="picker" [formControl]="colorKey" />
+      <ngx-mat-color-toggle matSuffix [for]="picker"></ngx-mat-color-toggle>
+      <ngx-mat-color-picker #picker></ngx-mat-color-picker>
+    </mat-form-field>
+  </div>
+
+  <!-- description -->
+  <div>
+    <mat-form-field style="width: 100%; max-width: 800px">
+      <textarea
+        matInput
+        rows="2"
+        [formControl]="description"
+        placeholder="description"
+      ></textarea>
+      <mat-error
+        *ngIf="
+          description.errors?.required &&
+          (description.dirty || description.touched)
+        "
+        >description required</mat-error
+      >
+      <mat-error
+        *ngIf="
+          description.errors?.maxLength &&
+          (description.dirty || description.touched)
+        "
+        >description too long</mat-error
+      >
+    </mat-form-field>
+  </div>
+
+  <!-- buttons -->
+  <div>
+    <button
+      type="button"
+      color="warn"
+      mat-icon-button
+      matTooltip="Discard changes"
+      (click)="cancel()"
+    >
+      <mat-icon>clear</mat-icon>
+    </button>
+    <button
+      type="submit"
+      color="primary"
+      mat-icon-button
+      matTooltip="Accept changes"
+      [disabled]="form.invalid || form.pristine"
+    >
+      <mat-icon>check_circle</mat-icon>
+    </button>
+  </div>
+</form>

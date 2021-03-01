@@ -1,0 +1,14 @@
+{
+  "name": "@myrmidon/cadmus-profile-ui",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^11.1.2",
+    "@angular/core": "^11.1.2",
+    "@angular-material-components/color-picker": "^5.0.2",
+    "ang-jsoneditor": "^1.10.5",
+    "jsoneditor": "^9.2.0"
+  },
+  "dependencies": {
+    "tslib": "^2.0.0"
+  }
+}

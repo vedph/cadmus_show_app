@@ -1,0 +1,21 @@
+<div *ngIf="facets">
+  <mat-tab-group [(selectedIndex)]="tabIndex">
+    <!-- list -->
+    <mat-tab label="list">
+      <cadmus-facet-view
+        *ngFor="let f of facets"
+        [facet]="f"
+        (editFacetMetadata)="onEditFacet($event)"
+      ></cadmus-facet-view>
+    </mat-tab>
+
+    <!-- facet editor -->
+    <mat-tab label="facet" *ngIf="editedFacet">
+      <cadmus-facet-metadata-editor
+        [facet]="editedFacet"
+        (facetChange)="onFacetChange($event)"
+        (editorClose)="onFacetEditorClose()"
+      ></cadmus-facet-metadata-editor>
+    </mat-tab>
+  </mat-tab-group>
+</div>
