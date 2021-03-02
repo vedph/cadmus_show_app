@@ -11,17 +11,33 @@ import { FlagListService } from './store/flag-list.service';
 })
 export class FlagListComponent implements OnInit {
   public flags$: Observable<FlagDefinition[]>;
+  public flag$: Observable<FlagDefinition | undefined>;
 
-  constructor(
-    private _flQuery: FlagListQuery,
-    private _flService: FlagListService
-  ) {
-    this.flags$ = _flQuery.selectAll();
+  constructor(private _flService: FlagListService, flQuery: FlagListQuery) {
+    this.flags$ = flQuery.selectAll();
+    this.flag$ = flQuery.selectActive();
   }
 
   ngOnInit(): void {}
 
   public addFlag(): void {
-    // TODO
+    this._flService.addFlag();
+  }
+
+  public deleteFlag(id: number): void {
+    this._flService.deleteFlag(id);
+  }
+
+  public editFlag(flag: FlagDefinition): void {
+    this._flService.setActive(flag.id);
+  }
+
+  public onCloseFlag(): void {
+    this._flService.setActive(null);
+  }
+
+  public onFlagChange(flag: FlagDefinition): void {
+    this._flService.updateFlag(flag);
+    this._flService.setActive(null);
   }
 }

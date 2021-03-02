@@ -77,4 +77,8 @@ export class FlagListService {
   public updateFlag(flag: FlagDefinition): void {
     this._store.upsert(flag.id, flag);
   }
+
+  public setActive(id: number | null): void {
+    this._store.setActive(id);
+  }
 }

@@ -1,1 +1,31 @@
-<p>flag-definition-list works!</p>
+<div>
+  <table *ngIf="flags$ | async as flags">
+    <tbody>
+      <tr *ngFor="let f of flags">
+        <td>
+          <button
+            type="button"
+            mat-icon-button
+            color="primary"
+            (click)="editFlag(f)"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button type="button" mat-icon-button color="warn">
+            <mat-icon>remove_circle</mat-icon>
+          </button>
+        </td>
+        <td><span [style.color]="'#' + f.colorKey">&#2B24;</span></td>
+        <td>TODO</td>
+        <td [matTooltip]="f.description">
+          {{ f.label }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <cadmus-flag-definition-editor
+    [flag]="(flag$ | async) || undefined"
+    (editorClose)="onCloseFlag()"
+    (flagChange)="onFlagChange($event)"
+  ></cadmus-flag-definition-editor>
+</div>

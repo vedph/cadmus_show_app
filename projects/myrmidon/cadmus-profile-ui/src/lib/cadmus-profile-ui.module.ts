@@ -23,6 +23,7 @@ import { GalleryModule } from 'ng-gallery';
 import { MarkdownModule } from 'ngx-markdown';
 import { FlagDefinitionEditorComponent } from './components/flag-definition-editor/flag-definition-editor.component';
 import { FlagListComponent } from './components/flag-list/flag-list.component';
+import { FlagBitPipe } from './pipes/flag-bit.pipe';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { FlagListComponent } from './components/flag-list/flag-list.component';
     PartDefinitionEditorComponent,
     PartInfoComponent,
     ScreenGalleryComponent,
+    FlagBitPipe,
   ],
   imports: [
     CommonModule,
