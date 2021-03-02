@@ -22,16 +22,16 @@ export class FlagDefinitionEditorComponent implements OnInit {
   private _definition: FlagDefinition | undefined;
 
   @Input()
-  public get definition(): FlagDefinition | undefined {
+  public get flag(): FlagDefinition | undefined {
     return this._definition;
   }
-  public set definition(value: FlagDefinition | undefined) {
+  public set flag(value: FlagDefinition | undefined) {
     this._definition = value;
     this.updateForm(value);
   }
 
   @Output()
-  public definitionChange: EventEmitter<FlagDefinition>;
+  public flagChange: EventEmitter<FlagDefinition>;
   @Output()
   public editorClose: EventEmitter<any>;
 
@@ -43,7 +43,7 @@ export class FlagDefinitionEditorComponent implements OnInit {
   public flagNumbers: number[];
 
   constructor(formBuilder: FormBuilder, private _colorService: ColorService) {
-    this.definitionChange = new EventEmitter<FlagDefinition>();
+    this.flagChange = new EventEmitter<FlagDefinition>();
     this.editorClose = new EventEmitter<any>();
     // https://2ality.com/2014/05/es6-array-methods.html
     this.flagNumbers = Array.from({ length: 32 }, (_, i) => i + 1);
@@ -71,7 +71,7 @@ export class FlagDefinitionEditorComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.updateForm(this.definition);
+    this.updateForm(this.flag);
   }
 
   private updateForm(definition: FlagDefinition | undefined): void {
@@ -89,7 +89,7 @@ export class FlagDefinitionEditorComponent implements OnInit {
     this.form.markAsPristine();
   }
 
-  private getDefinition(): FlagDefinition {
+  private getFlag(): FlagDefinition {
     return {
       id: 1 << this.id.value,
       label: this.label.value?.trim(),
@@ -106,6 +106,6 @@ export class FlagDefinitionEditorComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-    this.definitionChange.emit(this.getDefinition());
+    this.flagChange.emit(this.getFlag());
   }
 }

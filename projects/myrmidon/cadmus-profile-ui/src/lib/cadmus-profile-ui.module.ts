@@ -22,7 +22,7 @@ import { ScreenGalleryComponent } from './components/screen-gallery/screen-galle
 import { GalleryModule } from 'ng-gallery';
 import { MarkdownModule } from 'ngx-markdown';
 import { FlagDefinitionEditorComponent } from './components/flag-definition-editor/flag-definition-editor.component';
-import { FlagDefinitionListComponent } from './components/flag-definition-list/flag-definition-list.component';
+import { FlagListComponent } from './components/flag-list/flag-list.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +31,7 @@ import { FlagDefinitionListComponent } from './components/flag-definition-list/f
     FacetListComponent,
     FacetListCodeComponent,
     FlagDefinitionEditorComponent,
-    FlagDefinitionListComponent,
+    FlagListComponent,
     ModelLookupComponent,
     PartDefinitionEditorComponent,
     PartInfoComponent,
@@ -57,7 +57,7 @@ import { FlagDefinitionListComponent } from './components/flag-definition-list/f
     FacetListComponent,
     FacetListCodeComponent,
     FlagDefinitionEditorComponent,
-    FlagDefinitionListComponent,
+    FlagListComponent,
     ModelLookupComponent,
     PartDefinitionEditorComponent,
     PartInfoComponent,

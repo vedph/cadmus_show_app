@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FlagDefinitionListComponent } from './flag-definition-list.component';
+import { FlagListComponent } from './flag-list.component';
 
 describe('FlagDefinitionListComponent', () => {
-  let component: FlagDefinitionListComponent;
-  let fixture: ComponentFixture<FlagDefinitionListComponent>;
+  let component: FlagListComponent;
+  let fixture: ComponentFixture<FlagListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FlagDefinitionListComponent ]
+      declarations: [ FlagListComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FlagDefinitionListComponent);
+    fixture = TestBed.createComponent(FlagListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

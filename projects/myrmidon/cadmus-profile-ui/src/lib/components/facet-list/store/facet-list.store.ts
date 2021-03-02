@@ -53,7 +53,7 @@ export interface FacetListState
     ActiveState {}
 
 const INITIAL_STATE = {
-  active: null
+  active: null,
 };
 
 /**
@@ -64,7 +64,7 @@ const INITIAL_STATE = {
  * Each of these groups has an array of GroupedPartDefinition's.
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 @StoreConfig({ name: 'facets' })
 export class FacetListStore extends EntityStore<FacetListState> {
