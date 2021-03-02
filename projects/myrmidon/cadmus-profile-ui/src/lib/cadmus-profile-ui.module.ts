@@ -21,6 +21,8 @@ import { PartInfoComponent } from './components/part-info/part-info.component';
 import { ScreenGalleryComponent } from './components/screen-gallery/screen-gallery.component';
 import { GalleryModule } from 'ng-gallery';
 import { MarkdownModule } from 'ngx-markdown';
+import { FlagDefinitionEditorComponent } from './components/flag-definition-editor/flag-definition-editor.component';
+import { FlagDefinitionListComponent } from './components/flag-definition-list/flag-definition-list.component';
 
 @NgModule({
   declarations: [
@@ -28,8 +30,10 @@ import { MarkdownModule } from 'ngx-markdown';
     FacetMetadataEditorComponent,
     FacetListComponent,
     FacetListCodeComponent,
-    PartDefinitionEditorComponent,
+    FlagDefinitionEditorComponent,
+    FlagDefinitionListComponent,
     ModelLookupComponent,
+    PartDefinitionEditorComponent,
     PartInfoComponent,
     ScreenGalleryComponent,
   ],
@@ -52,9 +56,12 @@ import { MarkdownModule } from 'ngx-markdown';
     FacetMetadataEditorComponent,
     FacetListComponent,
     FacetListCodeComponent,
+    FlagDefinitionEditorComponent,
+    FlagDefinitionListComponent,
+    ModelLookupComponent,
     PartDefinitionEditorComponent,
     PartInfoComponent,
-    ScreenGalleryComponent
+    ScreenGalleryComponent,
   ],
 })
 export class CadmusProfileUiModule {}

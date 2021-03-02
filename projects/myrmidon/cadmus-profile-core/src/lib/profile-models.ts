@@ -22,3 +22,13 @@ export interface FacetDefinition {
   colorKey?: string;
   partDefinitions: PartDefinition[];
 }
+
+/**
+ * A flag definition.
+ */
+export interface FlagDefinition {
+  id: number;
+  label: string;
+  description: string;
+  colorKey: string;
+}
