@@ -1,9 +1,37 @@
 [
   {
+    "id": "it.vedph.bibliography",
+    "project": "shell",
+    "name": "bibliography",
+    "tip": "Bottom-down bibliography.",
+    "tags": ["references"]
+  },
+  {
     "id": "it.vedph.categories",
     "project": "shell",
     "name": "categories",
     "tip": "Categories from a thesaurus.",
+    "tags": ["tags"]
+  },
+  {
+    "id": "it.vedph.historical-date",
+    "project": "shell",
+    "name": "date",
+    "tip": "Historical date with optional references.",
+    "tags": ["time"]
+  },
+  {
+    "id": "it.vedph.index-keywords",
+    "project": "shell",
+    "name": "index keywords",
+    "tip": "Keywords grouped in several indexes.",
+    "tags": ["tags"]
+  },
+  {
+    "id": "it.vedph.keywords",
+    "project": "shell",
+    "name": "keywords",
+    "tip": "Simple keywords.",
     "tags": ["tags"]
   },
   {
@@ -12,5 +40,19 @@
     "name": "note",
     "tip": "General-purpose rich text note.",
     "tags": ["note"]
+  },
+  {
+    "id": "it.vedph.tiled-text",
+    "project": "shell",
+    "name": "tiled text",
+    "tip": "Tiles-based text.",
+    "tags": ["text"]
+  },
+  {
+    "id": "it.vedph.token-text",
+    "project": "shell",
+    "name": "token text",
+    "tip": "Tokens-based text.",
+    "tags": ["text"]
   }
 ]
