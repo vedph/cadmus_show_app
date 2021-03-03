@@ -15,7 +15,12 @@
           >
             <mat-icon>edit</mat-icon>
           </button>
-          <button type="button" mat-icon-button color="warn">
+          <button
+            type="button"
+            mat-icon-button
+            color="warn"
+            (click)="deleteFlag(f.id)"
+          >
             <mat-icon>remove_circle</mat-icon>
           </button>
         </td>
@@ -27,7 +32,7 @@
       </tr>
     </tbody>
   </table>
-  <mat-card *ngIf="(flag$ | async) as flag">
+  <mat-card *ngIf="flag$ | async as flag" [@inOutAnimation]>
     <mat-card-header>
       <mat-card-title>Flag</mat-card-title>
     </mat-card-header>

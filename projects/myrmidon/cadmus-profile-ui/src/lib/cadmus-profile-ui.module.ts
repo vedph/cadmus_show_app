@@ -24,6 +24,7 @@ import { MarkdownModule } from 'ngx-markdown';
 import { FlagDefinitionEditorComponent } from './components/flag-definition-editor/flag-definition-editor.component';
 import { FlagListComponent } from './components/flag-list/flag-list.component';
 import { FlagBitPipe } from './pipes/flag-bit.pipe';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { FlagBitPipe } from './pipes/flag-bit.pipe';
   imports: [
     CommonModule,
     FormsModule,
+    BrowserAnimationsModule,
     ReactiveFormsModule,
     DragDropModule,
     NgxMatColorPickerModule,
