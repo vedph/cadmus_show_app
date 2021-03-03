@@ -1,27 +1,10 @@
 [
   {
-    "id": "default",
-    "label": "default",
-    "description": "The default facet",
-    "colorKey": "86ACEB",
+    "id": "letter",
+    "label": "letter",
+    "description": "Letter.",
+    "colorKey": "AA3939",
     "partDefinitions": [
-      {
-        "typeId": "it.vedph.categories",
-        "name": "categories",
-        "description": "Item's categories.",
-        "isRequired": true,
-        "colorKey": "98F8F8",
-        "groupKey": "general",
-        "sortKey": "categories"
-      },
-      {
-        "typeId": "it.vedph.index-keywords",
-        "name": "index keywords",
-        "description": "Item's index keywords.",
-        "colorKey": "588BBF",
-        "groupKey": "general",
-        "sortKey": "keywords-x"
-      },
       {
         "typeId": "it.vedph.note",
         "name": "note",
@@ -31,15 +14,7 @@
         "sortKey": "note"
       },
       {
-        "typeId": "it.vedph.comment",
-        "name": "comment",
-        "description": "Comment.",
-        "colorKey": "B2E0AA",
-        "groupKey": "general",
-        "sortKey": "comment"
-      },
-      {
-        "typeId": "it.vedph.bibliography",
+        "typeId": "it.vedph.ext-bibliography",
         "name": "bibliography",
         "description": "Bibliography.",
         "colorKey": "20B2AA",
@@ -47,49 +22,427 @@
         "sortKey": "bibliography"
       },
       {
-        "typeId": "it.vedph.token-text",
-        "roleId": "base-text",
-        "name": "text",
-        "description": "Item's token-based text.",
-        "colorKey": "31AB54",
-        "groupKey": "text",
-        "sortKey": "text"
+        "typeId": "it.vedph.itinera.attachments",
+        "roleId": "",
+        "name": "attachment",
+        "description": "Attachments connected to some document.",
+        "colorKey": "EEE862",
+        "groupKey": "letter",
+        "sortKey": "ep-attachments"
       },
       {
-        "typeId": "it.vedph.token-text-layer",
-        "roleId": "fr.it.vedph.comment",
-        "name": "comments",
-        "description": "Comments on text.",
-        "colorKey": "F8D040",
-        "groupKey": "text",
-        "sortKey": "text-comments"
+        "typeId": "it.vedph.itinera.chronotopics",
+        "roleId": "",
+        "name": "chronotopics",
+        "description": "Chronological and topological coordinates.",
+        "colorKey": "F48483",
+        "groupKey": "letter",
+        "sortKey": "ep-chronotopics"
       },
       {
-        "typeId": "it.vedph.token-text-layer",
-        "roleId": "fr.it.vedph.chronology",
-        "name": "chronology",
-        "description": "Chronological indication.",
-        "colorKey": "DDA0DD",
-        "groupKey": "text",
-        "sortKey": "text-chronology"
+        "typeId": "it.vedph.itinera.cited-persons",
+        "roleId": "",
+        "name": "cited persons",
+        "description": "List of persons cited in a text.",
+        "colorKey": "F5C44E",
+        "groupKey": "letter",
+        "sortKey": "ep-cited-persons"
       },
       {
-        "typeId": "it.vedph.token-text-layer",
-        "roleId": "fr.it.vedph.apparatus",
-        "name": "apparatus",
-        "description": "Critical apparatus.",
-        "colorKey": "D4E0A4",
-        "groupKey": "text",
-        "sortKey": "text-apparatus"
+        "typeId": "it.vedph.itinera.doc-references",
+        "roleId": "",
+        "name": "references",
+        "description": "Document references related to a letter.",
+        "colorKey": "FAC9D5",
+        "groupKey": "letter",
+        "sortKey": "ep-doc-refs"
       },
       {
-        "typeId": "it.vedph.token-text-layer",
-        "roleId": "fr.it.vedph.quotations",
-        "name": "quotations",
-        "description": "Literary quotations.",
+        "typeId": "it.vedph.itinera.letter-info",
+        "roleId": "",
+        "name": "letter info",
+        "description": "Essential information about a letter.",
+        "colorKey": "76CB9C",
+        "groupKey": "letter",
+        "sortKey": "ep-letter-info",
+        "isRequired": true
+      }
+    ]
+  },
+  {
+    "id": "correspondent",
+    "label": "correspondent",
+    "description": "A letter's correspondent.",
+    "colorKey": "226666",
+    "partDefinitions": [
+      {
+        "typeId": "it.vedph.note",
+        "name": "note",
+        "description": "A free text note.",
+        "colorKey": "B0A0F8",
+        "groupKey": "general",
+        "sortKey": "note"
+      },
+      {
+        "typeId": "it.vedph.ext-bibliography",
+        "name": "bibliography",
+        "description": "Bibliography.",
+        "colorKey": "20B2AA",
+        "groupKey": "general",
+        "sortKey": "bibliography"
+      },
+      {
+        "typeId": "it.vedph.itinera.corr-dedications",
+        "roleId": "",
+        "name": "dedications",
+        "description": "Dedications between the reference author and correspondent.",
+        "colorKey": "A5CB76",
+        "groupKey": "correspondent",
+        "sortKey": "ep-dedications"
+      },
+      {
+        "typeId": "it.vedph.itinera.corr-exchanges",
+        "roleId": "",
+        "name": "exchanges",
+        "description": "Exchanges of objects between the reference author and correspondent.",
+        "colorKey": "76CBC6",
+        "groupKey": "correspondent",
+        "sortKey": "ep-exchanges"
+      },
+      {
+        "typeId": "it.vedph.itinera.corr-pseudonyms",
+        "roleId": "",
+        "name": "pseudonyms",
+        "description": "Pseudonyms assigned by the reference author to the correspondent, or vice-versa.",
+        "colorKey": "CB9C76",
+        "groupKey": "correspondent",
+        "sortKey": "ep-pseudonyms"
+      },
+      {
+        "typeId": "it.vedph.itinera.doc-references",
+        "roleId": "auth",
+        "name": "a-refs",
+        "description": "Document references by the reference author to the correspondent.",
+        "colorKey": "FAC9D5",
+        "groupKey": "correspondent",
+        "sortKey": "ep-doc-refs-a"
+      },
+      {
+        "typeId": "it.vedph.itinera.doc-references",
+        "roleId": "corr",
+        "name": "c-refs",
+        "description": "Document references by the correspondent to the reference author.",
+        "colorKey": "FAC9D5",
+        "groupKey": "correspondent",
+        "sortKey": "ep-doc-refs-c"
+      },
+      {
+        "typeId": "it.vedph.itinera.person-events",
+        "name": "c-events",
+        "description": "Biographic events connected to a correspondent.",
+        "colorKey": "988BD2",
+        "groupKey": "correspondent",
+        "sortKey": "ep-person-events"
+      },
+      {
+        "typeId": "it.vedph.itinera.person",
+        "roleId": "",
+        "name": "person",
+        "description": "Person's bio.",
+        "colorKey": "62AEEE",
+        "groupKey": "correspondent",
+        "sortKey": "ep-person",
+        "isRequired": true
+      },
+      {
+        "typeId": "it.vedph.itinera.person-works",
+        "roleId": "",
+        "name": "works",
+        "description": "Person's works.",
+        "colorKey": "AE62EE",
+        "groupKey": "correspondent",
+        "sortKey": "ep-person-works"
+      }
+    ]
+  },
+  {
+    "id": "poetic",
+    "label": "poetic",
+    "description": "Data about a poetic text related to letters.",
+    "colorKey": "D46A6A",
+    "partDefinitions": [
+      {
+        "typeId": "it.vedph.note",
+        "name": "note",
+        "description": "A free text note.",
+        "colorKey": "B0A0F8",
+        "groupKey": "general",
+        "sortKey": "note"
+      },
+      {
+        "typeId": "it.vedph.ext-bibliography",
+        "name": "bibliography",
+        "description": "Bibliography.",
+        "colorKey": "20B2AA",
+        "groupKey": "general",
+        "sortKey": "bibliography"
+      },
+      {
+        "typeId": "it.vedph.itinera.attachments",
+        "roleId": "",
+        "name": "attachment",
+        "description": "Attachments connected to some document.",
+        "colorKey": "EEE862",
+        "groupKey": "poetic",
+        "sortKey": "ep-attachments"
+      },
+      {
+        "typeId": "it.vedph.itinera.chronotopics",
+        "roleId": "",
+        "name": "chronotopics",
+        "description": "Chronological and topological coordinates.",
+        "colorKey": "F48483",
+        "groupKey": "poetic",
+        "sortKey": "ep-chronotopics"
+      },
+      {
+        "typeId": "it.vedph.itinera.cited-persons",
+        "roleId": "",
+        "name": "cited persons",
+        "description": "List of persons cited in a text.",
+        "colorKey": "F5C44E",
+        "groupKey": "poetic",
+        "sortKey": "ep-cited-persons"
+      },
+      {
+        "typeId": "it.vedph.itinera.poetic-text-info",
+        "roleId": "",
+        "name": "poetic text info",
+        "description": "Information about a letter-related poetic text.",
+        "colorKey": "D28BA2",
+        "groupKey": "poetic",
+        "sortKey": "ep-poetic-text-info",
+        "isRequired": true
+      }
+    ]
+  },
+  {
+    "id": "manuscript",
+    "label": "manuscript",
+    "description": "Manuscript.",
+    "colorKey": "AA6C39",
+    "partDefinitions": [
+      {
+        "typeId": "it.vedph.note",
+        "name": "note",
+        "description": "A free text note.",
+        "colorKey": "B0A0F8",
+        "groupKey": "general",
+        "sortKey": "note"
+      },
+      {
+        "typeId": "it.vedph.ext-bibliography",
+        "name": "bibliography",
+        "description": "Bibliography.",
+        "colorKey": "20B2AA",
+        "groupKey": "general",
+        "sortKey": "bibliography"
+      },
+      {
+        "typeId": "it.vedph.historical-date",
+        "name": "date",
+        "description": "Historical date.",
+        "colorKey": "F898F8",
+        "groupKey": "general",
+        "sortKey": "date"
+      },
+      {
+        "typeId": "it.vedph.itinera.ms-binding",
+        "roleId": "",
+        "name": "ms binding",
+        "description": "Manuscript's binding.",
+        "colorKey": "AF6465",
+        "groupKey": "manuscript",
+        "sortKey": "ms-binding"
+      },
+      {
+        "typeId": "it.vedph.itinera.ms-catchwords",
+        "roleId": "",
+        "name": "ms catchwords",
+        "description": "Manuscript's catchwords.",
+        "colorKey": "FE3A34",
+        "groupKey": "manuscript",
+        "sortKey": "ms-catchwords"
+      },
+      {
+        "typeId": "it.vedph.itinera.ms-composition",
+        "roleId": "",
+        "name": "ms composition",
+        "description": "Manuscript's composition.",
         "colorKey": "DAA520",
-        "groupKey": "text",
-        "sortKey": "text-quotations"
+        "groupKey": "manuscript",
+        "sortKey": "ms-composition"
+      },
+      {
+        "typeId": "it.vedph.itinera.ms-content-loci",
+        "roleId": "",
+        "name": "ms loci",
+        "description": "Manuscript's loci critici.",
+        "colorKey": "C880C4",
+        "groupKey": "manuscript",
+        "sortKey": "ms-loci"
+      },
+      {
+        "typeId": "it.vedph.itinera.ms-contents",
+        "roleId": "",
+        "name": "ms contents",
+        "description": "Manuscript's contents.",
+        "colorKey": "508B5E",
+        "groupKey": "manuscript",
+        "sortKey": "ms-contents"
+      },
+      {
+        "typeId": "it.vedph.itinera.ms-decorations",
+        "roleId": "",
+        "name": "ms decoration",
+        "description": "Manuscript's decoration.",
+        "colorKey": "4D5EF7",
+        "groupKey": "manuscript",
+        "sortKey": "ms-decoration"
+      },
+      {
+        "typeId": "it.vedph.itinera.ms-layouts",
+        "roleId": "",
+        "name": "ms layouts",
+        "description": "Manuscript's layouts.",
+        "colorKey": "72EAF7",
+        "groupKey": "manuscript",
+        "sortKey": "ms-layouts"
+      },
+      {
+        "typeId": "it.vedph.itinera.ms-hands",
+        "roleId": "",
+        "name": "ms hands",
+        "description": "Manuscript's hands.",
+        "colorKey": "F5C2B1",
+        "groupKey": "manuscript",
+        "sortKey": "ms-hands"
+      },
+      {
+        "typeId": "it.vedph.itinera.ms-history",
+        "roleId": "",
+        "name": "ms history",
+        "description": "Manuscript's history.",
+        "colorKey": "C82222",
+        "groupKey": "manuscript",
+        "sortKey": "ms-history"
+      },
+      {
+        "typeId": "it.vedph.itinera.ms-material-dsc",
+        "roleId": "",
+        "name": "ms material",
+        "description": "Manuscript's material description.",
+        "colorKey": "989796",
+        "groupKey": "manuscript",
+        "sortKey": "ms-material-dsc"
+      },
+      {
+        "typeId": "it.vedph.itinera.ms-numberings",
+        "roleId": "",
+        "name": "ms numberings",
+        "description": "Manuscript's numberings.",
+        "colorKey": "8047DD",
+        "groupKey": "manuscript",
+        "sortKey": "ms-numberings"
+      },
+      {
+        "typeId": "it.vedph.itinera.ms-place",
+        "roleId": "",
+        "name": "ms place",
+        "description": "Manuscript's place of origin.",
+        "colorKey": "41943B",
+        "groupKey": "manuscript",
+        "sortKey": "ms-place"
+      },
+      {
+        "typeId": "it.vedph.itinera.ms-poem-ranges",
+        "roleId": "",
+        "name": "ms poem ranges",
+        "description": "Manuscript's poems ranges.",
+        "colorKey": "E72A8E",
+        "groupKey": "manuscript",
+        "sortKey": "ms-poem-ranges"
+      },
+      {
+        "typeId": "it.vedph.itinera.ms-quires",
+        "roleId": "",
+        "name": "ms quires",
+        "description": "Manuscript's quires.",
+        "colorKey": "D4F672",
+        "groupKey": "manuscript",
+        "sortKey": "ms-quires"
+      },
+      {
+        "typeId": "it.vedph.itinera.ms-signatures",
+        "roleId": "",
+        "name": "ms signatures",
+        "description": "Manuscript's signatures.",
+        "colorKey": "D7D5DB",
+        "groupKey": "manuscript",
+        "sortKey": "ms-signatures",
+        "isRequired": true
+      },
+      {
+        "typeId": "it.vedph.itinera.ms-watermarks",
+        "roleId": "",
+        "name": "ms watermarks",
+        "description": "Manuscript's watermarks.",
+        "colorKey": "82DCCA",
+        "groupKey": "manuscript",
+        "sortKey": "ms-watermarks"
+      }
+    ]
+  },
+  {
+    "id": "hand",
+    "label": "hand",
+    "description": "Person's hand.",
+    "colorKey": "2D882D",
+    "partDefinitions": [
+      {
+        "typeId": "it.vedph.note",
+        "name": "note",
+        "description": "A free text note.",
+        "colorKey": "B0A0F8",
+        "groupKey": "general",
+        "sortKey": "note"
+      },
+      {
+        "typeId": "it.vedph.ext-bibliography",
+        "name": "bibliography",
+        "description": "Bibliography.",
+        "colorKey": "20B2AA",
+        "groupKey": "general",
+        "sortKey": "bibliography"
+      },
+      {
+        "typeId": "it.vedph.itinera.person-hand",
+        "roleId": "",
+        "name": "person hand",
+        "description": "Person's hand.",
+        "colorKey": "9D7EDD",
+        "groupKey": "hand",
+        "sortKey": "hand",
+        "isRequired": true
+      },
+      {
+        "typeId": "it.vedph.itinera.person",
+        "roleId": "",
+        "name": "person",
+        "description": "Person's bio.",
+        "colorKey": "62AEEE",
+        "groupKey": "hand",
+        "sortKey": "person"
       }
     ]
   }

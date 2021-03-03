@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "label": "complete",
+    "description": "The item is complete.",
+    "colorKey": "F0B880"
+  },
+  {
+    "id": 2,
+    "label": "revised",
+    "description": "The item has been revised.",
+    "colorKey": "80F080"
+  },
+  {
+    "id": 4,
+    "label": "issues",
+    "description": "The item has issues.",
+    "colorKey": "80F0F0"
+  }
+]

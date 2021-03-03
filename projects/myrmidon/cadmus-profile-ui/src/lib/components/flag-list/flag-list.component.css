@@ -1,0 +1,6 @@
+table {
+  border-collapse: collapse;
+}
+.selected {
+  border: 1px solid royalblue;
+}

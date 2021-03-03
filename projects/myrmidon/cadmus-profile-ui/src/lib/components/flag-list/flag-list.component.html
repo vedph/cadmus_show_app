@@ -5,7 +5,7 @@
   </button>
   <table *ngIf="flags$ | async as flags">
     <tbody>
-      <tr *ngFor="let f of flags">
+      <tr *ngFor="let f of flags" [class.selected]="f === (flag$ | async)">
         <td>
           <button
             type="button"
@@ -24,7 +24,11 @@
             <mat-icon>remove_circle</mat-icon>
           </button>
         </td>
-        <td><span [style.color]="'#' + f.colorKey">&#2B24;</span></td>
+        <td>
+          <span [style.color]="'#' + f.colorKey">
+            <mat-icon>flag</mat-icon>
+          </span>
+        </td>
         <td>{{ f.id | flagBit }}</td>
         <td [matTooltip]="f.description">
           {{ f.label }}

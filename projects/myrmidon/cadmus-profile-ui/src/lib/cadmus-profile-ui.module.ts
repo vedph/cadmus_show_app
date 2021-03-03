@@ -25,6 +25,7 @@ import { FlagDefinitionEditorComponent } from './components/flag-definition-edit
 import { FlagListComponent } from './components/flag-list/flag-list.component';
 import { FlagBitPipe } from './pipes/flag-bit.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FlagListCodeComponent } from './components/flag-list-code/flag-list-code.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FacetListCodeComponent,
     FlagDefinitionEditorComponent,
     FlagListComponent,
+    FlagListCodeComponent,
     ModelLookupComponent,
     PartDefinitionEditorComponent,
     PartInfoComponent,
@@ -62,6 +64,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FacetListCodeComponent,
     FlagDefinitionEditorComponent,
     FlagListComponent,
+    FlagListCodeComponent,
     ModelLookupComponent,
     PartDefinitionEditorComponent,
     PartInfoComponent,
