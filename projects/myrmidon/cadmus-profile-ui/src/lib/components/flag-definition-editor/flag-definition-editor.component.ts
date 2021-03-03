@@ -74,13 +74,24 @@ export class FlagDefinitionEditorComponent implements OnInit {
     this.updateForm(this.flag);
   }
 
+  private getBit(value: number): number {
+    let test = 1;
+    for (let i = 0; i < 32; i++) {
+      if ((value & test) !== 0) {
+        return i;
+      }
+      test <<= 1;
+    }
+    return -1;
+  }
+
   private updateForm(definition: FlagDefinition | undefined): void {
     if (!definition) {
       this.form.reset();
       return;
     }
 
-    this.id.setValue(definition.id);
+    this.id.setValue(this.getBit(definition.id) + 1);
     this.label.setValue(definition.label);
     const rgb = this._colorService.parseRgb(definition.colorKey);
     this.colorKey.setValue(rgb ? new Color(rgb.r, rgb.g, rgb.b) : null);
@@ -91,7 +102,7 @@ export class FlagDefinitionEditorComponent implements OnInit {
 
   private getFlag(): FlagDefinition {
     return {
-      id: 1 << this.id.value,
+      id: 1 << (this.id.value - 1),
       label: this.label.value?.trim(),
       colorKey: this.colorKey.value.hex,
       description: this.description.value?.trim(),

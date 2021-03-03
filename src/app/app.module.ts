@@ -21,6 +21,7 @@ import { GalleryModule } from 'ng-gallery';
 import { FacetListPageComponent } from './components/facet-list-page/facet-list-page.component';
 import { FacetListCodePageComponent } from './components/facet-list-code-page/facet-list-code-page.component';
 import { MarkdownModule } from 'ngx-markdown';
+import { FlagListPageComponent } from './components/flag-list-page/flag-list-page.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { MarkdownModule } from 'ngx-markdown';
     HomeComponent,
     FacetListPageComponent,
     FacetListCodePageComponent,
+    FlagListPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,6 +52,7 @@ import { MarkdownModule } from 'ngx-markdown';
         { path: 'home', component: HomeComponent },
         { path: 'facets-code', component: FacetListCodePageComponent },
         { path: 'facets-list', component: FacetListPageComponent },
+        { path: 'flags-list', component: FlagListPageComponent },
         { path: '**', component: HomeComponent },
       ],
       {

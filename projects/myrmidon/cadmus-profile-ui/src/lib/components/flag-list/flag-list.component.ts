@@ -5,7 +5,7 @@ import { FlagListQuery } from './store/flag-list.query';
 import { FlagListService } from './store/flag-list.service';
 
 @Component({
-  selector: 'cadmus-flag-definition-list',
+  selector: 'cadmus-flag-list',
   templateUrl: './flag-list.component.html',
   styleUrls: ['./flag-list.component.css'],
 })

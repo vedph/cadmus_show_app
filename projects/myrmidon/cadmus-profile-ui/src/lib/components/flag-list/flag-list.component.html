@@ -1,4 +1,8 @@
 <div>
+  <button mat-icon-button color="primary" (click)="addFlag()">
+    <mat-icon>add_circle</mat-icon>
+    add flag
+  </button>
   <table *ngIf="flags$ | async as flags">
     <tbody>
       <tr *ngFor="let f of flags">
@@ -16,16 +20,23 @@
           </button>
         </td>
         <td><span [style.color]="'#' + f.colorKey">&#2B24;</span></td>
-        <td>TODO</td>
+        <td>{{ f.id | flagBit }}</td>
         <td [matTooltip]="f.description">
           {{ f.label }}
         </td>
       </tr>
     </tbody>
   </table>
-  <cadmus-flag-definition-editor
-    [flag]="(flag$ | async) || undefined"
-    (editorClose)="onCloseFlag()"
-    (flagChange)="onFlagChange($event)"
-  ></cadmus-flag-definition-editor>
+  <mat-card *ngIf="(flag$ | async) as flag">
+    <mat-card-header>
+      <mat-card-title>Flag</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <cadmus-flag-definition-editor
+        [flag]="flag"
+        (editorClose)="onCloseFlag()"
+        (flagChange)="onFlagChange($event)"
+      ></cadmus-flag-definition-editor>
+    </mat-card-content>
+  </mat-card>
 </div>
