@@ -32,3 +32,32 @@ export interface FlagDefinition {
   description: string;
   colorKey: string;
 }
+
+/**
+ * A single entry in a thesaurus.
+ */
+export interface ThesaurusEntry {
+  id: string;
+  value: string;
+}
+
+/**
+ * A set of thesaurus entries.
+ */
+export interface Thesaurus {
+  id: string;
+  language: string;
+  targetId?: string;
+  entries?: ThesaurusEntry[];
+}
+
+/**
+ * Filter for thesauri.
+ */
+export interface ThesaurusFilter {
+  pageNumber: number;
+  pageSize: number;
+  id?: string;
+  isAlias?: boolean;
+  language?: string;
+}

@@ -1,0 +1,975 @@
+[
+  {
+    "id": "model-types@en",
+    "entries": [
+      {
+        "id": "it.vedph.note",
+        "value": "note"
+      },
+      {
+        "id": "it.vedph.ext-bibliography",
+        "value": "bibliography"
+      },
+      {
+        "id": "it.vedph.historical-date",
+        "value": "date"
+      },
+      {
+        "id": "it.vedph.itinera.doc-references",
+        "value": "references"
+      },
+      {
+        "id": "it.vedph.itinera.attachments",
+        "value": "attachments"
+      },
+      {
+        "id": "it.vedph.itinera.chronotopics",
+        "value": "chronotopics"
+      },
+      {
+        "id": "it.vedph.itinera.cited-persons",
+        "value": "cited persons"
+      },
+      {
+        "id": "it.vedph.itinera.letter-info",
+        "value": "letter info"
+      },
+      {
+        "id": "it.vedph.itinera.corr-dedications",
+        "value": "dedications"
+      },
+      {
+        "id": "it.vedph.itinera.corr-exchanges",
+        "value": "exchanges"
+      },
+      {
+        "id": "it.vedph.itinera.corr-pseudonyms",
+        "value": "pseudonyms"
+      },
+      {
+        "id": "it.vedph.itinera.person-events",
+        "value": "events"
+      },
+      {
+        "id": "it.vedph.itinera.person",
+        "value": "person"
+      },
+      {
+        "id": "it.vedph.itinera.person-works",
+        "value": "works"
+      },
+      {
+        "id": "it.vedph.itinera.poetic-text-info",
+        "value": "poetic info"
+      },
+      {
+        "id": "it.vedph.itinera.ms-binding",
+        "value": "ms binding"
+      },
+      {
+        "id": "it.vedph.itinera.ms-catchwords",
+        "value": "ms catchwords"
+      },
+      {
+        "id": "it.vedph.itinera.ms-composition",
+        "value": "ms composition"
+      },
+      {
+        "id": "it.vedph.itinera.ms-content-loci",
+        "value": "ms loci"
+      },
+      {
+        "id": "it.vedph.itinera.ms-contents",
+        "value": "ms contents"
+      },
+      {
+        "id": "it.vedph.itinera.ms-decorations",
+        "value": "ms decorations"
+      },
+      {
+        "id": "it.vedph.itinera.ms-layouts",
+        "value": "ms layouts"
+      },
+      {
+        "id": "it.vedph.itinera.ms-hands",
+        "value": "ms hands"
+      },
+      {
+        "id": "it.vedph.itinera.ms-history",
+        "value": "ms history"
+      },
+      {
+        "id": "it.vedph.itinera.ms-material-dsc",
+        "value": "ms matdsc"
+      },
+      {
+        "id": "it.vedph.itinera.ms-numberings",
+        "value": "ms numbers"
+      },
+      {
+        "id": "it.vedph.itinera.ms-place",
+        "value": "ms place"
+      },
+      {
+        "id": "it.vedph.itinera.ms-poem-ranges",
+        "value": "ms poems"
+      },
+      {
+        "id": "it.vedph.itinera.ms-quires",
+        "value": "ms quires"
+      },
+      {
+        "id": "it.vedph.itinera.ms-signatures",
+        "value": "ms signatures"
+      },
+      {
+        "id": "it.vedph.itinera.ms-watermarks",
+        "value": "ms watermarks"
+      },
+      {
+        "id": "it.vedph.itinera.person-hand",
+        "value": "hand"
+      }
+    ]
+  },
+  {
+    "id": "languages@en",
+    "entries": [
+      {
+        "id": "eng",
+        "value": "English"
+      },
+      {
+        "id": "fre",
+        "value": "French"
+      },
+      {
+        "id": "deu",
+        "value": "German"
+      },
+      {
+        "id": "grc",
+        "value": "Ancient Greek"
+      },
+      {
+        "id": "gre",
+        "value": "Modern Greek"
+      },
+      {
+        "id": "ita",
+        "value": "Italian"
+      },
+      {
+        "id": "lat",
+        "value": "Latin"
+      },
+      {
+        "id": "spa",
+        "value": "Spanish"
+      }
+    ]
+  },
+  {
+    "id": "ext-biblio-author-roles@en",
+    "entries": [
+      {
+        "id": "ed",
+        "value": "editor"
+      },
+      {
+        "id": "tr",
+        "value": "translator"
+      },
+      {
+        "id": "org",
+        "value": "organization"
+      }
+    ]
+  },
+  {
+    "id": "ext-biblio-languages@en",
+    "entries": [
+      {
+        "id": "eng",
+        "value": "English"
+      },
+      {
+        "id": "deu",
+        "value": "German"
+      },
+      {
+        "id": "ita",
+        "value": "Italian"
+      },
+      {
+        "id": "fra",
+        "value": "French"
+      },
+      {
+        "id": "spa",
+        "value": "Spanish"
+      }
+    ]
+  },
+  {
+    "id": "bio-event-types@en",
+    "entries": [
+      {
+        "id": "abilitation",
+        "value": "abilitazione"
+      },
+      {
+        "id": "purchase",
+        "value": "acquisto"
+      },
+      {
+        "id": "copy",
+        "value": "attività di copia"
+      },
+      {
+        "id": "legal",
+        "value": "atto giuridico"
+      },
+      {
+        "id": "composition",
+        "value": "composizione"
+      },
+      {
+        "id": "job",
+        "value": "professione"
+      },
+      {
+        "id": "meeting",
+        "value": "incontro"
+      },
+      {
+        "id": "enroll",
+        "value": "iscrizione"
+      },
+      {
+        "id": "wedding",
+        "value": "matrimonio"
+      },
+      {
+        "id": "diplomatic",
+        "value": "missione diplomatica"
+      },
+      {
+        "id": "death",
+        "value": "morte"
+      },
+      {
+        "id": "birth",
+        "value": "nascita"
+      },
+      {
+        "id": "appointment",
+        "value": "nomina"
+      },
+      {
+        "id": "note",
+        "value": "postille/annotazioni"
+      },
+      {
+        "id": "travel",
+        "value": "viaggio"
+      },
+      {
+        "id": "-",
+        "value": "altro"
+      }
+    ]
+  },
+  {
+    "id": "epist-attachment-types@en",
+    "entries": [
+      {
+        "id": "ms",
+        "value": "manoscritto"
+      },
+      {
+        "id": "work",
+        "value": "opera/testo"
+      },
+      {
+        "id": "letter",
+        "value": "lettera"
+      },
+      {
+        "id": "object",
+        "value": "oggetto"
+      },
+      {
+        "id": "-",
+        "value": "altro"
+      }
+    ]
+  },
+  {
+    "id": "ms-annotation-types@en",
+    "entries": [
+      {
+        "id": "comment",
+        "value": "commento"
+      },
+      {
+        "id": "note",
+        "value": "nota"
+      },
+      {
+        "id": "header",
+        "value": "titolo corr."
+      },
+      {
+        "id": "index",
+        "value": "indice"
+      },
+      {
+        "id": "correction",
+        "value": "correzione"
+      },
+      {
+        "id": "integration",
+        "value": "integrazione"
+      },
+      {
+        "id": "study",
+        "value": "annotaz.studio"
+      },
+      {
+        "id": "read",
+        "value": "annotaz.consultaz."
+      }
+    ]
+  },
+  {
+    "id": "ms-binding-materials@en",
+    "entries": [
+      {
+        "id": "leather",
+        "value": "pelle"
+      },
+      {
+        "id": "hide",
+        "value": "cuoio"
+      },
+      {
+        "id": "membrane",
+        "value": "membrana"
+      },
+      {
+        "id": "velvet",
+        "value": "velluto"
+      },
+      {
+        "id": "cardboard",
+        "value": "cartone"
+      }
+    ]
+  },
+  {
+    "id": "ms-binding-support-materials@en",
+    "entries": [
+      {
+        "id": "wood",
+        "value": "assi in legno"
+      },
+      {
+        "id": "cardboard",
+        "value": "cartonato"
+      },
+      {
+        "id": "none",
+        "value": "nessuno"
+      }
+    ]
+  },
+  {
+    "id": "ms-catchword-positions@en",
+    "entries": [
+      {
+        "id": "mis",
+        "value": "marg.inf.sx"
+      },
+      {
+        "id": "mic",
+        "value": "marg.inf.cen."
+      },
+      {
+        "id": "mid",
+        "value": "marg.inf.dx"
+      }
+    ]
+  },
+  {
+    "id": "ms-content-states@en",
+    "entries": [
+      {
+        "id": "headless",
+        "value": "acefalo"
+      },
+      {
+        "id": "crippled",
+        "value": "mutilo"
+      },
+      {
+        "id": "gaps",
+        "value": "lacunoso"
+      },
+      {
+        "id": "interrupted",
+        "value": "interrotto"
+      },
+      {
+        "id": "incomplete",
+        "value": "incompleto"
+      },
+      {
+        "id": "excerpts",
+        "value": "estratti"
+      }
+    ]
+  },
+  {
+    "id": "ms-decoration-colors@en",
+    "entries": [
+      {
+        "id": "blue",
+        "value": "blu"
+      },
+      {
+        "id": "red",
+        "value": "rosso"
+      },
+      {
+        "id": "purple",
+        "value": "porpora"
+      },
+      {
+        "id": "green",
+        "value": "verde"
+      },
+      {
+        "id": "ochre",
+        "value": "ocra"
+      },
+      {
+        "id": "gold",
+        "value": "oro"
+      }
+    ]
+  },
+  {
+    "id": "ms-decoration-types@en",
+    "entries": [
+      {
+        "id": "incipit",
+        "value": "pagina incipitaria"
+      },
+      {
+        "id": "page",
+        "value": "pagine decorate"
+      },
+      {
+        "id": "picture",
+        "value": "illustrazioni"
+      },
+      {
+        "id": "decoration",
+        "value": "ornamentazione"
+      },
+      {
+        "id": "head",
+        "value": "iniziali"
+      },
+      {
+        "id": "running",
+        "value": "titoli correnti"
+      },
+      {
+        "id": "drawing",
+        "value": "disegni"
+      },
+      {
+        "id": "frame",
+        "value": "spazi ill./iniziali n.e."
+      }
+    ]
+  },
+  {
+    "id": "ms-formats@en",
+    "entries": [
+      {
+        "id": "-",
+        "value": "---"
+      },
+      {
+        "id": "infolio",
+        "value": "in-folio"
+      },
+      {
+        "id": "in4",
+        "value": "in-4°"
+      },
+      {
+        "id": "in8",
+        "value": "in-8°"
+      },
+      {
+        "id": "in16",
+        "value": "in-16°"
+      }
+    ]
+  },
+  {
+    "id": "ms-guide-positions@en",
+    "entries": [
+      {
+        "id": "below",
+        "value": "sotto iniziale"
+      },
+      {
+        "id": "above",
+        "value": "sopra iniziale"
+      },
+      {
+        "id": "left",
+        "value": "sx iniziale"
+      },
+      {
+        "id": "right",
+        "value": "dx iniziale"
+      },
+      {
+        "id": "behind",
+        "value": "coperta da iniz."
+      }
+    ]
+  },
+  {
+    "id": "ms-languages@en",
+    "entries": [
+      {
+        "id": "lat",
+        "value": "Latin"
+      },
+      {
+        "id": "grc",
+        "value": "Greek"
+      },
+      {
+        "id": "ita",
+        "value": "Italian"
+      }
+    ]
+  },
+  {
+    "id": "ms-hand-sign-types@en",
+    "entries": [
+      {
+        "id": "let",
+        "value": "letter"
+      },
+      {
+        "id": "pct",
+        "value": "punctuation"
+      }
+    ]
+  },
+  {
+    "id": "ms-hand-types@en",
+    "entries": [
+      {
+        "id": "got",
+        "value": "gotica"
+      },
+      {
+        "id": "sgt",
+        "value": "semigotica"
+      },
+      {
+        "id": "mic",
+        "value": "minuscola canc."
+      },
+      {
+        "id": "mea",
+        "value": "mercantesca a."
+      },
+      {
+        "id": "crh",
+        "value": "corsiva um."
+      }
+    ]
+  },
+  {
+    "id": "ms-history-languages@en",
+    "entries": [
+      {
+        "id": "ita",
+        "value": "Italian"
+      },
+      {
+        "id": "lat",
+        "value": "Latin"
+      },
+      {
+        "id": "grc",
+        "value": "Greek"
+      },
+      {
+        "id": "-",
+        "value": "other"
+      }
+    ]
+  },
+  {
+    "id": "ms-history-person-roles@en",
+    "entries": [
+      {
+        "id": "owner",
+        "value": "possessore"
+      },
+      {
+        "id": "annotator",
+        "value": "postillatore"
+      }
+    ]
+  },
+  {
+    "id": "ms-materials@en",
+    "entries": [
+      {
+        "id": "parchment",
+        "value": "membr."
+      },
+      {
+        "id": "paper",
+        "value": "cart."
+      },
+      {
+        "id": "mix",
+        "value": "misto"
+      }
+    ]
+  },
+  {
+    "id": "ms-numbering-eras@en",
+    "entries": [
+      {
+        "id": "c21",
+        "value": "coeva"
+      },
+      {
+        "id": "c14",
+        "value": "sec.XV (cod.XIV)"
+      },
+      {
+        "id": "c15",
+        "value": "antica"
+      },
+      {
+        "id": "c16",
+        "value": "moderna"
+      },
+      {
+        "id": "c19",
+        "value": "recente"
+      }
+    ]
+  },
+  {
+    "id": "ms-numbering-positions@en",
+    "entries": [
+      {
+        "id": "mse",
+        "value": "marg.sup.est."
+      },
+      {
+        "id": "msc",
+        "value": "marg.sup.cen."
+      },
+      {
+        "id": "msi",
+        "value": "marg.sup.int."
+      },
+      {
+        "id": "mie",
+        "value": "marg.inf.est."
+      },
+      {
+        "id": "mic",
+        "value": "marg.inf.cen."
+      },
+      {
+        "id": "mii",
+        "value": "marg.inf.int."
+      },
+      {
+        "id": "is",
+        "value": "intercol.sup."
+      },
+      {
+        "id": "ii",
+        "value": "intercol.inf."
+      }
+    ]
+  },
+  {
+    "id": "ms-numbering-systems@en",
+    "entries": [
+      {
+        "id": "arabic",
+        "value": "arabo"
+      },
+      {
+        "id": "roman",
+        "value": "romano"
+      },
+      {
+        "id": "roman-arabic",
+        "value": "romano+arabo"
+      },
+      {
+        "id": "mix",
+        "value": "misto"
+      }
+    ]
+  },
+  {
+    "id": "ms-numbering-techniques@en",
+    "entries": [
+      {
+        "id": "ink",
+        "value": "inchiostro"
+      },
+      {
+        "id": "lapis",
+        "value": "lapis"
+      },
+      {
+        "id": "mechanic",
+        "value": "n. meccanico"
+      }
+    ]
+  },
+  {
+    "id": "ms-place-areas@en",
+    "entries": [
+      {
+        "id": "italy",
+        "value": "Italia"
+      },
+      {
+        "id": "france",
+        "value": "Francia"
+      },
+      {
+        "id": "germany",
+        "value": "Germania"
+      },
+      {
+        "id": "england",
+        "value": "Inghilterra"
+      },
+      {
+        "id": "spain",
+        "value": "Spagna"
+      },
+      {
+        "id": "portugal",
+        "value": "Portogallo"
+      },
+      {
+        "id": "bohemia",
+        "value": "Boemia"
+      },
+      {
+        "id": "hungary",
+        "value": "Ungheria"
+      },
+      {
+        "id": "-",
+        "value": "altro"
+      }
+    ]
+  },
+  {
+    "id": "ms-provenance-areas@en",
+    "entries": [
+      {
+        "id": "italy",
+        "value": "Italia"
+      },
+      {
+        "id": "france",
+        "value": "Francia"
+      },
+      {
+        "id": "germany",
+        "value": "Germania"
+      },
+      {
+        "id": "england",
+        "value": "Inghilterra"
+      },
+      {
+        "id": "spain",
+        "value": "Spagna"
+      },
+      {
+        "id": "portugal",
+        "value": "Portogallo"
+      },
+      {
+        "id": "bohemia",
+        "value": "Boemia"
+      },
+      {
+        "id": "hungary",
+        "value": "Ungheria"
+      },
+      {
+        "id": "-",
+        "value": "altro"
+      }
+    ]
+  },
+  {
+    "id": "ms-rubrication-types@en",
+    "entries": [
+      {
+        "id": "copyst",
+        "value": "copista"
+      },
+      {
+        "id": "other",
+        "value": "altra mano"
+      }
+    ]
+  },
+  {
+    "id": "ms-ruling-techniques@en",
+    "entries": [
+      {
+        "id": "dry",
+        "value": "a secco"
+      },
+      {
+        "id": "color",
+        "value": "a colore"
+      },
+      {
+        "id": "mine",
+        "value": "a mina di piombo"
+      },
+      {
+        "id": "ink",
+        "value": "a inchiostro"
+      },
+      {
+        "id": "fold",
+        "value": "per piegatura"
+      },
+      {
+        "id": "-",
+        "value": "altro"
+      }
+    ]
+  },
+  {
+    "id": "ms-states@en",
+    "entries": [
+      {
+        "id": "s1",
+        "value": "ottimo"
+      },
+      {
+        "id": "s2",
+        "value": "buono"
+      },
+      {
+        "id": "s3",
+        "value": "discreto"
+      },
+      {
+        "id": "s4",
+        "value": "precario"
+      },
+      {
+        "id": "s5",
+        "value": "pessimo"
+      }
+    ]
+  },
+  {
+    "id": "person-name-types@en",
+    "entries": [
+      {
+        "id": "first",
+        "value": "first"
+      },
+      {
+        "id": "last",
+        "value": "last"
+      },
+      {
+        "id": "name",
+        "value": "name"
+      },
+      {
+        "id": "title",
+        "value": "title"
+      }
+    ]
+  },
+  {
+    "id": "physical-size-units@en",
+    "entries": [
+      {
+        "id": "cm",
+        "value": "cm"
+      },
+      {
+        "id": "mm",
+        "value": "mm"
+      }
+    ]
+  },
+  {
+    "id": "text-metres@en",
+    "entries": [
+      {
+        "id": "canzone",
+        "value": "canzone"
+      },
+      {
+        "id": "carme",
+        "value": "carme"
+      },
+      {
+        "id": "egloga",
+        "value": "egloga"
+      },
+      {
+        "id": "epigramma",
+        "value": "epigramma"
+      },
+      {
+        "id": "sonetto",
+        "value": "sonetto"
+      },
+      {
+        "id": "sonetto-c",
+        "value": "sonetto caudato/ritornellato"
+      },
+      {
+        "id": "stanza",
+        "value": "stanza di canzone"
+      },
+      {
+        "id": "terza",
+        "value": "terza rima"
+      }
+    ]
+  }
+]

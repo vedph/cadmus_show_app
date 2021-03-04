@@ -1,0 +1,96 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title> Thesauri </mat-card-title>
+  </mat-card-header>
+  <mat-card-content
+    gdAreas="spinner spinner | filters list | . paginator"
+    gdAreas.lt-md="spinner | list | paginator | filters"
+    gdColumns="210px 1fr"
+    gdColumns.lt-md="1fr"
+    gdGap="8px"
+  >
+    <!-- spinner -->
+    <div
+      *ngIf="paginator.isLoading$ | async"
+      gdArea="spinner"
+      gdAlignColumns="center"
+      gdAlignRows="center"
+    >
+      <mat-spinner [diameter]="48" [strokeWidth]="4"></mat-spinner>
+    </div>
+
+    <!-- filters -->
+    <div gdArea="filters" gdAlignRows.lt-md="center">
+      <cadmus-thesaurus-filter
+        [filter]="filter$ | async"
+        (filterChange)="onFilterChange($event)"
+      ></cadmus-thesaurus-filter>
+    </div>
+
+    <!-- list -->
+    <div gdArea="list" *ngIf="pagination$ | async as pagination">
+      <table>
+        <thead>
+          <th></th>
+          <th></th>
+          <th>id</th>
+          <th>entries</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let thesaurus of pagination.data">
+            <td class="command">
+              <button
+                mat-icon-button
+                type="button"
+                matTooltip="Edit {{ thesaurus.id }}"
+                color="primary"
+                (click)="editThesaurus(thesaurus.id)"
+              >
+                <mat-icon>mode_edit</mat-icon>
+              </button>
+            </td>
+            <td class="command">
+              <button
+                mat-icon-button
+                type="button"
+                matTooltip="Delete {{ thesaurus.id }}"
+                color="warn"
+                (click)="deleteThesaurus(thesaurus.id)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+            <td>{{ thesaurus.id }}</td>
+            <td>
+              {{ thesaurus.entries?.length || 0 }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <mat-paginator
+        gdArea="pagination"
+        gdAlignColumns="center"
+        gdAlignRows="start"
+        [length]="pagination.total"
+        [pageSize]="pageSize?.value"
+        [pageSizeOptions]="[20, 50, 75, 100]"
+        [pageIndex]="pagination.currentPage - 1"
+        [showFirstLastButtons]="true"
+        (page)="pageChanged($event)"
+      ></mat-paginator>
+    </div>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button
+      type="button"
+      color="primary"
+      mat-raised-button
+      matTooltip="Add a new thesaurus"
+      (click)="addThesaurus()"
+    >
+      <mat-icon>add_circle</mat-icon>
+      add item
+    </button>
+  </mat-card-actions>
+</mat-card>

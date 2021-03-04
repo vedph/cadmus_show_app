@@ -78,6 +78,11 @@ export class FlagListService {
     this._store.upsert(flag.id, flag);
   }
 
+  /**
+   * Set the active flag.
+   *
+   * @param id The ID of the flag to set, or null.
+   */
   public setActive(id: number | null): void {
     this._store.setActive(id);
   }

@@ -26,6 +26,8 @@ import { FlagListComponent } from './components/flag-list/flag-list.component';
 import { FlagBitPipe } from './pipes/flag-bit.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlagListCodeComponent } from './components/flag-list-code/flag-list-code.component';
+import { ThesaurusListComponent } from './components/thesaurus-list/thesaurus-list.component';
+import { ThesaurusFilterComponent } from './components/thesaurus-filter/thesaurus-filter.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,7 @@ import { FlagListCodeComponent } from './components/flag-list-code/flag-list-cod
     FacetMetadataEditorComponent,
     FacetListComponent,
     FacetListCodeComponent,
+    FlagBitPipe,
     FlagDefinitionEditorComponent,
     FlagListComponent,
     FlagListCodeComponent,
@@ -40,7 +43,8 @@ import { FlagListCodeComponent } from './components/flag-list-code/flag-list-cod
     PartDefinitionEditorComponent,
     PartInfoComponent,
     ScreenGalleryComponent,
-    FlagBitPipe,
+    ThesaurusListComponent,
+    ThesaurusFilterComponent,
   ],
   imports: [
     CommonModule,
@@ -69,6 +73,8 @@ import { FlagListCodeComponent } from './components/flag-list-code/flag-list-cod
     PartDefinitionEditorComponent,
     PartInfoComponent,
     ScreenGalleryComponent,
+    ThesaurusListComponent,
+    ThesaurusFilterComponent,
   ],
 })
 export class CadmusProfileUiModule {}
