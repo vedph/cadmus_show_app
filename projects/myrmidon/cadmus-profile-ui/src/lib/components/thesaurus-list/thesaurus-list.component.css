@@ -2,7 +2,9 @@ tr:nth-child(odd) {
   background-color: #eaeaea;
 }
 th {
+  font-weight: normal;
   text-align: left;
+  color: silver;
 }
 td.command {
   width: 24px;

@@ -10,7 +10,10 @@ import { ThesaurusListState, ThesaurusListStore } from './thesaurus-list.store';
 @Injectable({
   providedIn: 'root',
 })
-export class ThesaurusListQuery extends QueryEntity<ThesaurusListState> {
+export class ThesaurusListQuery extends QueryEntity<
+  ThesaurusListState,
+  Thesaurus
+> {
   constructor(store: ThesaurusListStore) {
     super(store);
   }
@@ -22,7 +25,10 @@ export class ThesaurusListQuery extends QueryEntity<ThesaurusListState> {
     if (filter.id && thesaurus.id !== filter.id) {
       return false;
     }
-    if (filter.isAlias && !thesaurus.targetId) {
+    if (filter.isAlias === true && !thesaurus.targetId) {
+      return false;
+    }
+    if (filter.isAlias === false && thesaurus.targetId) {
       return false;
     }
     if (filter.language && thesaurus.language !== filter.language) {
@@ -32,7 +38,7 @@ export class ThesaurusListQuery extends QueryEntity<ThesaurusListState> {
   }
 
   public getPage(filter: ThesaurusFilter): DataPage<Thesaurus> {
-    const thesauri = this.getAll()
+    const thesauri = [...this.getAll()]
       .filter((t) => {
         return this.matchThesaurus(t, filter);
       })

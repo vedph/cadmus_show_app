@@ -28,6 +28,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlagListCodeComponent } from './components/flag-list-code/flag-list-code.component';
 import { ThesaurusListComponent } from './components/thesaurus-list/thesaurus-list.component';
 import { ThesaurusFilterComponent } from './components/thesaurus-filter/thesaurus-filter.component';
+import { ThesaurusListCodeComponent } from './components/thesaurus-list-code/thesaurus-list-code.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { ThesaurusFilterComponent } from './components/thesaurus-filter/thesauru
     ScreenGalleryComponent,
     ThesaurusListComponent,
     ThesaurusFilterComponent,
+    ThesaurusListCodeComponent,
   ],
   imports: [
     CommonModule,
@@ -75,6 +77,7 @@ import { ThesaurusFilterComponent } from './components/thesaurus-filter/thesauru
     ScreenGalleryComponent,
     ThesaurusListComponent,
     ThesaurusFilterComponent,
+    ThesaurusListCodeComponent,
   ],
 })
 export class CadmusProfileUiModule {}

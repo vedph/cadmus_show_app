@@ -1,0 +1,16 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <h2>Thesauri List Code</h2>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div>
+      <button type="button" mat-stroked-button (click)="loadSample()">
+        <mat-icon>input</mat-icon>
+        load sample
+      </button>
+    </div>
+    <cadmus-thesaurus-list-code [code]="code"></cadmus-thesaurus-list-code>
+  </mat-card-content>
+</mat-card>

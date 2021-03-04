@@ -29,9 +29,9 @@ export class ThesaurusListComponent implements OnInit {
   constructor(
     @Inject(THESAURUS_LIST_PAGINATOR)
     public paginator: PaginatorPlugin<ThesaurusListState>,
+    private _tlQuery: ThesaurusListQuery,
     private _tlService: ThesaurusListService,
     private _tfService: ThesaurusFilterService,
-    private _tlQuery: ThesaurusListQuery,
     private _dialogService: DialogService,
     tfQuery: ThesaurusFilterQuery,
     formBuilder: FormBuilder

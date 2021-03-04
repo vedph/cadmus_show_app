@@ -17,4 +17,5 @@ export * from './lib/components/part-info/part-info.component';
 export * from './lib/components/screen-gallery/screen-gallery.component';
 export * from './lib/components/thesaurus-list/thesaurus-list.component';
 export * from './lib/components/thesaurus-filter/thesaurus-filter.component';
+export * from './lib/components/thesaurus-list-code/thesaurus-list-code.component';
 export * from './lib/cadmus-profile-ui.module';

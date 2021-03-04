@@ -29,10 +29,10 @@
     </mat-form-field>
   </div>
 
-  <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="4px">
+  <div>
     <button
       type="button"
-      mat-mini-fab
+      mat-icon-button
       (click)="reset()"
       color="warn"
       matTooltip="Reset all the filters"
@@ -41,7 +41,7 @@
     </button>
     <button
       type="submit"
-      mat-mini-fab
+      mat-icon-button
       color="primary"
       [disabled]="form.invalid"
       matTooltip="Apply filters"

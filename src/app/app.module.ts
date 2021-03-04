@@ -23,6 +23,8 @@ import { FacetListCodePageComponent } from './components/facet-list-code-page/fa
 import { MarkdownModule } from 'ngx-markdown';
 import { FlagListPageComponent } from './components/flag-list-page/flag-list-page.component';
 import { FlagListCodePageComponent } from './components/flag-list-code-page/flag-list-code-page.component';
+import { ThesaurusListPageComponent } from './components/thesaurus-list-page/thesaurus-list-page.component';
+import { ThesaurusListCodePageComponent } from './components/thesaurus-list-code-page/thesaurus-list-code-page.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import { FlagListCodePageComponent } from './components/flag-list-code-page/flag
     FacetListCodePageComponent,
     FlagListPageComponent,
     FlagListCodePageComponent,
+    ThesaurusListPageComponent,
+    ThesaurusListCodePageComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,6 +60,8 @@ import { FlagListCodePageComponent } from './components/flag-list-code-page/flag
         { path: 'facets-list', component: FacetListPageComponent },
         { path: 'flags-code', component: FlagListCodePageComponent },
         { path: 'flags-list', component: FlagListPageComponent },
+        { path: 'thes-code', component: ThesaurusListCodePageComponent },
+        { path: 'thes-list', component: ThesaurusListPageComponent },
         { path: '**', component: HomeComponent },
       ],
       {

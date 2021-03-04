@@ -29,7 +29,7 @@
 
     <!-- list -->
     <div gdArea="list" *ngIf="pagination$ | async as pagination">
-      <table>
+      <table *ngIf="pagination.data?.length">
         <thead>
           <th></th>
           <th></th>
@@ -67,7 +67,7 @@
           </tr>
         </tbody>
       </table>
-      <mat-paginator
+      <mat-paginator *ngIf="pagination.data?.length"
         gdArea="pagination"
         gdAlignColumns="center"
         gdAlignRows="start"
