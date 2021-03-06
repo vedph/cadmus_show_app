@@ -87,12 +87,14 @@ export class ThesaurusListComponent implements OnInit {
         startWith(initialPageSize),
         // clear the cache when page size changes
         tap((_) => {
+          console.log(this._tlQuery.getCount());
           this.paginator.clearCache();
         })
       ),
       this.filter$.pipe(
         // clear the cache when filters changed
         tap((_) => {
+          console.log(this._tlQuery.getCount());
           this.paginator.clearCache();
         })
       ),
@@ -103,6 +105,11 @@ export class ThesaurusListComponent implements OnInit {
         if (filter) {
           filter.pageNumber = pageNumber;
           filter.pageSize = pageSize;
+        } else {
+          filter = {
+            pageNumber: pageNumber,
+            pageSize: pageSize,
+          };
         }
         const request = this.getRequest(filter);
         // update saved filters

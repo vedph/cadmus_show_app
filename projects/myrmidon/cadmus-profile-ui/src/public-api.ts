@@ -18,4 +18,5 @@ export * from './lib/components/screen-gallery/screen-gallery.component';
 export * from './lib/components/thesaurus-list/thesaurus-list.component';
 export * from './lib/components/thesaurus-filter/thesaurus-filter.component';
 export * from './lib/components/thesaurus-list-code/thesaurus-list-code.component';
+export * from './lib/services/ram-thesaurus.service';
 export * from './lib/cadmus-profile-ui.module';

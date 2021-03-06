@@ -17,7 +17,10 @@ const INITIAL_STATE = {
 
 @Injectable({ providedIn: 'root' })
 @StoreConfig({ name: 'thesauri' })
-export class ThesaurusListStore extends EntityStore<ThesaurusListState> {
+export class ThesaurusListStore extends EntityStore<
+  ThesaurusListState,
+  Thesaurus
+> {
   constructor() {
     super(INITIAL_STATE);
   }
