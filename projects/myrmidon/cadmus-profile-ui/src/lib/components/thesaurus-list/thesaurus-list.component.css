@@ -9,3 +9,6 @@ th {
 td.command {
   width: 24px;
 }
+.special {
+  color: royalblue;
+}

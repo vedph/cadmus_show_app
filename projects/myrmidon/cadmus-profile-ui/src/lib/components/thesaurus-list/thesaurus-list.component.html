@@ -60,14 +60,17 @@
                 <mat-icon>delete</mat-icon>
               </button>
             </td>
-            <td>{{ thesaurus.id }}</td>
+            <td [class.special]="thesaurus.id === 'model-types@en'">
+              {{ thesaurus.id }}
+            </td>
             <td>
               {{ thesaurus.entries?.length || 0 }}
             </td>
           </tr>
         </tbody>
       </table>
-      <mat-paginator *ngIf="pagination.data?.length"
+      <mat-paginator
+        *ngIf="pagination.data?.length"
         gdArea="pagination"
         gdAlignColumns="center"
         gdAlignRows="start"

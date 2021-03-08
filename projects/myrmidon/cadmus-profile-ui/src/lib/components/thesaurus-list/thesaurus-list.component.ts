@@ -9,7 +9,14 @@ import {
 import { DataPage } from 'projects/myrmidon/cadmus-shop-core/src/public-api';
 import { DialogService } from 'projects/myrmidon/cadmus-show-ui/src/public-api';
 import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
-import { debounceTime, map, startWith, switchMap, tap } from 'rxjs/operators';
+import {
+  debounceTime,
+  map,
+  startWith,
+  switchMap,
+  take,
+  tap,
+} from 'rxjs/operators';
 import { RamThesaurusService } from '../../services/ram-thesaurus.service';
 import { ThesaurusFilterQuery } from '../thesaurus-filter/store/thesaurus-filter.query';
 import { ThesaurusFilterService } from '../thesaurus-filter/store/thesaurus-filter.service';
@@ -22,6 +29,7 @@ import { ThesaurusListState } from './store/thesaurus-list.store';
   styleUrls: ['./thesaurus-list.component.css'],
 })
 export class ThesaurusListComponent implements OnInit {
+  private _refresh$: BehaviorSubject<number>;
   public pagination$: Observable<PaginationResponse<Thesaurus>> | undefined;
   public filter$: Observable<ThesaurusFilter | undefined>;
   public pageSize: FormControl;
@@ -37,6 +45,7 @@ export class ThesaurusListComponent implements OnInit {
   ) {
     this.pageSize = formBuilder.control(20);
     this.filter$ = tfQuery.select();
+    this._refresh$ = new BehaviorSubject(0);
   }
 
   private getRequest(
@@ -92,7 +101,8 @@ export class ThesaurusListComponent implements OnInit {
     // combine and get latest:
     // -page number changes from paginator;
     // -page size changes from control;
-    // -filter changes from filter (in this case, clearing the cache).
+    // -filter changes from filter (in this case, clearing the cache);
+    // -refresh request (in this case, clearing the cache).
     this.pagination$ = combineLatest([
       this.paginator.pageChanges.pipe(startWith(0)),
       this.pageSize.valueChanges.pipe(
@@ -111,6 +121,12 @@ export class ThesaurusListComponent implements OnInit {
           this.paginator.clearCache();
         })
       ),
+      this._refresh$.pipe(
+        // clear the cache when forcing refresh
+        tap((_) => {
+          this.paginator.clearCache();
+        })
+      ),
     ]).pipe(
       // https://blog.strongbrew.io/combine-latest-glitch/
       debounceTime(0),
@@ -118,19 +134,6 @@ export class ThesaurusListComponent implements OnInit {
       // to request the page from server
       switchMap(([pageNumber, pageSize, filter]) => {
         return this.getPaginatorResponse(pageNumber, pageSize, filter);
-        //   if (filter) {
-        //     filter.pageNumber = pageNumber;
-        //     filter.pageSize = pageSize;
-        //   } else {
-        //     filter = {
-        //       pageNumber: pageNumber,
-        //       pageSize: pageSize,
-        //     };
-        //   }
-        //   const request = this.getRequest(filter);
-        //   // update saved filters
-        //   this.paginator.metadata.set('filter', filter);
-        //   return this.paginator.getPage(request);
       })
     );
   }
@@ -162,7 +165,16 @@ export class ThesaurusListComponent implements OnInit {
         if (!ok) {
           return;
         }
-        // TODO
+        this._thesService
+          .deleteThesaurus(id)
+          .pipe(take(1))
+          .subscribe((_) => {
+            let n = this._refresh$.value + 1;
+            if (n > 100) {
+              n = 1;
+            }
+            this._refresh$.next(n);
+          });
       });
   }
 }
