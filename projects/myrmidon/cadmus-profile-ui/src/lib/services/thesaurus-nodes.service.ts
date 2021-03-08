@@ -37,9 +37,11 @@ export interface ThesaurusNodeFilter extends PagingOptions {
 })
 export class ThesaurusNodesService {
   private _nodes$: BehaviorSubject<ThesaurusNode[]>;
+  private _parentIds$: BehaviorSubject<string[]>;
 
   constructor() {
     this._nodes$ = new BehaviorSubject<ThesaurusNode[]>([]);
+    this._parentIds$ = new BehaviorSubject<string[]>([]);
   }
 
   /**
@@ -50,12 +52,34 @@ export class ThesaurusNodesService {
   }
 
   /**
+   * Get an observable with the list of unique parent IDs.
+   */
+   public selectParentIds(): Observable<string[]> {
+    return this._parentIds$;
+  }
+
+  /**
    * Get the full list of nodes.
    *
    * @returns An array of nodes.
    */
   public getNodes(): ThesaurusNode[] {
     return [...this._nodes$.value];
+  }
+
+  /**
+   * Get the list of unique parent IDs.
+   */
+  public getParentIds(): string[] {
+    return [...this._parentIds$.value];
+  }
+
+  private refreshParents(): void {
+    const ids = this._nodes$.value
+      .filter((n) => n.parentId)
+      .map((n) => n.parentId as string);
+
+    this._parentIds$.next([...new Set(ids)]);
   }
 
   /**
@@ -81,6 +105,8 @@ export class ThesaurusNodesService {
       });
     }
     this._nodes$.next(nodes);
+
+    this.refreshParents();
   }
 
   private matchNode(node: ThesaurusNode, filter: ThesaurusNodeFilter): boolean {
@@ -157,8 +183,16 @@ export class ThesaurusNodesService {
         nodes.push(node);
       }
     }
+
     // save
     this._nodes$.next(nodes);
+
+    if (
+      node.parentId &&
+      !this._parentIds$.value.find((id) => id === node.parentId)
+    ) {
+      this._parentIds$.next([...this._parentIds$.value, node.parentId]);
+    }
   }
 
   /**
@@ -176,6 +210,15 @@ export class ThesaurusNodesService {
         if (parent?.children) {
           const ci = parent.children.findIndex((n) => n.id === nodes[i].id);
           parent.children.splice(ci, 1);
+          // if no more children remain, update the parent ids
+          if (!parent.children.length) {
+            const ids = [...this._parentIds$.value];
+            const i = ids.findIndex((id) => id === parent.id);
+            if (i > -1) {
+              ids.splice(i, 1);
+              this._parentIds$.next(ids);
+            }
+          }
         }
       }
       nodes.splice(i, 1);
