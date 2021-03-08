@@ -2,8 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { JsonEditorOptions } from 'ang-jsoneditor';
+import { RamThesaurusService } from '../../services/ram-thesaurus.service';
 import { ThesaurusListQuery } from '../thesaurus-list/store/thesaurus-list.query';
-import { ThesaurusListService } from '../thesaurus-list/store/thesaurus-list.service';
 
 // https://github.com/mariohmol/ang-jsoneditor
 
@@ -29,7 +29,7 @@ export class ThesaurusListCodeComponent implements OnInit {
   constructor(
     formBuilder: FormBuilder,
     private _tlQuery: ThesaurusListQuery,
-    private _tlService: ThesaurusListService,
+    private _thesService: RamThesaurusService,
     private _snackbar: MatSnackBar
   ) {
     // options
@@ -47,7 +47,7 @@ export class ThesaurusListCodeComponent implements OnInit {
   }
 
   public save(): void {
-    this._tlService.set(this.json.value);
+    this._thesService.setAll(this.json.value);
     this._snackbar.open('Thesauri saved', 'OK', {
       duration: 1500,
     });

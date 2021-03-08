@@ -6,14 +6,14 @@ import {
   Thesaurus,
   ThesaurusFilter,
 } from 'projects/myrmidon/cadmus-profile-core/src/public-api';
+import { DataPage } from 'projects/myrmidon/cadmus-shop-core/src/public-api';
 import { DialogService } from 'projects/myrmidon/cadmus-show-ui/src/public-api';
 import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
-import { startWith, switchMap, tap } from 'rxjs/operators';
+import { map, startWith, switchMap, tap } from 'rxjs/operators';
+import { RamThesaurusService } from '../../services/ram-thesaurus.service';
 import { ThesaurusFilterQuery } from '../thesaurus-filter/store/thesaurus-filter.query';
 import { ThesaurusFilterService } from '../thesaurus-filter/store/thesaurus-filter.service';
 import { THESAURUS_LIST_PAGINATOR } from './store/thesaurus-list.paginator';
-import { ThesaurusListQuery } from './store/thesaurus-list.query';
-import { ThesaurusListService } from './store/thesaurus-list.service';
 import { ThesaurusListState } from './store/thesaurus-list.store';
 
 @Component({
@@ -29,39 +29,32 @@ export class ThesaurusListComponent implements OnInit {
   constructor(
     @Inject(THESAURUS_LIST_PAGINATOR)
     public paginator: PaginatorPlugin<ThesaurusListState>,
-    private _tlQuery: ThesaurusListQuery,
-    private _tlService: ThesaurusListService,
+    private _thesService: RamThesaurusService,
     private _tfService: ThesaurusFilterService,
     private _dialogService: DialogService,
     tfQuery: ThesaurusFilterQuery,
     formBuilder: FormBuilder
   ) {
-    this.filter$ = tfQuery.select();
     this.pageSize = formBuilder.control(20);
+    this.filter$ = tfQuery.select();
   }
 
   private getRequest(
-    filter?: ThesaurusFilter
+    filter: ThesaurusFilter
   ): () => Observable<PaginationResponse<Thesaurus>> {
-    return () => {
-      const page = filter
-        ? this._tlQuery.getPage(filter)
-        : {
-            pageNumber: 1,
-            pageSize: 20,
-            pageCount: 0,
-            total: 0,
-            items: [],
+    return () =>
+      this._thesService.getPage(filter).pipe(
+        // adapt page to paginator plugin
+        map((p: DataPage<Thesaurus>) => {
+          return {
+            currentPage: p.pageNumber,
+            perPage: p.pageSize,
+            lastPage: p.pageCount,
+            data: p.items,
+            total: p.total,
           };
-      const response: PaginationResponse<Thesaurus> = {
-        currentPage: page.pageNumber,
-        perPage: page.pageSize,
-        lastPage: page.pageCount,
-        data: page.items,
-        total: page.total,
-      };
-      return of(response);
-    };
+        })
+      );
   }
 
   ngOnInit(): void {
@@ -87,14 +80,12 @@ export class ThesaurusListComponent implements OnInit {
         startWith(initialPageSize),
         // clear the cache when page size changes
         tap((_) => {
-          console.log(this._tlQuery.getCount());
           this.paginator.clearCache();
         })
       ),
       this.filter$.pipe(
         // clear the cache when filters changed
         tap((_) => {
-          console.log(this._tlQuery.getCount());
           this.paginator.clearCache();
         })
       ),
@@ -146,7 +137,7 @@ export class ThesaurusListComponent implements OnInit {
         if (!ok) {
           return;
         }
-        this._tlService.deleteThesaurus(id);
+        // TODO
       });
   }
 }

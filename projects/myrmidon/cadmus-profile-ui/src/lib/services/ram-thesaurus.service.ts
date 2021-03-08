@@ -6,6 +6,9 @@ import {
 import { DataPage } from 'projects/myrmidon/cadmus-shop-core/src/public-api';
 import { Observable, of } from 'rxjs';
 
+/**
+ * This service keeps all the thesauri from a project in RAM.
+ */
 @Injectable({
   providedIn: 'root',
 })
@@ -16,6 +19,16 @@ export class RamThesaurusService {
     this._thesauri = [];
   }
 
+  public setAll(thesauri: Thesaurus[]): void {
+    this._thesauri = thesauri;
+  }
+
+  /**
+   * Get the thesaurus with the specified ID.
+   *
+   * @param id The thesaurus ID.
+   * @returns Observable with thesaurus.
+   */
   public get(id: string): Observable<Thesaurus | undefined> {
     return of(this._thesauri.find((t) => t.id === id));
   }
