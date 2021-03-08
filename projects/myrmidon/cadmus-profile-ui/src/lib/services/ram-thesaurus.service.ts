@@ -67,15 +67,13 @@ export class RamThesaurusService {
         return a.id.localeCompare(b.id);
       });
 
+    const offset = (filter.pageNumber - 1) * filter.pageSize;
     return of({
       pageNumber: filter.pageNumber,
       pageSize: filter.pageSize,
       pageCount: Math.ceil(thesauri.length / filter.pageSize),
       total: thesauri.length,
-      items: thesauri.slice(
-        (filter.pageNumber - 1) * filter.pageSize,
-        filter.pageSize
-      ),
+      items: thesauri.slice(offset, offset + filter.pageSize),
     });
   }
 

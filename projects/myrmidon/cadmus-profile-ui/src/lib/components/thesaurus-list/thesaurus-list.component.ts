@@ -9,7 +9,7 @@ import {
 import { DataPage } from 'projects/myrmidon/cadmus-shop-core/src/public-api';
 import { DialogService } from 'projects/myrmidon/cadmus-show-ui/src/public-api';
 import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
-import { map, startWith, switchMap, tap } from 'rxjs/operators';
+import { debounceTime, map, startWith, switchMap, tap } from 'rxjs/operators';
 import { RamThesaurusService } from '../../services/ram-thesaurus.service';
 import { ThesaurusFilterQuery } from '../thesaurus-filter/store/thesaurus-filter.query';
 import { ThesaurusFilterService } from '../thesaurus-filter/store/thesaurus-filter.service';
@@ -57,6 +57,27 @@ export class ThesaurusListComponent implements OnInit {
       );
   }
 
+  private getPaginatorResponse(
+    pageNumber: number,
+    pageSize: number,
+    filter: ThesaurusFilter | undefined
+  ): Observable<PaginationResponse<Thesaurus>> {
+    if (filter) {
+      filter.pageNumber = pageNumber;
+      filter.pageSize = pageSize;
+    } else {
+      filter = {
+        pageNumber: pageNumber,
+        pageSize: pageSize,
+      };
+    }
+    const request = this.getRequest(filter);
+    // update saved filters
+    this.paginator.metadata.set('filter', filter);
+
+    return this.paginator.getPage(request);
+  }
+
   ngOnInit(): void {
     // filter
     const initialPageSize = 20;
@@ -73,7 +94,7 @@ export class ThesaurusListComponent implements OnInit {
     // -page size changes from control;
     // -filter changes from filter (in this case, clearing the cache).
     this.pagination$ = combineLatest([
-      this.paginator.pageChanges,
+      this.paginator.pageChanges.pipe(startWith(0)),
       this.pageSize.valueChanges.pipe(
         // we are required to emit at least the initial value
         // as combineLatest emits only if ALL observables have emitted
@@ -84,28 +105,32 @@ export class ThesaurusListComponent implements OnInit {
         })
       ),
       this.filter$.pipe(
+        startWith(undefined),
         // clear the cache when filters changed
         tap((_) => {
           this.paginator.clearCache();
         })
       ),
     ]).pipe(
+      // https://blog.strongbrew.io/combine-latest-glitch/
+      debounceTime(0),
       // for each emitted value, combine into a filter and use it
       // to request the page from server
       switchMap(([pageNumber, pageSize, filter]) => {
-        if (filter) {
-          filter.pageNumber = pageNumber;
-          filter.pageSize = pageSize;
-        } else {
-          filter = {
-            pageNumber: pageNumber,
-            pageSize: pageSize,
-          };
-        }
-        const request = this.getRequest(filter);
-        // update saved filters
-        this.paginator.metadata.set('filter', filter);
-        return this.paginator.getPage(request);
+        return this.getPaginatorResponse(pageNumber, pageSize, filter);
+        //   if (filter) {
+        //     filter.pageNumber = pageNumber;
+        //     filter.pageSize = pageSize;
+        //   } else {
+        //     filter = {
+        //       pageNumber: pageNumber,
+        //       pageSize: pageSize,
+        //     };
+        //   }
+        //   const request = this.getRequest(filter);
+        //   // update saved filters
+        //   this.paginator.metadata.set('filter', filter);
+        //   return this.paginator.getPage(request);
       })
     );
   }
