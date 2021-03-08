@@ -15,6 +15,7 @@ export * from './lib/components/flag-definition-editor/flag-definition-editor.co
 export * from './lib/components/part-definition-editor/part-definition-editor.component';
 export * from './lib/components/part-info/part-info.component';
 export * from './lib/components/screen-gallery/screen-gallery.component';
+export * from './lib/components/thesaurus-editor/thesaurus-editor.component';
 export * from './lib/components/thesaurus-list/thesaurus-list.component';
 export * from './lib/components/thesaurus-filter/thesaurus-filter.component';
 export * from './lib/components/thesaurus-list-code/thesaurus-list-code.component';

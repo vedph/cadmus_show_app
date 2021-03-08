@@ -29,6 +29,7 @@ import { FlagListCodeComponent } from './components/flag-list-code/flag-list-cod
 import { ThesaurusListComponent } from './components/thesaurus-list/thesaurus-list.component';
 import { ThesaurusFilterComponent } from './components/thesaurus-filter/thesaurus-filter.component';
 import { ThesaurusListCodeComponent } from './components/thesaurus-list-code/thesaurus-list-code.component';
+import { ThesaurusEditorComponent } from './components/thesaurus-editor/thesaurus-editor.component';
 
 @NgModule({
   declarations: [
@@ -44,8 +45,9 @@ import { ThesaurusListCodeComponent } from './components/thesaurus-list-code/the
     PartDefinitionEditorComponent,
     PartInfoComponent,
     ScreenGalleryComponent,
-    ThesaurusListComponent,
+    ThesaurusEditorComponent,
     ThesaurusFilterComponent,
+    ThesaurusListComponent,
     ThesaurusListCodeComponent,
   ],
   imports: [
@@ -75,6 +77,7 @@ import { ThesaurusListCodeComponent } from './components/thesaurus-list-code/the
     PartDefinitionEditorComponent,
     PartInfoComponent,
     ScreenGalleryComponent,
+    ThesaurusEditorComponent,
     ThesaurusListComponent,
     ThesaurusFilterComponent,
     ThesaurusListCodeComponent,

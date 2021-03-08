@@ -63,7 +63,7 @@
             <td [class.special]="thesaurus.id === 'model-types@en'">
               {{ thesaurus.id }}
             </td>
-            <td>
+            <td style="text-align: center;">
               {{ thesaurus.entries?.length || 0 }}
             </td>
           </tr>
@@ -88,12 +88,12 @@
     <button
       type="button"
       color="primary"
-      mat-raised-button
+      mat-stroked-button
       matTooltip="Add a new thesaurus"
       (click)="addThesaurus()"
     >
       <mat-icon>add_circle</mat-icon>
-      add item
+      add thesaurus
     </button>
   </mat-card-actions>
 </mat-card>
