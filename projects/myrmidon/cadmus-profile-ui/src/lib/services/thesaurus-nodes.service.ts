@@ -7,10 +7,13 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 /**
  * A thesaurus entry edited in a set of thesauri nodes.
+ * The nodes may represent either a hierarchical or a non-hierarchical
+ * thesaurus.
  */
 export interface ThesaurusNode {
   id: string;
   value: string;
+  parentId?: string;
   level?: number;
   expanded?: boolean;
   parent?: ThesaurusNode;
@@ -35,23 +38,48 @@ export interface ThesaurusNodeFilter extends PagingOptions {
 export class ThesaurusNodesService {
   private _nodes$: BehaviorSubject<ThesaurusNode[]>;
 
+  constructor() {
+    this._nodes$ = new BehaviorSubject<ThesaurusNode[]>([]);
+  }
+
   /**
-   * The full list of nodes in the thesaurus.
+   * Get an observable with the full list of nodes.
    */
-  public get nodes$(): Observable<ThesaurusNode[]> {
+  public selectNodes(): Observable<ThesaurusNode[]> {
     return this._nodes$;
   }
 
-  constructor() {
-    this._nodes$ = new BehaviorSubject<ThesaurusNode[]>([]);
+  /**
+   * Get the full list of nodes.
+   *
+   * @returns An array of nodes.
+   */
+  public getNodes(): ThesaurusNode[] {
+    return [...this._nodes$.value];
   }
 
   /**
    * Set all the nodes at once.
    *
    * @param nodes The nodes to set.
+   * @param supply True to supply parent and children properties
+   * from the nodes' parentId values; false if the nodes already
+   * have these properties set.
    */
-  public setNodes(nodes: ThesaurusNode[]): void {
+  public setNodes(nodes: ThesaurusNode[], supply = false): void {
+    if (supply) {
+      nodes.forEach((node) => {
+        if (node.parentId) {
+          node.parent = nodes.find((n) => n.id === node.parentId);
+          if (node.parent) {
+            if (!node.parent.children) {
+              node.parent.children = [];
+            }
+            node.parent.children.push(node);
+          }
+        }
+      });
+    }
     this._nodes$.next(nodes);
   }
 
@@ -91,5 +119,68 @@ export class ThesaurusNodesService {
       pageCount: Math.ceil(nodes.length / filter.pageSize),
       items: nodes.slice(offset, offset + filter.pageSize),
     };
+  }
+
+  /**
+   * Add or replace the specified node.
+   *
+   * @param node The node.
+   */
+  public add(node: ThesaurusNode): void {
+    const nodes = [...this._nodes$.value];
+    const i = nodes.findIndex((n) => n.id === node.id);
+
+    // replace an existing node in place
+    if (i > -1) {
+      nodes.splice(i, 1, node);
+    } else {
+      // the node has a parent?
+      if (node.parentId) {
+        // yes: find it
+        const parent = nodes.find((n) => n.id === node.parentId);
+        if (parent) {
+          // if found, add the node as its child...
+          node.parent = parent;
+          if (!parent.children) {
+            parent.children = [];
+          }
+          parent.children.push(node);
+          // ... and insert it as its last child
+          nodes.splice(nodes.indexOf(parent) + 1, 0, node);
+        } else {
+          // if not found, that's an error; treat it as an unparented node
+          node.parentId = undefined;
+          nodes.push(node);
+        }
+      } else {
+        // no parent: just append
+        nodes.push(node);
+      }
+    }
+    // save
+    this._nodes$.next(nodes);
+  }
+
+  /**
+   * Delete the node with the specified ID.
+   *
+   * @param id The ID of the node to delete.
+   */
+  public delete(id: string): void {
+    const nodes = [...this._nodes$.value];
+    const i = nodes.findIndex((n) => n.id === id);
+    if (i > -1) {
+      // if it is a child, remove from its parent
+      if (nodes[i].parentId) {
+        const parent = nodes.find((n) => n.id === nodes[i].parentId);
+        if (parent?.children) {
+          const ci = parent.children.findIndex((n) => n.id === nodes[i].id);
+          parent.children.splice(ci, 1);
+        }
+      }
+      nodes.splice(i, 1);
+      // save
+      this._nodes$.next(nodes);
+    }
   }
 }
