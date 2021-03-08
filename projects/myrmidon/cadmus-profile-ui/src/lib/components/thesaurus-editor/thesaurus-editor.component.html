@@ -1,1 +1,28 @@
-<p>thesaurus-editor works!</p>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <h2>Thesaurus Editor</h2>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <!-- filter -->
+    <div>
+      <form [formGroup]="form" (submit)="applyFilter()">
+        <mat-form-field style="width: 6em">
+          <input matInput [formControl]="filter" placeholder="filter" />
+        </mat-form-field>
+        &nbsp;
+        <mat-form-field
+          *ngIf="parentIds$ | async as parentIds"
+          style="width: 8em"
+        >
+          <mat-select [formControl]="parentId" placeholder="parentId">
+            <mat-option *ngFor="let e of parentIds" [value]="e.id">{{
+              e.value
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </form>
+    </div>
+  </mat-card-content>
+</mat-card>

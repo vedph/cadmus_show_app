@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ThesaurusEntry } from 'projects/myrmidon/cadmus-profile-core/src/public-api';
 import {
   DataPage,
   PagingOptions,
@@ -24,8 +25,7 @@ export interface ThesaurusNode {
  * Filter applied to a set of thesauri nodes.
  */
 export interface ThesaurusNodeFilter extends PagingOptions {
-  id?: string;
-  value?: string;
+  idOrValue?: string;
   parentId?: string;
 }
 
@@ -37,11 +37,11 @@ export interface ThesaurusNodeFilter extends PagingOptions {
 })
 export class ThesaurusNodesService {
   private _nodes$: BehaviorSubject<ThesaurusNode[]>;
-  private _parentIds$: BehaviorSubject<string[]>;
+  private _parentIds$: BehaviorSubject<ThesaurusEntry[]>;
 
   constructor() {
     this._nodes$ = new BehaviorSubject<ThesaurusNode[]>([]);
-    this._parentIds$ = new BehaviorSubject<string[]>([]);
+    this._parentIds$ = new BehaviorSubject<ThesaurusEntry[]>([]);
   }
 
   /**
@@ -54,7 +54,7 @@ export class ThesaurusNodesService {
   /**
    * Get an observable with the list of unique parent IDs.
    */
-   public selectParentIds(): Observable<string[]> {
+  public selectParentIds(): Observable<ThesaurusEntry[]> {
     return this._parentIds$;
   }
 
@@ -70,16 +70,24 @@ export class ThesaurusNodesService {
   /**
    * Get the list of unique parent IDs.
    */
-  public getParentIds(): string[] {
+  public getParentIds(): ThesaurusEntry[] {
     return [...this._parentIds$.value];
   }
 
   private refreshParents(): void {
-    const ids = this._nodes$.value
+    const entries = this._nodes$.value
       .filter((n) => n.parentId)
-      .map((n) => n.parentId as string);
+      .map((n) => {
+        return { id: n.id, value: n.value };
+      });
 
-    this._parentIds$.next([...new Set(ids)]);
+    const uniqueEntries: ThesaurusEntry[] = [];
+    entries.forEach((entry) => {
+      if (!uniqueEntries.find((e) => e.id === entry.id)) {
+        uniqueEntries.push(entry);
+      }
+    });
+    this._parentIds$.next(uniqueEntries);
   }
 
   /**
@@ -110,10 +118,11 @@ export class ThesaurusNodesService {
   }
 
   private matchNode(node: ThesaurusNode, filter: ThesaurusNodeFilter): boolean {
-    if (filter.id && !node.id.toLowerCase().includes(filter.id)) {
-      return false;
-    }
-    if (filter.value && !node.value.toLowerCase().includes(filter.value)) {
+    if (
+      filter.idOrValue &&
+      !node.id.toLowerCase().includes(filter.idOrValue) &&
+      !node.value.toLowerCase().includes(filter.idOrValue)
+    ) {
       return false;
     }
     if (
@@ -132,8 +141,7 @@ export class ThesaurusNodesService {
    * @returns The requested page of nodes.
    */
   public getPage(filter: ThesaurusNodeFilter): DataPage<ThesaurusNode> {
-    filter.id = filter.id?.toLowerCase();
-    filter.value = filter.value?.toLowerCase();
+    filter.idOrValue = filter.idOrValue?.toLowerCase();
     const nodes = this._nodes$.value.filter((node) => {
       return this.matchNode(node, filter);
     });
@@ -187,11 +195,16 @@ export class ThesaurusNodesService {
     // save
     this._nodes$.next(nodes);
 
+    // if the added node has a parent, update the parent IDs if required
     if (
       node.parentId &&
-      !this._parentIds$.value.find((id) => id === node.parentId)
+      !this._parentIds$.value.find((entry) => entry.id === node.parentId)
     ) {
-      this._parentIds$.next([...this._parentIds$.value, node.parentId]);
+      const parent = this._nodes$.value.find((p) => p.id === node.parentId);
+      this._parentIds$.next([
+        ...this._parentIds$.value,
+        { id: node.parentId, value: parent?.value || node.parentId },
+      ]);
     }
   }
 
@@ -213,7 +226,7 @@ export class ThesaurusNodesService {
           // if no more children remain, update the parent ids
           if (!parent.children.length) {
             const ids = [...this._parentIds$.value];
-            const i = ids.findIndex((id) => id === parent.id);
+            const i = ids.findIndex((entry) => entry.id === parent.id);
             if (i > -1) {
               ids.splice(i, 1);
               this._parentIds$.next(ids);
