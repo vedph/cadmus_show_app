@@ -57,7 +57,7 @@ export interface Thesaurus {
 export interface ThesaurusFilter {
   pageNumber: number;
   pageSize: number;
-  id?: string;
+  idOrValue?: string;
   isAlias?: boolean;
   language?: string;
 }

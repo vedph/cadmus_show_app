@@ -15,6 +15,9 @@ const INITIAL_STATE = {
   active: null,
 };
 
+/**
+ * Thesauri list store. This contains a page of thesauri.
+ */
 @Injectable({ providedIn: 'root' })
 @StoreConfig({ name: 'thesauri' })
 export class ThesaurusListStore extends EntityStore<

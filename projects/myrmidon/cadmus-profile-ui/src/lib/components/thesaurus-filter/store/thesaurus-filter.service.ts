@@ -20,7 +20,7 @@ export class ThesaurusFilterService {
 
   public setFilter(filter: ThesaurusFilter): void {
     this._store.update({
-      id: filter.id,
+      idOrValue: filter.idOrValue,
       isAlias: filter.isAlias,
       language: filter.language
     });

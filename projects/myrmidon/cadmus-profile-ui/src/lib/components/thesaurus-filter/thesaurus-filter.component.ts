@@ -58,7 +58,7 @@ export class ThesaurusFilterComponent implements OnInit {
       return;
     }
 
-    this.id.setValue(filter.id);
+    this.id.setValue(filter.idOrValue);
     this.alias.setValue(filter.isAlias);
     this.language.setValue(filter.language);
     this.form.markAsPristine();
@@ -68,7 +68,7 @@ export class ThesaurusFilterComponent implements OnInit {
     return {
       pageNumber: 0,
       pageSize: 0,
-      id: this.id.value,
+      idOrValue: this.id.value,
       isAlias: this.alias.value,
       language: this.language.value,
     };

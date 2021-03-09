@@ -4,7 +4,7 @@ import {
   DataPage,
   PagingOptions,
 } from 'projects/myrmidon/cadmus-shop-core/src/public-api';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 
 /**
  * A thesaurus entry edited in a set of thesauri nodes.
@@ -140,19 +140,21 @@ export class ThesaurusNodesService {
    * @param filter The filter.
    * @returns The requested page of nodes.
    */
-  public getPage(filter: ThesaurusNodeFilter): DataPage<ThesaurusNode> {
+  public getPage(
+    filter: ThesaurusNodeFilter
+  ): Observable<DataPage<ThesaurusNode>> {
     filter.idOrValue = filter.idOrValue?.toLowerCase();
     const nodes = this._nodes$.value.filter((node) => {
       return this.matchNode(node, filter);
     });
     const offset = (filter.pageNumber - 1) * filter.pageSize;
-    return {
+    return of({
       pageNumber: filter.pageNumber,
       pageSize: filter.pageSize,
       total: nodes.length,
       pageCount: Math.ceil(nodes.length / filter.pageSize),
       items: nodes.slice(offset, offset + filter.pageSize),
-    };
+    });
   }
 
   /**

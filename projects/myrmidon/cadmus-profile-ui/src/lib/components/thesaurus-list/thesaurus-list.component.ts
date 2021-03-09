@@ -23,6 +23,26 @@ import { ThesaurusFilterService } from '../thesaurus-filter/store/thesaurus-filt
 import { THESAURUS_LIST_PAGINATOR } from './store/thesaurus-list.paginator';
 import { ThesaurusListState } from './store/thesaurus-list.store';
 
+/**
+ * Thesauri list component. This is a paged list; so, the corresponding
+ * store does not represent the full list of thesauri (which would take
+ * too much space), but rather a single page from it, selected according
+ * to the values in the thesaurus filter store. So, the entity store
+ * for this component just holds the thesauri found in a single page.
+ *
+ * A paginator factory, depending on its query, is used to inject the
+ * paginator into this component. The paginator uses a request function
+ * to fetch data for its page from some service (here, the RAM-based list
+ * of thesauri). This request is triggered by a change in the paging
+ * parameters (number/size); a change in the filter; or a refresh request
+ * (e.g. when a thesaurus is deleted).
+ *
+ * Whenever the request is triggered, it gets the current filter value,
+ * updates its page number and size from the controls, creates a fetch
+ * request with this filter, and invokes the paginator's getPage function.
+ * This either gets the page from its cache, or invokes the request
+ * function.
+ */
 @Component({
   selector: 'cadmus-thesaurus-list',
   templateUrl: './thesaurus-list.component.html',
@@ -35,9 +55,12 @@ export class ThesaurusListComponent implements OnInit {
   public pageSize: FormControl;
 
   constructor(
+    // the paginator factory
     @Inject(THESAURUS_LIST_PAGINATOR)
     public paginator: PaginatorPlugin<ThesaurusListState>,
+    // the service with the full thesauri list
     private _thesService: RamThesaurusService,
+    // services related to the filter store
     private _filterService: ThesaurusFilterService,
     private _filterQuery: ThesaurusFilterQuery,
     private _dialogService: DialogService,
@@ -48,6 +71,12 @@ export class ThesaurusListComponent implements OnInit {
     this._refresh$ = new BehaviorSubject(0);
   }
 
+  /**
+   * Return a request function used to fetch data for
+   * the page specified by filter.
+   *
+   * @param filter The filter with paging and filtering data.
+   */
   private getRequest(
     filter: ThesaurusFilter
   ): () => Observable<PaginationResponse<Thesaurus>> {
@@ -66,6 +95,14 @@ export class ThesaurusListComponent implements OnInit {
       );
   }
 
+  /**
+   * Get the paginator response from its cache or from the
+   * underlying service. The filter is got from the filter
+   * state, and updated with paging parameters.
+   *
+   * @param pageNumber The page number.
+   * @param pageSize The page size.
+   */
   private getPaginatorResponse(
     pageNumber: number,
     pageSize: number

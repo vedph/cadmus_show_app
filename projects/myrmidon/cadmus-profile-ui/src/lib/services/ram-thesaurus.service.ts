@@ -37,7 +37,7 @@ export class RamThesaurusService {
     thesaurus: Thesaurus,
     filter: ThesaurusFilter
   ): boolean {
-    if (filter.id && !thesaurus.id.includes(filter.id)) {
+    if (filter.idOrValue && !thesaurus.id.includes(filter.idOrValue)) {
       return false;
     }
     if (filter.isAlias === true && !thesaurus.targetId) {
