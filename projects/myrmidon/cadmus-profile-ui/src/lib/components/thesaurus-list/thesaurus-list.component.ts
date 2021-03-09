@@ -38,13 +38,13 @@ export class ThesaurusListComponent implements OnInit {
     @Inject(THESAURUS_LIST_PAGINATOR)
     public paginator: PaginatorPlugin<ThesaurusListState>,
     private _thesService: RamThesaurusService,
-    private _tfService: ThesaurusFilterService,
+    private _filterService: ThesaurusFilterService,
+    private _filterQuery: ThesaurusFilterQuery,
     private _dialogService: DialogService,
-    tfQuery: ThesaurusFilterQuery,
     formBuilder: FormBuilder
   ) {
     this.pageSize = formBuilder.control(20);
-    this.filter$ = tfQuery.select();
+    this.filter$ = _filterQuery.select();
     this._refresh$ = new BehaviorSubject(0);
   }
 
@@ -68,18 +68,13 @@ export class ThesaurusListComponent implements OnInit {
 
   private getPaginatorResponse(
     pageNumber: number,
-    pageSize: number,
-    filter: ThesaurusFilter | undefined
+    pageSize: number
   ): Observable<PaginationResponse<Thesaurus>> {
-    if (filter) {
-      filter.pageNumber = pageNumber;
-      filter.pageSize = pageSize;
-    } else {
-      filter = {
-        pageNumber: pageNumber,
-        pageSize: pageSize,
-      };
-    }
+    const filter = {
+      ...this._filterQuery.getValue(),
+      pageNumber: pageNumber,
+      pageSize: pageSize,
+    };
     const request = this.getRequest(filter);
     // update saved filters
     this.paginator.metadata.set('filter', filter);
@@ -90,12 +85,6 @@ export class ThesaurusListComponent implements OnInit {
   ngOnInit(): void {
     // filter
     const initialPageSize = 20;
-    this.filter$ = new BehaviorSubject<ThesaurusFilter>(
-      this.paginator.metadata.get('filter') || {
-        pageNumber: 1,
-        pageSize: initialPageSize,
-      }
-    );
     this.pageSize.setValue(initialPageSize);
 
     // combine and get latest:
@@ -115,7 +104,7 @@ export class ThesaurusListComponent implements OnInit {
         })
       ),
       this.filter$.pipe(
-        startWith(undefined),
+        // startWith(undefined),
         // clear the cache when filters changed
         tap((_) => {
           this.paginator.clearCache();
@@ -132,14 +121,14 @@ export class ThesaurusListComponent implements OnInit {
       debounceTime(0),
       // for each emitted value, combine into a filter and use it
       // to request the page from server
-      switchMap(([pageNumber, pageSize, filter]) => {
-        return this.getPaginatorResponse(pageNumber, pageSize, filter);
+      switchMap(([pageNumber, pageSize, _]) => {
+        return this.getPaginatorResponse(pageNumber, pageSize);
       })
     );
   }
 
-  public onFilterChange(event: ThesaurusFilter): void {
-    this._tfService.setFilter(event);
+  public onFilterChange(filter: ThesaurusFilter): void {
+    this._filterService.setFilter(filter);
   }
 
   public pageChanged(event: PageEvent): void {
