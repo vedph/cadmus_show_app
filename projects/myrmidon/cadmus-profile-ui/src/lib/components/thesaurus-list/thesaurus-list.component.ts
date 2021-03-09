@@ -8,7 +8,7 @@ import {
 } from 'projects/myrmidon/cadmus-profile-core/src/public-api';
 import { DataPage } from 'projects/myrmidon/cadmus-shop-core/src/public-api';
 import { DialogService } from 'projects/myrmidon/cadmus-show-ui/src/public-api';
-import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import {
   debounceTime,
   map,
@@ -30,7 +30,7 @@ import { ThesaurusListState } from './store/thesaurus-list.store';
 })
 export class ThesaurusListComponent implements OnInit {
   private _refresh$: BehaviorSubject<number>;
-  public pagination$: Observable<PaginationResponse<Thesaurus>> | undefined;
+  public page$: Observable<PaginationResponse<Thesaurus>> | undefined;
   public filter$: Observable<ThesaurusFilter | undefined>;
   public pageSize: FormControl;
 
@@ -103,7 +103,7 @@ export class ThesaurusListComponent implements OnInit {
     // -page size changes from control;
     // -filter changes from filter (in this case, clearing the cache);
     // -refresh request (in this case, clearing the cache).
-    this.pagination$ = combineLatest([
+    this.page$ = combineLatest([
       this.paginator.pageChanges.pipe(startWith(0)),
       this.pageSize.valueChanges.pipe(
         // we are required to emit at least the initial value

@@ -28,8 +28,8 @@
     </div>
 
     <!-- list -->
-    <div gdArea="list" *ngIf="pagination$ | async as pagination">
-      <table *ngIf="pagination.data?.length">
+    <div gdArea="list" *ngIf="page$ | async as page">
+      <table *ngIf="page.data?.length">
         <thead>
           <th></th>
           <th></th>
@@ -37,7 +37,7 @@
           <th>entries</th>
         </thead>
         <tbody>
-          <tr *ngFor="let thesaurus of pagination.data">
+          <tr *ngFor="let thesaurus of page.data">
             <td class="command">
               <button
                 mat-icon-button
@@ -69,15 +69,16 @@
           </tr>
         </tbody>
       </table>
+      <!-- paginator -->
       <mat-paginator
-        *ngIf="pagination.data?.length"
+        *ngIf="page.data?.length"
         gdArea="pagination"
         gdAlignColumns="center"
         gdAlignRows="start"
-        [length]="pagination.total"
+        [length]="page.total"
         [pageSize]="pageSize?.value"
         [pageSizeOptions]="[20, 50, 75, 100]"
-        [pageIndex]="pagination.currentPage - 1"
+        [pageIndex]="page.currentPage - 1"
         [showFirstLastButtons]="true"
         (page)="pageChanged($event)"
       ></mat-paginator>
