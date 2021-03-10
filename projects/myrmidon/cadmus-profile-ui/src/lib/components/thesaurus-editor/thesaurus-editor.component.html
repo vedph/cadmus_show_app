@@ -27,14 +27,10 @@
 
     <!-- list -->
     <div *ngIf="page$ | async as page">
-      <div
+      <cadmus-thesaurus-node
         *ngFor="let node of page.data"
-        [style.marginLeft]="node.level + 'em'"
-        class="node"
-      >
-        <span class="node-id">{{ node.id }}</span>
-        <span class="node-value">{{ node.value }}</span>
-      </div>
+        [node]="node"
+      ></cadmus-thesaurus-node>
 
       <!-- paginator -->
       <mat-paginator

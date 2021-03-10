@@ -30,6 +30,7 @@ import { ThesaurusListComponent } from './components/thesaurus-list/thesaurus-li
 import { ThesaurusFilterComponent } from './components/thesaurus-filter/thesaurus-filter.component';
 import { ThesaurusListCodeComponent } from './components/thesaurus-list-code/thesaurus-list-code.component';
 import { ThesaurusEditorComponent } from './components/thesaurus-editor/thesaurus-editor.component';
+import { ThesaurusNodeComponent } from './components/thesaurus-node/thesaurus-node.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { ThesaurusEditorComponent } from './components/thesaurus-editor/thesauru
     ThesaurusFilterComponent,
     ThesaurusListComponent,
     ThesaurusListCodeComponent,
+    ThesaurusNodeComponent,
   ],
   imports: [
     CommonModule,
@@ -81,6 +83,7 @@ import { ThesaurusEditorComponent } from './components/thesaurus-editor/thesauru
     ThesaurusListComponent,
     ThesaurusFilterComponent,
     ThesaurusListCodeComponent,
+    ThesaurusNodeComponent,
   ],
 })
 export class CadmusProfileUiModule {}
