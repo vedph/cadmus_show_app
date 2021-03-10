@@ -46,7 +46,11 @@
 
   <!-- edit -->
   <div *ngIf="editing">
-    <form [formGroup]="form" (submit)="save()">
+    <form
+      [formGroup]="form"
+      (submit)="save()"
+      (keydown.esc)="toggleEdit(false)"
+    >
       <!-- id -->
       <mat-form-field>
         <input matInput [formControl]="id" placeholder="id" />
@@ -64,7 +68,7 @@
       <!-- value -->
       &nbsp;
       <mat-form-field>
-        <input matInput [formControl]="value" placeholder="value" />
+        <input matInput [formControl]="value" placeholder="value" #nodeVal />
         <mat-error
           *ngIf="value.errors?.required && (value.dirty || value.touched)"
           >value required</mat-error

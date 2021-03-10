@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -22,6 +30,8 @@ export class ThesaurusNodeComponent implements OnInit {
   public id: FormControl;
   public value: FormControl;
   public form: FormGroup;
+
+  @ViewChild('nodeVal') nodeValRef: ElementRef | undefined;
 
   @Input()
   public get node(): ThesaurusNode | undefined {
@@ -68,6 +78,11 @@ export class ThesaurusNodeComponent implements OnInit {
 
   public toggleEdit(on: boolean): void {
     this.editing = on;
+    if (on) {
+      setTimeout(() => {
+        this.nodeValRef?.nativeElement.focus();
+      }, 300);
+    }
   }
 
   public save(): void {
