@@ -1,10 +1,13 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { PageEvent } from '@angular/material/paginator';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PaginationResponse, PaginatorPlugin } from '@datorama/akita';
 import { ThesaurusEntry } from 'projects/myrmidon/cadmus-profile-core/src/public-api';
 import { DataPage } from 'projects/myrmidon/cadmus-shop-core/src/public-api';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { debounceTime, map, startWith, switchMap, tap } from 'rxjs/operators';
+import { RamThesaurusService } from '../../services/ram-thesaurus.service';
 import {
   ThesaurusNode,
   ThesaurusNodeFilter,
@@ -25,6 +28,8 @@ import { ThesaurusEditorState } from './store/thesaurus-editor.store';
   styleUrls: ['./thesaurus-editor.component.css'],
 })
 export class ThesaurusEditorComponent implements OnInit {
+  private _id: string;
+
   private _refresh$: BehaviorSubject<number>;
   public filter$: BehaviorSubject<ThesaurusNodeFilter>;
   public pageSize: FormControl;
@@ -40,8 +45,17 @@ export class ThesaurusEditorComponent implements OnInit {
     @Inject(THESAURUS_EDITOR_PAGINATOR)
     public paginator: PaginatorPlugin<ThesaurusEditorState>,
     private _nodesService: ThesaurusNodesService,
+    private _thesService: RamThesaurusService,
+    private _router: Router,
+    private _route: ActivatedRoute,
     formBuilder: FormBuilder
   ) {
+    // get the edited thesaurus ID from the route
+    this._id = this._route.snapshot.params.id;
+    if (this._id === 'new') {
+      this._id = '';
+    }
+
     this.filter$ = new BehaviorSubject<ThesaurusNodeFilter>({
       pageNumber: 1,
       pageSize: 20,
@@ -56,6 +70,31 @@ export class ThesaurusEditorComponent implements OnInit {
     this.form = formBuilder.group({
       idOrValue: this.idOrValue,
       parentId: this.parentId,
+    });
+  }
+
+  private refresh(): void {
+    let n = this._refresh$.value + 1;
+    if (n > 100) {
+      n = 1;
+    }
+    this._refresh$.next(n);
+  }
+
+  private loadThesaurus(): void {
+    this._thesService.get(this._id).subscribe((thesaurus) => {
+      if (!thesaurus) {
+        thesaurus = {
+          id: this._id || 'new-thesaurus',
+          language: 'en',
+        };
+      }
+      const entries: ThesaurusEntry[] = [];
+      thesaurus.entries?.forEach(e => {
+        entries.push({...e});
+      });
+      this._nodesService.setNodes(entries, true);
+      this.refresh();
     });
   }
 
@@ -115,7 +154,7 @@ export class ThesaurusEditorComponent implements OnInit {
         })
       ),
       this.filter$.pipe(
-        // startWith(undefined),
+        startWith(undefined),
         // clear the cache when filters changed
         tap((_) => {
           this.paginator.clearCache();
@@ -136,6 +175,17 @@ export class ThesaurusEditorComponent implements OnInit {
         return this.getPaginatorResponse(pageNumber, pageSize);
       })
     );
+
+    // load
+    this.loadThesaurus();
+  }
+
+  public pageChanged(event: PageEvent): void {
+    // https://material.angular.io/components/paginator/api
+    this.paginator.setPage(event.pageIndex + 1);
+    if (event.pageSize !== this.pageSize.value) {
+      this.pageSize.setValue(event.pageSize);
+    }
   }
 
   public applyFilter(): void {

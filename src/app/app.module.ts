@@ -9,7 +9,10 @@ import { HomeComponent } from './components/home/home.component';
 import { RouterModule } from '@angular/router';
 import { CadmusMaterialModule } from '@myrmidon/cadmus-material';
 import { CadmusProfileCoreModule } from 'projects/myrmidon/cadmus-profile-core/src/public-api';
-import { CadmusProfileUiModule } from 'projects/myrmidon/cadmus-profile-ui/src/public-api';
+import {
+  CadmusProfileUiModule,
+  ThesaurusEditorComponent,
+} from 'projects/myrmidon/cadmus-profile-ui/src/public-api';
 import { CadmusShopCoreModule } from 'projects/myrmidon/cadmus-shop-core/src/public-api';
 import { CadmusShopAssetModule } from 'projects/myrmidon/cadmus-shop-asset/src/public-api';
 import { CommonModule } from '@angular/common';
@@ -62,6 +65,7 @@ import { ThesaurusListCodePageComponent } from './components/thesaurus-list-code
         { path: 'flags-list', component: FlagListPageComponent },
         { path: 'thes-code', component: ThesaurusListCodePageComponent },
         { path: 'thes-list', component: ThesaurusListPageComponent },
+        { path: 'thes/:id', component: ThesaurusEditorComponent },
         { path: '**', component: HomeComponent },
       ],
       {

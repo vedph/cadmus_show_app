@@ -971,5 +971,198 @@
         "value": "terza rima"
       }
     ]
+  },
+  {
+    "id": "ms-script-types@en",
+    "entries": [
+      {
+        "id": "cap",
+        "value": "Capitalis"
+      },
+      {
+        "id": "o-rom-cur",
+        "value": "Older Roman cursive (majuscule)"
+      },
+      {
+        "id": "l-rom-cur",
+        "value": "Later Roman cursive (minuscule)"
+      },
+      {
+        "id": "unc",
+        "value": "Uncial"
+      },
+      {
+        "id": "h-unc",
+        "value": "Half-uncial"
+      },
+      {
+        "id": "h-unc.-",
+        "value": "Half-uncial"
+      },
+      {
+        "id": "h-unc.o",
+        "value": "Older (eastern) half-uncial"
+      },
+      {
+        "id": "h-unc.l",
+        "value": "Later half-uncial"
+      },
+      {
+        "id": "isl",
+        "value": "Insular"
+      },
+      {
+        "id": "isl.ir",
+        "value": "Insular: Irish"
+      },
+      {
+        "id": "isl.ir.h-unc",
+        "value": "Insular: Irish half-uncial"
+      },
+      {
+        "id": "isl.ir.min",
+        "value": "Insular: Irish minuscule"
+      },
+      {
+        "id": "isl.ir.cur",
+        "value": "Insular: Irish cursive"
+      },
+      {
+        "id": "isl.a-s",
+        "value": "Insular: Anglo-Saxon"
+      },
+      {
+        "id": "isl.a-s.h-unc",
+        "value": "Insular: Anglo-Saxon half-uncial"
+      },
+      {
+        "id": "isl.a-s.min",
+        "value": "Insular: Anglo-Saxon minuscule"
+      },
+      {
+        "id": "isl.a-s.cur",
+        "value": "Insular: Anglo-Saxon cursive"
+      },
+      {
+        "id": "isl.cel",
+        "value": "Insular: other Celtic"
+      },
+      {
+        "id": "vis",
+        "value": "Visigothic"
+      },
+      {
+        "id": "vis.min",
+        "value": "Visigothic minuscule"
+      },
+      {
+        "id": "vis.cur",
+        "value": "Visigothic cursive"
+      },
+      {
+        "id": "sin",
+        "value": "Sinai"
+      },
+      {
+        "id": "sin.min",
+        "value": "Sinai minuscule"
+      },
+      {
+        "id": "n-ita",
+        "value": "north-Italian"
+      },
+      {
+        "id": "n-ita.cur",
+        "value": "north-Italian cursive"
+      },
+      {
+        "id": "n-ita.min",
+        "value": "north-Italian minuscule"
+      },
+      {
+        "id": "mer",
+        "value": "Merovingian"
+      },
+      {
+        "id": "mer.cur",
+        "value": "Merovingian cursive"
+      },
+      {
+        "id": "mer.lux",
+        "value": "Merovingian: Luxeuil type"
+      },
+      {
+        "id": "mer.ab",
+        "value": "Merovingian: ab-type"
+      },
+      {
+        "id": "mer.az",
+        "value": "Merovingian: az-type"
+      },
+      {
+        "id": "mer.b",
+        "value": "Merovingian: b-type"
+      },
+      {
+        "id": "mer.mordr",
+        "value": "Merovingian: Mordramnus minuscule"
+      },
+      {
+        "id": "car",
+        "value": "Caroline minuscule"
+      },
+      {
+        "id": "car.fra",
+        "value": "Caroline minuscule: French"
+      },
+      {
+        "id": "car.deu",
+        "value": "Caroline minuscule: German"
+      },
+      {
+        "id": "car.n-ita",
+        "value": "Caroline minuscule: north-Italian"
+      },
+      {
+        "id": "car.rom",
+        "value": "Caroline minuscule: Roman"
+      },
+      {
+        "id": "ben",
+        "value": "Beneventan script"
+      },
+      {
+        "id": "ben.-",
+        "value": "Beneventan script"
+      },
+      {
+        "id": "ben.mc",
+        "value": "Beneventan script: Monte Cassino"
+      },
+      {
+        "id": "ben.ba",
+        "value": "Beneventan script: Bari"
+      },
+      {
+        "id": "goth",
+        "value": "Gothic textura (textualis)"
+      },
+      {
+        "id": "bast",
+        "value": "Bastarda"
+      },
+      {
+        "id": "hum",
+        "value": "Humanistic"
+      },
+      {
+        "id": "hum.cur",
+        "value": "Humanistic cursive"
+      },
+      {
+        "id": "hum.min",
+        "value": "Humanistic minuscule"
+      }
+    ]
   }
 ]

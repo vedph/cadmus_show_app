@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
+import { Router } from '@angular/router';
 import { PaginationResponse, PaginatorPlugin } from '@datorama/akita';
 import {
   Thesaurus,
@@ -64,6 +65,7 @@ export class ThesaurusListComponent implements OnInit {
     private _filterService: ThesaurusFilterService,
     private _filterQuery: ThesaurusFilterQuery,
     private _dialogService: DialogService,
+    private _router: Router,
     formBuilder: FormBuilder
   ) {
     this.pageSize = formBuilder.control(20);
@@ -177,11 +179,11 @@ export class ThesaurusListComponent implements OnInit {
   }
 
   public addThesaurus(): void {
-    // TODO
+    this._router.navigate(['/thes/new']);
   }
 
   public editThesaurus(id: string): void {
-    // TODO
+    this._router.navigate([`/thes/${id}`]);
   }
 
   public deleteThesaurus(id: string): void {

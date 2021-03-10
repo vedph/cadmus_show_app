@@ -1,0 +1,12 @@
+.node {
+  margin-top: 8px;
+}
+.node-id {
+  background-color: #f0f0f0;
+  border-radius: 6px;
+  padding: 4px;
+  margin: 0 4px;
+}
+.node-value {
+  font-size: 90%;
+}

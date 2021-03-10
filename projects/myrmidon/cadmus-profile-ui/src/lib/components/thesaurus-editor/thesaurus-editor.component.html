@@ -9,7 +9,7 @@
     <div>
       <form [formGroup]="form" (submit)="applyFilter()">
         <mat-form-field style="width: 6em">
-          <input matInput [formControl]="filter" placeholder="filter" />
+          <input matInput [formControl]="idOrValue" placeholder="ID/value" />
         </mat-form-field>
         &nbsp;
         <mat-form-field
@@ -23,6 +23,32 @@
           </mat-select>
         </mat-form-field>
       </form>
+    </div>
+
+    <!-- list -->
+    <div *ngIf="page$ | async as page">
+      <div
+        *ngFor="let node of page.data"
+        [style.marginLeft]="node.level + 'em'"
+        class="node"
+      >
+        <span class="node-id">{{ node.id }}</span>
+        <span class="node-value">{{ node.value }}</span>
+      </div>
+
+      <!-- paginator -->
+      <mat-paginator
+        *ngIf="page.data?.length"
+        gdArea="pagination"
+        gdAlignColumns="center"
+        gdAlignRows="start"
+        [length]="page.total"
+        [pageSize]="pageSize?.value"
+        [pageSizeOptions]="[20, 50, 75, 100]"
+        [pageIndex]="page.currentPage - 1"
+        [showFirstLastButtons]="true"
+        (page)="pageChanged($event)"
+      ></mat-paginator>
     </div>
   </mat-card-content>
 </mat-card>

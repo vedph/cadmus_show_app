@@ -90,6 +90,43 @@ export class ThesaurusNodesService {
     this._parentIds$.next(uniqueEntries);
   }
 
+  private assignParentIds(nodes: ThesaurusNode[]): void {
+    nodes.forEach((node) => {
+      const i = node.id.lastIndexOf('.');
+      if (i > -1) {
+        node.parentId = node.id.substr(0, i);
+      }
+    });
+  }
+
+  private assignRelations(nodes: ThesaurusNode[]): void {
+    nodes.forEach((node) => {
+      if (node.parentId) {
+        node.parent = nodes.find((n) => n.id === node.parentId);
+        if (node.parent) {
+          if (!node.parent.children) {
+            node.parent.children = [];
+          }
+          node.parent.children.push(node);
+        }
+      }
+    });
+  }
+
+  private assignLevels(nodes: ThesaurusNode[]): void {
+    nodes.forEach((node) => {
+      if (node.parent) {
+        let n = 0;
+        let parent: ThesaurusNode | undefined = node.parent;
+        while (parent) {
+          n++;
+          parent = parent.parent;
+        }
+        node.level = n;
+      }
+    });
+}
+
   /**
    * Set all the nodes at once.
    *
@@ -100,17 +137,9 @@ export class ThesaurusNodesService {
    */
   public setNodes(nodes: ThesaurusNode[], supply = false): void {
     if (supply) {
-      nodes.forEach((node) => {
-        if (node.parentId) {
-          node.parent = nodes.find((n) => n.id === node.parentId);
-          if (node.parent) {
-            if (!node.parent.children) {
-              node.parent.children = [];
-            }
-            node.parent.children.push(node);
-          }
-        }
-      });
+      this.assignParentIds(nodes);
+      this.assignRelations(nodes);
+      this.assignLevels(nodes);
     }
     this._nodes$.next(nodes);
 
