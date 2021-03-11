@@ -12,12 +12,10 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
  * The nodes may represent either a hierarchical or a non-hierarchical
  * thesaurus.
  */
-export interface ThesaurusNode {
-  id: string;
-  value: string;
+export interface ThesaurusNode extends ThesaurusEntry {
   parentId?: string;
-  level?: number;
-  ordinal?: number;
+  level: number;
+  ordinal: number;
   expanded?: boolean;
   lastSibling?: boolean;
   parent?: ThesaurusNode;
@@ -145,7 +143,7 @@ export class ThesaurusNodesService {
         const old = map.get(key) as { ordinal: number; node: ThesaurusNode };
         old.ordinal++;
       }
-      node.ordinal = map.get(key)?.ordinal;
+      node.ordinal = map.get(key)?.ordinal as number;
     }
 
     // set last flags
@@ -157,19 +155,14 @@ export class ThesaurusNodesService {
   /**
    * Set all the nodes at once.
    *
-   * @param nodes The nodes to set.
-   * @param supply True to supply parent and children properties
-   * from the nodes' parentId values; false if the nodes already
-   * have these properties set.
+   * @param entries The nodes to set.
    */
-  public setNodes(nodes: ThesaurusNode[], supply = false): void {
-    if (supply) {
-      this.assignParentIds(nodes);
-      this.assignRelations(nodes);
-      this.assignLevels(nodes);
-      this.assignOrdinals(nodes);
-    }
-    this._nodes$.next(nodes);
+  public importEntries(entries: ThesaurusEntry[]): void {
+    this.assignParentIds(entries as ThesaurusNode[]);
+    this.assignRelations(entries as ThesaurusNode[]);
+    this.assignLevels(entries as ThesaurusNode[]);
+    this.assignOrdinals(entries as ThesaurusNode[]);
+    this._nodes$.next(entries as ThesaurusNode[]);
 
     this.refreshParents();
   }
@@ -225,9 +218,12 @@ export class ThesaurusNodesService {
 
     // replace an existing node in place
     if (i > -1) {
+      node.ordinal = nodes[i].ordinal;
+      node.lastSibling = nodes[i].lastSibling;
       nodes.splice(i, 1, node);
     } else {
-      // the node has a parent?
+      // else it's a new node --
+      // has the node a parent?
       if (node.parentId) {
         // yes: find it
         const parent = nodes.find((n) => n.id === node.parentId);
@@ -238,15 +234,29 @@ export class ThesaurusNodesService {
             parent.children = [];
           }
           parent.children.push(node);
+
           // ... and insert it as its last child
+          let n = 1;
+          if (parent.children.length) {
+            const lastChild = parent.children[parent.children.length - 1];
+            n = lastChild.ordinal + 1;
+            lastChild.lastSibling = false;
+          }
+          node.ordinal = n;
+          node.lastSibling = true;
           nodes.splice(nodes.indexOf(parent) + 1, 0, node);
         } else {
-          // if not found, that's an error; treat it as an unparented node
-          node.parentId = undefined;
-          nodes.push(node);
+          // if not found, that's an error: do nothing
+          console.error('Node parent ID not found: ' + node.parentId);
+          return;
         }
       } else {
         // no parent: just append
+        if (nodes.length) {
+          nodes[nodes.length - 1].lastSibling = false;
+        }
+        node.ordinal = nodes.length + 1;
+        node.lastSibling = true;
         nodes.push(node);
       }
     }
@@ -275,27 +285,39 @@ export class ThesaurusNodesService {
   public delete(id: string): void {
     const nodes = [...this._nodes$.value];
     const i = nodes.findIndex((n) => n.id === id);
-    if (i > -1) {
-      // if it is a child, remove from its parent
-      if (nodes[i].parentId) {
-        const parent = nodes.find((n) => n.id === nodes[i].parentId);
-        if (parent?.children) {
-          const ci = parent.children.findIndex((n) => n.id === nodes[i].id);
-          parent.children.splice(ci, 1);
-          // if no more children remain, update the parent ids
-          if (!parent.children.length) {
-            const ids = [...this._parentIds$.value];
-            const i = ids.findIndex((entry) => entry.id === parent.id);
-            if (i > -1) {
-              ids.splice(i, 1);
-              this._parentIds$.next(ids);
-            }
+    if (i === -1) {
+      return;
+    }
+    // if it is a child, remove from its parent
+    if (nodes[i].parentId) {
+      const parent = nodes.find((n) => n.id === nodes[i].parentId);
+      if (parent?.children) {
+        const ci = parent.children.findIndex((n) => n.id === nodes[i].id);
+        parent.children.splice(ci, 1);
+        // if no more children remain, update the parent ids
+        if (!parent.children.length) {
+          const ids = [...this._parentIds$.value];
+          const i = ids.findIndex((entry) => entry.id === parent.id);
+          if (i > -1) {
+            ids.splice(i, 1);
+            this._parentIds$.next(ids);
           }
         }
       }
-      nodes.splice(i, 1);
-      // save
-      this._nodes$.next(nodes);
     }
+
+    // update ordinals
+    if (nodes[i].lastSibling && i) {
+      nodes[i - 1].lastSibling = true;
+    }
+    for (let j = i + 1; j < nodes.length; j++) {
+      if (nodes[j].parentId === nodes[i].parentId) {
+        nodes[j].ordinal--;
+      }
+    }
+
+    nodes.splice(i, 1);
+    // save
+    this._nodes$.next(nodes);
   }
 }

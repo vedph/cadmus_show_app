@@ -93,7 +93,7 @@ export class ThesaurusEditorComponent implements OnInit {
       thesaurus.entries?.forEach(e => {
         entries.push({...e});
       });
-      this._nodesService.setNodes(entries, true);
+      this._nodesService.importEntries(entries);
       this.refresh();
     });
   }

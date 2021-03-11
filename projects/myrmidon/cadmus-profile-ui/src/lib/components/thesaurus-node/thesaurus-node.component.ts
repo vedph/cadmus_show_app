@@ -95,6 +95,8 @@ export class ThesaurusNodeComponent implements OnInit {
       ...this._node,
       id: this.id.value.trim(),
       value: this.value.value.trim(),
+      level: 0,
+      ordinal: 0,
     });
   }
 }
