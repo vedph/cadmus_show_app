@@ -94,7 +94,7 @@ export class ThesaurusNodesService {
    * Assign the parent IDs to the children nodes being imported,
    * according to their ID. If a node ID is composite (using
    * dots as separators), it has a parent equal to its ID minus
-   * its last component.
+   * its last component. This also sets the hasChildren property.
    *
    * @param nodes The nodes.
    */
@@ -103,6 +103,13 @@ export class ThesaurusNodesService {
       const i = node.id.lastIndexOf('.');
       if (i > -1) {
         node.parentId = node.id.substr(0, i);
+      }
+    });
+
+    const parentIds = [...new Set(nodes.map((n) => n.parentId))];
+    nodes.forEach((node) => {
+      if (parentIds.includes(node.id)) {
+        node.hasChildren = true;
       }
     });
   }
@@ -169,7 +176,6 @@ export class ThesaurusNodesService {
     this.assignParentIds(entries as ThesaurusNode[]);
     this.assignLevels(entries as ThesaurusNode[]);
     this.assignOrdinals(entries as ThesaurusNode[]);
-    // TODO hasChildren
     this._nodes$.next(entries as ThesaurusNode[]);
 
     this.refreshParentIds();
@@ -266,6 +272,12 @@ export class ThesaurusNodesService {
           console.log('Parent node not found: ' + node.parentId);
           return;
         }
+        // the parent should have its hasChildren set
+        const parent = nodes[i];
+        if (!parent.hasChildren) {
+          nodes.splice(i, 1, { ...parent, hasChildren: true });
+        }
+        // assign ordinals and lastSibling
         i++;
         let n = 1;
         while (i < nodes.length && nodes[i].parentId === node.parentId) {
@@ -302,6 +314,14 @@ export class ThesaurusNodesService {
     }
   }
 
+  private getParentIndex(nodes: ThesaurusNode[], childIndex: number): number {
+    let i = childIndex - 1;
+    while (i > -1 && nodes[i].id !== nodes[childIndex].parentId) {
+      i--;
+    }
+    return i;
+  }
+
   /**
    * Delete the node with the specified ID.
    *
@@ -317,15 +337,22 @@ export class ThesaurusNodesService {
     const deleted = nodes[i];
     nodes.splice(i, 1);
 
-    // if it was the last sibling, the previous one,
-    // if any, is now the last sibling
-    if (
-      deleted.lastSibling &&
-      i &&
-      nodes[i - 1].parentId === deleted.parentId
-    ) {
-      const prevSibling = nodes[i - 1];
-      nodes.splice(i - 1, 1, { ...prevSibling, lastSibling: true });
+    // if it was the last sibling:
+    if (deleted.lastSibling) {
+      // if it was also the 1st, we have removed all the children
+      if (deleted.ordinal === 1) {
+        const parentIndex = this.getParentIndex(nodes, i);
+        nodes.splice(parentIndex, 1, {
+          ...nodes[parentIndex],
+          hasChildren: false,
+        });
+      } else {
+        // else the previous one, if any, is now the last sibling
+        if (nodes[i - 1].parentId === deleted.parentId) {
+          const prevSibling = nodes[i - 1];
+          nodes.splice(i - 1, 1, { ...prevSibling, lastSibling: true });
+        }
+      }
     }
 
     // update ordinals for the next siblings if any
