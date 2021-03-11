@@ -9,13 +9,11 @@
   margin: 0 4px 0 8px;
 }
 .node-id {
-  background-color: #f8f8f8;
+  background-color: #0aa668;
+  color: white;
   border-radius: 6px;
   padding: 4px;
   margin: 0 4px;
-}
-.node-value {
-  font-size: 90%;
 }
 .node-btn {
   opacity: 15%;

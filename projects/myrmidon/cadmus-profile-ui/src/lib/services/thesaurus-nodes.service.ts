@@ -91,6 +91,14 @@ export class ThesaurusNodesService {
     this._parentIds$.next(uniqueEntries);
   }
 
+  /**
+   * Assign the parent IDs to the children nodes, according
+   * to their ID. If a node ID is composite (using dots as
+   * separators), it has a parent equal to its ID minus its
+   * last component.
+   *
+   * @param nodes The nodes.
+   */
   private assignParentIds(nodes: ThesaurusNode[]): void {
     nodes.forEach((node) => {
       const i = node.id.lastIndexOf('.');
@@ -100,11 +108,20 @@ export class ThesaurusNodesService {
     });
   }
 
+  /**
+   * Assign relationhsip properties (parent and children) to
+   * the nodes.
+   *
+   * @param nodes The nodes.
+   */
   private assignRelations(nodes: ThesaurusNode[]): void {
     nodes.forEach((node) => {
       if (node.parentId) {
+        // find and set parent (there should be one)
         node.parent = nodes.find((n) => n.id === node.parentId);
         if (node.parent) {
+          // assign child to parent
+          node.parent.expanded = true;
           if (!node.parent.children) {
             node.parent.children = [];
           }
@@ -114,6 +131,11 @@ export class ThesaurusNodesService {
     });
   }
 
+  /**
+   * Assign depth levels to the nodes.
+   *
+   * @param nodes The nodes.
+   */
   private assignLevels(nodes: ThesaurusNode[]): void {
     nodes.forEach((node) => {
       if (node.parent) {
@@ -128,6 +150,11 @@ export class ThesaurusNodesService {
     });
   }
 
+  /**
+   * Assign ordinal and lastSibling properties to the nodes.
+   *
+   * @param nodes The nodes.
+   */
   private assignOrdinals(nodes: ThesaurusNode[]): void {
     const map = new Map<string, { ordinal: number; node: ThesaurusNode }>();
 
@@ -194,16 +221,34 @@ export class ThesaurusNodesService {
     filter: ThesaurusNodeFilter
   ): Observable<DataPage<ThesaurusNode>> {
     filter.idOrValue = filter.idOrValue?.toLowerCase();
-    const nodes = this._nodes$.value.filter((node) => {
-      return this.matchNode(node, filter);
+
+    const pageNodes: ThesaurusNode[] = [];
+    let offset = (filter.pageNumber - 1) * filter.pageSize;
+    let total = 0;
+
+    this._nodes$.value.forEach((node) => {
+      // consider only matching nodes
+      if (this.matchNode(node, filter)) {
+        // collapsed nodes are excluded
+        if (!node.parent || node.parent.expanded) {
+          if (node.parentId) total++;
+          if (offset) {
+            offset--;
+          } else {
+            if (pageNodes.length < filter.pageSize) {
+              pageNodes.push(node);
+            }
+          }
+        }
+      }
     });
-    const offset = (filter.pageNumber - 1) * filter.pageSize;
+
     return of({
       pageNumber: filter.pageNumber,
       pageSize: filter.pageSize,
-      total: nodes.length,
-      pageCount: Math.ceil(nodes.length / filter.pageSize),
-      items: nodes.slice(offset, offset + filter.pageSize),
+      total: total,
+      pageCount: Math.ceil(total / filter.pageSize),
+      items: pageNodes,
     });
   }
 

@@ -7,6 +7,7 @@
     <span class="node-value">{{ node.value }}</span>
     <!-- buttons -->
     <span class="node-btn">
+      <!-- edit -->
       <button
         type="button"
         mat-icon-button
@@ -16,21 +17,30 @@
       >
         <mat-icon>edit</mat-icon>
       </button>
-      <button
+      <!-- expand -->
+      <button *ngIf="!node.expanded && node.children?.length"
         type="button"
         mat-icon-button
-        *ngIf="node.level"
-        matTooltip="Promote this entry"
+        matTooltip="Expand this node"
       >
-        <mat-icon>arrow_back</mat-icon>
+        <mat-icon>expand_more</mat-icon>
       </button>
-      <button
+      <!-- collapse -->
+      <button *ngIf="node.expanded"
+        type="button"
+        mat-icon-button
+        matTooltip="Collapse this node"
+      >
+        <mat-icon>expand_less</mat-icon>
+      </button>
+      <!-- <button
         type="button"
         mat-icon-button
         matTooltip="Make this entry child of the preceding one"
       >
         <mat-icon>subdirectory_arrow_right</mat-icon>
-      </button>
+      </button> -->
+      <!-- move up -->
       <button
         type="button"
         mat-icon-button
@@ -39,6 +49,7 @@
       >
         <mat-icon>arrow_upward</mat-icon>
       </button>
+      <!-- move down -->
       <button
         type="button"
         mat-icon-button
@@ -47,6 +58,7 @@
       >
         <mat-icon>arrow_downward</mat-icon>
       </button>
+      <!-- delete -->
       <button
         type="button"
         mat-icon-button
