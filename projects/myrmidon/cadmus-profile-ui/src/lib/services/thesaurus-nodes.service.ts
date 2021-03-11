@@ -13,13 +13,12 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
  * thesaurus.
  */
 export interface ThesaurusNode extends ThesaurusEntry {
-  parentId?: string;
   level: number;
   ordinal: number;
+  parentId?: string;
   expanded?: boolean;
+  hasChildren?: boolean;
   lastSibling?: boolean;
-  parent?: ThesaurusNode;
-  children?: ThesaurusNode[];
 }
 
 /**
@@ -75,7 +74,7 @@ export class ThesaurusNodesService {
     return [...this._parentIds$.value];
   }
 
-  private refreshParents(): void {
+  private refreshParentIds(): void {
     const entries = this._nodes$.value
       .filter((n) => n.parentId)
       .map((n) => {
@@ -92,10 +91,10 @@ export class ThesaurusNodesService {
   }
 
   /**
-   * Assign the parent IDs to the children nodes, according
-   * to their ID. If a node ID is composite (using dots as
-   * separators), it has a parent equal to its ID minus its
-   * last component.
+   * Assign the parent IDs to the children nodes being imported,
+   * according to their ID. If a node ID is composite (using
+   * dots as separators), it has a parent equal to its ID minus
+   * its last component.
    *
    * @param nodes The nodes.
    */
@@ -109,49 +108,31 @@ export class ThesaurusNodesService {
   }
 
   /**
-   * Assign relationhsip properties (parent and children) to
-   * the nodes.
-   *
-   * @param nodes The nodes.
-   */
-  private assignRelations(nodes: ThesaurusNode[]): void {
-    nodes.forEach((node) => {
-      if (node.parentId) {
-        // find and set parent (there should be one)
-        node.parent = nodes.find((n) => n.id === node.parentId);
-        if (node.parent) {
-          // assign child to parent
-          node.parent.expanded = true;
-          if (!node.parent.children) {
-            node.parent.children = [];
-          }
-          node.parent.children.push(node);
-        }
-      }
-    });
-  }
-
-  /**
-   * Assign depth levels to the nodes.
+   * Assign depth levels to the nodes being imported.
    *
    * @param nodes The nodes.
    */
   private assignLevels(nodes: ThesaurusNode[]): void {
-    nodes.forEach((node) => {
-      if (node.parent) {
-        let n = 0;
-        let parent: ThesaurusNode | undefined = node.parent;
+    for (let i = 0; i < nodes.length; i++) {
+      const node = nodes[i];
+
+      if (node.parentId) {
+        let n = 1;
+        let parent = nodes.find((n) => n.id === node.parentId);
         while (parent) {
           n++;
-          parent = parent.parent;
+          parent = nodes.find(
+            (n) => n.id === (parent as ThesaurusNode).parentId
+          );
         }
         node.level = n;
       }
-    });
+    }
   }
 
   /**
-   * Assign ordinal and lastSibling properties to the nodes.
+   * Assign ordinal and lastSibling properties to the nodes
+   * being imported.
    *
    * @param nodes The nodes.
    */
@@ -186,15 +167,16 @@ export class ThesaurusNodesService {
    */
   public importEntries(entries: ThesaurusEntry[]): void {
     this.assignParentIds(entries as ThesaurusNode[]);
-    this.assignRelations(entries as ThesaurusNode[]);
     this.assignLevels(entries as ThesaurusNode[]);
     this.assignOrdinals(entries as ThesaurusNode[]);
+    // TODO hasChildren
     this._nodes$.next(entries as ThesaurusNode[]);
 
-    this.refreshParents();
+    this.refreshParentIds();
   }
 
   private matchNode(node: ThesaurusNode, filter: ThesaurusNodeFilter): boolean {
+    // idOrValue
     if (
       filter.idOrValue &&
       !node.id.toLowerCase().includes(filter.idOrValue) &&
@@ -202,12 +184,12 @@ export class ThesaurusNodesService {
     ) {
       return false;
     }
-    if (
-      filter.parentId &&
-      (!node.parent || node.parent.id !== filter.parentId)
-    ) {
+
+    // parentId
+    if (filter.parentId && node.parentId !== filter.parentId) {
       return false;
     }
+
     return true;
   }
 
@@ -220,8 +202,10 @@ export class ThesaurusNodesService {
   public getPage(
     filter: ThesaurusNodeFilter
   ): Observable<DataPage<ThesaurusNode>> {
+    // adjust filter
     filter.idOrValue = filter.idOrValue?.toLowerCase();
 
+    // collect page's nodes
     const pageNodes: ThesaurusNode[] = [];
     let offset = (filter.pageNumber - 1) * filter.pageSize;
     let total = 0;
@@ -230,8 +214,15 @@ export class ThesaurusNodesService {
       // consider only matching nodes
       if (this.matchNode(node, filter)) {
         // collapsed nodes are excluded
-        if (!node.parent || node.parent.expanded) {
-          if (node.parentId) total++;
+        let collapsed = false;
+        if (node.parentId) {
+          const parent = this._nodes$.value.find((n) => n.id === node.parentId);
+          if (!parent?.expanded) {
+            collapsed = true;
+          }
+        }
+        if (!collapsed) {
+          total++;
           if (offset) {
             offset--;
           } else {
@@ -261,39 +252,29 @@ export class ThesaurusNodesService {
     const nodes = [...this._nodes$.value];
     const i = nodes.findIndex((n) => n.id === node.id);
 
-    // replace an existing node in place
+    // replace an existing node
     if (i > -1) {
       node.ordinal = nodes[i].ordinal;
       node.lastSibling = nodes[i].lastSibling;
       nodes.splice(i, 1, node);
     } else {
-      // else it's a new node --has the node a parent?
+      // else it's a new node -- has the node a parent?
       if (node.parentId) {
-        // yes: find it
-        const parent = nodes.find((n) => n.id === node.parentId);
-        if (parent) {
-          // if found, add the node as its child...
-          node.parent = parent;
-          if (!parent.children) {
-            parent.children = [];
-          }
-          parent.children.push(node);
-
-          // ... and insert it as its last child
-          let n = 1;
-          if (parent.children.length) {
-            const lastChild = parent.children[parent.children.length - 1];
-            n = lastChild.ordinal + 1;
-            lastChild.lastSibling = false;
-          }
-          node.ordinal = n;
-          node.lastSibling = true;
-          nodes.splice(nodes.indexOf(parent) + 1, 0, node);
-        } else {
-          // if not found, that's an error: do nothing
-          console.error('Node parent ID not found: ' + node.parentId);
+        // yes: append as the last child
+        let i = nodes.findIndex((p) => p.id === node.parentId);
+        if (i === -1) {
+          console.log('Parent node not found: ' + node.parentId);
           return;
         }
+        i++;
+        let n = 1;
+        while (i < nodes.length && nodes[i].parentId === node.parentId) {
+          n++;
+          i++;
+        }
+        node.lastSibling = true;
+        node.ordinal = n;
+        nodes.splice(i, 0, node);
       } else {
         // no parent: just append
         if (nodes.length) {
@@ -327,40 +308,34 @@ export class ThesaurusNodesService {
    * @param id The ID of the node to delete.
    */
   public delete(id: string): void {
+    // delete
     const nodes = [...this._nodes$.value];
     const i = nodes.findIndex((n) => n.id === id);
     if (i === -1) {
       return;
     }
-    // if it is a child, remove from its parent
-    if (nodes[i].parentId) {
-      const parent = nodes.find((n) => n.id === nodes[i].parentId);
-      if (parent?.children) {
-        const ci = parent.children.findIndex((n) => n.id === nodes[i].id);
-        parent.children.splice(ci, 1);
-        // if no more children remain, update the parent ids
-        if (!parent.children.length) {
-          const ids = [...this._parentIds$.value];
-          const i = ids.findIndex((entry) => entry.id === parent.id);
-          if (i > -1) {
-            ids.splice(i, 1);
-            this._parentIds$.next(ids);
-          }
-        }
-      }
-    }
-
-    // update ordinals
-    if (nodes[i].lastSibling && i) {
-      nodes[i - 1].lastSibling = true;
-    }
-    for (let j = i + 1; j < nodes.length; j++) {
-      if (nodes[j].parentId === nodes[i].parentId) {
-        nodes[j].ordinal--;
-      }
-    }
-
+    const deleted = nodes[i];
     nodes.splice(i, 1);
+
+    // if it was the last sibling, the previous one,
+    // if any, is now the last sibling
+    if (
+      deleted.lastSibling &&
+      i &&
+      nodes[i - 1].parentId === deleted.parentId
+    ) {
+      const prevSibling = nodes[i - 1];
+      nodes.splice(i - 1, 1, { ...prevSibling, lastSibling: true });
+    }
+
+    // update ordinals for the next siblings if any
+    let j = i + 1;
+    while (j < nodes.length && nodes[j].parentId === deleted.parentId) {
+      const sibling = nodes[j];
+      nodes.splice(j, 1, { ...sibling, ordinal: sibling.ordinal - 1 });
+      j++;
+    }
+
     // save
     this._nodes$.next(nodes);
   }

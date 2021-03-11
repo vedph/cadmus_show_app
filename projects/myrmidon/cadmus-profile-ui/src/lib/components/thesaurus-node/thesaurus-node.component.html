@@ -19,7 +19,7 @@
       </button>
       <!-- expand -->
       <button
-        *ngIf="!node.expanded && node.children?.length"
+        *ngIf="!node.expanded && node.hasChildren"
         type="button"
         mat-icon-button
         matTooltip="Expand this node"
