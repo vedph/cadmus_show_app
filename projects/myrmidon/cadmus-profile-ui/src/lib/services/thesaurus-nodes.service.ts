@@ -8,6 +8,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 
 /**
  * A thesaurus entry edited in a set of thesauri nodes.
+ * This is used as the view-model for the thesaurus editor.
  * The nodes may represent either a hierarchical or a non-hierarchical
  * thesaurus.
  */
@@ -16,7 +17,9 @@ export interface ThesaurusNode {
   value: string;
   parentId?: string;
   level?: number;
+  ordinal?: number;
   expanded?: boolean;
+  lastSibling?: boolean;
   parent?: ThesaurusNode;
   children?: ThesaurusNode[];
 }
@@ -125,7 +128,31 @@ export class ThesaurusNodesService {
         node.level = n;
       }
     });
-}
+  }
+
+  private assignOrdinals(nodes: ThesaurusNode[]): void {
+    const map = new Map<string, { ordinal: number; node: ThesaurusNode }>();
+
+    for (let i = 0; i < nodes.length; i++) {
+      const node = nodes[i];
+      const key = node.parentId || '';
+      if (!map.has(key)) {
+        map.set(key, {
+          ordinal: 1,
+          node: node,
+        });
+      } else {
+        const old = map.get(key) as { ordinal: number; node: ThesaurusNode };
+        old.ordinal++;
+      }
+      node.ordinal = map.get(key)?.ordinal;
+    }
+
+    // set last flags
+    for (let v of map.values()) {
+      v.node.lastSibling = true;
+    }
+  }
 
   /**
    * Set all the nodes at once.
@@ -140,6 +167,7 @@ export class ThesaurusNodesService {
       this.assignParentIds(nodes);
       this.assignRelations(nodes);
       this.assignLevels(nodes);
+      this.assignOrdinals(nodes);
     }
     this._nodes$.next(nodes);
 

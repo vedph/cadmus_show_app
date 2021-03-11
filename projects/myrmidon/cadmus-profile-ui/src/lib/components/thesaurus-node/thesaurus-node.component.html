@@ -1,47 +1,61 @@
 <div *ngIf="node">
   <!-- display -->
   <div *ngIf="!editing" [style.marginLeft]="node.level + 'em'" class="node">
-    <!-- buttons -->
-    <button
-      type="button"
-      mat-icon-button
-      color="primary"
-      matTooltip="Edit this entry"
-      (click)="toggleEdit(true)"
-    >
-      <mat-icon>edit</mat-icon>
-    </button>
-    <button
-      type="button"
-      mat-icon-button
-      *ngIf="node.level"
-      matTooltip="Promote this entry"
-    >
-      <mat-icon>arrow_back</mat-icon>
-    </button>
-    <button
-      type="button"
-      mat-icon-button
-      matTooltip="Make this entry child of the preceding one"
-    >
-      <mat-icon>subdirectory_arrow_right</mat-icon>
-    </button>
-    <button type="button" mat-icon-button matTooltip="Move this entry up">
-      <mat-icon>arrow_upward</mat-icon>
-    </button>
-    <button type="button" mat-icon-button matTooltip="Move this entry down">
-      <mat-icon>arrow_downward</mat-icon>
-    </button>
-    <button
-      type="button"
-      mat-icon-button
-      color="warn"
-      matTooltip="Delete this entry"
-    >
-      <mat-icon>remove_circle</mat-icon>
-    </button>
+    <!-- node -->
+    <span class="node-ord">{{ node.ordinal }}</span>
     <span class="node-id">{{ node.id }}</span>
     <span class="node-value">{{ node.value }}</span>
+    <!-- buttons -->
+    <span class="node-btn">
+      <button
+        type="button"
+        mat-icon-button
+        color="primary"
+        matTooltip="Edit this entry"
+        (click)="toggleEdit(true)"
+      >
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button
+        type="button"
+        mat-icon-button
+        *ngIf="node.level"
+        matTooltip="Promote this entry"
+      >
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <button
+        type="button"
+        mat-icon-button
+        matTooltip="Make this entry child of the preceding one"
+      >
+        <mat-icon>subdirectory_arrow_right</mat-icon>
+      </button>
+      <button
+        type="button"
+        mat-icon-button
+        matTooltip="Move this entry up"
+        *ngIf="(node.ordinal || 0) > 1"
+      >
+        <mat-icon>arrow_upward</mat-icon>
+      </button>
+      <button
+        type="button"
+        mat-icon-button
+        matTooltip="Move this entry down"
+        *ngIf="!node.lastSibling"
+      >
+        <mat-icon>arrow_downward</mat-icon>
+      </button>
+      <button
+        type="button"
+        mat-icon-button
+        color="warn"
+        matTooltip="Delete this entry"
+      >
+        <mat-icon>remove_circle</mat-icon>
+      </button>
+    </span>
   </div>
 
   <!-- edit -->
@@ -67,7 +81,7 @@
 
       <!-- value -->
       &nbsp;
-      <mat-form-field>
+      <mat-form-field style="min-width: 300px">
         <input matInput [formControl]="value" placeholder="value" #nodeVal />
         <mat-error
           *ngIf="value.errors?.required && (value.dirty || value.touched)"
