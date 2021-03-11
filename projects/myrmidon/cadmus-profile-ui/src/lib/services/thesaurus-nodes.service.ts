@@ -267,8 +267,7 @@ export class ThesaurusNodesService {
       node.lastSibling = nodes[i].lastSibling;
       nodes.splice(i, 1, node);
     } else {
-      // else it's a new node --
-      // has the node a parent?
+      // else it's a new node --has the node a parent?
       if (node.parentId) {
         // yes: find it
         const parent = nodes.find((n) => n.id === node.parentId);

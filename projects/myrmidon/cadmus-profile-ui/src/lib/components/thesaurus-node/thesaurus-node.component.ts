@@ -13,6 +13,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { ComponentSignal } from 'projects/myrmidon/cadmus-profile-core/src/public-api';
 import { ThesaurusNode } from '../../services/thesaurus-nodes.service';
 
 /**
@@ -45,9 +46,13 @@ export class ThesaurusNodeComponent implements OnInit {
   @Output()
   public nodeChange: EventEmitter<ThesaurusNode>;
 
+  @Output()
+  public signal: EventEmitter<ComponentSignal<ThesaurusNode>>;
+
   constructor(formBuilder: FormBuilder) {
     this.editing = false;
     this.nodeChange = new EventEmitter<ThesaurusNode>();
+    this.signal = new EventEmitter<ComponentSignal<ThesaurusNode>>();
     // form
     this.id = formBuilder.control(null, [
       Validators.required,
@@ -85,18 +90,29 @@ export class ThesaurusNodeComponent implements OnInit {
     }
   }
 
+  private getNode(): ThesaurusNode {
+    return {
+      ...this._node,
+      id: this.id.value.trim(),
+      value: this.value.value.trim(),
+      level: 0,
+      ordinal: 0,
+    };
+  }
+
   public save(): void {
     if (!this.editing || this.form.invalid) {
       return;
     }
     this.form.markAsPristine();
     this.editing = false;
-    this.nodeChange.emit({
-      ...this._node,
-      id: this.id.value.trim(),
-      value: this.value.value.trim(),
-      level: 0,
-      ordinal: 0,
+    this.nodeChange.emit(this.getNode());
+  }
+
+  public emitSignal(id: string) {
+    this.signal.emit({
+      id: id,
+      payload: this.getNode(),
     });
   }
 }

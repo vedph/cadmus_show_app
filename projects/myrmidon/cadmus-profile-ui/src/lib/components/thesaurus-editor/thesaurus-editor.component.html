@@ -30,6 +30,8 @@
       <cadmus-thesaurus-node
         *ngFor="let node of page.data"
         [node]="node"
+        (nodeChange)="addNode($event)"
+        (signal)="onSignal($event)"
       ></cadmus-thesaurus-node>
 
       <!-- paginator -->

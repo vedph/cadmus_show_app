@@ -3,7 +3,10 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PaginationResponse, PaginatorPlugin } from '@datorama/akita';
-import { ThesaurusEntry } from 'projects/myrmidon/cadmus-profile-core/src/public-api';
+import {
+  ComponentSignal,
+  ThesaurusEntry,
+} from 'projects/myrmidon/cadmus-profile-core/src/public-api';
 import { DataPage } from 'projects/myrmidon/cadmus-shop-core/src/public-api';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { debounceTime, map, startWith, switchMap, tap } from 'rxjs/operators';
@@ -90,8 +93,8 @@ export class ThesaurusEditorComponent implements OnInit {
         };
       }
       const entries: ThesaurusEntry[] = [];
-      thesaurus.entries?.forEach(e => {
-        entries.push({...e});
+      thesaurus.entries?.forEach((e) => {
+        entries.push({ ...e });
       });
       this._nodesService.importEntries(entries);
       this.refresh();
@@ -195,5 +198,27 @@ export class ThesaurusEditorComponent implements OnInit {
       idOrValue: this.idOrValue.value,
       parentId: this.parentId.value,
     });
+  }
+
+  public addNode(node: ThesaurusNode): void {
+    this._nodesService.add(node);
+    this.refresh();
+  }
+
+  public onSignal(signal: ComponentSignal<ThesaurusNode>): void {
+    const node = signal.payload as ThesaurusNode;
+    switch (signal.id) {
+      case 'expand':
+        node.expanded = true;
+        this._nodesService.add(node);
+        this.refresh();
+        break;
+      case 'collapse':
+        node.expanded = false;
+        this._nodesService.add(node);
+        this.refresh();
+        break;
+      // TODO
+    }
   }
 }
