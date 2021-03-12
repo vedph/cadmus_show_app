@@ -31,7 +31,7 @@
       </button>
       <!-- collapse -->
       <button
-        *ngIf="!node.collapsed"
+        *ngIf="!node.collapsed && node.hasChildren"
         type="button"
         mat-icon-button
         matTooltip="Collapse this node"

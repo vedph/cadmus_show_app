@@ -5,8 +5,8 @@
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <!-- filter -->
     <div>
+      <!-- filter -->
       <form [formGroup]="form" (submit)="applyFilter()">
         <mat-form-field style="width: 6em">
           <input matInput [formControl]="idOrValue" placeholder="ID/value" />
@@ -22,6 +22,31 @@
             }}</mat-option>
           </mat-select>
         </mat-form-field>
+        <button
+          type="submit"
+          mat-icon-button
+          color="primary"
+          matTooltip="Apply filters"
+        >
+          <mat-icon>check_circle</mat-icon>
+        </button>
+        <!-- togglers -->
+        <button
+          type="button"
+          mat-icon-button
+          (click)="expandAll()"
+          matTooltip="Expand all"
+        >
+          <mat-icon>unfold_more</mat-icon>
+        </button>
+        <button
+          type="button"
+          mat-icon-button
+          (click)="collapseAll()"
+          matTooltip="Collapse all"
+        >
+          <mat-icon>unfold_less</mat-icon>
+        </button>
       </form>
     </div>
 

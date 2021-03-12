@@ -372,4 +372,17 @@ export class ThesaurusNodesService {
     // save
     this._nodes$.next(nodes);
   }
+
+  /**
+   * Toggle the expanded/collapsed state for all the nodes at once.
+   *
+   * @param collapsed The collapsed state to be set.
+   */
+  public toggleAll(collapsed: boolean): void {
+    const nodes: ThesaurusNode[] = [];
+    this._nodes$.value.forEach((node) => {
+      nodes.push({ ...node, collapsed: collapsed });
+    });
+    this._nodes$.next(nodes);
+  }
 }

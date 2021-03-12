@@ -205,6 +205,16 @@ export class ThesaurusEditorComponent implements OnInit {
     this.refresh();
   }
 
+  public expandAll(): void {
+    this._nodesService.toggleAll(false);
+    this.refresh();
+  }
+
+  public collapseAll(): void {
+    this._nodesService.toggleAll(true);
+    this.refresh();
+  }
+
   public onSignal(signal: ComponentSignal<ThesaurusNode>): void {
     const node = signal.payload as ThesaurusNode;
     switch (signal.id) {
