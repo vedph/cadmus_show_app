@@ -32,6 +32,8 @@ export class ThesaurusNodeComponent implements OnInit {
   public value: FormControl;
   public form: FormGroup;
 
+  public indent: string;
+
   @ViewChild('nodeVal') nodeValRef: ElementRef | undefined;
 
   @Input()
@@ -51,6 +53,7 @@ export class ThesaurusNodeComponent implements OnInit {
 
   constructor(formBuilder: FormBuilder) {
     this.editing = false;
+    this.indent = '';
     this.nodeChange = new EventEmitter<ThesaurusNode>();
     this.signal = new EventEmitter<ComponentSignal<ThesaurusNode>>();
     // form
@@ -75,10 +78,12 @@ export class ThesaurusNodeComponent implements OnInit {
     this.editing = false;
     if (!node) {
       this.form.reset();
+      this.indent = '';
       return;
     }
     this.id.setValue(node.id);
     this.value.setValue(node.value);
+    this.indent = '\u2022'.repeat((node.level || 1) - 1);
   }
 
   public toggleEdit(on: boolean): void {

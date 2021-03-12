@@ -209,12 +209,12 @@ export class ThesaurusEditorComponent implements OnInit {
     const node = signal.payload as ThesaurusNode;
     switch (signal.id) {
       case 'expand':
-        node.expanded = true;
+        node.collapsed = false;
         this._nodesService.add(node);
         this.refresh();
         break;
       case 'collapse':
-        node.expanded = false;
+        node.collapsed = true;
         this._nodesService.add(node);
         this.refresh();
         break;

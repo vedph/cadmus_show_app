@@ -1,6 +1,8 @@
 <div *ngIf="node">
   <!-- display -->
-  <div *ngIf="!editing" [style.marginLeft]="node.level + 'em'" class="node">
+  <div *ngIf="!editing" class="node">
+    <!-- indent -->
+    <span class="node-ind">{{indent}}</span>
     <!-- node -->
     <span class="node-ord">{{ node.ordinal }}</span>
     <span class="node-id">{{ node.id }}</span>
@@ -19,7 +21,7 @@
       </button>
       <!-- expand -->
       <button
-        *ngIf="!node.expanded && node.hasChildren"
+        *ngIf="node.collapsed && node.hasChildren"
         type="button"
         mat-icon-button
         matTooltip="Expand this node"
@@ -29,7 +31,7 @@
       </button>
       <!-- collapse -->
       <button
-        *ngIf="node.expanded"
+        *ngIf="!node.collapsed"
         type="button"
         mat-icon-button
         matTooltip="Collapse this node"

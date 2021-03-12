@@ -16,7 +16,7 @@ export interface ThesaurusNode extends ThesaurusEntry {
   level: number;
   ordinal: number;
   parentId?: string;
-  expanded?: boolean;
+  collapsed?: boolean;
   hasChildren?: boolean;
   lastSibling?: boolean;
 }
@@ -125,14 +125,15 @@ export class ThesaurusNodesService {
 
       if (node.parentId) {
         let n = 1;
-        let parent = nodes.find((n) => n.id === node.parentId);
-        while (parent) {
+        let parentIndex = this.getParentIndex(nodes, i);
+
+        while (parentIndex > -1) {
           n++;
-          parent = nodes.find(
-            (n) => n.id === (parent as ThesaurusNode).parentId
-          );
+          parentIndex = this.getParentIndex(nodes, parentIndex);
         }
         node.level = n;
+      } else {
+        node.level = 1;
       }
     }
   }
@@ -173,10 +174,12 @@ export class ThesaurusNodesService {
    * @param entries The nodes to set.
    */
   public importEntries(entries: ThesaurusEntry[]): void {
-    this.assignParentIds(entries as ThesaurusNode[]);
-    this.assignLevels(entries as ThesaurusNode[]);
-    this.assignOrdinals(entries as ThesaurusNode[]);
-    this._nodes$.next(entries as ThesaurusNode[]);
+    const nodes = entries as ThesaurusNode[];
+    this.assignParentIds(nodes);
+    this.assignLevels(nodes);
+    this.assignOrdinals(nodes);
+
+    this._nodes$.next(nodes);
 
     this.refreshParentIds();
   }
@@ -212,18 +215,21 @@ export class ThesaurusNodesService {
     filter.idOrValue = filter.idOrValue?.toLowerCase();
 
     // collect page's nodes
+    const nodes = this._nodes$.value;
     const pageNodes: ThesaurusNode[] = [];
     let offset = (filter.pageNumber - 1) * filter.pageSize;
     let total = 0;
 
-    this._nodes$.value.forEach((node) => {
+    for (let i = 0; i < nodes.length; i++) {
+      const node = nodes[i];
+
       // consider only matching nodes
       if (this.matchNode(node, filter)) {
         // collapsed nodes are excluded
         let collapsed = false;
         if (node.parentId) {
-          const parent = this._nodes$.value.find((n) => n.id === node.parentId);
-          if (!parent?.expanded) {
+          const parentIndex = this.getParentIndex(nodes, i);
+          if (parentIndex > -1 && nodes[parentIndex].collapsed) {
             collapsed = true;
           }
         }
@@ -238,7 +244,7 @@ export class ThesaurusNodesService {
           }
         }
       }
-    });
+    }
 
     return of({
       pageNumber: filter.pageNumber,
