@@ -1,11 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import {
-  FormArray,
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
 import { CadmusModel } from 'projects/myrmidon/cadmus-shop-core/src/public-api';
 
 @Component({
@@ -22,14 +15,9 @@ export class PartInfoComponent implements OnInit {
   }
   public set model(value: CadmusModel | undefined) {
     this._model = value;
-    this.refresh();
   }
 
   constructor() {}
 
   ngOnInit(): void {}
-
-  private refresh(): void {
-    // TODO
-  }
 }

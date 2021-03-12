@@ -4,8 +4,8 @@
     <mat-checkbox [formControl]="fragment">fragments</mat-checkbox>
   </mat-card-header>
   <mat-card-content
-    gdAreas="spinner spinner | filters list | . paginator"
-    gdAreas.lt-md="spinner | list | paginator | filters"
+    gdAreas="spinner spinner | filters list | . paginator |  info info"
+    gdAreas.lt-md="spinner | list | paginator | filters | info"
     gdColumns="210px 1fr"
     gdColumns.lt-md="1fr"
     gdGap="8px"
@@ -41,9 +41,19 @@
         <tbody>
           <tr *ngFor="let m of page.data">
             <td>
+              <!-- view -->
               <button
                 type="button"
                 color="primary"
+                matTooltip="View model's details"
+                mat-icon-button
+                (click)="onViewModel(m)"
+              >
+                <mat-icon>preview</mat-icon>
+              </button>
+              <!-- copy -->
+              <button
+                type="button"
                 matTooltip="Copy the model's ID"
                 mat-icon-button
                 [cdkCopyToClipboard]="m.id"
@@ -71,6 +81,11 @@
         [showFirstLastButtons]="true"
         (page)="pageChanged($event)"
       ></mat-paginator>
+    </div>
+
+    <!-- info -->
+    <div gdArea="info" *ngIf="model" style="border-top:1px solid silver">
+      <cadmus-part-info [model]="model"></cadmus-part-info>
     </div>
   </mat-card-content>
 </mat-card>

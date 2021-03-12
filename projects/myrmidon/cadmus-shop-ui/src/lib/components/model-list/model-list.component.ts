@@ -9,7 +9,14 @@ import {
   DataPage,
 } from 'projects/myrmidon/cadmus-shop-core/src/public-api';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { debounceTime, map, startWith, switchMap, tap } from 'rxjs/operators';
+import {
+  debounceTime,
+  map,
+  startWith,
+  switchMap,
+  take,
+  tap,
+} from 'rxjs/operators';
 import { ModelFilterQuery } from '../model-filter/store/model-filter.query';
 import { ModelFilterService } from '../model-filter/store/model-filter.service';
 import { MODEL_LIST_PAGINATOR } from './store/model-list.paginator';
@@ -26,6 +33,7 @@ export class ModelListComponent implements OnInit {
   public filter$: Observable<CadmusModelFilter | undefined>;
   public pageSize: FormControl;
   public fragment: FormControl;
+  public model: CadmusModel | undefined;
 
   constructor(
     // the paginator factory
@@ -152,5 +160,14 @@ export class ModelListComponent implements OnInit {
     if (event.pageSize !== this.pageSize.value) {
       this.pageSize.setValue(event.pageSize);
     }
+  }
+
+  public onViewModel(model: CadmusModel): void {
+    this._assetService
+      .getModelDetails(model)
+      .pipe(take(1))
+      .subscribe((m) => {
+        this.model = m;
+      });
   }
 }

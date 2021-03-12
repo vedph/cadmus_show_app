@@ -7,6 +7,7 @@ import { CadmusShowUiModule } from 'projects/myrmidon/cadmus-show-ui/src/public-
 import { ModelFilterComponent } from './components/model-filter/model-filter.component';
 import { ModelListComponent } from './components/model-list/model-list.component';
 import { ClipboardModule } from '@angular/cdk/clipboard';
+import { CadmusProfileUiModule } from 'projects/myrmidon/cadmus-profile-ui/src/public-api';
 
 @NgModule({
   declarations: [ModelFilterComponent, ModelListComponent],
@@ -17,6 +18,7 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
     ReactiveFormsModule,
     ClipboardModule,
     CadmusMaterialModule,
+    CadmusProfileUiModule,
     CadmusShowUiModule,
   ],
   exports: [ModelFilterComponent, ModelListComponent],
