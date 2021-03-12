@@ -31,11 +31,12 @@ import { ThesaurusEditorState } from './store/thesaurus-editor.store';
   styleUrls: ['./thesaurus-editor.component.css'],
 })
 export class ThesaurusEditorComponent implements OnInit {
-  private _id: string;
-
   private _refresh$: BehaviorSubject<number>;
+
+  public id: string;
   public filter$: BehaviorSubject<ThesaurusNodeFilter>;
   public pageSize: FormControl;
+
   // filter
   public parentId: FormControl;
   public idOrValue: FormControl;
@@ -54,9 +55,9 @@ export class ThesaurusEditorComponent implements OnInit {
     formBuilder: FormBuilder
   ) {
     // get the edited thesaurus ID from the route
-    this._id = this._route.snapshot.params.id;
-    if (this._id === 'new') {
-      this._id = '';
+    this.id = this._route.snapshot.params.id;
+    if (this.id === 'new') {
+      this.id = '';
     }
 
     this.filter$ = new BehaviorSubject<ThesaurusNodeFilter>({
@@ -85,10 +86,10 @@ export class ThesaurusEditorComponent implements OnInit {
   }
 
   private loadThesaurus(): void {
-    this._thesService.get(this._id).subscribe((thesaurus) => {
+    this._thesService.get(this.id).subscribe((thesaurus) => {
       if (!thesaurus) {
         thesaurus = {
-          id: this._id || 'new-thesaurus',
+          id: this.id || 'new-thesaurus',
           language: 'en',
         };
       }

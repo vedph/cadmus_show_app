@@ -19,6 +19,10 @@
         "dist/myrmidon/cadmus-shop-core/myrmidon-cadmus-shop-core",
         "dist/myrmidon/cadmus-shop-core"
       ],
+      "@myrmidon/cadmus-shop-ui": [
+        "dist/myrmidon/cadmus-shop-ui/myrmidon-cadmus-shop-ui",
+        "dist/myrmidon/cadmus-shop-ui"
+      ],
       "@myrmidon/cadmus-show-ui": [
         "dist/myrmidon/cadmus-show-ui/myrmidon-cadmus-show-ui",
         "dist/myrmidon/cadmus-show-ui"

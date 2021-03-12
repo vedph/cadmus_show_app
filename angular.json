@@ -328,6 +328,46 @@
           }
         }
       }
+    },
+    "@myrmidon/cadmus-shop-ui": {
+      "projectType": "library",
+      "root": "projects/myrmidon/cadmus-shop-ui",
+      "sourceRoot": "projects/myrmidon/cadmus-shop-ui/src",
+      "prefix": "cadmus",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/myrmidon/cadmus-shop-ui/tsconfig.lib.json",
+            "project": "projects/myrmidon/cadmus-shop-ui/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/myrmidon/cadmus-shop-ui/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/myrmidon/cadmus-shop-ui/src/test.ts",
+            "tsConfig": "projects/myrmidon/cadmus-shop-ui/tsconfig.spec.json",
+            "karmaConfig": "projects/myrmidon/cadmus-shop-ui/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/myrmidon/cadmus-shop-ui/tsconfig.lib.json",
+              "projects/myrmidon/cadmus-shop-ui/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "cadmus-show"
