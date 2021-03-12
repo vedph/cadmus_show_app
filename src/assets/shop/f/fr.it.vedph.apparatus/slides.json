@@ -1,0 +1,12 @@
+[
+  {
+    "id": "apparatus01.png",
+    "label": "apparatus - list of entries",
+    "tip": "The list of apparatus entries in the layer."
+  },
+  {
+    "id": "apparatus02.png",
+    "label": "apparatus entry",
+    "tip": "A replacement entry, with witnesses and authors."
+  }
+]

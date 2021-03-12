@@ -1,5 +1,6 @@
 [
   {
+    "fragment": true,
     "id": "fr.it.vedph.apparatus",
     "project": "shell",
     "name": "apparatus",
@@ -7,6 +8,7 @@
     "tags": ["philology", "text"]
   },
   {
+    "fragment": true,
     "id": "fr.it.vedph.chronology",
     "project": "shell",
     "name": "chronology",
@@ -14,6 +16,7 @@
     "tags": ["history", "text"]
   },
   {
+    "fragment": true,
     "id": "fr.it.vedph.comment",
     "project": "shell",
     "name": "comment",
@@ -21,6 +24,7 @@
     "tags": ["text"]
   },
   {
+    "fragment": true,
     "id": "fr.it.vedph.orthography",
     "project": "shell",
     "name": "orthography",
@@ -28,6 +32,7 @@
     "tags": ["text"]
   },
   {
+    "fragment": true,
     "id": "fr.it.vedph.quotations",
     "project": "shell",
     "name": "quotations",

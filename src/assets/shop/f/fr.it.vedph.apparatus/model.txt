@@ -1,0 +1,13 @@
+- tag (string)
+- entries (ApparatusEntry[]):
+  - type (string)
+  - value (string)
+  - tag (string)
+  - normValue (string)
+  - note (string)
+  - witnesses (AnnotatedValue[]):
+    - value (string)
+    - note (string)
+  - authors ([])
+  - isAccepted (boolean)
+  - groupId (string)
