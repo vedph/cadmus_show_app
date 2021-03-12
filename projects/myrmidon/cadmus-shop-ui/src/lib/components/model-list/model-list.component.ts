@@ -112,6 +112,12 @@ export class ModelListComponent implements OnInit {
           this.paginator.clearCache();
         })
       ),
+      this.fragment.valueChanges.pipe(
+        startWith(false),
+        tap((_) => {
+          this.paginator.clearCache();
+        })
+      ),
       this.filter$.pipe(
         // startWith(undefined),
         // clear the cache when filters changed
