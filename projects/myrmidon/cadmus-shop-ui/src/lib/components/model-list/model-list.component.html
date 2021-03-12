@@ -40,7 +40,17 @@
         </thead>
         <tbody>
           <tr *ngFor="let m of page.data">
-            <td></td>
+            <td>
+              <button
+                type="button"
+                color="primary"
+                matTooltip="Copy the model's ID"
+                mat-icon-button
+                [cdkCopyToClipboard]="m.id"
+              >
+                <mat-icon>content_copy</mat-icon>
+              </button>
+            </td>
             <td>{{ m.id }}</td>
             <td>{{ m.name }}</td>
             <td>{{ m.project }}</td>

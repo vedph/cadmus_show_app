@@ -1,1 +1,37 @@
-[]
+[
+  {
+    "id": "fr.it.vedph.apparatus",
+    "project": "shell",
+    "name": "apparatus",
+    "tip": "Critical apparatus.",
+    "tags": ["philology", "text"]
+  },
+  {
+    "id": "fr.it.vedph.chronology",
+    "project": "shell",
+    "name": "chronology",
+    "tip": "Chronological layer.",
+    "tags": ["history", "text"]
+  },
+  {
+    "id": "fr.it.vedph.comment",
+    "project": "shell",
+    "name": "comment",
+    "tip": "Comments layer.",
+    "tags": ["text"]
+  },
+  {
+    "id": "fr.it.vedph.orthography",
+    "project": "shell",
+    "name": "orthography",
+    "tip": "Orthographic variations.",
+    "tags": ["text"]
+  },
+  {
+    "id": "fr.it.vedph.quotations",
+    "project": "shell",
+    "name": "quotations",
+    "tip": "Literary quotations layer.",
+    "tags": ["text"]
+  }
+]
