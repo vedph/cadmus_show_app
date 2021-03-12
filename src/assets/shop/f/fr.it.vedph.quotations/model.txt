@@ -1,0 +1,9 @@
+- location (string)
+- entries (QuotationEntry[]):
+  - author (string)
+  - work (string)
+  - citation (string)
+  - citationUri (string)
+  - variant (string)
+  - tag (string)
+  - note (string)

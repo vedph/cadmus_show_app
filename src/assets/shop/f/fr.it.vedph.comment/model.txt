@@ -1,0 +1,7 @@
+- location (string)
+- tag (string)
+- text (string)
+- references (DocReference[])
+- externalIds (string[])
+- categories (string[])
+- keywords (IndexKeyword[])
