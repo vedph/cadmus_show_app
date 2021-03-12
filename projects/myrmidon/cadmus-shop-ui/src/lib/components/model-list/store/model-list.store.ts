@@ -7,7 +7,7 @@ import {
 } from '@datorama/akita';
 import { CadmusModel } from 'projects/myrmidon/cadmus-shop-core/src/public-api';
 
-export interface CadmusModelListState
+export interface ModelListState
   extends EntityState<CadmusModel, string>,
     ActiveState {}
 
@@ -20,8 +20,8 @@ const INITIAL_STATE = {
  */
 @Injectable({ providedIn: 'root' })
 @StoreConfig({ name: 'models' })
-export class CadmusModelListStore extends EntityStore<
-  CadmusModelListState,
+export class ModelListStore extends EntityStore<
+  ModelListState,
   CadmusModel
 > {
   constructor() {

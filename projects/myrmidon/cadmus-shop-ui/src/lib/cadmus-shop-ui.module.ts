@@ -4,11 +4,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CadmusMaterialModule } from '@myrmidon/cadmus-material';
 import { CadmusShowUiModule } from 'projects/myrmidon/cadmus-show-ui/src/public-api';
-import { CadmusModelFilterComponent } from './components/cadmus-model-filter/cadmus-model-filter.component';
-import { CadmusModelListComponent } from './components/cadmus-model-list/cadmus-model-list.component';
+import { ModelFilterComponent } from './components/model-filter/model-filter.component';
+import { ModelListComponent } from './components/model-list/model-list.component';
 
 @NgModule({
-  declarations: [CadmusModelFilterComponent, CadmusModelListComponent],
+  declarations: [ModelFilterComponent, ModelListComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -17,6 +17,6 @@ import { CadmusModelListComponent } from './components/cadmus-model-list/cadmus-
     CadmusMaterialModule,
     CadmusShowUiModule,
   ],
-  exports: [CadmusModelFilterComponent, CadmusModelListComponent],
+  exports: [ModelFilterComponent, ModelListComponent],
 })
 export class CadmusShopUiModule {}

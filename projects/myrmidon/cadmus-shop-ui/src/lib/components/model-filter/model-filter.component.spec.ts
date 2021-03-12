@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CadmusModelFilterComponent } from './cadmus-model-filter.component';
+import { ModelFilterComponent } from './model-filter.component';
 
 describe('CadmusModelFilterComponent', () => {
-  let component: CadmusModelFilterComponent;
-  let fixture: ComponentFixture<CadmusModelFilterComponent>;
+  let component: ModelFilterComponent;
+  let fixture: ComponentFixture<ModelFilterComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CadmusModelFilterComponent ]
+      declarations: [ ModelFilterComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CadmusModelFilterComponent);
+    fixture = TestBed.createComponent(ModelFilterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

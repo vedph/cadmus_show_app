@@ -4,11 +4,11 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { CadmusModelFilter } from 'projects/myrmidon/cadmus-shop-core/src/public-api';
 
 @Component({
-  selector: 'cadmus-cadmus-model-filter',
-  templateUrl: './cadmus-model-filter.component.html',
-  styleUrls: ['./cadmus-model-filter.component.css'],
+  selector: 'cadmus-model-filter',
+  templateUrl: './model-filter.component.html',
+  styleUrls: ['./model-filter.component.css'],
 })
-export class CadmusModelFilterComponent implements OnInit {
+export class ModelFilterComponent implements OnInit {
   private _filter: CadmusModelFilter | undefined | null;
 
   @Input()
