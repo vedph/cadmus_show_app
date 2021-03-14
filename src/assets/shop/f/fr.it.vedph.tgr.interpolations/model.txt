@@ -1,0 +1,33 @@
+- location* (string)
+- interpolations (Interpolation[]):
+  - type* (int): same as the critical apparatus entry type.
+  - role (string)
+  - tag (string)
+  - languages (string[])
+  - value (string)
+  - groupId (string)
+  - note (string)
+  - sources (ReadingSource[]):
+    - witness (string)
+    - handId (string)
+  - quotations (VarQuotation[]):
+    - tag (string)
+    - authority (string)
+    - work (string)
+    - location (string)
+    - parallels (QuotationParallel[]):
+      - tag (string)
+      - work (string)
+      - location (string)
+    - variants (QuotationVariant[]):
+      - lemma (string)
+      - type* (int): same as the critical apparatus entry type.
+      - value (string)
+      - witnesses (AnnotatedValue[]):
+        - value (string)
+        - note (string)
+      - authors (LocAnnotatedValue[]):
+        - value (string)
+        - note (string)
+        - tag (string)
+        - location (string)

@@ -29,7 +29,7 @@
     "project": "shell",
     "name": "orthography",
     "tip": "Orthographic variations.",
-    "tags": ["text"]
+    "tags": ["linguistics", "text"]
   },
   {
     "fragment": true,
@@ -37,6 +37,30 @@
     "project": "shell",
     "name": "quotations",
     "tip": "Literary quotations layer.",
-    "tags": ["text"]
+    "tags": ["philology", "text"]
+  },
+  {
+    "fragment": true,
+    "id": "fr.it.vedph.tgr.interpolations",
+    "project": "tgr",
+    "name": "interpolations",
+    "tip": "Interpolations layer.",
+    "tags": ["philology", "text"]
+  },
+  {
+    "fragment": true,
+    "id": "fr.it.vedph.tgr.ling-tags",
+    "project": "tgr",
+    "name": "linguistic tags",
+    "tip": "Linguistic tags layer.",
+    "tags": ["linguistics", "text"]
+  },
+  {
+    "fragment": true,
+    "id": "fr.it.vedph.tgr.var-quotations",
+    "project": "tgr",
+    "name": "quotations",
+    "tip": "Quotations with variants.",
+    "tags": ["philology", "text"]
   }
 ]

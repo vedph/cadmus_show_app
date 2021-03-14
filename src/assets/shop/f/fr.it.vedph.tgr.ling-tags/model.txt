@@ -1,0 +1,10 @@
+- location* (string)
+- forms* (LingTaggedForm[]):
+  - lemmata (string[])
+  - isDubious (boolean)
+  - note (string)
+  - tags (AnnotatedTag[]):
+    - value (string)
+    - notes (TaggedNote[]):
+      - tag (string)
+      - note (string)

@@ -1,0 +1,4 @@
+- witnesses (AvailableWitness[]):
+  - id* (string)
+  - isPartial (boolean)
+  - note (string)
