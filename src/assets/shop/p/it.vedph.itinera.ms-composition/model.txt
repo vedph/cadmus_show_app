@@ -3,7 +3,11 @@
 - guardSheets (MsGuardSheet[]):
   - isBack (boolean)
   - material (string, thesaurus)
-  - location (MsLocation)
+  - location (MsLocation):
+    - N (int): sheet number.
+    - R (boolean): number is Roman.
+    - S (string): suffix, containing 0-2 lowercase letters.
+    - L (int): line number.
   - date (HistoricalDate)
   - note (string)
 - sections (MsSection[]):

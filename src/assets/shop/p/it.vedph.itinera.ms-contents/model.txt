@@ -1,0 +1,16 @@
+- contents (MsContent[]):
+  - author (string)
+  - claimedAuthor (string)
+  - work* (string)
+  - start (MsLocation):
+    - N (int): sheet number.
+    - R (boolean): number is Roman.
+    - S (string): suffix, containing 0-2 lowercase letters.
+    - L (int): line number.
+  - end (MsLocation)
+  - state (string, thesaurus)
+  - note (string)
+  - units (MsContentUnit[]):
+    - label* (string)
+    - incipit (string)
+    - explicit (string)

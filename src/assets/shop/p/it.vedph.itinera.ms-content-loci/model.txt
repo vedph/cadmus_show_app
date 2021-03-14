@@ -1,0 +1,9 @@
+- loci (MsContentLocus[]):
+  - citation* (string)
+  - text* (string)
+  - refSheet (MsLocation):
+    - N (int): sheet number.
+    - R (boolean): number is Roman.
+    - S (string): suffix, containing 0-2 lowercase letters.
+    - L (int): line number.
+  - imageId (string)
