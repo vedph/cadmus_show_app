@@ -88,7 +88,8 @@ export class CadmusShopAssetService {
       pageSize: filter.pageSize,
       pageCount: 0,
       total: items.length,
-      items: filter.pageSize > 0 ? items.slice(skip, filter.pageSize) : items,
+      items:
+        filter.pageSize > 0 ? items.slice(skip, skip + filter.pageSize) : items,
     };
   }
 
@@ -238,11 +239,11 @@ export class CadmusShopAssetService {
           description: r.d,
           code: r.m,
           // supply full path relative to shop's root in slides
-          slides: r.s.map(slide => {
+          slides: r.s.map((slide) => {
             return {
               ...slide,
-              id: basePath + 'img/' + slide.id
-            }
+              id: basePath + 'img/' + slide.id,
+            };
           }),
         };
       })

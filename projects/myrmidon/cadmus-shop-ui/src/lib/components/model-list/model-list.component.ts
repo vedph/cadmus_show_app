@@ -101,7 +101,7 @@ export class ModelListComponent implements OnInit {
 
   ngOnInit(): void {
     // filter
-    const initialPageSize = 20;
+    const initialPageSize = 10;
     this.pageSize.setValue(initialPageSize);
 
     // combine and get latest:

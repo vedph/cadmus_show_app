@@ -131,5 +131,103 @@
     "name": "ms.composition",
     "tip": "Manuscript's composition.",
     "tags": ["codicology"]
+  },
+  {
+    "id": "it.vedph.itinera.ms-content-loci",
+    "project": "itinera",
+    "name": "ms.loci",
+    "tip": "Manuscript's loci critici.",
+    "tags": ["codicology"]
+  },
+  {
+    "id": "it.vedph.itinera.ms-contents",
+    "project": "itinera",
+    "name": "ms.contents",
+    "tip": "Manuscript's contents.",
+    "tags": ["codicology"]
+  },
+  {
+    "id": "it.vedph.itinera.ms-decorations",
+    "project": "itinera",
+    "name": "ms.decorations",
+    "tip": "Manuscript's decorations.",
+    "tags": ["codicology"]
+  },
+  {
+    "id": "it.vedph.itinera.ms-hands",
+    "project": "itinera",
+    "name": "ms.hands",
+    "tip": "Manuscript's hands.",
+    "tags": ["codicology"]
+  },
+  {
+    "id": "it.vedph.itinera.ms-history",
+    "project": "itinera",
+    "name": "ms.history",
+    "tip": "Manuscript's history.",
+    "tags": ["codicology"]
+  },
+  {
+    "id": "it.vedph.itinera.ms-layouts",
+    "project": "itinera",
+    "name": "ms.layouts",
+    "tip": "Manuscript's layouts.",
+    "tags": ["codicology"]
+  },
+  {
+    "id": "it.vedph.itinera.ms-material-dsc",
+    "project": "itinera",
+    "name": "ms.material",
+    "tip": "Manuscript's material description.",
+    "tags": ["codicology"]
+  },
+  {
+    "id": "it.vedph.itinera.ms-numberings",
+    "project": "itinera",
+    "name": "ms.numberings",
+    "tip": "Manuscript's numberings.",
+    "tags": ["codicology"]
+  },
+  {
+    "id": "it.vedph.itinera.ms-place",
+    "project": "itinera",
+    "name": "ms.place",
+    "tip": "Manuscript's place of origin.",
+    "tags": ["codicology"]
+  },
+  {
+    "id": "it.vedph.itinera.ms-poem-ranges",
+    "project": "itinera",
+    "name": "ms.poem ranges",
+    "tip": "Manuscript's poem ranges.",
+    "tags": ["codicology"]
+  },
+  {
+    "id": "it.vedph.itinera.ms-quires",
+    "project": "itinera",
+    "name": "ms.quires",
+    "tip": "Manuscript's quires.",
+    "tags": ["codicology"]
+  },
+  {
+    "id": "it.vedph.itinera.ms-signatures",
+    "project": "itinera",
+    "name": "ms.signatures",
+    "tip": "Manuscript's signatures.",
+    "tags": ["codicology"]
+  },
+  {
+    "id": "it.vedph.itinera.ms-watermarks",
+    "project": "itinera",
+    "name": "ms.watermarks",
+    "tip": "Manuscript's watermarks.",
+    "tags": ["codicology"]
+  },
+  {
+    "id": "it.vedph.itinera.person-hand",
+    "project": "itinera",
+    "name": "hand",
+    "tip": "Person's hand.",
+    "tags": ["codicology"]
   }
 ]
