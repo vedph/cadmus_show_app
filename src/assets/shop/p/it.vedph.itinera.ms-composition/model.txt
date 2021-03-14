@@ -1,0 +1,15 @@
+- sheetCount* (int)
+- guardSheetCount (int)
+- guardSheets (MsGuardSheet[]):
+  - isBack (boolean)
+  - material (string, thesaurus)
+  - location (MsLocation)
+  - date (HistoricalDate)
+  - note (string)
+- sections (MsSection[]):
+  - tag (string): any arbitrarily chosen ID used to group sections together.
+  - label* (string)
+  - start* (MsLocation)
+  - end* (MsLocation)
+  - era (string, thesaurus)
+  - date (HistoricalDate)

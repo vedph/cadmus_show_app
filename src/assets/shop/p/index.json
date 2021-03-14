@@ -110,5 +110,26 @@
     "name": "word forms",
     "tip": "Word's form(s).",
     "tags": ["lexicography"]
+  },
+  {
+    "id": "it.vedph.itinera.ms-binding",
+    "project": "itinera",
+    "name": "ms.binding",
+    "tip": "Manuscript's binding.",
+    "tags": ["codicology"]
+  },
+  {
+    "id": "it.vedph.itinera.ms-catchwords",
+    "project": "itinera",
+    "name": "ms.catchwords",
+    "tip": "Manuscript's catchwords.",
+    "tags": ["codicology"]
+  },
+  {
+    "id": "it.vedph.itinera.ms-composition",
+    "project": "itinera",
+    "name": "ms.composition",
+    "tip": "Manuscript's composition.",
+    "tags": ["codicology"]
   }
 ]

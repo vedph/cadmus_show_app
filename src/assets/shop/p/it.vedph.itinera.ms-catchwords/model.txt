@@ -1,0 +1,6 @@
+- catchwords (MsCatchword[]):
+  - position* (string, thesaurus)
+  - isVertical (boolean)
+  - decoration (string)
+  - register (string): numerazioni/segnature a registro
+  - note (string)

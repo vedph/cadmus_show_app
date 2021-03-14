@@ -1,0 +1,12 @@
+- century* (number)
+- description* (string, MD, 5000)
+- coverMaterial* (string, thesaurus)
+- supportMaterial* (string, thesaurus)
+- size (PhysicalSize):
+  - tag (string)
+  - W (PhysicalDimension):
+    - tag (string)
+    - value (float)
+    - unit (string)
+  - H (PhysicalDimension)
+  - D (PhysicalDimension)
