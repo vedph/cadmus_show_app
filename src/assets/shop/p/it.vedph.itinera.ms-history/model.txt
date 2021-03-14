@@ -1,0 +1,37 @@
+- provenances* (GeoAddress[]): at least 1; in chronological order:
+  - area* (string)
+  - address (string)
+- history* (string, MD, 5000)
+- persons (MsHistoryPerson[]):
+  - id (string)
+  - role (string, thesaurus)
+  - name* (PersonName):
+    - language (string)
+    - tag (string)
+    - parts (PersonNamePart[]):
+      - type (string)
+      - value (string)
+  - date (HistoricalDate)
+  - note (string, 1000)
+  - externalIds (string[])
+  - sources (DocReference[]):
+    - tag (string)
+    - author (string)
+    - work (string)
+    - location (string)
+    - note (string)
+- annotations (MsAnnotation[]):
+  - language* (string, thesaurus): code from ISO 639-3.
+  - type* (string, thesaurus)
+  - text* (string, 1000)
+  - start (MsLocation)
+  - end (MsLocation)
+  - personId (string)
+  - sources (DocReference[])
+- restorations (MsRestoration[]):
+  - type* (string, thesaurus)
+  - place (string)
+  - date (HistoricalDate)
+  - note (string)
+  - personId (string)
+  - sources (DocReference[])

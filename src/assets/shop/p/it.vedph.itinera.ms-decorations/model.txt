@@ -1,0 +1,39 @@
+- decorations (MsDecoration[]):
+  - flags (string[]); 0-N picks from a thesaurus: original, unitary, complete, has tips, etc.
+  - place (string)
+  - note (string)
+  - artist (MsDecorationArtist):
+    - type* (string, thesaurus): type of element, see below.
+    - id* (string): inner ID
+    - name* (string)
+    - note (string)
+    - references (DocReference[]):
+      - tag (string)
+      - author (string)
+      - work (string)
+      - location (string)
+      - note (string)
+  - elements (MsDecorationElement[]):
+    - key (string): the key used for this element when it represents also a parent of other elements. Its scope is limited to the part.
+    - parentKey (string): used to group sub-elements under an element, it is the key of the parent element. Its scope is limited to the part.
+    - type* (string, thesaurus): the element's type.
+    - flags* (string[]; 0-N picks from a thesaurus: original, unitary, complete, has tips, etc.)
+    - ranges* (MsLocationRange[]):
+      - start (MsLocation):
+        - N (int): sheet number.
+        - R (boolean): number is Roman.
+        - S (string): suffix, containing 0-2 lowercase letters.
+        - L (int): line number.
+      - end (MsLocation)
+    - typologies (string[]): 0-N picks from a thesaurus.
+    - subject (string): the decoration subject when applicable. For letters, it might be the letter itself.
+    - colors (string[]): 0-N picks from a thesaurus.
+    - gilding (string, thesaurus): gilding type.
+    - technique (string, thesaurus)
+    - tool (string, thesaurus)
+    - position (string, thesaurus): relative to the page.
+    - lineHeight (number): height measured in lines.
+    - textRelation (string): relationship with text.
+    - description (string, MD, 1000)
+    - imageId (string): this is an ID representing the prefix for all the images representing the decoration; e.g. if it is ae, we would expect any number of image resources named after it plus a conventional numbering, like ae00001, ae00002, etc.
+    - note (string).
