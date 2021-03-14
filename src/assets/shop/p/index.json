@@ -103,5 +103,12 @@
     "name": "ms.units",
     "tip": "Manuscript's codicological units.",
     "tags": ["codicology"]
+  },
+  {
+    "id": "it.vedph.pura.word-forms",
+    "project": "pura",
+    "name": "word forms",
+    "tip": "Word's form(s).",
+    "tags": ["lexicography"]
   }
 ]

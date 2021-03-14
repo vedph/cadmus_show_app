@@ -1,4 +1,3 @@
-- location (string)
 - tag (string)
 - label (string)
 - eventId (string)

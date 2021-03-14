@@ -1,4 +1,3 @@
-- location (string)
 - entries (QuotationEntry[]):
   - author (string)
   - work (string)

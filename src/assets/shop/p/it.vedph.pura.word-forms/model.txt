@@ -1,0 +1,12 @@
+- forms* (WordForm[]):
+  - lid (string)
+  - prelemma (string)
+  - lemma (string)
+  - postlemma (string)
+  - homograph (short)
+  - pos (string)
+  - note (string)
+  - variants (VariantForm[]):
+    - value (string)
+    - pos (string)
+    - tag (string)

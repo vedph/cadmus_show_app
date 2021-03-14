@@ -62,5 +62,13 @@
     "name": "quotations",
     "tip": "Quotations with variants.",
     "tags": ["philology", "text"]
+  },
+  {
+    "fragment": true,
+    "id": "fr.it.vedph.pura.lemma-tag",
+    "project": "pura",
+    "name": "lemma tags",
+    "tip": "Lemma tags layer.",
+    "tags": ["linguistics", "text"]
   }
 ]
