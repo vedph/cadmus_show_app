@@ -1,0 +1,16 @@
+- area* (string, thesaurus)
+- address (string): this contains any number of components separated by comma, like in geocoding addresses, whereas the area is the top level component.
+- city (string)
+- site (string, thesaurus): e.g. "St. Paul monastry".
+- subscriber (string): subscriber ID (human-readable, arbitrary string)
+- subscriptionLoc (MsLocation):
+  - N (int): sheet number.
+  - R (boolean): number is Roman.
+  - S (string): suffix, containing 0-2 lowercase letters.
+  - L (int): line number.
+- sources (DocReference[]): modern bibliography references:
+  - tag (string)
+  - author (string)
+  - work (string)
+  - location (string)
+  - note (string)

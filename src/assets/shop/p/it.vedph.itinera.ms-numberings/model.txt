@@ -1,0 +1,9 @@
+- numberings (MsNumbering[]):
+  - isMain (boolean)
+  - isPagination (boolean): cartulazione vs. paginazione.
+  - era* (string, thesaurus).
+  - system* (string, thesaurus)
+  - technique* (string, thesaurus)
+  - century* (number)
+  - position (string, thesaurus)
+  - issues (string)

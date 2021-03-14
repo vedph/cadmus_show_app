@@ -1,0 +1,7 @@
+- quires (MsQuire[]):
+  - tag (string, thesaurus)
+  - startNr* (number)
+  - endNr* (number)
+  - sheetCount\* (number)
+  - sheetDelta (number): negative or positive.
+  - note (string)

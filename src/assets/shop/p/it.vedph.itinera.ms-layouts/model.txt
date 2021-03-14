@@ -1,0 +1,13 @@
+- layouts (MsLayout[]):
+  - sample* (MsLocation): the sheet used as the sample for taking measurements and counts:
+    - N (int): sheet number.
+    - R (boolean): number is Roman.
+    - S (string): suffix, containing 0-2 lowercase letters.
+    - L (int): line number.
+  - dimensions (PhysicalDimension[]): any number of measurements taken for any kind of measurable thing in the manuscript:
+    - tag (string)
+    - value (float)
+    - unit (string)
+  - columnCount* (int)
+  - rulingTechnique (string, thesaurus)
+  - counts (DecoratedCount[]): any number of counts. This allows entering any number of counts with different levels of precision. For instance, you might have rowMinCount, rowMaxCount, lineCount, approxLineCount, lineMinCount, lineMaxCount, prickCount, etc. It also allows descriptions for properties like columns, direction, blanks, ruling, execution, etc., eventually with a count (which might represent an average, or the most frequent value, etc.).

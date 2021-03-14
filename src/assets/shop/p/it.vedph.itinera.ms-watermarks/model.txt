@@ -1,0 +1,7 @@
+- watermarks (MsWatermark[]):
+  - subject* (string, thesaurus)
+  - similarityRank (number): a rank for the similarity of the watermark described here to the paradigmatic watermark model; the higher the number, the less similar is the watermark.
+  - description (string): a text description for this watermark instance.
+  - place (string)
+  - date (HistoricalDate)
+  - externalIds (string[])

@@ -1,0 +1,5 @@
+- tag (string)
+- ranges* (AlnumRange[]):
+  - a* (string): the start "number".
+  - b (string): the end number unless equal to the start "number".
+- note (string)
