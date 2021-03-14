@@ -1,0 +1,19 @@
+- scripts (MsScript[]):
+  - role* (string); e.g. mano principale, secondaria, scriptio superior, scriptio inferior...
+  - languages* (string[] ISO 639-3, thesaurus: ms-languages): 1 or more languages.
+  - type (string, hierarchical thesaurus: ms-script-types)
+  - hands* (MsHand[]):
+    - id* (string)
+    - date (HistoricalDate)
+    - start* (MsLocation):
+      - N (int): sheet number.
+      - R (boolean): number is Roman.
+      - S (string): suffix, containing 0-2 lowercase letters.
+      - L (int): line number.
+    - end* (MsLocation)
+    - description* (string)
+    - abbreviations (string, MD)
+    - letters (MsHandLetter[]):
+      - letter* (string)
+      - description (string)
+      - imageId (string)

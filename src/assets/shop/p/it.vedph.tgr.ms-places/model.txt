@@ -1,0 +1,11 @@
+- area
+- address
+- city
+- site
+- rank (short)
+- sources (DocReference[]):
+  - tag (string)
+  - author (string)
+  - work (string)
+  - location (string)
+  - note (string)

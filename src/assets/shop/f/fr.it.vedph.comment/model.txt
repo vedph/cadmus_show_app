@@ -1,7 +1,12 @@
 - location (string)
 - tag (string)
 - text (string)
-- references (DocReference[])
+- references (DocReference[]):
+  - tag (string)
+  - author (string)
+  - work (string)
+  - location (string)
+  - note (string)
 - externalIds (string[])
 - categories (string[])
 - keywords (IndexKeyword[])

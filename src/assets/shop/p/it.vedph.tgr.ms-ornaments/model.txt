@@ -1,0 +1,18 @@
+- ornaments (MsOrnament[]):
+  - type (string)
+  - start (MsLocation):
+    - N (int): sheet number.
+    - R (boolean): number is Roman.
+    - S (string): suffix, containing 0-2 lowercase letters.
+    - L (int): line number.
+  - end (MsLocation)
+  - size (PhysicalSize)
+    - tag (string)
+    - W (PhysicalDimension):
+      - tag (string)
+      - value (float)
+      - unit (string)
+    - H (PhysicalDimension)
+    - D (PhysicalDimension)
+  - description (string)
+  - note (string)

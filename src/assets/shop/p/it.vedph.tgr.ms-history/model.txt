@@ -1,0 +1,19 @@
+- provenances (GeoAddress[]):
+  - area (string)
+  - address (string)
+- history
+- owners (string[])
+- subscription (MsSubscription):
+  - language (string)
+  - text (string)
+  - handId (string)
+  - note (string)
+  - locations (MsLocation[]):
+    - N (int): sheet number.
+    - R (boolean): number is Roman.
+    - S (string): suffix, containing 0-2 lowercase letters.
+    - L (int): line number.
+- annotations (MsAnnotation[]):
+  - language (string)
+  - handId (string)
+  - note (string)

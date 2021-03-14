@@ -1,0 +1,50 @@
+- units* (MsUnit[]): codicological units:
+  - start* (MsLocation):
+    - N (int): sheet number.
+    - R (boolean): number is Roman.
+    - S (string): suffix, containing 0-2 lowercase letters.
+    - L (int): line number.
+  - end* (MsLocation)
+  - groupId (string)
+  - groupOrdinal (number)
+  - date (HistoricalDate)
+  - palimpsests (MsPalimpsest[]): the sheet(s) which are palimpsests inside this unit:
+    - locations (MsLocation[]): 1 or more sheets in the unit's range.
+    - date (HistoricalDate)
+    - note (string)
+  - material* (string, thesaurus: ms-materials)
+  - guardSheetMaterial (string, thesaurus: ms-materials)
+  - sheetCount* (int)
+  - guardSheetCount* (int)
+  - backGuardSheetCount* (int)
+  - guardSheets (MsGuardSheet[]):
+    - isBack (boolean)
+    - material (string, thesaurus: ms-materials)
+    - watermarks (MsWatermark[]):
+      - value (string)
+      - description (string)
+    - note (string)
+  - quires (string)
+  - sheetNumbering (string): leaf or page numbering.
+  - quireNumbering (string)
+  - leafSizes (PhysicalSize[]):
+    - tag (string)
+    - W (PhysicalDimension):
+      - tag (string)
+      - value (float)
+      - unit (string)
+    - H (PhysicalDimension)
+    - D (PhysicalDimension)
+  - leafSizeSamples (MsLocation[]): locations of the sheet(s) used as samples for taking the measurements in leafSizes.
+  - writtenAreaSizes (PhysicalSize[])
+  - writtenAreaSizeSamples (MsLocation[]): locations of the sheet(s) used as samples for taking the measurements in writtenAreaSizes.
+  - rulings (MsRuling[])
+    - manner of execution (string, thesaurus: ms-ruling-manners@en)
+    - system (string, thesaurus: ms-ruling-systems@en)
+    - type (string)
+    - description (string)
+  - watermarks (MsWatermark[]):
+    - value (string)
+    - description (string)
+  - conservation state (string)
+  - binding (string)

@@ -1,0 +1,19 @@
+- contents (MsContent[]):
+  - start (MsLocation):
+    - N (int): sheet number.
+    - R (boolean): number is Roman.
+    - S (string): suffix, containing 0-2 lowercase letters.
+    - L (int): line number.
+  - end (MsLocation)
+  - work (string)
+  - location (string)
+  - title (string)
+  - incipit (string)
+  - explicit (string)
+  - note (string)
+  - editions (DocReference[]):
+    - tag (string)
+    - author (string)
+    - work (string)
+    - location (string)
+    - note (string)

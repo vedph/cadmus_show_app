@@ -54,5 +54,54 @@
     "name": "token text",
     "tip": "Tokens-based text.",
     "tags": ["text"]
+  },
+  {
+    "id": "it.vedph.tgr.ms-contents",
+    "project": "tgr",
+    "name": "ms.contents",
+    "tip": "Manuscript's contents.",
+    "tags": ["codicology"]
+  },
+  {
+    "id": "it.vedph.tgr.ms-formal-features",
+    "project": "tgr",
+    "name": "ms.features",
+    "tip": "An arbitrary selection of manuscript's formal features.",
+    "tags": ["codicology"]
+  },
+  {
+    "id": "it.vedph.tgr.ms-history",
+    "project": "tgr",
+    "name": "ms.history",
+    "tip": "Manuscript's history.",
+    "tags": ["codicology"]
+  },
+  {
+    "id": "it.vedph.tgr.ms-ornaments",
+    "project": "tgr",
+    "name": "ms.ornaments",
+    "tip": "Manuscript's ornamentations.",
+    "tags": ["codicology"]
+  },
+  {
+    "id": "it.vedph.tgr.ms-places",
+    "project": "tgr",
+    "name": "ms.places",
+    "tip": "Manuscript's places of origin.",
+    "tags": ["codicology"]
+  },
+  {
+    "id": "it.vedph.tgr.ms-scripts",
+    "project": "tgr",
+    "name": "ms.scripts",
+    "tip": "Manuscript's scripts.",
+    "tags": ["codicology"]
+  },
+  {
+    "id": "it.vedph.tgr.ms-units",
+    "project": "tgr",
+    "name": "ms.units",
+    "tip": "Manuscript's codicological units.",
+    "tags": ["codicology"]
   }
 ]
