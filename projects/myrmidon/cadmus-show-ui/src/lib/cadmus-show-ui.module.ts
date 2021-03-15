@@ -8,7 +8,7 @@ import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 @NgModule({
   declarations: [
     ConfirmDialogComponent,
-    SafeHtmlPipe
+    SafeHtmlPipe,
   ],
   imports: [
     CommonModule,

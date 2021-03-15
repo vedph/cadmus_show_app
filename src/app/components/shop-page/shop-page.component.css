@@ -1,0 +1,11 @@
+#banner {
+  height: 258px;
+  background-image: url("/assets/img/supermarket.jpg");
+  background-size: cover;
+  margin-bottom: 16px;
+}
+article {
+  margin: 8px 16px;
+  font-size: 14pt;
+  line-height: 20pt;
+}

@@ -1,10 +1,36 @@
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>
-      <h2>Home</h2>
-    </mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    TODO
-  </mat-card-content>
-</mat-card>
+<div style="margin: 8px">
+  <div
+    gdAreas="intro docs | shop profile"
+    gdAreas.lt-md="intro | docs | shop | profile"
+    gdColumns="1fr 1fr"
+    gdColumns.lt-md="100%"
+    gdRows="auto auto"
+    gdRows.lt-md="auto auto auto auto"
+    gdGap="16px"
+  >
+    <div class="card">
+      <div>
+        <a><mat-icon>explore</mat-icon></a>
+      </div>
+      <div><a>Introduction</a></div>
+    </div>
+    <div class="card">
+      <div>
+        <a><mat-icon>description</mat-icon></a>
+      </div>
+      <div><a>Documentation</a></div>
+    </div>
+    <div class="card">
+      <div>
+        <a routerLink="/shop"><mat-icon>shopping_bag</mat-icon></a>
+      </div>
+      <div><a routerLink="/shop">Models Shop</a></div>
+    </div>
+    <div class="card">
+      <div>
+        <a><mat-icon>build</mat-icon></a>
+      </div>
+      <div><a>Profile Builder</a></div>
+    </div>
+  </div>
+</div>

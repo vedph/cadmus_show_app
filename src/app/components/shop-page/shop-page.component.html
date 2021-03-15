@@ -1,0 +1,100 @@
+<div>
+  <div id="banner"></div>
+  <article>
+    <h1>The Models Shop</h1>
+    <p>
+      <button mat-flat-button color="primary">
+        <mat-icon>shopping_bag</mat-icon> goto the shop
+      </button>
+    </p>
+    <p>
+      Cadmus is focused on reuse. This means not only software reuse; but also
+      data models reuse.
+    </p>
+    <p>
+      In fact, there is no closed notion of a model for Cadmus records. Such
+      records are defined by <em>composing</em> several models together, just
+      like you can build any construction starting from a set of Lego-like
+      bricks.
+    </p>
+    <p>
+      Often, real-world models are something complex, consisting of several
+      parts, which may well appear in other models too. For instance, consider
+      the datation. TODO
+    </p>
+    <mat-accordion multi>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>single point</mat-expansion-panel-header>
+        <img src="/assets/img/d1.svg" />
+        <p>A single point on a timeline, like <em>178 BC</em>.</p>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header
+          >2 points - interval</mat-expansion-panel-header
+        >
+        <img src="/assets/img/d2.svg" />
+        <p>Two points on the timeline, defining an interval, like
+        <em>14-37 AD</em>.</p>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header
+          >2 points, first undefined</mat-expansion-panel-header
+        >
+        <img src="/assets/img/d3.svg" />
+        <p>Two points on the timeline, defining an interval, where the first point
+        is not exactly defined. This is a terminus ante, like
+        <em>before 31 AD</em>.</p>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header
+          >2 points, last undefined</mat-expansion-panel-header
+        >
+        <img src="/assets/img/d4.svg" />
+        <p>Two points on the timeline, defining an interval, where the last point
+        is not exactly defined. This is a terminus post, like
+        <em>after 31 AD</em>.</p>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <br>
+    <h2>The Shop</h2>
+    <p>
+      The shop here is just a demonstrative list. You will find all the models
+      defined and implemented for handling a number of different Cadmus-based
+      projects.
+    </p>
+    <p>
+      Models are grouped into two lists: one for <strong>parts</strong>, another
+      for <strong>fragments</strong>. From the point of view of the system, this
+      distinction is artificial; as we always deal with just parts. Some of
+      these parts are layer-parts: they contain a list of data (fragments), each
+      linked to a specific portion of a text (in turn, contained in another
+      part). Thus, layer parts all have the same model, as far as they are
+      regarded as a list of fragments; yet, the model of each fragment is
+      different, and that's what makes layer parts different.
+    </p>
+    <p>
+      Thus, we may have a comments layer part, where each fragment represents a
+      generic comment attached to text; a paleographic layer part, where each
+      fragment encodes the graphical features of letters, ligatures, etc.; and
+      so forth.
+    </p>
+    <p>
+      The model of a layer part being a consequence of the model of its
+      fragment, the list includes both part and fragment models. Yet, as
+      explained here, fragment models really mean layer part models, as far as a
+      layer part is just a set of fragments.
+    </p>
+    <p>
+      Each model has its own unique ID, listed with its user-friendly name, the
+      name of the project it was developed for, and a set of tags. You can
+      variously filter this list to find what you are looking for, or just
+      browse it across its pages.
+    </p>
+    <p>
+      When you want to get some information about a model, just click its view
+      button: at the bottom of the page you will find a short description, a
+      strict formalization of it in a plain text, and one or more screenshots
+      from its editing UI.
+    </p>
+  </article>
+</div>

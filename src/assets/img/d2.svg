@@ -1,0 +1,13 @@
+<svg width="390" height="100" xmlns="http://www.w3.org/2000/svg">
+ <g id="date">
+  <line stroke-width="3" stroke-linecap="undefined" stroke-linejoin="undefined" y2="50" x2="350" y1="50" x1="50" opacity="undefined" stroke="#000" fill="none"/>
+  <line stroke-linecap="undefined" stroke-linejoin="undefined" y2="50" x2="49" y1="50" x1="30" opacity="undefined" fill-opacity="null" stroke-opacity="null" stroke-dasharray="2,2" stroke-width="3" stroke="#000" fill="none"/>
+  <line stroke-linecap="undefined" stroke-linejoin="undefined" y2="50" x2="371" y1="50" x1="351" opacity="undefined" fill-opacity="null" stroke-opacity="null" stroke-dasharray="2,2" stroke-width="3" stroke="#000" fill="none"/>
+
+  <ellipse ry="10" rx="10" id="lp" cy="50" cx="120" opacity="undefined" stroke-opacity="null" stroke="#000" fill="#aaff56"/>
+
+  <ellipse ry="10" rx="10" id="rp" cy="50" cx="233" opacity="undefined" stroke-opacity="null" stroke="#000" fill="#ff5656"/>
+
+  <rect id="cr" height="19" width="113" y="68" x="120" opacity="undefined" stroke-opacity="null" stroke-dasharray="null" stroke-width="null" stroke="#000" fill="#56ffff"/>
+ </g>
+</svg>

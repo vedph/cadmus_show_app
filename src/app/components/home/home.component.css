@@ -1,0 +1,20 @@
+.card {
+  min-height: 400px;
+  background-color: skyblue;
+  border-radius: 24px;
+  padding: 20px;
+  color: white;
+  text-align: center;
+  font-size: 32pt;
+}
+.card mat-icon {
+  margin: 40px 0 20px 0;
+  font-size: 200px;
+  width: 200px;
+  height: 200px;
+}
+.card a {
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}

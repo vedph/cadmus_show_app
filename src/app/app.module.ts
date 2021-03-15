@@ -29,6 +29,7 @@ import { FlagListCodePageComponent } from './components/flag-list-code-page/flag
 import { ThesaurusListPageComponent } from './components/thesaurus-list-page/thesaurus-list-page.component';
 import { ThesaurusListCodePageComponent } from './components/thesaurus-list-code-page/thesaurus-list-code-page.component';
 import { ModelListComponent } from 'projects/myrmidon/cadmus-shop-ui/src/public-api';
+import { ShopPageComponent } from './components/shop-page/shop-page.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { ModelListComponent } from 'projects/myrmidon/cadmus-shop-ui/src/public-
     FlagListCodePageComponent,
     ThesaurusListPageComponent,
     ThesaurusListCodePageComponent,
+    ShopPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,6 +62,7 @@ import { ModelListComponent } from 'projects/myrmidon/cadmus-shop-ui/src/public-
       [
         { path: '', redirectTo: 'home', pathMatch: 'full' },
         { path: 'home', component: HomeComponent },
+        { path: 'shop', component: ShopPageComponent },
         { path: 'models', component: ModelListComponent },
         { path: 'facets-code', component: FacetListCodePageComponent },
         { path: 'facets-list', component: FacetListPageComponent },
