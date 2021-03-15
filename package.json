@@ -28,6 +28,7 @@
     "ang-jsoneditor": "^1.10.5",
     "jsoneditor": "^9.2.0",
     "ng-gallery": "^5.0.0",
+    "ng-ticker": "^2.1.0",
     "ngx-markdown": "^11.1.0",
     "rxjs": "~6.6.6",
     "tslib": "^2.0.0",

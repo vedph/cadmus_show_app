@@ -30,6 +30,7 @@ import { ThesaurusListPageComponent } from './components/thesaurus-list-page/the
 import { ThesaurusListCodePageComponent } from './components/thesaurus-list-code-page/thesaurus-list-code-page.component';
 import { ModelListComponent } from 'projects/myrmidon/cadmus-shop-ui/src/public-api';
 import { ShopPageComponent } from './components/shop-page/shop-page.component';
+import { NgTickerModule } from 'ng-ticker';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { ShopPageComponent } from './components/shop-page/shop-page.component';
     GalleryModule,
     // markdown
     MarkdownModule.forRoot(),
+    NgTickerModule,
     CadmusMaterialModule,
     CadmusProfileCoreModule,
     CadmusProfileUiModule,

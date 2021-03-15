@@ -19,9 +19,27 @@
     </p>
     <p>
       Often, real-world models are something complex, consisting of several
-      parts, which may well appear in other models too. For instance, consider
-      the datation. TODO
+      parts, which may well appear in other models, too. For instance, consider
+      the datation. This is not just a year, or a century number; it can be
+      something very complex, like e.g.
+      <em>367/366 B.C.? - ca. 150 A.D. (Roman copy)</em>, as it is found in SEG
+      46,1531. We thus need a model to adequately encode such datations in a
+      structured, computable way.
     </p>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        Some datation samples
+      </mat-expansion-panel-header>
+      <ng-ticker [stopOnHover]="true" speed="20s">
+        <p>
+          &#x2022; unknown &#x2022; iii century AD &#x2022; before the ii
+          century BC &#x2022; after the i century AD (?) &#x2022; between the ii
+          and iii century AD &#x2022; about iv-iii century BC &#x2022; May 30,
+          178 BC &#x2022; 136/5 BC &#x2022; after 178 BC &#x2022; before 136/5
+          BC &#x2022; 150-125 BC &#x2022; Tiberius reign (14-37 AD) ...
+        </p>
+      </ng-ticker>
+    </mat-expansion-panel>
     <mat-accordion multi>
       <mat-expansion-panel>
         <mat-expansion-panel-header>single point</mat-expansion-panel-header>
@@ -33,29 +51,35 @@
           >2 points - interval</mat-expansion-panel-header
         >
         <img src="/assets/img/d2.svg" />
-        <p>Two points on the timeline, defining an interval, like
-        <em>14-37 AD</em>.</p>
+        <p>
+          Two points on the timeline, defining an interval, like
+          <em>14-37 AD</em>.
+        </p>
       </mat-expansion-panel>
       <mat-expansion-panel>
         <mat-expansion-panel-header
           >2 points, first undefined</mat-expansion-panel-header
         >
         <img src="/assets/img/d3.svg" />
-        <p>Two points on the timeline, defining an interval, where the first point
-        is not exactly defined. This is a terminus ante, like
-        <em>before 31 AD</em>.</p>
+        <p>
+          Two points on the timeline, defining an interval, where the first
+          point is not exactly defined. This is a terminus ante, like
+          <em>before 31 AD</em>.
+        </p>
       </mat-expansion-panel>
       <mat-expansion-panel>
         <mat-expansion-panel-header
           >2 points, last undefined</mat-expansion-panel-header
         >
         <img src="/assets/img/d4.svg" />
-        <p>Two points on the timeline, defining an interval, where the last point
-        is not exactly defined. This is a terminus post, like
-        <em>after 31 AD</em>.</p>
+        <p>
+          Two points on the timeline, defining an interval, where the last point
+          is not exactly defined. This is a terminus post, like
+          <em>after 31 AD</em>.
+        </p>
       </mat-expansion-panel>
     </mat-accordion>
-    <br>
+    <br />
     <h2>The Shop</h2>
     <p>
       The shop here is just a demonstrative list. You will find all the models
