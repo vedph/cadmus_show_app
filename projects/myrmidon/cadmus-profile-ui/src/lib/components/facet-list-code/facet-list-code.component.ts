@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { JsonEditorOptions } from 'ang-jsoneditor';
@@ -13,6 +13,8 @@ import { FacetListService } from '../facet-list/store/facet-list.service';
   styleUrls: ['./facet-list-code.component.css'],
 })
 export class FacetListCodeComponent implements OnInit {
+  @ViewChild('editor', { static: false }) public editorRef: any;
+
   @Input()
   public get code(): string {
     return this.json.value;
@@ -35,6 +37,16 @@ export class FacetListCodeComponent implements OnInit {
     // options
     this.editorOptions = new JsonEditorOptions();
     this.editorOptions.modes = ['code', 'text', 'tree', 'view'];
+    this.editorOptions = new JsonEditorOptions();
+    this.editorOptions.modes = ['code', 'text', 'tree', 'view'];
+    this.editorOptions.onModeChange = (newMode, oldMode) => {
+      if (newMode === 'code') {
+        const editor = this.editorRef.editor;
+        editor.aceEditor.setOptions({
+          maxLines: 1000,
+        });
+      }
+    };
     // form
     this.json = formBuilder.control([]);
     this.form = formBuilder.group({

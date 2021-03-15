@@ -1,5 +1,5 @@
 <form [formGroup]="form" (submit)="save()">
-  <json-editor [options]="editorOptions" formControlName="json"></json-editor>
+  <json-editor #editor [options]="editorOptions" formControlName="json"></json-editor>
   <br>
   <button type="submit" mat-flat-button color="primary">
     <mat-icon>save</mat-icon>
