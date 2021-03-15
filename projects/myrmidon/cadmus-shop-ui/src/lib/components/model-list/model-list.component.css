@@ -3,3 +3,15 @@ th {
   text-align: left;
   color: silver;
 }
+.m-id {
+  color: royalblue;
+}
+.m-prj {
+  background-color: seagreen;
+  color: white;
+  border-radius: 6px;
+  padding: 4px;
+}
+.m-tag {
+  color: #ffb200;
+}

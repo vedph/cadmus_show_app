@@ -61,10 +61,10 @@
                 <mat-icon>content_copy</mat-icon>
               </button>
             </td>
-            <td>{{ m.id }}</td>
+            <td><span class="m-id">{{ m.id }}</span></td>
             <td>{{ m.name }}</td>
-            <td>{{ m.project }}</td>
-            <td>{{ m.tags?.join("; ") }}</td>
+            <td><span class="m-prj">{{ m.project }}</span></td>
+            <td><span class="m-tag">{{ m.tags?.join("; ") }}</span></td>
           </tr>
         </tbody>
       </table>
