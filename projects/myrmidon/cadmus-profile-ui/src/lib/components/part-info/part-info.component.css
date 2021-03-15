@@ -13,3 +13,8 @@ figcaption {
 .model-id {
   color:royalblue;
 }
+pre {
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
