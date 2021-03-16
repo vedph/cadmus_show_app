@@ -3,8 +3,8 @@ import { FormBuilder, FormControl } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { PaginationResponse, PaginatorPlugin } from '@datorama/akita';
+import { Thesaurus } from '@myrmidon/cadmus-core';
 import {
-  Thesaurus,
   ThesaurusFilter,
 } from 'projects/myrmidon/cadmus-profile-core/src/public-api';
 import { DataPage } from 'projects/myrmidon/cadmus-shop-core/src/public-api';

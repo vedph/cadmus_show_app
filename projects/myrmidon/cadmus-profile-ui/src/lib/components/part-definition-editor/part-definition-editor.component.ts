@@ -6,7 +6,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { PartDefinition } from 'projects/myrmidon/cadmus-profile-core/src/public-api';
+import { PartDefinition } from '@myrmidon/cadmus-core';
 import { CadmusShopAssetService } from 'projects/myrmidon/cadmus-shop-asset/src/public-api';
 import { CadmusModel } from 'projects/myrmidon/cadmus-shop-core/src/public-api';
 import { ColorService } from 'projects/myrmidon/cadmus-show-ui/src/public-api';
@@ -131,7 +131,7 @@ export class PartDefinitionEditorComponent implements OnInit {
       roleId: this.roleId.value?.trim(),
       name: this.name.value?.trim(),
       description: this.description.value?.trim(),
-      isRequired: this.required.value ? true : undefined,
+      isRequired: this.required.value ? true : false,
       colorKey: this.colorKey.value.hex,
       groupKey: this.groupKey.value?.trim(),
       sortKey: this.sortKey.value?.trim(),

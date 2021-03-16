@@ -6,7 +6,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { FacetDefinition } from 'projects/myrmidon/cadmus-profile-core/src/public-api';
+import { FacetDefinition } from '@myrmidon/cadmus-core';
 import { ColorService } from 'projects/myrmidon/cadmus-show-ui/src/public-api';
 
 /**

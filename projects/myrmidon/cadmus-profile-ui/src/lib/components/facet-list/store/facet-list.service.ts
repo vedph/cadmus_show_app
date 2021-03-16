@@ -4,8 +4,8 @@ import {
   deepCopy,
   FacetDefinition,
   PartDefinition,
-  ProfileUtilService,
-} from 'projects/myrmidon/cadmus-profile-core/src/public-api';
+} from '@myrmidon/cadmus-core';
+import { ProfileUtilService } from 'projects/myrmidon/cadmus-profile-core/src/public-api';
 import { ColorService } from 'projects/myrmidon/cadmus-show-ui/src/public-api';
 import { FacetListQuery } from './facet-list.query';
 import {
@@ -257,9 +257,13 @@ export class FacetListService {
           typeId: typeId,
         }),
         typeId: typeId,
+        roleId: '',
         name: typeId,
         description: '',
         sortKey: typeId,
+        isRequired: false,
+        groupKey: '',
+        colorKey: '#808080',
       },
     ];
     // update groups

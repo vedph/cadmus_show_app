@@ -12,10 +12,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatChipEvent } from '@angular/material/chips';
-import {
-  deepCopy,
-  PartDefinition,
-} from 'projects/myrmidon/cadmus-profile-core/src/public-api';
+import { deepCopy, PartDefinition } from '@myrmidon/cadmus-core';
 import {
   ColorService,
   DialogService,

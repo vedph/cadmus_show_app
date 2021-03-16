@@ -3,9 +3,9 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PaginationResponse, PaginatorPlugin } from '@datorama/akita';
+import { ThesaurusEntry } from '@myrmidon/cadmus-core';
 import {
   ComponentSignal,
-  ThesaurusEntry,
 } from 'projects/myrmidon/cadmus-profile-core/src/public-api';
 import { DataPage } from 'projects/myrmidon/cadmus-shop-core/src/public-api';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
@@ -91,10 +91,11 @@ export class ThesaurusEditorComponent implements OnInit {
         thesaurus = {
           id: this.id || 'new-thesaurus',
           language: 'en',
+          entries: []
         };
       }
       const entries: ThesaurusEntry[] = [];
-      thesaurus.entries?.forEach((e) => {
+      thesaurus.entries.forEach((e: ThesaurusEntry) => {
         entries.push({ ...e });
       });
       this._nodesService.importEntries(entries);

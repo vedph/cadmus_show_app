@@ -5,7 +5,7 @@ import {
   EntityStore,
   StoreConfig,
 } from '@datorama/akita';
-import { FlagDefinition } from 'projects/myrmidon/cadmus-profile-core/src/public-api';
+import { FlagDefinition } from '@myrmidon/cadmus-core';
 
 export interface FlagListState
   extends EntityState<FlagDefinition, number>,

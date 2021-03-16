@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Thesaurus } from '@myrmidon/cadmus-core';
 import {
-  Thesaurus,
   ThesaurusFilter,
 } from 'projects/myrmidon/cadmus-profile-core/src/public-api';
 import { DataPage } from 'projects/myrmidon/cadmus-shop-core/src/public-api';

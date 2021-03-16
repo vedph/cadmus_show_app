@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FlagDefinition } from 'projects/myrmidon/cadmus-profile-core/src/public-api';
+import { FlagDefinition } from '@myrmidon/cadmus-core';
 import { FlagListQuery } from './flag-list.query';
 import { FlagListStore } from './flag-list.store';
 

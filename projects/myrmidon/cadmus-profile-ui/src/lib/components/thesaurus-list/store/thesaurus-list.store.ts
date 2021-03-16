@@ -5,7 +5,7 @@ import {
   ActiveState,
 } from '@datorama/akita';
 import { Injectable } from '@angular/core';
-import { Thesaurus } from 'projects/myrmidon/cadmus-profile-core/src/public-api';
+import { Thesaurus } from '@myrmidon/cadmus-core';
 
 export interface ThesaurusListState
   extends EntityState<Thesaurus, string>,

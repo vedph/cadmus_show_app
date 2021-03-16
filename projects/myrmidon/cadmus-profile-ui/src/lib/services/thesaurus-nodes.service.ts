@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ThesaurusEntry } from 'projects/myrmidon/cadmus-profile-core/src/public-api';
+import { ThesaurusEntry } from '@myrmidon/cadmus-core';
 import {
   DataPage,
   PagingOptions,

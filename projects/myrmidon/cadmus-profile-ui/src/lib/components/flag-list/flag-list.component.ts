@@ -1,6 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
-import { FlagDefinition } from 'projects/myrmidon/cadmus-profile-core/src/public-api';
+import { FlagDefinition } from '@myrmidon/cadmus-core';
 import { DialogService } from 'projects/myrmidon/cadmus-show-ui/src/public-api';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';

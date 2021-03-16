@@ -5,7 +5,7 @@ import {
   EntityStore,
   StoreConfig,
 } from '@datorama/akita';
-import { PartDefinition } from 'projects/myrmidon/cadmus-profile-core/src/public-api';
+import { PartDefinition } from '@myrmidon/cadmus-core';
 
 // FacetListStore:
 // - GroupingFacet (id, label, description, colorKey, groups)

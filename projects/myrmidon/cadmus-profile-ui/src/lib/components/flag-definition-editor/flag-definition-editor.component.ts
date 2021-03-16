@@ -7,7 +7,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { FlagDefinition } from 'projects/myrmidon/cadmus-profile-core/src/public-api';
+import { FlagDefinition } from '@myrmidon/cadmus-core';
 import { ColorService } from 'projects/myrmidon/cadmus-show-ui/src/public-api';
 
 /**

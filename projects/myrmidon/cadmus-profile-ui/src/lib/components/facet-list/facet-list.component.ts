@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { deepCopy } from 'projects/myrmidon/cadmus-profile-core/src/lib/utils';
-import { FacetDefinition } from 'projects/myrmidon/cadmus-profile-core/src/public-api';
+import { deepCopy, FacetDefinition } from '@myrmidon/cadmus-core';
 import { CadmusShopAssetService } from 'projects/myrmidon/cadmus-shop-asset/src/public-api';
 import { CadmusModel } from 'projects/myrmidon/cadmus-shop-core/src/public-api';
 import { FacetListQuery } from './store/facet-list.query';
@@ -44,7 +43,7 @@ export class FacetListComponent implements OnInit {
       id: facet.id,
       label: facet.label,
       description: facet.description,
-      colorKey: facet.colorKey,
+      colorKey: facet.colorKey || '',
       partDefinitions: [],
     };
     setTimeout(() => {
