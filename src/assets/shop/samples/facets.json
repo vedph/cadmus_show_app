@@ -58,13 +58,13 @@
         "sortKey": "ep-doc-refs"
       },
       {
-        "typeId": "it.vedph.itinera.letter-info",
+        "typeId": "it.vedph.itinera.serial-text-info",
         "roleId": "",
-        "name": "letter info",
-        "description": "Essential information about a letter.",
+        "name": "text info",
+        "description": "Information about a serial text.",
         "colorKey": "76CB9C",
         "groupKey": "letter",
-        "sortKey": "ep-letter-info",
+        "sortKey": "ep-text-info",
         "isRequired": true
       }
     ]
@@ -92,10 +92,10 @@
         "sortKey": "bibliography"
       },
       {
-        "typeId": "it.vedph.itinera.corr-dedications",
+        "typeId": "it.vedph.itinera.lit-dedications",
         "roleId": "",
         "name": "dedications",
-        "description": "Dedications between the reference author and correspondent.",
+        "description": "Literary dedications.",
         "colorKey": "A5CB76",
         "groupKey": "correspondent",
         "sortKey": "ep-dedications"
@@ -108,15 +108,6 @@
         "colorKey": "76CBC6",
         "groupKey": "correspondent",
         "sortKey": "ep-exchanges"
-      },
-      {
-        "typeId": "it.vedph.itinera.corr-pseudonyms",
-        "roleId": "",
-        "name": "pseudonyms",
-        "description": "Pseudonyms assigned by the reference author to the correspondent, or vice-versa.",
-        "colorKey": "CB9C76",
-        "groupKey": "correspondent",
-        "sortKey": "ep-pseudonyms"
       },
       {
         "typeId": "it.vedph.itinera.doc-references",
@@ -215,9 +206,9 @@
         "sortKey": "ep-cited-persons"
       },
       {
-        "typeId": "it.vedph.itinera.poetic-text-info",
+        "typeId": "it.vedph.itinera.serial-text-info",
         "roleId": "",
-        "name": "poetic text info",
+        "name": "text info",
         "description": "Information about a letter-related poetic text.",
         "colorKey": "D28BA2",
         "groupKey": "poetic",
@@ -400,49 +391,6 @@
         "colorKey": "82DCCA",
         "groupKey": "manuscript",
         "sortKey": "ms-watermarks"
-      }
-    ]
-  },
-  {
-    "id": "hand",
-    "label": "hand",
-    "description": "Person's hand.",
-    "colorKey": "2D882D",
-    "partDefinitions": [
-      {
-        "typeId": "it.vedph.note",
-        "name": "note",
-        "description": "A free text note.",
-        "colorKey": "B0A0F8",
-        "groupKey": "general",
-        "sortKey": "note"
-      },
-      {
-        "typeId": "it.vedph.ext-bibliography",
-        "name": "bibliography",
-        "description": "Bibliography.",
-        "colorKey": "20B2AA",
-        "groupKey": "general",
-        "sortKey": "bibliography"
-      },
-      {
-        "typeId": "it.vedph.itinera.person-hand",
-        "roleId": "",
-        "name": "person hand",
-        "description": "Person's hand.",
-        "colorKey": "9D7EDD",
-        "groupKey": "hand",
-        "sortKey": "hand",
-        "isRequired": true
-      },
-      {
-        "typeId": "it.vedph.itinera.person",
-        "roleId": "",
-        "name": "person",
-        "description": "Person's bio.",
-        "colorKey": "62AEEE",
-        "groupKey": "hand",
-        "sortKey": "person"
       }
     ]
   }
