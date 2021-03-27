@@ -14,6 +14,13 @@
     "tags": ["tags"]
   },
   {
+    "id": "it.vedph.comment",
+    "project": "shell",
+    "name": "comment",
+    "tip": "Generic comment.",
+    "tags": ["comment"]
+  },
+  {
     "id": "it.vedph.historical-date",
     "project": "shell",
     "name": "date",
