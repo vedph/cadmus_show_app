@@ -1,3 +1,4 @@
+/*
 import { Component, Input, OnInit } from '@angular/core';
 import { GalleryItem, ImageItem } from 'ng-gallery';
 import { ImageSlide } from '@myrmidon/cadmus-shop-core';
@@ -48,3 +49,4 @@ export class ScreenGalleryComponent implements OnInit {
     });
   }
 }
+*/

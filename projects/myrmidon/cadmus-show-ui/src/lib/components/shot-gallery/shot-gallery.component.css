@@ -3,6 +3,11 @@
   border-radius: 6px;
   padding: 0 6px;
   margin: 6px 0;
+  background-color: #fafafa;
+}
+.bar .nr {
+  font-weight: bold;
+  margin: 0 4px;
 }
 .image {
   width: 100%;

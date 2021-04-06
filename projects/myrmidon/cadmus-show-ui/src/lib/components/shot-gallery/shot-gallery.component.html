@@ -20,11 +20,12 @@
       <mat-icon>skip_next</mat-icon>
     </button>
     <ng-container *ngIf="slide">
+      <span class="nr">{{ slideNr }}/{{ slides?.length }}</span>
       <span>{{ slide.label }}</span>
     </ng-container>
   </div>
   <!-- image -->
-  <div class="image" *ngIf="slideUri && slide">
+  <div class="image" *ngIf="slideUri && slide" @inOutAnimation>
     <img [src]="slideUri" [alt]="slide.label" />
   </div>
   <!-- tip -->

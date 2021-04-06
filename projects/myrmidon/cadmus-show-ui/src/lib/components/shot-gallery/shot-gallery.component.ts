@@ -1,3 +1,10 @@
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
 import { ImageSlide } from '@myrmidon/cadmus-shop-core';
 
@@ -5,6 +12,18 @@ import { ImageSlide } from '@myrmidon/cadmus-shop-core';
   selector: 'cadmus-shot-gallery',
   templateUrl: './shot-gallery.component.html',
   styleUrls: ['./shot-gallery.component.css'],
+  animations: [
+    trigger('inOutAnimation', [
+      transition(':enter', [
+        style({ width: 0, opacity: 0 }),
+        animate('1s ease-out', style({ width: '100vw', opacity: 1 })),
+      ]),
+      transition(':leave', [
+        style({ width: '100vw', opacity: 1 }),
+        animate('1s ease-in', style({ width: 0, opacity: 0 })),
+      ]),
+    ]),
+  ],
 })
 export class ShotGalleryComponent implements OnInit {
   private _slides: ImageSlide[] | undefined;

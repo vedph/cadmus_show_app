@@ -18,8 +18,6 @@ import { FacetListCodeComponent } from './components/facet-list-code/facet-list-
 import { PartDefinitionEditorComponent } from './components/part-definition-editor/part-definition-editor.component';
 import { ModelLookupComponent } from './components/model-lookup/model-lookup.component';
 import { PartInfoComponent } from './components/part-info/part-info.component';
-import { ScreenGalleryComponent } from './components/screen-gallery/screen-gallery.component';
-import { GalleryModule } from 'ng-gallery';
 import { MarkdownModule } from 'ngx-markdown';
 import { FlagDefinitionEditorComponent } from './components/flag-definition-editor/flag-definition-editor.component';
 import { FlagListComponent } from './components/flag-list/flag-list.component';
@@ -45,7 +43,6 @@ import { ThesaurusNodeComponent } from './components/thesaurus-node/thesaurus-no
     ModelLookupComponent,
     PartDefinitionEditorComponent,
     PartInfoComponent,
-    ScreenGalleryComponent,
     ThesaurusEditorComponent,
     ThesaurusFilterComponent,
     ThesaurusListComponent,
@@ -60,7 +57,6 @@ import { ThesaurusNodeComponent } from './components/thesaurus-node/thesaurus-no
     DragDropModule,
     NgxMatColorPickerModule,
     NgJsonEditorModule,
-    GalleryModule,
     // MarkdownModule.forChild(),
     MarkdownModule,
     CadmusMaterialModule,
@@ -79,7 +75,6 @@ import { ThesaurusNodeComponent } from './components/thesaurus-node/thesaurus-no
     ModelLookupComponent,
     PartDefinitionEditorComponent,
     PartInfoComponent,
-    ScreenGalleryComponent,
     ThesaurusEditorComponent,
     ThesaurusListComponent,
     ThesaurusFilterComponent,
