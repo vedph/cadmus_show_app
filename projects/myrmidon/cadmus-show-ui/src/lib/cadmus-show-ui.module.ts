@@ -22,7 +22,8 @@ import { CadmusShopCoreModule } from '@myrmidon/cadmus-shop-core';
   ],
   exports: [
     ConfirmDialogComponent,
-    SafeHtmlPipe
+    SafeHtmlPipe,
+    ShotGalleryComponent,
   ],
 })
 export class CadmusShowUiModule {}

@@ -6,7 +6,10 @@
   </mat-card-header>
 
   <mat-card-content>
-    <p><span class="model-prj">{{ model.project }}</span> - <span class="model-id">{{ model.id }}</span></p>
+    <p>
+      <span class="model-prj">{{ model.project }}</span> -
+      <span class="model-id">{{ model.id }}</span>
+    </p>
     <mat-tab-group>
       <!-- description -->
       <mat-tab label="description">
@@ -20,13 +23,19 @@
           </code>
         </div>
       </mat-tab>
-      <!-- gallery -->
-      <mat-tab label="gallery" *ngIf="(model.slides?.length || 0) > 1">
+      <!-- shots -->
+      <mat-tab label="gallery">
+        <cadmus-shot-gallery
+          [slides]="model.slides"
+          baseSlideUri="./assets/shop/"
+        ></cadmus-shot-gallery>
+      </mat-tab>
+
+      <!-- <mat-tab label="gallery" *ngIf="(model.slides?.length || 0) > 1">
         <cadmus-screen-gallery
           [slides]="model.slides || []"
         ></cadmus-screen-gallery>
       </mat-tab>
-      <!-- single image -->
       <mat-tab label="image" *ngIf="(model.slides?.length || 0) === 1">
         <figure>
           <img [src]="'assets/shop/' + $any(model.slides)[0].id" />
@@ -35,7 +44,7 @@
             <p class="slide-tip" *ngIf="$any(model.slides)[0].tip">{{$any(model.slides)[0].tip}}</p>
           </figcaption>
         </figure>
-      </mat-tab>
+      </mat-tab> -->
     </mat-tab-group>
   </mat-card-content>
 </mat-card>

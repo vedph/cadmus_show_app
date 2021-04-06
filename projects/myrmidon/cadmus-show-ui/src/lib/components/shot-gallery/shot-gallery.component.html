@@ -1,1 +1,34 @@
-<p>shot-gallery works!</p>
+<div *ngIf="slides?.length">
+  <!-- bar -->
+  <div class="bar">
+    <button
+      type="button"
+      mat-icon-button
+      matTooltip="Previous image"
+      (click)="prevShot()"
+      [disabled]="slideNr < 2"
+    >
+      <mat-icon>skip_previous</mat-icon>
+    </button>
+    <button
+      type="button"
+      mat-icon-button
+      matTooltip="Next image"
+      (click)="nextShot()"
+      [disabled]="slideNr === slides?.length"
+    >
+      <mat-icon>skip_next</mat-icon>
+    </button>
+    <ng-container *ngIf="slide">
+      <span>{{ slide.label }}</span>
+    </ng-container>
+  </div>
+  <!-- image -->
+  <div class="image" *ngIf="slideUri && slide">
+    <img [src]="slideUri" [alt]="slide.label" />
+  </div>
+  <!-- tip -->
+  <div *ngIf="slide" class="tip">
+    {{ slide.tip }}
+  </div>
+</div>
