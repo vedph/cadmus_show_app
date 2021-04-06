@@ -16,7 +16,7 @@ import { deepCopy, PartDefinition } from '@myrmidon/cadmus-core';
 import {
   ColorService,
   DialogService,
-} from 'projects/myrmidon/cadmus-show-ui/src/public-api';
+} from '@myrmidon/cadmus-show-ui';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import {

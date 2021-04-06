@@ -7,7 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { FacetDefinition } from '@myrmidon/cadmus-core';
-import { ColorService } from 'projects/myrmidon/cadmus-show-ui/src/public-api';
+import { ColorService } from '@myrmidon/cadmus-show-ui';
 
 /**
  * Editor for facet definition metadata, i.e. all the data of a facet

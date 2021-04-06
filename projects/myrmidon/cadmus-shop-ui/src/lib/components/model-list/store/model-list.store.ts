@@ -5,7 +5,7 @@ import {
   EntityStore,
   StoreConfig,
 } from '@datorama/akita';
-import { CadmusModel } from 'projects/myrmidon/cadmus-shop-core/src/public-api';
+import { CadmusModel } from '@myrmidon/cadmus-shop-core';
 
 export interface ModelListState
   extends EntityState<CadmusModel, string>,

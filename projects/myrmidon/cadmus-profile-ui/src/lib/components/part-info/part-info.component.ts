@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CadmusModel } from 'projects/myrmidon/cadmus-shop-core/src/public-api';
+import { CadmusModel } from '@myrmidon/cadmus-shop-core';
 
 @Component({
   selector: 'cadmus-part-info',

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store, StoreConfig } from '@datorama/akita';
-import { CadmusModelFilter } from 'projects/myrmidon/cadmus-shop-core/src/public-api';
+import { CadmusModelFilter } from '@myrmidon/cadmus-shop-core';
 
 const INITIAL_STATE: CadmusModelFilter = {
   pageNumber: 1,

@@ -7,9 +7,9 @@ import {
   Validators,
 } from '@angular/forms';
 import { PartDefinition } from '@myrmidon/cadmus-core';
-import { CadmusShopAssetService } from 'projects/myrmidon/cadmus-shop-asset/src/public-api';
-import { CadmusModel } from 'projects/myrmidon/cadmus-shop-core/src/public-api';
-import { ColorService } from 'projects/myrmidon/cadmus-show-ui/src/public-api';
+import { CadmusShopAssetService } from '@myrmidon/cadmus-shop-asset';
+import { CadmusModel } from '@myrmidon/cadmus-shop-core';
+import { ColorService } from '@myrmidon/cadmus-show-ui';
 
 @Component({
   selector: 'cadmus-part-definition-editor',

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { GalleryItem, ImageItem } from 'ng-gallery';
-import { ImageSlide } from 'projects/myrmidon/cadmus-shop-core/src/public-api';
+import { ImageSlide } from '@myrmidon/cadmus-shop-core';
 
 @Component({
   selector: 'cadmus-screen-gallery',

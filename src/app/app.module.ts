@@ -4,19 +4,18 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { EnvServiceProvider } from 'projects/myrmidon/cadmus-shop-core/src/lib/services/env.service.provider';
 import { HomeComponent } from './components/home/home.component';
 import { RouterModule } from '@angular/router';
 import { CadmusMaterialModule } from '@myrmidon/cadmus-material';
-import { CadmusProfileCoreModule } from 'projects/myrmidon/cadmus-profile-core/src/public-api';
+import { CadmusProfileCoreModule } from '@myrmidon/cadmus-profile-core';
 import {
   CadmusProfileUiModule,
   ThesaurusEditorComponent,
-} from 'projects/myrmidon/cadmus-profile-ui/src/public-api';
-import { CadmusShopCoreModule } from 'projects/myrmidon/cadmus-shop-core/src/public-api';
-import { CadmusShopAssetModule } from 'projects/myrmidon/cadmus-shop-asset/src/public-api';
+} from '@myrmidon/cadmus-profile-ui';
+import { CadmusShopCoreModule } from '@myrmidon/cadmus-shop-core';
+import { CadmusShopAssetModule } from '@myrmidon/cadmus-shop-asset';
 import { CommonModule } from '@angular/common';
-import { CadmusShowUiModule } from 'projects/myrmidon/cadmus-show-ui/src/public-api';
+import { CadmusShowUiModule } from '@myrmidon/cadmus-show-ui';
 import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 import { environment } from '../environments/environment';
 import { NgJsonEditorModule } from 'ang-jsoneditor';
@@ -28,9 +27,10 @@ import { FlagListPageComponent } from './components/flag-list-page/flag-list-pag
 import { FlagListCodePageComponent } from './components/flag-list-code-page/flag-list-code-page.component';
 import { ThesaurusListPageComponent } from './components/thesaurus-list-page/thesaurus-list-page.component';
 import { ThesaurusListCodePageComponent } from './components/thesaurus-list-code-page/thesaurus-list-code-page.component';
-import { ModelListComponent } from 'projects/myrmidon/cadmus-shop-ui/src/public-api';
+import { ModelListComponent } from '@myrmidon/cadmus-shop-ui';
 import { ShopPageComponent } from './components/shop-page/shop-page.component';
 import { NgTickerModule } from 'ng-ticker';
+import { EnvServiceProvider } from '@myrmidon/cadmus-core';
 
 @NgModule({
   declarations: [

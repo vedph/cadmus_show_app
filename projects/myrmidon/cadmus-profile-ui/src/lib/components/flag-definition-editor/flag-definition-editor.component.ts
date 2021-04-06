@@ -8,7 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { FlagDefinition } from '@myrmidon/cadmus-core';
-import { ColorService } from 'projects/myrmidon/cadmus-show-ui/src/public-api';
+import { ColorService } from '@myrmidon/cadmus-show-ui';
 
 /**
  * Flag definition editor.

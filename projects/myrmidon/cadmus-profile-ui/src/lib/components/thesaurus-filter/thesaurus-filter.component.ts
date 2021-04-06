@@ -5,7 +5,7 @@ import {
   FormControl,
   Validators,
 } from '@angular/forms';
-import { ThesaurusFilter } from 'projects/myrmidon/cadmus-profile-core/src/public-api';
+import { ThesaurusFilter } from '@myrmidon/cadmus-profile-core';
 
 @Component({
   selector: 'cadmus-thesaurus-filter',

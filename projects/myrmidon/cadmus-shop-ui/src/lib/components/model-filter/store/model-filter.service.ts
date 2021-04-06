@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CadmusModelFilter } from 'projects/myrmidon/cadmus-shop-core/src/public-api';
+import { CadmusModelFilter } from '@myrmidon/cadmus-shop-core';
 import { ModelFilterStore } from './model-filter.store';
 
 /**

@@ -5,8 +5,8 @@ import {
   FacetDefinition,
   PartDefinition,
 } from '@myrmidon/cadmus-core';
-import { ProfileUtilService } from 'projects/myrmidon/cadmus-profile-core/src/public-api';
-import { ColorService } from 'projects/myrmidon/cadmus-show-ui/src/public-api';
+import { ProfileUtilService } from '@myrmidon/cadmus-profile-core';
+import { ColorService } from '@myrmidon/cadmus-show-ui';
 import { FacetListQuery } from './facet-list.query';
 import {
   FacetListStore,

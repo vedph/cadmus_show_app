@@ -2,12 +2,12 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
 import { PaginationResponse, PaginatorPlugin } from '@datorama/akita';
-import { CadmusShopAssetService } from 'projects/myrmidon/cadmus-shop-asset/src/public-api';
+import { CadmusShopAssetService } from '@myrmidon/cadmus-shop-asset';
 import {
   CadmusModel,
   CadmusModelFilter,
   DataPage,
-} from 'projects/myrmidon/cadmus-shop-core/src/public-api';
+} from '@myrmidon/cadmus-shop-core';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import {
   debounceTime,

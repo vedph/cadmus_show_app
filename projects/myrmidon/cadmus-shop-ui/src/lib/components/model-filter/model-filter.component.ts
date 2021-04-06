@@ -1,7 +1,7 @@
 import { Output } from '@angular/core';
 import { Component, EventEmitter, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { CadmusModelFilter } from 'projects/myrmidon/cadmus-shop-core/src/public-api';
+import { CadmusModelFilter } from '@myrmidon/cadmus-shop-core';
 
 @Component({
   selector: 'cadmus-model-filter',

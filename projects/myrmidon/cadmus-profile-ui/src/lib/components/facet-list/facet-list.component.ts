@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { deepCopy, FacetDefinition } from '@myrmidon/cadmus-core';
-import { CadmusShopAssetService } from 'projects/myrmidon/cadmus-shop-asset/src/public-api';
-import { CadmusModel } from 'projects/myrmidon/cadmus-shop-core/src/public-api';
+import { CadmusShopAssetService } from '@myrmidon/cadmus-shop-asset';
+import { CadmusModel } from '@myrmidon/cadmus-shop-core';
 import { FacetListQuery } from './store/facet-list.query';
 import { GroupedPartDefinition, GroupingFacet } from './store/facet-list.store';
 

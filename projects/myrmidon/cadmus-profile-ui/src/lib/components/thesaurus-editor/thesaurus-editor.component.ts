@@ -6,8 +6,8 @@ import { PaginationResponse, PaginatorPlugin } from '@datorama/akita';
 import { ThesaurusEntry } from '@myrmidon/cadmus-core';
 import {
   ComponentSignal,
-} from 'projects/myrmidon/cadmus-profile-core/src/public-api';
-import { DataPage } from 'projects/myrmidon/cadmus-shop-core/src/public-api';
+} from '@myrmidon/cadmus-profile-core';
+import { DataPage } from '@myrmidon/cadmus-shop-core';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { debounceTime, map, startWith, switchMap, tap } from 'rxjs/operators';
 import { RamThesaurusService } from '../../services/ram-thesaurus.service';

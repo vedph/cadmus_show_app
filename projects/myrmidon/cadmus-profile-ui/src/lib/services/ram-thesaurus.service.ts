@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Thesaurus } from '@myrmidon/cadmus-core';
 import {
   ThesaurusFilter,
-} from 'projects/myrmidon/cadmus-profile-core/src/public-api';
-import { DataPage } from 'projects/myrmidon/cadmus-shop-core/src/public-api';
+} from '@myrmidon/cadmus-profile-core';
+import { DataPage } from '@myrmidon/cadmus-shop-core';
 import { Observable, of } from 'rxjs';
 
 /**

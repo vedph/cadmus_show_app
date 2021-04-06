@@ -13,7 +13,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { ComponentSignal } from 'projects/myrmidon/cadmus-profile-core/src/public-api';
+import { ComponentSignal } from '@myrmidon/cadmus-profile-core';
 import { ThesaurusNode } from '../../services/thesaurus-nodes.service';
 
 /**

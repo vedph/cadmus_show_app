@@ -1,7 +1,7 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { FlagDefinition } from '@myrmidon/cadmus-core';
-import { DialogService } from 'projects/myrmidon/cadmus-show-ui/src/public-api';
+import { DialogService } from '@myrmidon/cadmus-show-ui';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { FlagListQuery } from './store/flag-list.query';

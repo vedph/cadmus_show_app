@@ -5,7 +5,7 @@ import {
   CadmusModelFilter,
   DataPage,
   ImageSlide,
-} from 'projects/myrmidon/cadmus-shop-core/src/lib/shop-models';
+} from '@myrmidon/cadmus-shop-core';
 import { forkJoin, Observable, of } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 

@@ -6,9 +6,9 @@ import { PaginationResponse, PaginatorPlugin } from '@datorama/akita';
 import { Thesaurus } from '@myrmidon/cadmus-core';
 import {
   ThesaurusFilter,
-} from 'projects/myrmidon/cadmus-profile-core/src/public-api';
-import { DataPage } from 'projects/myrmidon/cadmus-shop-core/src/public-api';
-import { DialogService } from 'projects/myrmidon/cadmus-show-ui/src/public-api';
+} from '@myrmidon/cadmus-profile-core';
+import { DataPage } from '@myrmidon/cadmus-shop-core';
+import { DialogService } from '@myrmidon/cadmus-show-ui';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import {
   debounceTime,

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CadmusShopAssetService } from 'projects/myrmidon/cadmus-shop-asset/src/public-api';
+import { CadmusShopAssetService } from '@myrmidon/cadmus-shop-asset';
 import { take } from 'rxjs/operators';
 
 @Component({

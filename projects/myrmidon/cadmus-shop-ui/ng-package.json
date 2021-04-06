@@ -2,6 +2,14 @@
   "$schema": "../../../node_modules/ng-packagr/ng-package.schema.json",
   "dest": "../../../dist/myrmidon/cadmus-shop-ui",
   "lib": {
-    "entryFile": "src/public-api.ts"
+    "entryFile": "src/public-api.ts",
+    "umdModuleIds": {
+      "@datorama/akita": "@datorama/akita",
+      "@myrmidon/cadmus-core": "@myrmidon/cadmus-core",
+      "@myrmidon/cadmus-material": "@myrmidon/cadmus-material",
+      "@myrmidon/cadmus-shop-asset": "@myrmidon/cadmus-shop-asset",
+      "@myrmidon/cadmus-show-ui": "@myrmidon/cadmus-show-ui",
+      "@myrmidon/cadmus-profile-ui": "@myrmidon/cadmus-profile-ui"
+    }
   }
 }

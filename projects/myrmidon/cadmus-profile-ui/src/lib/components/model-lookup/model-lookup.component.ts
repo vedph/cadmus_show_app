@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { CadmusShopAssetService } from 'projects/myrmidon/cadmus-shop-asset/src/public-api';
-import { CadmusModel } from 'projects/myrmidon/cadmus-shop-core/src/public-api';
+import { CadmusShopAssetService } from '@myrmidon/cadmus-shop-asset';
+import { CadmusModel } from '@myrmidon/cadmus-shop-core';
 import { Observable, of } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 

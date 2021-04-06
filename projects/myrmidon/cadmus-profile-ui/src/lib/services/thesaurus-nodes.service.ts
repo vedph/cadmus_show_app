@@ -3,7 +3,7 @@ import { ThesaurusEntry } from '@myrmidon/cadmus-core';
 import {
   DataPage,
   PagingOptions,
-} from 'projects/myrmidon/cadmus-shop-core/src/public-api';
+} from '@myrmidon/cadmus-shop-core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 
 /**

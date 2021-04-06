@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CadmusMaterialModule } from '@myrmidon/cadmus-material';
-import { CadmusProfileCoreModule } from 'projects/myrmidon/cadmus-profile-core/src/public-api';
-import { CadmusShowUiModule } from 'projects/myrmidon/cadmus-show-ui/src/public-api';
+import { CadmusProfileCoreModule } from '@myrmidon/cadmus-profile-core';
+import { CadmusShowUiModule } from '@myrmidon/cadmus-show-ui';
 import { FacetViewComponent } from './components/facet-view/facet-view.component';
 import { FacetMetadataEditorComponent } from './components/facet-metadata-editor/facet-metadata-editor.component';
 import {
@@ -61,7 +61,8 @@ import { ThesaurusNodeComponent } from './components/thesaurus-node/thesaurus-no
     NgxMatColorPickerModule,
     NgJsonEditorModule,
     GalleryModule,
-    MarkdownModule.forChild(),
+    // MarkdownModule.forChild(),
+    MarkdownModule,
     CadmusMaterialModule,
     CadmusProfileCoreModule,
     CadmusShowUiModule,
