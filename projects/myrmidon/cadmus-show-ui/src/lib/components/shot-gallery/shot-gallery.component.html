@@ -24,8 +24,8 @@
       <span>{{ slide.label }}</span>
     </ng-container>
   </div>
-  <!-- image -->
-  <div class="image" *ngIf="slideUri && slide" @inOutAnimation>
+  <!-- image @inOutAnimation -->
+  <div class="image" *ngIf="slideUri && slide">
     <img [src]="slideUri" [alt]="slide.label" />
   </div>
   <!-- tip -->

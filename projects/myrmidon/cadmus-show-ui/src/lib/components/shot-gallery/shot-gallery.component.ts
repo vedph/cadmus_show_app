@@ -1,10 +1,10 @@
-import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
+// import {
+//   animate,
+//   state,
+//   style,
+//   transition,
+//   trigger,
+// } from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
 import { ImageSlide } from '@myrmidon/cadmus-shop-core';
 
@@ -12,18 +12,18 @@ import { ImageSlide } from '@myrmidon/cadmus-shop-core';
   selector: 'cadmus-shot-gallery',
   templateUrl: './shot-gallery.component.html',
   styleUrls: ['./shot-gallery.component.css'],
-  animations: [
-    trigger('inOutAnimation', [
-      transition(':enter', [
-        style({ width: 0, opacity: 0 }),
-        animate('1s ease-out', style({ width: '100vw', opacity: 1 })),
-      ]),
-      transition(':leave', [
-        style({ width: '100vw', opacity: 1 }),
-        animate('1s ease-in', style({ width: 0, opacity: 0 })),
-      ]),
-    ]),
-  ],
+  // animations: [
+  //   trigger('inOutAnimation', [
+  //     transition(':enter', [
+  //       style({ transform: 'translateX(100%)', opacity: 0 }),
+  //       animate('1s ease-out', style({ transform: 'translateX(0)', opacity: 1 })),
+  //     ]),
+  //     transition(':leave', [
+  //       style({ transform: 'translateX(100%)', opacity: 1 }),
+  //       animate('1s ease-in', style({ transform: 'translateX(0)', opacity: 0 })),
+  //     ]),
+  //   ]),
+  // ],
 })
 export class ShotGalleryComponent implements OnInit {
   private _slides: ImageSlide[] | undefined;
@@ -68,10 +68,10 @@ export class ShotGalleryComponent implements OnInit {
 
   private setCurrentSlide(n: number): void {
     this.slideNr = n;
-    this.slideUri = this.buildSlideUri();
     if (this._slides) {
       this.slide = this._slides[this.slideNr - 1];
     }
+    this.slideUri = this.buildSlideUri();
   }
 
   public prevShot(): void {
