@@ -2,13 +2,16 @@
   - author (string)
   - claimedAuthor (string)
   - work* (string)
-  - start (MsLocation):
-    - N (int): sheet number.
-    - R (boolean): number is Roman.
-    - S (string): suffix, containing 0-2 lowercase letters.
-    - L (int): line number.
-  - end (MsLocation)
-  - state (string, thesaurus)
+  - ranges (MsLocationRange[]):
+    - start (MsLocation):
+      - n* (int): sheet number.
+      - r (boolean): number is Roman.
+      - s (string): suffix, containing 0-2 lowercase letters (e.g. r=recto, v=verso, rv=both).
+      - l (int): line number.
+    - end (MsLocation)
+  - state (string, thesaurus ms-content-states)
+  - incipit (string)
+  - explicit (string)
   - note (string)
   - units (MsContentUnit[]):
     - label* (string)

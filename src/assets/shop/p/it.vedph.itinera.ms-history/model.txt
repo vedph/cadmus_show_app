@@ -16,8 +16,8 @@
   - externalIds (string[])
   - sources (DocReference[]):
     - tag (string)
-    - author (string)
-    - work (string)
+    - author* (string)
+    - work* (string)
     - location (string)
     - note (string)
 - annotations (MsAnnotation[]):

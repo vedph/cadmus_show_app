@@ -2,32 +2,32 @@
   - id* (string)
   - types* (string[], thesaurus ms-hand-types)
   - personId (string)
-  - description* (string, MD, 2000)
+  - description* (string.MD)
   - initials (string)
   - corrections (string)
   - punctuation (string)
-  - abbreviations (string, MD, 1000)
-  - idReason* (string, thesaurus)
+  - abbreviations (string.MD)
+  - idReason* (string, thesaurus ms-hand-id-reasons)
   - ranges* (MsLocationRange[]):
     - start (MsLocation):
-      - N (int): sheet number.
-      - R (boolean): number is Roman.
-      - S (string): suffix, containing 0-2 lowercase letters.
-      - L (int): line number.
+      - n* (int): sheet number.
+      - r (boolean): number is Roman.
+      - s (string): suffix, containing 0-2 lowercase letters (e.g. r=recto, v=verso, rv=both).
+      - l (int): line number.
     - end (MsLocation)
   - extentNote (string)
   - rubrications (MsRubrication[]):
     - ranges (MsLocationRange[])
-    - type* (string, thesaurus)
+    - type* (string, thesaurus ms-rubrication-types)
     - description (string)
     - issues (string)
   - subscription (MsSubscription):
     - locations* (MsLocation[])
-    - language* (string, thesaurus): code from ISO 639-3.
+    - language* (string, thesaurus ms-languages): code from ISO 639-3.
     - text (string)
   - signs (MsHandSign[]): description of any relevant graphical sign, whether it's a letter or not (the type is specified in type):
     - id* (string): this must be a unique, arbitrarily chosen string for this sign
     - type* (string, thesaurus: ms-hand-sign-types)
-    - description (string, MD, 1000)
+    - description (string.MD)
     - imageId (string): this is an ID representing the prefix for all the images representing that sign; e.g. if it is ae, we would expect any number of image resources named after it plus a conventional numbering, like ae00001, ae00002, etc.
   - imageIds (string[])

@@ -1,6 +1,6 @@
 - date (HistoricalDate):
-  - A (Datation):
-    - value (int): the numeric value of the point. Its interpretation depends on other points properties: it may represent a year or a century, or a span between two consecutive Gregorian years.
+  - a* (Datation):
+    - value* (int): the numeric value of the point. Its interpretation depends on other points properties: it may represent a year or a century, or a span between two consecutive Gregorian years.
     - isCentury (boolean): true if value is a century number; false if it's a Gregorian year.
     - isSpan (boolean): true if the value is the first year of a pair of two consecutive years. This is used for calendars which span across two Gregorian years, e.g. 776/5 BC.
     - month (short): the month number (1-12) or 0.
@@ -8,10 +8,10 @@
     - isApproximate (boolean): true if the point is approximate ("about").
     - isDubious (boolean): true if the point is dubious ("perhaphs").
     - hint (string): a short textual hint used to better explain or motivate the datation point.
-  - B (Datation)
+  - b (Datation)
 - references (DocReference[]):
   - tag (string)
-  - author (string)
-  - work (string)
+  - author* (string)
+  - work* (string)
   - location (string)
   - note (string)

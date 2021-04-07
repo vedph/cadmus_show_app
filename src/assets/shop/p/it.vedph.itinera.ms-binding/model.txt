@@ -1,12 +1,12 @@
 - century* (number)
-- description* (string, MD, 5000)
-- coverMaterial* (string, thesaurus)
-- supportMaterial* (string, thesaurus)
+- description* (string.MD)
+- coverMaterial* (string, thesaurus ms-binding-materials)
+- supportMaterial* (string, thesaurus ms-binding-support-materials)
 - size (PhysicalSize):
-  - tag (string)
-  - W (PhysicalDimension):
-    - tag (string)
-    - value (float)
-    - unit (string)
-  - H (PhysicalDimension)
-  - D (PhysicalDimension)
+  - tag (string, thesaurus physical-size-tags)
+  - w (PhysicalDimension):
+    - tag (string, thesaurus physical-dimension-tags)
+    - value* (float)
+    - unit* (string, thesaurus physical-size-units*)
+  - h (PhysicalDimension)
+  - d (PhysicalDimension)
