@@ -1,12 +1,12 @@
-- material* (string, thesaurus)
-- state* (string, thesaurus)
-- format (string, thesaurus)
-- stateNote (string, 500)
+- material* (string, thesaurus ms-materials)
+- state* (string, thesaurus ms-states)
+- format (string, thesaurus ms-formats)
+- stateNote (string)
 - palimpsests (MsPalimpsest[]):
   - location* (MsLocation):
-    - N (int): sheet number.
-    - R (boolean): number is Roman.
-    - S (string): suffix, containing 0-2 lowercase letters.
-    - L (int): line number.
+    - n* (int): sheet number.
+    - r (boolean): number is Roman.
+    - s (string): suffix, containing 0-2 lowercase letters (e.g. r=recto, v=verso, rv=both).
+    - l (int): line number.
   - date (HistoricalDate)
   - note (string)
