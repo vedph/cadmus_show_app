@@ -1,16 +1,16 @@
 - provenances* (GeoAddress[]): at least 1; in chronological order:
-  - area* (string)
+  - area* (string, thesaurus ms-provenance-areas)
   - address (string)
-- history* (string, MD, 5000)
+- history* (string.MD)
 - persons (MsHistoryPerson[]):
   - id (string)
-  - role (string, thesaurus)
+  - role (string, thesaurus ms-history-person-roles)
   - name* (PersonName):
-    - language (string)
-    - tag (string)
-    - parts (PersonNamePart[]):
-      - type (string)
-      - value (string)
+    - language* (string)
+    - tag (string, thesaurus person-name-tags)
+    - parts* (PersonNamePart[]):
+      - type* (string, thesaurus person-name-types)
+      - value* (string)
   - date (HistoricalDate)
   - note (string, 1000)
   - externalIds (string[])

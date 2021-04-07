@@ -1,9 +1,9 @@
 - layouts (MsLayout[]):
   - sample* (MsLocation): the sheet used as the sample for taking measurements and counts:
-    - N (int): sheet number.
-    - R (boolean): number is Roman.
-    - S (string): suffix, containing 0-2 lowercase letters.
-    - L (int): line number.
+    - n* (int): sheet number.
+    - r (boolean): number is Roman.
+    - s (string): suffix, containing 0-2 lowercase letters (e.g. r=recto, v=verso, rv=both).
+    - l (int): line number.
   - dimensions (PhysicalDimension[]): any number of measurements taken for any kind of measurable thing in the manuscript:
     - tag (string)
     - value (float)
