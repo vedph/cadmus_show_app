@@ -30,6 +30,8 @@ import { ModelListComponent } from '@myrmidon/cadmus-shop-ui';
 import { ShopPageComponent } from './components/shop-page/shop-page.component';
 import { NgTickerModule } from 'ng-ticker';
 import { EnvServiceProvider } from '@myrmidon/cadmus-core';
+import { CadmusUiModule } from '@myrmidon/cadmus-ui';
+import { ComplexModelsComponent } from './components/complex-models/complex-models.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,7 @@ import { EnvServiceProvider } from '@myrmidon/cadmus-core';
     ThesaurusListPageComponent,
     ThesaurusListCodePageComponent,
     ShopPageComponent,
+    ComplexModelsComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,6 +56,7 @@ import { EnvServiceProvider } from '@myrmidon/cadmus-core';
     MarkdownModule.forRoot(),
     NgTickerModule,
     CadmusMaterialModule,
+    CadmusUiModule,
     CadmusProfileCoreModule,
     CadmusProfileUiModule,
     CadmusShopCoreModule,
@@ -62,6 +66,7 @@ import { EnvServiceProvider } from '@myrmidon/cadmus-core';
       [
         { path: '', redirectTo: 'home', pathMatch: 'full' },
         { path: 'home', component: HomeComponent },
+        { path: 'docs/complex-models', component: ComplexModelsComponent },
         { path: 'shop', component: ShopPageComponent },
         { path: 'models', component: ModelListComponent },
         { path: 'facets-code', component: FacetListCodePageComponent },

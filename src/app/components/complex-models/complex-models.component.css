@@ -1,0 +1,23 @@
+h1 {
+  text-align: center;
+  margin-top: 16px;
+  font-size: 300%;
+}
+#banner {
+  height: 258px;
+  background-image: url("/assets/img/blocks.jpg");
+  background-size: cover;
+  margin-bottom: 16px;
+}
+article {
+  margin: 16px 64px;
+  font-size: 14pt;
+  line-height: 20pt;
+  column-width: 30em;
+  column-count: 4;
+  column-gap: 2em;
+  column-rule: 1px solid silver;
+}
+figure {
+  font-size: 85%;
+}

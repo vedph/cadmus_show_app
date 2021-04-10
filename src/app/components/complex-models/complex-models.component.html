@@ -1,0 +1,214 @@
+<div>
+  <h1>Data Architecture</h1>
+  <div id="banner"></div>
+  <article>
+    <p>
+      Cadmus is focused on reuse. This means not only software reuse; but also
+      data models reuse.
+    </p>
+    <p>
+      In fact, there is no closed notion of a model for Cadmus records. Such
+      records are defined by <em>composing</em> several models together, just
+      like you can build any construction starting from a set of Lego-like
+      bricks.
+    </p>
+    <h2>Open Data Modeling</h2>
+    <p>
+      First, the underlying storage technology (the shelves for our boxes) is an
+      implementation detail; users need not to trouble with it. In fact, given
+      its layered architecture, you could even swap its data storage technology
+      with another one, and the rest of the system would not even be aware of
+      it.
+    </p>
+    <p>
+      Also, Cadmus does not pose any limitation to the types of data you may
+      want to enter. Data, i.e. our boxes with their objects, can be anything:
+      an inscription, a literary text, a manuscript, a dictionary entry, a
+      prosopographic entry, etc.
+    </p>
+    <p>
+      Yet, in most cases, such objects have complex structures, where we can
+      identify recurring sub-models. For instance, all these different objects
+      eventually share a datation. So, it makes sense designing composite,
+      rather than monolithic models. We model our datation once, and reuse it
+      everywhere; and the same happens with any other part of a more complex
+      model we might find useful to design in isolation, and then compose with
+      other parts.
+    </p>
+    <h2>Taming Models Complexity</h2>
+    <p>
+      Datation might sound an odd example for a model; but a datation often is
+      much more than a simple number for a year or a century, and it effectively
+      requires a structure of its own. For instance, consider this expression:
+      <em>367/366 B.C.? - ca. 150 A.D. (Roman copy)</em> (found in SEG 46,1531).
+      We want to preserve all the nouances of similar expressions, but we also
+      want to encode datations in a computable structure, so that a machine can
+      sort or filter items according to its value. Click below to see some more
+      examples.
+    </p>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        Some datation samples
+      </mat-expansion-panel-header>
+      <ng-ticker [stopOnHover]="true" speed="20s">
+        <p>
+          &#x2022; unknown &#x2022; iii century AD &#x2022; before the ii
+          century BC &#x2022; after the i century AD (?) &#x2022; between the ii
+          and iii century AD &#x2022; about iv-iii century BC &#x2022; May 30,
+          178 BC &#x2022; 136/5 BC &#x2022; after 178 BC &#x2022; before 136/5
+          BC &#x2022; 150-125 BC &#x2022; Tiberius reign (14-37 AD) ...
+        </p>
+      </ng-ticker>
+    </mat-expansion-panel>
+    <br />
+    <p>
+      We could thus start from this timeline, and place a single point on it to
+      cover expressions like "iii century AD", "May 30, 178 BC", "136/5 BC",
+      etc.
+    </p>
+    <figure>
+      <img src="/assets/img/d1.svg" />
+      <legend>
+        <p>A single point on a timeline, like <em>178 BC</em>.</p>
+      </legend>
+    </figure>
+    <p>
+      By adding another point we can define an interval, which covers
+      expressions like "between the ii and iii century AD", "about iv-iii
+      century BC", "150-125 BC", "Tiberius reign (14-37 AD)", etc.
+    </p>
+    <figure>
+      <img src="/assets/img/d2.svg" />
+      <legend>
+        <p>
+          Two points on the timeline, defining an interval, like
+          <em>14-37 AD</em>.
+        </p>
+      </legend>
+    </figure>
+    <p>
+      Finally, the second point might be <em>somewhere</em> before the first one
+      (as a <em>terminus ante</em>); or somewhere after it (as a
+      <em>terminus post</em>).
+    </p>
+    <figure>
+      <img src="/assets/img/d3.svg" />
+      <legend>
+        <p>
+          Two points on the timeline, defining an interval, where the first
+          point is not exactly defined. This is a <em>terminus ante</em>, like
+          <em>before 31 AD</em>.
+        </p>
+      </legend>
+    </figure>
+    <figure>
+      <img src="/assets/img/d4.svg" />
+      <legend>
+        <p>
+          Two points on the timeline, defining an interval, where the last point
+          is not exactly defined. This is a <em>terminus post</em>, like
+          <em>after 31 AD</em>.
+        </p>
+      </legend>
+    </figure>
+    <p>
+      So, here is our model: it has either 0 points, when unknown; or 1 or 2
+      points. Each of these point is an object, having its own properties.
+    </p>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        More on the date model
+      </mat-expansion-panel-header>
+      <p>A point in the date has these properties:</p>
+      <ul>
+        <li>
+          <strong>value</strong>: the numeric value of the point. Its
+          interpretation depends on other points properties: it may represent a
+          year or a century, or a span between two consecutive Gregorian years.
+        </li>
+        <li>
+          <strong>isCentury</strong>: true if value is a century number; false
+          if it's a Gregorian year.
+        </li>
+        <li>
+          <strong>isSpan</strong>: true if the value is the first year of a pair
+          of two consecutive years. This is used for calendars which span across
+          two Gregorian years, e.g. 776/5 BC.
+        </li>
+        <li><strong>month</strong>: the month number (1-12) or 0.</li>
+        <li><strong>day</strong>: the day number (1-31) or 0.</li>
+        <li>
+          <strong>isApproximate</strong>: true if the point is approximate
+          ("about", "ca.").
+        </li>
+        <li>
+          <strong>isDubious</strong>: true if the point is dubious ("perhaphs").
+        </li>
+        <li>
+          <strong>hint</strong>: a short textual hint used to better explain or
+          motivate the datation point.
+        </li>
+      </ul>
+      <p>
+        As a sample, consider the expression cited above
+        <em>367/366 B.C.? - ca. 150 A.D. (Roman copy)</em>:
+      </p>
+      <ol>
+        <li>
+          point A:
+          <ul>
+            <li>value=-367</li>
+            <li>isSpan=true</li>
+            <li>isDubious=true</li>
+          </ul>
+        </li>
+        <li>
+          point B:
+          <ul>
+            <li>value=150</li>
+            <li>isApproximate=true</li>
+            <li>hint=Roman copy</li>
+          </ul>
+        </li>
+      </ol>
+    </mat-expansion-panel>
+    <br />
+
+    <p>
+      Here you can play with an editor for this model. The default date set in
+      this editor is "367/366 B.C.? - ca. 150 A.D. (Roman copy)"; a real-world
+      example drawn from SEG 46,1531. This represents a range, where the first
+      point is a year spanning across two years of our Gregorian calendar
+      (367-366 BC), and it's dubious; the second point instead is placed
+      somewhat around 150 AD.
+    </p>
+    <p>
+      You can enter a date using a simple syntax, or edit the date visually, by
+      opening the visual editor with the arrow button. You can start with the
+      visual editor to get to know the syntax, and later directly use that
+      syntax, which is faster and more compact. Once finished, click the circle
+      button or just press enter. When you enter a new value, its corresponding
+      model is here shown below the editor. The numeric value shown next to the
+      date is its computed, approximate value used for sorting or filtering.
+    </p>
+    <cadmus-historical-date-editor
+      [(date)]="date"
+    ></cadmus-historical-date-editor>
+    <div *ngIf="date">
+      <pre>{{ date | json }}</pre>
+    </div>
+    <h2>Composing UI</h2>
+    <p>
+      The above example also shows another essential concept in the Cadmus
+      architecture: not only data, but also its editing UI is composable. So,
+      whenever you need to enter a date in your data editor, you will just have
+      to include its editor in your UI, just like now we included it in this
+      page.
+    </p>
+    <p>
+      This allows building data models and their editing UIs by pieces, with a
+      high level of reuse, resulting in a more uniform architecture and a much
+      faster development.
+    </p>
+  </article>
+</div>
