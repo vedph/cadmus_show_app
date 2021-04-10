@@ -11,11 +11,17 @@
 .f-chip-list {
   display: flex;
   flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: flex-start;
 }
 .f-chip {
-  flex: 1 1;
+  flex: 0 0;
   width: 150px;
   font-weight: normal;
+  text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .f-chip-selected {
   border: 2px solid orange;
