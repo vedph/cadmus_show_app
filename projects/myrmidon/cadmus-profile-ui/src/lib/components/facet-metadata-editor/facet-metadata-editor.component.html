@@ -1,7 +1,7 @@
 <form [formGroup]="form" (submit)="save()">
   <!-- id -->
   <div>
-    <mat-form-field>
+    <mat-form-field *ngIf="editableId">
       <input matInput [formControl]="id" placeholder="ID" />
       <mat-error *ngIf="id.errors?.required && (id.dirty || id.touched)"
         >ID required</mat-error
@@ -13,6 +13,7 @@
         >invalid ID</mat-error
       >
     </mat-form-field>
+    <span class="id">{{ id?.value }}</span>
   </div>
 
   <!-- label -->

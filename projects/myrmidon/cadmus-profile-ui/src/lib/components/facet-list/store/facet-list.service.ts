@@ -131,7 +131,7 @@ export class FacetListService {
    *
    * @param id The ID to assign to the new facet.
    */
-  public addFacet(id = 'new'): void {
+  public addNewFacet(id = 'new'): void {
     const facet: GroupingFacet = {
       id: id,
       label: id,
@@ -140,6 +140,19 @@ export class FacetListService {
     };
     this._store.add(facet);
     this._store.setActive(facet.id);
+  }
+
+  /**
+   * Update the metadata of the specified facet.
+   *
+   * @param facet The new facet's metadata.
+   */
+  public updateFacetMetadata(facet: FacetDefinition): void {
+    this._store.update(facet.id, {
+      label: facet.label,
+      colorKey: facet.colorKey,
+      description: facet.description,
+    });
   }
 
   /**

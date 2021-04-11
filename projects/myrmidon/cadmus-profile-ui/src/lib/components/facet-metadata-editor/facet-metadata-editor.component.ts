@@ -33,6 +33,9 @@ export class FacetMetadataEditorComponent implements OnInit {
     this.updateForm(value);
   }
 
+  @Input()
+  public editableId: boolean | undefined;
+
   /**
    * Emitted when facet is saved.
    */

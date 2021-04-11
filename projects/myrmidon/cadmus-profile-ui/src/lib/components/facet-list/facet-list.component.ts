@@ -1,8 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { deepCopy, FacetDefinition } from '@myrmidon/cadmus-core';
 import { CadmusShopAssetService } from '@myrmidon/cadmus-shop-asset';
 import { CadmusModel } from '@myrmidon/cadmus-shop-core';
 import { FacetListQuery } from './store/facet-list.query';
+import { FacetListService } from './store/facet-list.service';
 import { GroupedPartDefinition, GroupingFacet } from './store/facet-list.store';
 
 @Component({
@@ -11,19 +18,21 @@ import { GroupedPartDefinition, GroupingFacet } from './store/facet-list.store';
   styleUrls: ['./facet-list.component.css'],
 })
 export class FacetListComponent implements OnInit {
-  private _editedFacetIndex: number;
-
   public facets: GroupingFacet[];
   public editedFacet: FacetDefinition | undefined;
   public tabIndex: number;
   public currentModel: CadmusModel | undefined;
   public editedPart: GroupedPartDefinition | undefined;
+  // new facet form
+  public newFacetId: FormControl;
+  public newFacetForm: FormGroup;
 
   constructor(
+    formBuilder: FormBuilder,
     query: FacetListQuery,
+    private _facetService: FacetListService,
     private _shopService: CadmusShopAssetService
   ) {
-    this._editedFacetIndex = -1;
     this.facets = [];
     this.tabIndex = 0;
     // make a copy of each facet as we're making
@@ -33,12 +42,20 @@ export class FacetListComponent implements OnInit {
         return deepCopy(f);
       });
     });
+    // form
+    this.newFacetId = formBuilder.control(null, [
+      Validators.required,
+      Validators.maxLength(50),
+      Validators.pattern(/^[-a-zA-Z0-9_]+$/),
+    ]);
+    this.newFacetForm = formBuilder.group({
+      id: this.newFacetId,
+    });
   }
 
   ngOnInit(): void {}
 
   public onEditFacet(facet: GroupingFacet): void {
-    this._editedFacetIndex = this.facets.indexOf(facet);
     this.editedFacet = {
       id: facet.id,
       label: facet.label,
@@ -51,21 +68,31 @@ export class FacetListComponent implements OnInit {
     }, 300);
   }
 
+  public addFacet(): void {
+    if (
+      this.newFacetForm.invalid ||
+      this.facets.find((f) => f.id === this.newFacetId.value)
+    ) {
+      return;
+    }
+
+    this._facetService.addNewFacet(this.newFacetId.value);
+    const facet = this.facets.find((f) => f.id === this.newFacetId.value);
+    if (facet) {
+      this.onEditFacet(facet);
+    }
+  }
+
   public onFacetChange(facet: FacetDefinition): void {
     if (!this.editedFacet) {
       return;
     }
-    this.facets[this._editedFacetIndex] = Object.assign(
-      {
-        ...this.facets[this._editedFacetIndex],
-      },
-      facet
-    );
+    this._facetService.updateFacetMetadata(facet);
+    this.onFacetEditorClose();
   }
 
   public onFacetEditorClose(): void {
     this.tabIndex = 0;
-    this._editedFacetIndex = -1;
     this.editedFacet = undefined;
   }
 
