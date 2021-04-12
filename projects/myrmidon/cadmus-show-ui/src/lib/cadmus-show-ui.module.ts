@@ -6,10 +6,12 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 import { ShotGalleryComponent } from './components/shot-gallery/shot-gallery.component';
 import { CadmusShopCoreModule } from '@myrmidon/cadmus-shop-core';
+import { RunningCountComponent } from './components/running-count/running-count.component';
 
 @NgModule({
   declarations: [
     ConfirmDialogComponent,
+    RunningCountComponent,
     SafeHtmlPipe,
     ShotGalleryComponent,
   ],
@@ -22,6 +24,7 @@ import { CadmusShopCoreModule } from '@myrmidon/cadmus-shop-core';
   ],
   exports: [
     ConfirmDialogComponent,
+    RunningCountComponent,
     SafeHtmlPipe,
     ShotGalleryComponent,
   ],

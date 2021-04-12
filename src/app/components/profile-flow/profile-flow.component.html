@@ -5,7 +5,10 @@
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <mat-vertical-stepper>
+    <cadmus-running-count
+      [params]="{ start: 0, end: 123, interval: 10, increment: 1 }"
+    ></cadmus-running-count>
+    <mat-vertical-stepper (selectionChange)="onStepperSelectionChange($event)">
       <mat-step label="facets">
         <h2>Items Facets</h2>
         <p>Define the parts for each type of item.</p>
