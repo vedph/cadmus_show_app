@@ -18,6 +18,13 @@ export class RamThesaurusService {
   private _thesauri$: BehaviorSubject<Thesaurus[]>;
 
   /**
+   * The count of thesauri provided by this service.
+   */
+  public get count(): number {
+    return this._thesauri$.value.length;
+  }
+
+  /**
    * The thesauri provided by this service.
    */
   public get thesauri$(): Observable<Thesaurus[]> {

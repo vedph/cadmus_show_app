@@ -5,13 +5,16 @@
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <cadmus-running-count
-      [params]="{ start: 0, end: 123, interval: 10, increment: 1 }"
-    ></cadmus-running-count>
     <mat-vertical-stepper (selectionChange)="onStepperSelectionChange($event)">
       <mat-step label="facets">
         <h2>Items Facets</h2>
-        <p>Define the parts for each type of item.</p>
+        <div class="pnc">
+          <p>Define the parts for each type of item.</p>
+          <cadmus-running-count
+            *ngIf="counts[0]"
+            [params]="{ start: 0, end: counts[0], interval: 20, increment: 1 }"
+          ></cadmus-running-count>
+        </div>
         <div>
           <button mat-stroked-button matStepperNext>
             <mat-icon>skip_next</mat-icon>
@@ -21,11 +24,17 @@
       </mat-step>
       <mat-step label="flags">
         <h2>Items Flags</h2>
-        <p>
-          Define an optional set of flags which can be attached to items, to tag
-          them in some meaningful way (e.g. to be revised, completed, revised,
-          etc.).
-        </p>
+        <div class="pnc">
+          <p>
+            Define an optional set of flags which can be attached to items, to
+            tag them in some meaningful way (e.g. to be revised, completed,
+            revised, etc.).
+          </p>
+          <cadmus-running-count
+            *ngIf="counts[1]"
+            [params]="{ start: 0, end: counts[1], interval: 20, increment: 1 }"
+          ></cadmus-running-count>
+        </div>
         <div>
           <button mat-stroked-button matStepperPrevious>
             <mat-icon>skip_previous</mat-icon>
@@ -39,14 +48,24 @@
       </mat-step>
       <mat-step label="thesauri">
         <h2>Thesauri</h2>
-        <p>
-          Define any number of taxonomies, either flat or hierarchical, to be
-          used in the editors to pick values from a set.
-        </p>
+        <div class="pnc">
+          <p>
+            Define any number of taxonomies, either flat or hierarchical, to be
+            used in the editors to pick values from a set.
+          </p>
+          <cadmus-running-count
+            *ngIf="counts[2]"
+            [params]="{ start: 0, end: counts[2], interval: 10, increment: 1 }"
+          ></cadmus-running-count>
+        </div>
         <div>
           <button mat-stroked-button matStepperPrevious>
             <mat-icon>skip_previous</mat-icon>
             back
+          </button>
+          <button mat-stroked-button color="primary">
+            <mat-icon>offline_bolt</mat-icon>
+            generate
           </button>
         </div>
       </mat-step>
