@@ -1,39 +1,49 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { JsonEditorOptions } from 'ang-jsoneditor';
-import { RamThesaurusService } from '../../services/ram-thesaurus.service';
-import { ThesaurusListQuery } from '../thesaurus-list/store/thesaurus-list.query';
 
-// https://github.com/mariohmol/ang-jsoneditor
-
+/**
+ * JSON code editor.
+ */
 @Component({
-  selector: 'cadmus-thesaurus-list-code',
-  templateUrl: './thesaurus-list-code.component.html',
-  styleUrls: ['./thesaurus-list-code.component.css'],
+  selector: 'cadmus-json-editor',
+  templateUrl: './json-editor.component.html',
+  styleUrls: ['./json-editor.component.css'],
 })
-export class ThesaurusListCodeComponent implements OnInit {
+export class JsonEditorComponent implements OnInit {
   @ViewChild('editor', { static: false }) public editorRef: any;
 
+  /**
+   * The data being edited.
+   */
   @Input()
-  public get code(): string {
+  public get data(): any {
     return this.json.value;
   }
-  public set code(value: string) {
+  public set data(value: any) {
     this.json.setValue(value);
   }
+
+  /**
+   * Emitted when data is saved.
+   */
+  @Output()
+  public dataChange: EventEmitter<any>;
 
   public editorOptions: JsonEditorOptions;
 
   public json: FormControl;
   public form: FormGroup;
 
-  constructor(
-    formBuilder: FormBuilder,
-    private _tlQuery: ThesaurusListQuery,
-    private _thesService: RamThesaurusService,
-    private _snackbar: MatSnackBar
-  ) {
+  constructor(formBuilder: FormBuilder) {
+    this.dataChange = new EventEmitter<string>();
     // options
     this.editorOptions = new JsonEditorOptions();
     this.editorOptions.modes = ['code', 'text', 'tree', 'view'];
@@ -55,13 +65,12 @@ export class ThesaurusListCodeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.json.setValue(this._tlQuery.getAll());
+    if (this.json.value !== this.data) {
+      this.json.setValue(this.data);
+    }
   }
 
   public save(): void {
-    this._thesService.setAll(this.json.value);
-    this._snackbar.open('Thesauri saved', 'OK', {
-      duration: 1500,
-    });
+    this.dataChange.emit(this.json.value);
   }
 }

@@ -4,7 +4,11 @@
       <!-- head -->
       <div>
         <!-- label -->
-        <span class="f-label">
+        <span
+          class="f-label"
+          [style.background]="'#' + facet?.colorKey"
+          [style.color]="getContrastColor(facet?.colorKey)"
+        >
           {{ facet?.label }}
         </span>
         <span class="f-id">

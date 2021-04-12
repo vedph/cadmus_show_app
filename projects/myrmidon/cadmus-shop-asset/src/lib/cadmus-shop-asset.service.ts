@@ -33,6 +33,12 @@ export class CadmusShopAssetService {
     });
   }
 
+  /**
+   * Load an object from a JSON resource.
+   *
+   * @param path The path (relative to the root folder).
+   * @returns The object parsed from the loaded JSON code.
+   */
   public loadObject<T>(path: string): Observable<T> {
     return this._http.get<T>('./assets/shop/' + path + '.json');
   }

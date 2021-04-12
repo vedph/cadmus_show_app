@@ -73,7 +73,7 @@ export class FacetListService {
    *
    * @param facet The facet definition.
    */
-  private getFacetPartGroups(facet: FacetDefinition): PartDefinitionGroup[] {
+  public getFacetPartGroups(facet: FacetDefinition): PartDefinitionGroup[] {
     // map the facet's part definitions into grouped part definitions,
     // setting the scopedId of each part to a combination of group ID and
     // part type and role IDs.
@@ -123,6 +123,31 @@ export class FacetListService {
     });
 
     this._store.set(groupingFacets);
+  }
+
+  /**
+   * Maps the received grouping facet into part definitions.
+   *
+   * @param facet The grouping facet.
+   * @returns The part definitions.
+   */
+  public getPartDefsFromGroupingFacet(facet: GroupingFacet): PartDefinition[] {
+    const defs: PartDefinition[] = [];
+    facet.groups.forEach((g) => {
+      g.partDefinitions.forEach((gd) => {
+        defs.push({
+          typeId: gd.typeId,
+          roleId: gd.roleId,
+          name: gd.name,
+          description: gd.description,
+          isRequired: gd.isRequired,
+          colorKey: gd.colorKey,
+          groupKey: gd.groupKey,
+          sortKey: gd.sortKey,
+        });
+      });
+    });
+    return defs;
   }
 
   /**

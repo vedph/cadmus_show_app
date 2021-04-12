@@ -3,9 +3,12 @@
     <mat-icon>add_circle</mat-icon>
     add flag
   </button>
-  <table *ngIf="flags$ | async as flags">
+  <table *ngIf="flags">
     <tbody>
-      <tr *ngFor="let f of flags" [class.selected]="f === (flag$ | async)">
+      <tr
+        *ngFor="let f of flags; let i = index"
+        [class.selected]="f === editedFlag"
+      >
         <td>
           <button
             type="button"
@@ -19,7 +22,7 @@
             type="button"
             mat-icon-button
             color="warn"
-            (click)="deleteFlag(f.id)"
+            (click)="deleteFlag(i)"
           >
             <mat-icon>remove_circle</mat-icon>
           </button>
@@ -36,16 +39,26 @@
       </tr>
     </tbody>
   </table>
-  <mat-card *ngIf="flag$ | async as flag" [@inOutAnimation]>
+  <mat-card *ngIf="editedFlag" [@inOutAnimation]>
     <mat-card-header>
       <mat-card-title>Flag</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <cadmus-flag-definition-editor
-        [flag]="flag"
-        (editorClose)="onCloseFlag()"
+        [flag]="editedFlag"
+        (editorClose)="onFlagEditorClose()"
         (flagChange)="onFlagChange($event)"
       ></cadmus-flag-definition-editor>
     </mat-card-content>
   </mat-card>
+  <hr />
+  <button
+    type="button"
+    mat-flat-button
+    color="primary"
+    matTooltip="Save flags"
+    (click)="save()"
+  >
+    <mat-icon>save</mat-icon> save
+  </button>
 </div>

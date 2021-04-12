@@ -1,7 +1,30 @@
-<button mat-icon-button color="primary" (click)="addFacet()">
-  <mat-icon>add_circle</mat-icon>
-  add facet
-</button>
+<form [formGroup]="newFacetForm" (submit)="addFacet()">
+  <mat-form-field>
+    <input matInput [formControl]="newFacetId" placeholder="facet ID" />
+    <mat-error
+      *ngIf="
+        newFacetId.errors?.required && (newFacetId.dirty || newFacetId.touched)
+      "
+      >ID required</mat-error
+    >
+    <mat-error
+      *ngIf="
+        newFacetId.errors?.maxLength && (newFacetId.dirty || newFacetId.touched)
+      "
+      >ID too long</mat-error
+    >
+    <mat-error
+      *ngIf="
+        newFacetId.errors?.pattern && (newFacetId.dirty || newFacetId.touched)
+      "
+      >invalid ID</mat-error
+    >
+  </mat-form-field>
+  <button mat-icon-button color="primary" (click)="addFacet()">
+    <mat-icon>add_circle</mat-icon>
+    add facet
+  </button>
+</form>
 <div *ngIf="facets">
   <mat-tab-group [(selectedIndex)]="tabIndex">
     <!-- list -->

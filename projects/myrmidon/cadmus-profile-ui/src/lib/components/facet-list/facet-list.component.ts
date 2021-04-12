@@ -1,15 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { deepCopy, FacetDefinition } from '@myrmidon/cadmus-core';
+import { FacetDefinition } from '@myrmidon/cadmus-core';
 import { CadmusShopAssetService } from '@myrmidon/cadmus-shop-asset';
 import { CadmusModel } from '@myrmidon/cadmus-shop-core';
-import { FacetListQuery } from './store/facet-list.query';
-import { FacetListService } from './store/facet-list.service';
 import { GroupedPartDefinition, GroupingFacet } from './store/facet-list.store';
 
 @Component({
@@ -18,7 +16,14 @@ import { GroupedPartDefinition, GroupingFacet } from './store/facet-list.store';
   styleUrls: ['./facet-list.component.css'],
 })
 export class FacetListComponent implements OnInit {
+  /**
+   * The facets.
+   */
+  @Input()
   public facets: GroupingFacet[];
+  @Output()
+  public facetsChange: EventEmitter<GroupingFacet[]>;
+
   public editedFacet: FacetDefinition | undefined;
   public tabIndex: number;
   public currentModel: CadmusModel | undefined;
@@ -29,19 +34,11 @@ export class FacetListComponent implements OnInit {
 
   constructor(
     formBuilder: FormBuilder,
-    query: FacetListQuery,
-    private _facetService: FacetListService,
     private _shopService: CadmusShopAssetService
   ) {
     this.facets = [];
     this.tabIndex = 0;
-    // make a copy of each facet as we're making
-    // the facets editable
-    query.selectAll().subscribe((facets) => {
-      this.facets = facets.map((f) => {
-        return deepCopy(f);
-      });
-    });
+    this.facetsChange = new EventEmitter<GroupingFacet[]>();
     // form
     this.newFacetId = formBuilder.control(null, [
       Validators.required,
@@ -55,6 +52,11 @@ export class FacetListComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  /**
+   * Edit the specified facet's metadata.
+   *
+   * @param facet The grouping facet to edit.
+   */
   public onEditFacet(facet: GroupingFacet): void {
     this.editedFacet = {
       id: facet.id,
@@ -68,7 +70,11 @@ export class FacetListComponent implements OnInit {
     }, 300);
   }
 
+  /**
+   * Add a new facet and edit it.
+   */
   public addFacet(): void {
+    // do not add if invalid or already existing ID
     if (
       this.newFacetForm.invalid ||
       this.facets.find((f) => f.id === this.newFacetId.value)
@@ -76,21 +82,38 @@ export class FacetListComponent implements OnInit {
       return;
     }
 
-    this._facetService.addNewFacet(this.newFacetId.value);
-    const facet = this.facets.find((f) => f.id === this.newFacetId.value);
-    if (facet) {
-      this.onEditFacet(facet);
-    }
+    // edit a newly created facet
+    this.onEditFacet({
+      id: this.newFacetId.value,
+      label: '',
+      description: '',
+      groups: [],
+    });
   }
 
+  /**
+   * Handle the facet metadata changes.
+   *
+   * @param facet The updated facet metadata.
+   */
   public onFacetChange(facet: FacetDefinition): void {
     if (!this.editedFacet) {
       return;
     }
-    this._facetService.updateFacetMetadata(facet);
+    // add/replace the facet
+    const i = this.facets.findIndex((f) => f.id === facet.id);
+    if (i === -1) {
+      this.facets.push({ ...facet, groups: [] });
+    } else {
+      this.facets.splice(i, 1, Object.assign(this.facets[i], facet));
+    }
+
     this.onFacetEditorClose();
   }
 
+  /**
+   * Close the facet metadata editor.
+   */
   public onFacetEditorClose(): void {
     this.tabIndex = 0;
     this.editedFacet = undefined;
@@ -105,5 +128,9 @@ export class FacetListComponent implements OnInit {
         });
       }
     });
+  }
+
+  public save(): void {
+    this.facetsChange.emit(this.facets);
   }
 }

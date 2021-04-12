@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FacetListCodeComponent } from './facet-list-code.component';
+import { JsonEditorComponent } from './json-editor.component';
 
-describe('FacetListCodeComponent', () => {
-  let component: FacetListCodeComponent;
-  let fixture: ComponentFixture<FacetListCodeComponent>;
+describe('JsonEditorComponent', () => {
+  let component: JsonEditorComponent;
+  let fixture: ComponentFixture<JsonEditorComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FacetListCodeComponent ]
+      declarations: [ JsonEditorComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FacetListCodeComponent);
+    fixture = TestBed.createComponent(JsonEditorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

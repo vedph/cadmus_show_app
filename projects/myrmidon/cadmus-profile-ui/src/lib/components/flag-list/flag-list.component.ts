@@ -1,11 +1,8 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FlagDefinition } from '@myrmidon/cadmus-core';
 import { DialogService } from '@myrmidon/cadmus-show-ui';
-import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { FlagListQuery } from './store/flag-list.query';
-import { FlagListService } from './store/flag-list.service';
 
 @Component({
   selector: 'cadmus-flag-list',
@@ -25,45 +22,73 @@ import { FlagListService } from './store/flag-list.service';
   ],
 })
 export class FlagListComponent implements OnInit {
-  public flags$: Observable<FlagDefinition[]>;
-  public flag$: Observable<FlagDefinition | undefined>;
+  @Input()
+  public flags: FlagDefinition[];
+  @Output()
+  public flagsChange: EventEmitter<FlagDefinition[]>;
 
-  constructor(
-    private _flService: FlagListService,
-    flQuery: FlagListQuery,
-    private _dialogService: DialogService
-  ) {
-    this.flags$ = flQuery.selectAll();
-    this.flag$ = flQuery.selectActive();
+  public editedFlag: FlagDefinition | undefined;
+
+  constructor(private _dialogService: DialogService) {
+    this.flags = [];
+    this.flagsChange = new EventEmitter<FlagDefinition[]>();
   }
 
   ngOnInit(): void {}
 
-  public addFlag(): void {
-    this._flService.addFlag();
+  private getNextId(): number {
+    for (let i = 0; i < 32; i++) {
+      const testId = 1 << i;
+      if (
+        this.flags.findIndex(f => testId === f.id) === -1) {
+        return testId;
+      }
+    }
+    return 0;
   }
 
-  public deleteFlag(id: number): void {
+  public addFlag(): void {
+    this.editedFlag = {
+      id: this.getNextId(),
+      label: 'new flag',
+      colorKey: '',
+      description: ''
+    };
+  }
+
+  public deleteFlag(index: number): void {
     this._dialogService
       .confirm('Confirmation', 'Delete this flag?')
       .pipe(take(1))
       .subscribe((yes) => {
         if (yes) {
-          this._flService.deleteFlag(id);
+          if (this.editedFlag === this.flags[index]) {
+            this.onFlagEditorClose();
+          }
+          this.flags.splice(index, 1);
         }
       });
   }
 
   public editFlag(flag: FlagDefinition): void {
-    this._flService.setActive(flag.id);
+    this.editedFlag = flag;
   }
 
-  public onCloseFlag(): void {
-    this._flService.setActive(null);
+  public onFlagEditorClose(): void {
+    this.editedFlag = undefined;
   }
 
   public onFlagChange(flag: FlagDefinition): void {
-    this._flService.updateFlag(flag);
-    this._flService.setActive(null);
+    const i = this.flags.findIndex(f => f.id === flag.id);
+    if (i === -1) {
+      this.flags.push(flag);
+    } else {
+      this.flags.splice(i, 1, flag);
+    }
+    this.onFlagEditorClose();
+  }
+
+  public save(): void {
+    this.flagsChange.emit(this.flags);
   }
 }

@@ -12,21 +12,19 @@ import {
   NgxMatColorPickerModule,
   NGX_MAT_COLOR_FORMATS,
 } from '@angular-material-components/color-picker';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FacetListComponent } from './components/facet-list/facet-list.component';
-import { NgJsonEditorModule } from 'ang-jsoneditor';
-import { FacetListCodeComponent } from './components/facet-list-code/facet-list-code.component';
-import { PartDefinitionEditorComponent } from './components/part-definition-editor/part-definition-editor.component';
-import { ModelLookupComponent } from './components/model-lookup/model-lookup.component';
-import { PartInfoComponent } from './components/part-info/part-info.component';
-import { MarkdownModule } from 'ngx-markdown';
 import { FlagDefinitionEditorComponent } from './components/flag-definition-editor/flag-definition-editor.component';
 import { FlagListComponent } from './components/flag-list/flag-list.component';
 import { FlagBitPipe } from './pipes/flag-bit.pipe';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FlagListCodeComponent } from './components/flag-list-code/flag-list-code.component';
+import { JsonEditorComponent } from './components/json-editor/json-editor.component';
+import { MarkdownModule } from 'ngx-markdown';
+import { ModelLookupComponent } from './components/model-lookup/model-lookup.component';
+import { NgJsonEditorModule } from 'ang-jsoneditor';
+import { PartDefinitionEditorComponent } from './components/part-definition-editor/part-definition-editor.component';
+import { PartInfoComponent } from './components/part-info/part-info.component';
 import { ThesaurusListComponent } from './components/thesaurus-list/thesaurus-list.component';
 import { ThesaurusFilterComponent } from './components/thesaurus-filter/thesaurus-filter.component';
-import { ThesaurusListCodeComponent } from './components/thesaurus-list-code/thesaurus-list-code.component';
 import { ThesaurusEditorComponent } from './components/thesaurus-editor/thesaurus-editor.component';
 import { ThesaurusNodeComponent } from './components/thesaurus-node/thesaurus-node.component';
 
@@ -35,18 +33,16 @@ import { ThesaurusNodeComponent } from './components/thesaurus-node/thesaurus-no
     FacetViewComponent,
     FacetMetadataEditorComponent,
     FacetListComponent,
-    FacetListCodeComponent,
     FlagBitPipe,
     FlagDefinitionEditorComponent,
     FlagListComponent,
-    FlagListCodeComponent,
+    JsonEditorComponent,
     ModelLookupComponent,
     PartDefinitionEditorComponent,
     PartInfoComponent,
     ThesaurusEditorComponent,
     ThesaurusFilterComponent,
     ThesaurusListComponent,
-    ThesaurusListCodeComponent,
     ThesaurusNodeComponent,
   ],
   imports: [
@@ -68,17 +64,15 @@ import { ThesaurusNodeComponent } from './components/thesaurus-node/thesaurus-no
     FacetViewComponent,
     FacetMetadataEditorComponent,
     FacetListComponent,
-    FacetListCodeComponent,
     FlagDefinitionEditorComponent,
     FlagListComponent,
-    FlagListCodeComponent,
+    JsonEditorComponent,
     ModelLookupComponent,
     PartDefinitionEditorComponent,
     PartInfoComponent,
     ThesaurusEditorComponent,
     ThesaurusListComponent,
     ThesaurusFilterComponent,
-    ThesaurusListCodeComponent,
     ThesaurusNodeComponent,
   ],
 })

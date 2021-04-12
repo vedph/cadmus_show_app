@@ -13,7 +13,7 @@
         >invalid ID</mat-error
       >
     </mat-form-field>
-    <span class="id">{{ id?.value }}</span>
+    <div class="id">{{ id?.value }}</div>
   </div>
 
   <!-- label -->
@@ -29,10 +29,9 @@
         >label too long</mat-error
       >
     </mat-form-field>
-  </div>
 
-  <!-- colorKey -->
-  <div>
+    <!-- colorKey -->
+    &nbsp;
     <mat-form-field style="width: 8em">
       <input matInput [ngxMatColorPicker]="picker" [formControl]="colorKey" />
       <ngx-mat-color-toggle matSuffix [for]="picker"></ngx-mat-color-toggle>

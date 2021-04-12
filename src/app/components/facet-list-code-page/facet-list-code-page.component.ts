@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { FacetDefinition } from '@myrmidon/cadmus-core';
+import { FacetListQuery, FacetListService } from '@myrmidon/cadmus-profile-ui';
 import { CadmusShopAssetService } from '@myrmidon/cadmus-shop-asset';
-import { take } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-facet-list-code-page',
@@ -8,18 +12,44 @@ import { take } from 'rxjs/operators';
   styleUrls: ['./facet-list-code-page.component.css'],
 })
 export class FacetListCodePageComponent {
-  public code: string;
+  public data$: Observable<FacetDefinition[]>;
 
-  constructor(private _shopService: CadmusShopAssetService) {
-    this.code = '[]';
+  constructor(
+    facetListQuery: FacetListQuery,
+    private _facetListService: FacetListService,
+    private _shopService: CadmusShopAssetService,
+    private _snackbar: MatSnackBar
+  ) {
+    this.data$ = facetListQuery.selectAll().pipe(
+      map((facets) => {
+        return facets.map((gf) => {
+          return {
+            id: gf.id,
+            label: gf.label,
+            colorKey: gf.colorKey || '',
+            description: gf.description,
+            partDefinitions: this._facetListService.getPartDefsFromGroupingFacet(
+              gf
+            ),
+          };
+        });
+      })
+    );
   }
 
   public loadSample(): void {
     this._shopService
-      .loadObject<string>('samples/facets')
+      .loadObject<FacetDefinition[]>('samples/facets')
       .pipe(take(1))
-      .subscribe((s) => {
-        this.code = s;
+      .subscribe((facets) => {
+        this._facetListService.set(facets);
       });
+  }
+
+  public onDataChange(data: FacetDefinition[]): void {
+    this._facetListService.set(data);
+    this._snackbar.open('Facets saved', 'OK', {
+      duration: 1500,
+    });
   }
 }

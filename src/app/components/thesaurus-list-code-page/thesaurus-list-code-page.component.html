@@ -11,6 +11,9 @@
         load sample
       </button>
     </div>
-    <cadmus-thesaurus-list-code [code]="code"></cadmus-thesaurus-list-code>
+    <cadmus-json-editor
+      [data]="(data$ | async) || '[]'"
+      (dataChange)="onDataChange($event)"
+    ></cadmus-json-editor>
   </mat-card-content>
 </mat-card>
