@@ -4,6 +4,22 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Architecture
 
+Libraries and their dependencies:
+
+- `@myrmidon/cadmus-profile-core` (build-core)
+- `@myrmidon/cadmus-shop-core` (build-core)
+- `@myrmidon/cadmus-shop-asset` (build-shop)
+- `@myrmidon/cadmus-show-ui` (build-ui)
+  - `@myrmidon/cadmus-shop-core`
+- `@myrmidon/cadmus-profile-ui` (build-prof)
+  - `@myrmidon/cadmus-profile-core`
+  - `@myrmidon/cadmus-shop-asset`
+  - `@myrmidon/cadmus-show-ui`
+- `@myrmidon/cadmus-shop-ui` (build-shop)
+  - `@myrmidon/cadmus-shop-asset`
+  - `@myrmidon/cadmus-show-ui`
+  - `@myrmidon/cadmus-profile-ui`
+
 ### Profile Area
 
 _Projects_:

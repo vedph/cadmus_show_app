@@ -12,7 +12,8 @@
     "build-ui": "ng build @myrmidon/cadmus-show-ui --prod",
     "build-prof": "ng build @myrmidon/cadmus-profile-ui --prod",
     "build-shop": "ng build @myrmidon/cadmus-shop-asset --prod && ng build @myrmidon/cadmus-shop-ui --prod",
-    "build-lib": "npm run build-core && npm run build-ui && npm run build-prof && npm run build-shop"
+    "build-lib": "npm run build-core && npm run build-ui && npm run build-prof && npm run build-shop",
+    "build-all": "npm run build-core && ng build @myrmidon/cadmus-shop-asset --prod && ng build @myrmidon/cadmus-show-ui --prod && ng build @myrmidon/cadmus-profile-ui --prod && ng build @myrmidon/cadmus-shop-ui --prod"
   },
   "private": true,
   "dependencies": {
