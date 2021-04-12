@@ -23,10 +23,10 @@
   margin: 0 4px;
 }
 .node-btn {
-  opacity: 15%;
+  opacity: 0.15;
 }
 .node-btn:hover {
-  opacity: 100%;
+  opacity: 1;
 }
 form {
   border: 1px solid silver;
