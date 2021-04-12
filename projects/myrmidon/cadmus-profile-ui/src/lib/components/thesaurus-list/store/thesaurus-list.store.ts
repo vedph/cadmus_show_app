@@ -16,7 +16,10 @@ const INITIAL_STATE = {
 };
 
 /**
- * Thesauri list store. This contains a page of thesauri.
+ * Thesauri list store. This contains a single page of thesauri.
+ * The full set of thesauri is never loaded in the store at once,
+ * as often it would be too big for an optimal user experience.
+ * Rather, thesauri are fetched by a RamThesaurusService.
  */
 @Injectable({ providedIn: 'root' })
 @StoreConfig({ name: 'thesauri' })

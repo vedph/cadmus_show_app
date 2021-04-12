@@ -4,7 +4,7 @@ import { ThesaurusListQuery } from './thesaurus-list.query';
 import { ThesaurusListStore } from './thesaurus-list.store';
 
 /**
- * Service used to write data into the Thesauruss list store.
+ * Service used to write data into the thesauri list store.
  */
 @Injectable({
   providedIn: 'root',

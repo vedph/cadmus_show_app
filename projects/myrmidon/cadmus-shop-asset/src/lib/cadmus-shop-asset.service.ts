@@ -100,8 +100,8 @@ export class CadmusShopAssetService {
   }
 
   /**
-   * Get the specified page of units, or all the units at once
-   * if the page size is 0.
+   * Get the specified page of models (parts or fragments), or all
+   * the models at once if the page size is 0.
    *
    * @param filter The filter.
    * @param fragment True to get fragments, false to get parts.

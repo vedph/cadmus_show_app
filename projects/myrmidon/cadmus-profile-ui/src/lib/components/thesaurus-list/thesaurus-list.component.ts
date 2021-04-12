@@ -4,9 +4,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { PaginationResponse, PaginatorPlugin } from '@datorama/akita';
 import { Thesaurus } from '@myrmidon/cadmus-core';
-import {
-  ThesaurusFilter,
-} from '@myrmidon/cadmus-profile-core';
+import { ThesaurusFilter } from '@myrmidon/cadmus-profile-core';
 import { DataPage } from '@myrmidon/cadmus-shop-core';
 import { DialogService } from '@myrmidon/cadmus-show-ui';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
@@ -164,6 +162,8 @@ export class ThesaurusListComponent implements OnInit {
         return this.getPaginatorResponse(pageNumber, pageSize);
       })
     );
+
+    this.refresh();
   }
 
   public onFilterChange(filter: ThesaurusFilter): void {
@@ -186,6 +186,14 @@ export class ThesaurusListComponent implements OnInit {
     this._router.navigate([`/thes/${id}`]);
   }
 
+  private refresh(): void {
+    let n = this._refresh$.value + 1;
+    if (n > 100) {
+      n = 1;
+    }
+    this._refresh$.next(n);
+  }
+
   public deleteThesaurus(id: string): void {
     this._dialogService
       .confirm('Confirm Deletion', `Delete thesaurus "${id}"?`)
@@ -197,11 +205,7 @@ export class ThesaurusListComponent implements OnInit {
           .deleteThesaurus(id)
           .pipe(take(1))
           .subscribe((_) => {
-            let n = this._refresh$.value + 1;
-            if (n > 100) {
-              n = 1;
-            }
-            this._refresh$.next(n);
+            this.refresh();
           });
       });
   }
