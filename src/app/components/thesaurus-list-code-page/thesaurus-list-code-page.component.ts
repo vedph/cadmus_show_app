@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { Thesaurus } from '@myrmidon/cadmus-core';
 import { RamThesaurusService } from '@myrmidon/cadmus-profile-ui';
 import { CadmusShopAssetService } from '@myrmidon/cadmus-shop-asset';
@@ -24,7 +25,8 @@ export class ThesaurusListCodePageComponent {
   constructor(
     private _thesService: RamThesaurusService,
     private _shopService: CadmusShopAssetService,
-    private _snackbar: MatSnackBar
+    private _snackbar: MatSnackBar,
+    private _router: Router
   ) {
     this.data$ = this._thesService.thesauri$;
   }
@@ -43,5 +45,6 @@ export class ThesaurusListCodePageComponent {
     this._snackbar.open('Thesauri saved', 'OK', {
       duration: 1500,
     });
+    this._router.navigate(['/profile'], { queryParams: { step: 3 } });
   }
 }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { FacetDefinition } from '@myrmidon/cadmus-core';
 import { FacetListQuery, FacetListService } from '@myrmidon/cadmus-profile-ui';
 import { CadmusShopAssetService } from '@myrmidon/cadmus-shop-asset';
@@ -18,7 +19,8 @@ export class FacetListCodePageComponent {
     facetListQuery: FacetListQuery,
     private _facetListService: FacetListService,
     private _shopService: CadmusShopAssetService,
-    private _snackbar: MatSnackBar
+    private _snackbar: MatSnackBar,
+    private _router: Router
   ) {
     this.data$ = facetListQuery.selectAll().pipe(
       map((facets) => {
@@ -51,5 +53,6 @@ export class FacetListCodePageComponent {
     this._snackbar.open('Facets saved', 'OK', {
       duration: 1500,
     });
+    this._router.navigate(['/profile'], { queryParams: { step: 1 } });
   }
 }

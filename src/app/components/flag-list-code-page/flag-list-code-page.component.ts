@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { FlagDefinition } from '@myrmidon/cadmus-core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-flag-list-code-page',
@@ -18,7 +19,8 @@ export class FlagListCodePageComponent {
     flagListQuery: FlagListQuery,
     private _flagListService: FlagListService,
     private _shopService: CadmusShopAssetService,
-    private _snackbar: MatSnackBar
+    private _snackbar: MatSnackBar,
+    private _router: Router
   ) {
     this.data$ = flagListQuery.selectAll();
   }
@@ -37,5 +39,6 @@ export class FlagListCodePageComponent {
     this._snackbar.open('Flags saved', 'OK', {
       duration: 1500,
     });
+    this._router.navigate(['/profile'], { queryParams: { step: 2 } });
   }
 }
