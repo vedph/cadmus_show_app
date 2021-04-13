@@ -14,3 +14,6 @@ cadmus-running-count {
   justify-items: start;
   align-items: start;
 }
+.tbar {
+  margin-top: 8px;
+}

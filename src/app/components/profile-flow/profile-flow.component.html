@@ -5,23 +5,49 @@
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <mat-vertical-stepper (selectionChange)="onStepperSelectionChange($event)">
+    <mat-vertical-stepper
+      [selectedIndex]="initialIndex"
+      (selectionChange)="onStepperSelectionChange($event)"
+    >
+      <!-- facets -->
       <mat-step label="facets">
         <h2>Items Facets</h2>
         <div class="pnc">
-          <p>Define the parts for each type of item.</p>
+          <p>
+            Define the parts for each type of item. A facet lists all the parts
+            an item can (or should) contain.
+          </p>
           <cadmus-running-count
             *ngIf="counts[0]"
             [params]="{ start: 0, end: counts[0], interval: 20, increment: 1 }"
           ></cadmus-running-count>
         </div>
-        <div>
-          <button mat-stroked-button matStepperNext>
+        <div class="tbar">
+          <a
+            type="button"
+            mat-stroked-button
+            matTooltip="Edit or import facets code"
+            routerLink="/facets-code"
+          >
+            <mat-icon>code</mat-icon>
+            code
+          </a>
+          <a
+            type="button"
+            mat-stroked-button
+            matTooltip="Visually edit facets"
+            routerLink="/facets-list"
+          >
+            <mat-icon>mouse</mat-icon>
+            visual
+          </a>
+          <button type="button" mat-stroked-button matStepperNext>
             <mat-icon>skip_next</mat-icon>
             next
           </button>
         </div>
       </mat-step>
+      <!-- flags -->
       <mat-step label="flags">
         <h2>Items Flags</h2>
         <div class="pnc">
@@ -35,17 +61,36 @@
             [params]="{ start: 0, end: counts[1], interval: 20, increment: 1 }"
           ></cadmus-running-count>
         </div>
-        <div>
-          <button mat-stroked-button matStepperPrevious>
+        <div class="tbar">
+          <a
+            type="button"
+            mat-stroked-button
+            matTooltip="Edit or import flags code"
+            routerLink="/flags-code"
+          >
+            <mat-icon>code</mat-icon>
+            code
+          </a>
+          <a
+            type="button"
+            mat-stroked-button
+            matTooltip="Visually edit flags"
+            routerLink="/flags-list"
+          >
+            <mat-icon>mouse</mat-icon>
+            visual
+          </a>
+          <button type="button" mat-stroked-button matStepperPrevious>
             <mat-icon>skip_previous</mat-icon>
             back
           </button>
-          <button mat-stroked-button matStepperNext>
+          <button type="button" mat-stroked-button matStepperNext>
             <mat-icon>skip_next</mat-icon>
             next
           </button>
         </div>
       </mat-step>
+      <!-- thesauri -->
       <mat-step label="thesauri">
         <h2>Thesauri</h2>
         <div class="pnc">
@@ -58,7 +103,25 @@
             [params]="{ start: 0, end: counts[2], interval: 10, increment: 1 }"
           ></cadmus-running-count>
         </div>
-        <div>
+        <div class="tbar">
+          <button
+            type="button"
+            mat-stroked-button
+            matTooltip="Edit or import thesauri code"
+            routerLink="/thes-code"
+          >
+            <mat-icon>code</mat-icon>
+            code
+          </button>
+          <button
+            type="button"
+            mat-stroked-button
+            matTooltip="Visually edit thesauri"
+            routerLink="/thes-list"
+          >
+            <mat-icon>mouse</mat-icon>
+            visual
+          </button>
           <button mat-stroked-button matStepperPrevious>
             <mat-icon>skip_previous</mat-icon>
             back
