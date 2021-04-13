@@ -7,6 +7,10 @@ cadmus-running-count {
   border-radius: 20px;
   border: 4px solid #7cbdd6;
 }
+.head-icon {
+  vertical-align: middle;
+  margin-right: 8px;
+}
 .pnc {
   display: grid;
   grid-template-columns: 200px 200px;
