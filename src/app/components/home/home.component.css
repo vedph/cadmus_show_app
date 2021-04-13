@@ -1,8 +1,14 @@
+#container {
+  background-image: url("/assets/img/cadmus.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+}
 .card {
   min-height: 400px;
   background-color: skyblue;
   border-radius: 24px;
   padding: 20px;
+  opacity: 0.85;
   color: white;
   text-align: center;
   font-size: 32pt;
