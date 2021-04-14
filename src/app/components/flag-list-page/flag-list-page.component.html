@@ -5,6 +5,9 @@
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <cadmus-flag-list [flags]="(flags$ | async) || []"></cadmus-flag-list>
+    <cadmus-flag-list
+      [flags]="(flags$ | async) || []"
+      (flagsChange)="onFlagsChange($event)"
+    ></cadmus-flag-list>
   </mat-card-content>
 </mat-card>
