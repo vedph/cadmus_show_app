@@ -4,83 +4,95 @@
       <h2>Thesaurus Editor</h2>
     </mat-card-title>
     <mat-card-subtitle>
-      <h3>{{id}}</h3>
+      <h3>{{ id }}</h3>
     </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <div>
-      <!-- filter -->
-      <form [formGroup]="form" (submit)="applyFilter()">
-        <mat-form-field style="width: 6em">
-          <input matInput [formControl]="idOrValue" placeholder="ID/value" />
-        </mat-form-field>
+    <!-- form -->
+    <form [formGroup]="form" (submit)="save()">
+      <div>
+        <mat-checkbox [formControl]="alias">alias</mat-checkbox>
         &nbsp;
-        <mat-form-field
-          *ngIf="parentIds$ | async as parentIds"
-          style="width: 8em"
-        >
-          <mat-select [formControl]="parentId" placeholder="parentId">
-            <mat-option *ngFor="let e of parentIds" [value]="e.id">{{
-              e.value
-            }}</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <button
-          type="submit"
-          mat-icon-button
-          color="primary"
-          matTooltip="Apply filters"
-        >
-          <mat-icon>check_circle</mat-icon>
-        </button>
-        <!-- togglers -->
-        <button
-          type="button"
-          mat-icon-button
-          (click)="expandAll()"
-          matTooltip="Expand all"
-        >
-          <mat-icon>unfold_more</mat-icon>
-        </button>
-        <button
-          type="button"
-          mat-icon-button
-          (click)="collapseAll()"
-          matTooltip="Collapse all"
-        >
-          <mat-icon>unfold_less</mat-icon>
-        </button>
-      </form>
-    </div>
+        <cadmus-thesaurus-lookup
+          *ngIf="alias?.value"
+          style="display: inline-block"
+          [initialValue]="targetId?.value"
+          label="target ID"
+          (entryChange)="onTargetIdChange($event)"
+        ></cadmus-thesaurus-lookup>
+      </div>
+      <div *ngIf="!alias.value">
+        <!-- filter form -->
+        <form [formGroup]="filterForm" (submit)="applyFilter()">
+          <mat-form-field style="width: 6em">
+            <input matInput [formControl]="idOrValue" placeholder="ID/value" />
+          </mat-form-field>
+          &nbsp;
+          <mat-form-field
+            *ngIf="parentIds$ | async as parentIds"
+            style="width: 8em"
+          >
+            <mat-select [formControl]="parentId" placeholder="parent ID">
+              <mat-option *ngFor="let e of parentIds" [value]="e.id">{{
+                e.value
+              }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <button
+            type="submit"
+            mat-icon-button
+            color="primary"
+            matTooltip="Apply filters"
+          >
+            <mat-icon>check_circle</mat-icon>
+          </button>
+          <!-- togglers -->
+          <button
+            type="button"
+            mat-icon-button
+            (click)="expandAll()"
+            matTooltip="Expand all"
+          >
+            <mat-icon>unfold_more</mat-icon>
+          </button>
+          <button
+            type="button"
+            mat-icon-button
+            (click)="collapseAll()"
+            matTooltip="Collapse all"
+          >
+            <mat-icon>unfold_less</mat-icon>
+          </button>
+        </form>
 
-    <!-- list -->
-    <div *ngIf="page$ | async as page">
-      <cadmus-thesaurus-node
-        *ngFor="let node of page.data"
-        [node]="node"
-        (nodeChange)="addNode($event)"
-        (signal)="onSignal($event)"
-      ></cadmus-thesaurus-node>
+        <!-- list -->
+        <div *ngIf="page$ | async as page">
+          <cadmus-thesaurus-node
+            *ngFor="let node of page.data"
+            [node]="node"
+            (nodeChange)="addNode($event)"
+            (signal)="onSignal($event)"
+          ></cadmus-thesaurus-node>
 
-      <!-- paginator -->
-      <mat-paginator
-        *ngIf="page.data?.length"
-        gdArea="pagination"
-        gdAlignColumns="center"
-        gdAlignRows="start"
-        [length]="page.total"
-        [pageSize]="pageSize?.value"
-        [pageSizeOptions]="[20, 50, 75, 100]"
-        [pageIndex]="page.currentPage - 1"
-        [showFirstLastButtons]="true"
-        (page)="pageChanged($event)"
-      ></mat-paginator>
-    </div>
+          <!-- paginator -->
+          <mat-paginator
+            *ngIf="page.data?.length"
+            gdArea="pagination"
+            gdAlignColumns="center"
+            gdAlignRows="start"
+            [length]="page.total"
+            [pageSize]="pageSize?.value"
+            [pageSizeOptions]="[20, 50, 75, 100]"
+            [pageIndex]="page.currentPage - 1"
+            [showFirstLastButtons]="true"
+            (page)="pageChanged($event)"
+          ></mat-paginator>
+        </div>
+      </div>
+      <button type="submit" color="primary" mat-stroked-button>
+        <mat-icon>check_circle</mat-icon>
+        save
+      </button>
+    </form>
   </mat-card-content>
-  <mat-card-actions>
-    <button type="button" color="primary" mat-stroked-button>
-      <mat-icon>check_circle</mat-icon>
-      save
-    </button>
-  </mat-card-actions>
 </mat-card>

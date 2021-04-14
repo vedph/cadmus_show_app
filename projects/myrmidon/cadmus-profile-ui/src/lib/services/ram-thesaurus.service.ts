@@ -1,10 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Thesaurus } from '@myrmidon/cadmus-core';
-import {
-  ThesaurusFilter,
-} from '@myrmidon/cadmus-profile-core';
+import { ThesaurusFilter } from '@myrmidon/cadmus-profile-core';
 import { DataPage } from '@myrmidon/cadmus-shop-core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
+
+/**
+ * An entry returned by the lookup function of the
+ * RamThesaurusService.
+ */
+export interface LookupThesaurusEntry {
+  id: string;
+  targetId?: string;
+}
 
 /**
  * This service keeps in RAM all the thesauri from a project.
@@ -132,5 +139,33 @@ export class RamThesaurusService {
       return of(true);
     }
     return of(false);
+  }
+
+  /**
+   * Lookup the IDs of the first limit thesauri matching filter.
+   *
+   * @param filter The thesaurus ID filter.
+   * @param includeAlias True to include aliases.
+   * @param limit The maximum number of matches to return.
+   * @returns Thesauri lookup data.
+   */
+  public lookup(
+    filter: string,
+    includeAlias = false,
+    limit = 10
+  ): Observable<LookupThesaurusEntry[]> {
+    return of(
+      this._thesauri$.value
+        .filter((t) =>
+          includeAlias
+            ? t.id.includes(filter)
+            : !t.targetId && t.id.includes(filter)
+        )
+        .map((t) => {
+          return { id: t.id, targetId: t.targetId };
+        })
+        .sort((a, b) => a.id.localeCompare(b.id))
+        .slice(0, limit)
+    );
   }
 }

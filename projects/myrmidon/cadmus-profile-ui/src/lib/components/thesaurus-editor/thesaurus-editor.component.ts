@@ -1,16 +1,22 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PaginationResponse, PaginatorPlugin } from '@datorama/akita';
 import { ThesaurusEntry } from '@myrmidon/cadmus-core';
-import {
-  ComponentSignal,
-} from '@myrmidon/cadmus-profile-core';
+import { ComponentSignal } from '@myrmidon/cadmus-profile-core';
 import { DataPage } from '@myrmidon/cadmus-shop-core';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { debounceTime, map, startWith, switchMap, tap } from 'rxjs/operators';
-import { RamThesaurusService } from '../../services/ram-thesaurus.service';
+import {
+  LookupThesaurusEntry,
+  RamThesaurusService,
+} from '../../services/ram-thesaurus.service';
 import {
   ThesaurusNode,
   ThesaurusNodeFilter,
@@ -37,10 +43,14 @@ export class ThesaurusEditorComponent implements OnInit {
   public filter$: BehaviorSubject<ThesaurusNodeFilter>;
   public pageSize: FormControl;
 
+  public alias: FormControl;
+  public targetId: FormControl;
+  public form: FormGroup;
+
   // filter
   public parentId: FormControl;
   public idOrValue: FormControl;
-  public form: FormGroup;
+  public filterForm: FormGroup;
 
   public parentIds$: Observable<ThesaurusEntry[]>;
   public page$: Observable<PaginationResponse<ThesaurusNode>> | undefined;
@@ -50,7 +60,6 @@ export class ThesaurusEditorComponent implements OnInit {
     public paginator: PaginatorPlugin<ThesaurusEditorState>,
     private _nodesService: ThesaurusNodesService,
     private _thesService: RamThesaurusService,
-    private _router: Router,
     private _route: ActivatedRoute,
     formBuilder: FormBuilder
   ) {
@@ -68,10 +77,21 @@ export class ThesaurusEditorComponent implements OnInit {
     this.pageSize = formBuilder.control(20);
     // the list of all the parent nodes IDs in the edited thesaurus
     this.parentIds$ = this._nodesService.selectParentIds();
+    // thesaurus form
+    this.alias = formBuilder.control(false);
+    this.targetId = formBuilder.control(null, [
+      Validators.required,
+      Validators.maxLength(50),
+      Validators.pattern(/^[a-zA-Z0-9][-_a-zA-Z0-9]*$/),
+    ]);
+    this.form = formBuilder.group({
+      alias: this.alias,
+      targetId: this.targetId,
+    });
     // filter form
     this.idOrValue = formBuilder.control(null);
     this.parentId = formBuilder.control(null);
-    this.form = formBuilder.group({
+    this.filterForm = formBuilder.group({
       idOrValue: this.idOrValue,
       parentId: this.parentId,
     });
@@ -91,7 +111,7 @@ export class ThesaurusEditorComponent implements OnInit {
         thesaurus = {
           id: this.id || 'new-thesaurus',
           language: 'en',
-          entries: []
+          entries: [],
         };
       }
       const entries: ThesaurusEntry[] = [];
@@ -185,6 +205,10 @@ export class ThesaurusEditorComponent implements OnInit {
     this.loadThesaurus();
   }
 
+  public onTargetIdChange(targetId: LookupThesaurusEntry | null): void {
+    this.targetId.setValue(targetId?.id);
+  }
+
   public pageChanged(event: PageEvent): void {
     // https://material.angular.io/components/paginator/api
     this.paginator.setPage(event.pageIndex + 1);
@@ -232,5 +256,9 @@ export class ThesaurusEditorComponent implements OnInit {
         break;
       // TODO
     }
+  }
+
+  public save(): void {
+    // TODO
   }
 }

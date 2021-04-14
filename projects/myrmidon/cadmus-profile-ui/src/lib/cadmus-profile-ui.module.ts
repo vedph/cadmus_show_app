@@ -26,6 +26,7 @@ import { PartInfoComponent } from './components/part-info/part-info.component';
 import { ThesaurusListComponent } from './components/thesaurus-list/thesaurus-list.component';
 import { ThesaurusFilterComponent } from './components/thesaurus-filter/thesaurus-filter.component';
 import { ThesaurusEditorComponent } from './components/thesaurus-editor/thesaurus-editor.component';
+import { ThesaurusLookupComponent } from './components/thesaurus-lookup/thesaurus-lookup.component';
 import { ThesaurusNodeComponent } from './components/thesaurus-node/thesaurus-node.component';
 
 @NgModule({
@@ -43,6 +44,7 @@ import { ThesaurusNodeComponent } from './components/thesaurus-node/thesaurus-no
     ThesaurusEditorComponent,
     ThesaurusFilterComponent,
     ThesaurusListComponent,
+    ThesaurusLookupComponent,
     ThesaurusNodeComponent,
   ],
   imports: [
@@ -73,6 +75,7 @@ import { ThesaurusNodeComponent } from './components/thesaurus-node/thesaurus-no
     ThesaurusEditorComponent,
     ThesaurusListComponent,
     ThesaurusFilterComponent,
+    ThesaurusLookupComponent,
     ThesaurusNodeComponent,
   ],
 })
