@@ -139,11 +139,15 @@ export class PartDefinitionEditorComponent implements OnInit {
   }
 
   public onPartModelPicked(model: CadmusModel): void {
-    this.typeId.setValue(model.id);
+    if (model) {
+      this.typeId.setValue(model.id);
+    }
   }
 
   public onFragmentModelPicked(model: CadmusModel): void {
-    this.roleId.setValue(model.id);
+    if (model) {
+      this.roleId.setValue(model.id);
+    }
   }
 
   public cancel(): void {

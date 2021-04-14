@@ -126,7 +126,7 @@ export class FacetListService {
   }
 
   /**
-   * Maps the received grouping facet into part definitions.
+   * Maps a grouping facet into a flat list of part definitions.
    *
    * @param facet The grouping facet.
    * @returns The part definitions.

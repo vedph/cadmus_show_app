@@ -1,13 +1,22 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { FacetDefinition } from '@myrmidon/cadmus-core';
+import { FacetDefinition, PartDefinition } from '@myrmidon/cadmus-core';
 import { CadmusShopAssetService } from '@myrmidon/cadmus-shop-asset';
 import { CadmusModel } from '@myrmidon/cadmus-shop-core';
+import { FacetListService } from './store/facet-list.service';
 import { GroupedPartDefinition, GroupingFacet } from './store/facet-list.store';
 
 @Component({
@@ -16,6 +25,8 @@ import { GroupedPartDefinition, GroupingFacet } from './store/facet-list.store';
   styleUrls: ['./facet-list.component.css'],
 })
 export class FacetListComponent implements OnInit {
+  private _editedPartFacetId: string | undefined;
+
   /**
    * The facets.
    */
@@ -23,6 +34,10 @@ export class FacetListComponent implements OnInit {
   public facets: GroupingFacet[];
   @Output()
   public facetsChange: EventEmitter<GroupingFacet[]>;
+
+  @ViewChild('info', { read: ElementRef, static: false }) public infoElemRef:
+    | ElementRef<HTMLElement>
+    | undefined;
 
   public editedFacet: FacetDefinition | undefined;
   public tabIndex: number;
@@ -34,6 +49,7 @@ export class FacetListComponent implements OnInit {
 
   constructor(
     formBuilder: FormBuilder,
+    private _facetListService: FacetListService,
     private _shopService: CadmusShopAssetService
   ) {
     this.facets = [];
@@ -120,16 +136,76 @@ export class FacetListComponent implements OnInit {
   }
 
   public onEditPart(part: GroupedPartDefinition): void {
-    // TODO edit part definition
+    this._editedPartFacetId = part.facetId;
+    this.editedPart = part;
+    this.tabIndex = 2;
+  }
+
+  public onPartChange(part: PartDefinition): void {
+    // part has changed, we must refresh the whole facet
+    const facetIndex = this.facets.findIndex(
+      (f) => f.id === this._editedPartFacetId
+    );
+    if (facetIndex === -1) {
+      return;
+    }
+    // get part definitions from it
+    const parts = this._facetListService.getPartDefsFromGroupingFacet(
+      this.facets[facetIndex]
+    );
+    // replace the edited part definition
+    const i = parts.findIndex(
+      (p) =>
+        p.typeId === part.typeId &&
+        ((!p.roleId && !part.roleId) || p.roleId === part.roleId)
+    );
+    if (i === -1) {
+      return;
+    }
+    parts.splice(i, 1, part);
+
+    // get the facet including the part which was edited
+    // and replace its groups with updated groups
+    const gf = this.facets[facetIndex];
+    const facet: FacetDefinition = {
+      id: gf.id,
+      label: gf.label,
+      colorKey: gf.colorKey || '',
+      description: gf.description,
+      partDefinitions: parts,
+    };
+
+    // replace the old facet with the updated one
+    const newFacet: GroupingFacet = {
+      ...gf,
+      groups: this._facetListService.getFacetPartGroups(facet),
+    };
+    this.facets.splice(
+      facetIndex,
+      1,
+      Object.assign(this.facets[facetIndex], newFacet)
+    );
+
+    this.onPartEditorClose();
+  }
+
+  public onPartEditorClose(): void {
+    this._editedPartFacetId = undefined;
+    this.tabIndex = 0;
+    this.editedPart = undefined;
   }
 
   public onViewPartInfo(part: GroupedPartDefinition): void {
     const fragment = part.roleId?.startsWith('fr.');
-    const typeId = fragment? part.roleId : part.typeId;
+    const typeId = fragment ? part.roleId : part.typeId;
     this._shopService.getModel(typeId, fragment).subscribe((m) => {
       if (m) {
         this._shopService.getModelDetails(m).subscribe((dm) => {
           this.currentModel = dm;
+          this.infoElemRef?.nativeElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+          });
         });
       }
     });

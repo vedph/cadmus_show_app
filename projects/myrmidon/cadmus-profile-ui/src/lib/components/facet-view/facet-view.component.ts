@@ -13,12 +13,10 @@ import {
 } from '@angular/forms';
 import { MatChipEvent } from '@angular/material/chips';
 import { deepCopy, PartDefinition } from '@myrmidon/cadmus-core';
-import {
-  ColorService,
-  DialogService,
-} from '@myrmidon/cadmus-show-ui';
+import { ColorService, DialogService } from '@myrmidon/cadmus-show-ui';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
+import { PartDefinitionVmService } from '../../services/part-definition-vm.service';
 import {
   GroupedPartDefinition,
   GroupingFacet,
@@ -87,7 +85,8 @@ export class FacetViewComponent implements OnInit {
   constructor(
     private _formBuilder: FormBuilder,
     private _dialogService: DialogService,
-    private _colorService: ColorService
+    private _colorService: ColorService,
+    private _partService: PartDefinitionVmService
   ) {
     this.editable = true;
     this.editFacetMetadata = new EventEmitter<GroupingFacet>();
@@ -144,34 +143,6 @@ export class FacetViewComponent implements OnInit {
     this.dirty = false;
   }
 
-  public buildPartId(groupIndex: number, part: PartDefinition): string {
-    const sb: string[] = [];
-    sb.push(groupIndex.toString());
-    sb.push(':');
-    sb.push(part.typeId);
-    if (part.roleId) {
-      sb.push('@');
-      sb.push(part.roleId);
-    }
-    return sb.join('');
-  }
-
-  private parsePartId(
-    id: string
-  ): { groupIndex: number; typeId: string; roleId?: string } {
-    const ci = id.indexOf(':');
-    const groupIndex = +id.substr(0, ci);
-
-    const ai = id.indexOf('@');
-    const typeId = id.substr(ci + 1, ai > -1 ? ai - 1 - ci : undefined);
-    const roleId = ai > -1 ? id.substr(ai + 1) : undefined;
-    return {
-      groupIndex: groupIndex,
-      typeId: typeId,
-      roleId: roleId,
-    };
-  }
-
   public addGroup(item?: PartDefinitionGroup): void {
     if (!this._facet) {
       return;
@@ -225,13 +196,17 @@ export class FacetViewComponent implements OnInit {
     return this._colorService.getContrastColor(color || '');
   }
 
+  public buildScopedPartId(groupIndex: number, part: PartDefinition): string {
+    return this._partService.buildScopedPartId(groupIndex, part);
+  }
+
   private findPart(
     id: string
   ): { groupIndex: number; partIndex: number } | null {
     if (!this._facet) {
       return null;
     }
-    const parsedId = this.parsePartId(id);
+    const parsedId = this._partService.parseScopedPartId(id);
 
     const i = this._facet.groups[parsedId.groupIndex].partDefinitions.findIndex(
       (d) => {

@@ -12,10 +12,9 @@
         >typeId too long</mat-error
       >
     </mat-form-field>
-  </div>
-  <div>
-    <cadmus-model-lookup
-      label="part model"
+    &nbsp;
+    <cadmus-model-lookup style="display: inline-block"
+      label="part lookup"
       (itemChange)="onPartModelPicked($event)"
     ></cadmus-model-lookup>
   </div>
@@ -49,11 +48,10 @@
         >role ID too long</mat-error
       >
     </mat-form-field>
-  </div>
-  <div>
-    <cadmus-model-lookup
+    &nbsp;
+    <cadmus-model-lookup style="display: inline-block"
       [fragment]="true"
-      label="fragment model"
+      label="fragment lookup"
       (itemChange)="onFragmentModelPicked($event)"
     ></cadmus-model-lookup>
   </div>

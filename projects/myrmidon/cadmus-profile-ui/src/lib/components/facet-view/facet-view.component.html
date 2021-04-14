@@ -68,15 +68,6 @@
               <mat-icon>format_paint</mat-icon>
             </button>
           </form>
-          <!-- edit part -->
-          <button
-            mat-icon-button
-            matTooltip="Edit the selected part"
-            [disabled]="!selectedPartId"
-            (click)="editSelectedPart()"
-          >
-            <mat-icon>edit_location_alt</mat-icon>
-          </button>
           <!-- save facet -->
           <button
             type="button"
@@ -181,6 +172,14 @@
                   </button>
                   <button
                     mat-icon-button
+                    matTooltip="Edit the selected part"
+                    [disabled]="!selectedPartId"
+                    (click)="editSelectedPart()"
+                  >
+                    <mat-icon>edit_location_alt</mat-icon>
+                  </button>
+                  <button
+                    mat-icon-button
                     matTooltip="Add a part to this group"
                     color="primary"
                   >
@@ -201,9 +200,11 @@
                   *ngFor="let d of facet.groups[i].partDefinitions"
                   cdkDrag
                   class="f-chip"
-                  [class.f-chip-selected]="buildPartId(i, d) === selectedPartId"
-                  [id]="buildPartId(i, d)"
-                  [value]="buildPartId(i, d)"
+                  [class.f-chip-selected]="
+                    buildScopedPartId(i, d) === selectedPartId
+                  "
+                  [id]="buildScopedPartId(i, d)"
+                  [value]="buildScopedPartId(i, d)"
                   [removable]="editable"
                   [style.background-color]="
                     d.colorKey ? '#' + d.colorKey : 'transparent'

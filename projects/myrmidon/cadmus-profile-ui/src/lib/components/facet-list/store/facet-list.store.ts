@@ -23,6 +23,7 @@ export interface GroupedPartDefinitionId {
  * A part definition inside a group.
  */
 export interface GroupedPartDefinition extends PartDefinition {
+  facetId?: string;
   scopedId: string;
 }
 
