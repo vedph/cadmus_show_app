@@ -110,7 +110,7 @@ export class FacetListService {
    * @param facets The facets definitions.
    */
   public set(facets: FacetDefinition[]): void {
-    // map each facet into a GroupingFacet in the store's state
+    // map each facet into a GroupingFacet
     const groupingFacets = facets.map((d, i) => {
       return {
         id: d.id,

@@ -163,7 +163,7 @@ export class FacetViewComponent implements OnInit {
     const groupIndex = +id.substr(0, ci);
 
     const ai = id.indexOf('@');
-    const typeId = id.substr(ci + 1, ai > -1 ? ai - ci : undefined);
+    const typeId = id.substr(ci + 1, ai > -1 ? ai - 1 - ci : undefined);
     const roleId = ai > -1 ? id.substr(ai + 1) : undefined;
     return {
       groupIndex: groupIndex,

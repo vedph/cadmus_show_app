@@ -66,6 +66,33 @@
         "groupKey": "letter",
         "sortKey": "ep-text-info",
         "isRequired": true
+      },
+      {
+        "typeId": "it.vedph.token-text",
+        "roleId": "base-text",
+        "name": "text",
+        "description": "Token-based text.",
+        "colorKey": "31AB54",
+        "groupKey": "text",
+        "sortKey": "text"
+      },
+      {
+        "typeId": "it.vedph.token-text-layer",
+        "roleId": "fr.it.vedph.comment",
+        "name": "comments",
+        "description": "Comments on text.",
+        "colorKey": "F8D040",
+        "groupKey": "text",
+        "sortKey": "text-comments"
+      },
+      {
+        "typeId": "it.vedph.token-text-layer",
+        "roleId": "fr.it.vedph.apparatus",
+        "name": "apparatus",
+        "description": "Critical apparatus.",
+        "colorKey": "D4E0A4",
+        "groupKey": "text",
+        "sortKey": "text-apparatus"
       }
     ]
   },

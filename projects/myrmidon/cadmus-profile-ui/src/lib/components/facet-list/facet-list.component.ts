@@ -119,9 +119,13 @@ export class FacetListComponent implements OnInit {
     this.editedFacet = undefined;
   }
 
+  public onEditPart(part: GroupedPartDefinition): void {
+    // TODO edit part definition
+  }
+
   public onViewPartInfo(part: GroupedPartDefinition): void {
-    // TODO fragments
-    this._shopService.getModel(part.typeId, false).subscribe((m) => {
+    const typeId = part.roleId?.startsWith('fr.')? part.roleId : part.typeId;
+    this._shopService.getModel(typeId, false).subscribe((m) => {
       if (m) {
         this._shopService.getModelDetails(m).subscribe((dm) => {
           this.currentModel = dm;
