@@ -10,7 +10,10 @@ import { ThesaurusListStore } from './thesaurus-list.store';
   providedIn: 'root',
 })
 export class ThesaurusListService {
-  constructor(private _store: ThesaurusListStore, private _query: ThesaurusListQuery) {}
+  constructor(
+    private _store: ThesaurusListStore,
+    private _query: ThesaurusListQuery
+  ) {}
 
   /**
    * Set all the thesauri.

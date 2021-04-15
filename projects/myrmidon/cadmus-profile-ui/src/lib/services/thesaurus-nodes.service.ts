@@ -344,11 +344,14 @@ export class ThesaurusNodesService {
     if (deleted.lastSibling) {
       // if it was also the 1st, we have removed all the children
       if (deleted.ordinal === 1) {
+        // clear the children in the parent node
         const parentIndex = this.getParentIndex(nodes, i);
-        nodes.splice(parentIndex, 1, {
-          ...nodes[parentIndex],
-          hasChildren: false,
-        });
+        if (parentIndex > -1) {
+          nodes.splice(parentIndex, 1, {
+            ...nodes[parentIndex],
+            hasChildren: false,
+          });
+        }
       } else {
         // else the previous one, if any, is now the last sibling
         if (nodes[i - 1].parentId === deleted.parentId) {
