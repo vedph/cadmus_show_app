@@ -10,9 +10,14 @@
       </a>
     </p>
     <p>
-      A Cadmus profile tells the editor about your data architecture. There are
-      three main areas here:
+      A Cadmus profile tells the editor about your data architecture. In this
+      site you can use the <a routerLink="profile/flow">profile builder</a> to
+      create a full profile, either visually or textually. You can pick and
+      combine the desired models (listed in the <a routerLink="shop">shop</a>),
+      define the optional flags for your records, and all the taxonomies useful
+      for your conceptual domain.
     </p>
+    <p>There are three main areas in a profile:</p>
     <ol>
       <li>
         <strong>facets</strong> define the data models ("parts") you pick to
@@ -221,6 +226,12 @@
       Alternatively, the thesaurus can be just an alias targeting another,
       existing thesaurus. In this case it has no <code>entries</code>, but only
       a single <code>targetId</code> with the ID of the thesaurus it refers to.
+    </p>
+    <p>
+      Finally, note that the ID <code>model-types</code> is conventionally
+      reserved to provide a mapping between machine-targeted type IDs (like
+      <code>it.vedph.categories</code>) and their human-friendly names (like
+      <code>categories</code>).
     </p>
   </article>
 </div>
