@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -32,6 +39,8 @@ import {
 import { THESAURUS_EDITOR_PAGINATOR } from './store/thesaurus-editor.paginator';
 import { ThesaurusEditorState } from './store/thesaurus-editor.store';
 
+const THES_ID_PATTERN = '^[a-zA-Z0-9][-_a-zA-Z0-9]*$';
+
 /**
  * Thesaurus editor. This edits a thesaurus per pages. Each page
  * contains a set of thesauri nodes, which are a representation of
@@ -62,8 +71,10 @@ export class ThesaurusEditorComponent implements OnInit {
   public filter$: BehaviorSubject<ThesaurusNodeFilter>;
   public pageSize: FormControl;
 
+  // thesaurus form
   public alias: FormControl;
   public targetId: FormControl;
+  public entryCount: FormControl;
   public form: FormGroup;
 
   // filter
@@ -93,14 +104,12 @@ export class ThesaurusEditorComponent implements OnInit {
     this.parentIds$ = this._nodesService.selectParentIds();
     // thesaurus form
     this.alias = formBuilder.control(false);
-    this.targetId = formBuilder.control(null, [
-      Validators.required,
-      Validators.maxLength(50),
-      Validators.pattern(/^[a-zA-Z0-9][-_a-zA-Z0-9]*$/),
-    ]);
+    this.targetId = formBuilder.control(null);
+    this.entryCount = formBuilder.control(0, Validators.min(1));
     this.form = formBuilder.group({
       alias: this.alias,
       targetId: this.targetId,
+      entryCount: this.entryCount,
     });
     // filter form
     this.idOrValue = formBuilder.control(null);
@@ -111,12 +120,36 @@ export class ThesaurusEditorComponent implements OnInit {
     });
   }
 
+  /**
+   * Update the form's validators according to whether the edited
+   * thesaurus is just an alias or a full thesaurus.
+   */
+  private updateValidators(): void {
+    if (this.alias.value) {
+      // alias: target ID required and valid, no entries
+      this.entryCount.setValidators(null);
+      this.targetId.setValidators([
+        Validators.required,
+        Validators.maxLength(50),
+        Validators.pattern(new RegExp(THES_ID_PATTERN)),
+      ]);
+    } else {
+      // not an alias: entries required, no target ID
+      this.entryCount.setValidators(Validators.min(1));
+      this.targetId.setValidators(null);
+    }
+
+    this.entryCount.updateValueAndValidity();
+    this.targetId.updateValueAndValidity();
+  }
+
   private refresh(): void {
     let n = this._refresh$.value + 1;
     if (n > 100) {
       n = 1;
     }
     this._refresh$.next(n);
+    this.entryCount.setValue(this._nodesService.length);
   }
 
   private loadThesaurus(): void {
@@ -217,6 +250,11 @@ export class ThesaurusEditorComponent implements OnInit {
         return this.getPaginatorResponse(pageNumber, pageSize);
       })
     );
+
+    // change validation according to whether this is an alias
+    this.alias.valueChanges.subscribe((_) => {
+      this.updateValidators();
+    });
 
     // load
     this.loadThesaurus();

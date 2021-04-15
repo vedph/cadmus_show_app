@@ -39,6 +39,13 @@ export class ThesaurusNodesService {
   private _nodes$: BehaviorSubject<ThesaurusNode[]>;
   private _parentIds$: BehaviorSubject<ThesaurusEntry[]>;
 
+  /**
+   * The number of nodes in this set.
+   */
+  public get length(): number {
+    return this._nodes$.value.length;
+  }
+
   constructor() {
     this._nodes$ = new BehaviorSubject<ThesaurusNode[]>([]);
     this._parentIds$ = new BehaviorSubject<ThesaurusEntry[]>([]);

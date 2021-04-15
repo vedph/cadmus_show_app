@@ -94,7 +94,12 @@
         close
       </button>
       &nbsp;
-      <button type="submit" color="primary" mat-stroked-button>
+      <button
+        type="submit"
+        color="primary"
+        mat-stroked-button
+        [disabled]="form.invalid"
+      >
         <mat-icon>check_circle</mat-icon>
         save
       </button>

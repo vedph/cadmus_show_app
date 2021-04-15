@@ -32,6 +32,7 @@ import { FlagListPageComponent } from './components/flag-list-page/flag-list-pag
 import { FlagListCodePageComponent } from './components/flag-list-code-page/flag-list-code-page.component';
 import { ModelListComponent } from '@myrmidon/cadmus-shop-ui';
 import { ProfileFlowComponent } from './components/profile-flow/profile-flow.component';
+import { ProfileHomeComponent } from './components/profile-home/profile-home.component';
 import { ShopPageComponent } from './components/shop-page/shop-page.component';
 import { ThesaurusListPageComponent } from './components/thesaurus-list-page/thesaurus-list-page.component';
 import { ThesaurusListCodePageComponent } from './components/thesaurus-list-code-page/thesaurus-list-code-page.component';
@@ -47,6 +48,7 @@ import { ThesaurusEditComponent } from './components/thesaurus-edit/thesaurus-ed
     FlagListPageComponent,
     FlagListCodePageComponent,
     ProfileFlowComponent,
+    ProfileHomeComponent,
     ThesaurusEditComponent,
     ThesaurusListPageComponent,
     ThesaurusListCodePageComponent,
@@ -72,7 +74,8 @@ import { ThesaurusEditComponent } from './components/thesaurus-edit/thesaurus-ed
       [
         { path: '', redirectTo: 'home', pathMatch: 'full' },
         { path: 'home', component: HomeComponent },
-        { path: 'profile', component: ProfileFlowComponent },
+        { path: 'profile', component: ProfileHomeComponent },
+        { path: 'profile/flow', component: ProfileFlowComponent },
         { path: 'docs/complex-models', component: ComplexModelsComponent },
         { path: 'shop', component: ShopPageComponent },
         { path: 'models', component: ModelListComponent },
