@@ -6,13 +6,21 @@ import {
   Validators,
 } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
-import { ActivatedRoute, Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute } from '@angular/router';
 import { PaginationResponse, PaginatorPlugin } from '@datorama/akita';
-import { ThesaurusEntry } from '@myrmidon/cadmus-core';
+import { Thesaurus, ThesaurusEntry } from '@myrmidon/cadmus-core';
 import { ComponentSignal } from '@myrmidon/cadmus-profile-core';
 import { DataPage } from '@myrmidon/cadmus-shop-core';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { debounceTime, map, startWith, switchMap, tap } from 'rxjs/operators';
+import {
+  debounceTime,
+  map,
+  startWith,
+  switchMap,
+  take,
+  tap,
+} from 'rxjs/operators';
 import {
   LookupThesaurusEntry,
   RamThesaurusService,
@@ -61,6 +69,7 @@ export class ThesaurusEditorComponent implements OnInit {
     private _nodesService: ThesaurusNodesService,
     private _thesService: RamThesaurusService,
     private _route: ActivatedRoute,
+    private _snackbar: MatSnackBar,
     formBuilder: FormBuilder
   ) {
     // get the edited thesaurus ID from the route
@@ -254,11 +263,39 @@ export class ThesaurusEditorComponent implements OnInit {
         this._nodesService.add(node);
         this.refresh();
         break;
-      // TODO
     }
   }
 
   public save(): void {
-    // TODO
+    if (this.form.invalid) {
+      return;
+    }
+    const thesaurus: Thesaurus = {
+      id: this.id,
+      language: 'en',
+      entries: [],
+    };
+
+    if (this.alias.value) {
+      if (!this.targetId.value) {
+        return;
+      }
+      thesaurus.targetId = this.targetId.value;
+    } else {
+      thesaurus.entries = this._nodesService.getNodes().map((n) => {
+        return {
+          id: n.id,
+          value: n.value,
+        };
+      });
+    }
+    this._thesService
+      .addThesaurus(thesaurus)
+      .pipe(take(1))
+      .subscribe((t) => {
+        this._snackbar.open('Thesaurus saved', 'OK', {
+          duration: 1500,
+        });
+      });
   }
 }
