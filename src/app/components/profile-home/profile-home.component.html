@@ -55,5 +55,28 @@
       The profile is a simple JSON text with an object for each of these three
       areas: <code>facets</code>, <code>flags</code>, and <code>thesauri</code>.
     </p>
+    <h3>Facets</h3>
+    <h3>Flags</h3>
+    <h3>Thesauri</h3>
+    <p>Each thesaurus is an object with these properties:</p>
+    <ul>
+      <li>
+        <code>id</code>: the thesaurus unique ID, suffixed with
+        <code>@</code> followed by its ISO639-2 language code; e.g.
+        <code>languages@en</code>.
+      </li>
+      <li>
+        <code>entries</code>: an array of entries, each being an object having:
+        <ul>
+          <li><code>id</code>: the entry ID.</li>
+          <li><code>value</code>: the entry value.</li>
+        </ul>
+      </li>
+    </ul>
+    <p>
+      Alternatively, the thesaurus can be just an alias targeting another,
+      existing thesaurus. In this case it has no <code>entries</code>, but only
+      a single <code>targetId</code> with the ID of the thesaurus it refers to.
+    </p>
   </article>
 </div>
