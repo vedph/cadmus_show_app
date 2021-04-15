@@ -53,6 +53,6 @@ export class FacetListCodePageComponent {
     this._snackbar.open('Facets saved', 'OK', {
       duration: 1500,
     });
-    this._router.navigate(['/profile'], { queryParams: { step: 1 } });
+    this._router.navigate(['/profile/flow'], { queryParams: { step: 1 } });
   }
 }

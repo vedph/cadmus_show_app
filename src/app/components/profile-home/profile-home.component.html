@@ -50,20 +50,102 @@
         to represent any entry from your taxonomies.
       </li>
     </ol>
-    <h2>Syntax</h2>
     <p>
       The profile is a simple JSON text with an object for each of these three
       areas: <code>facets</code>, <code>flags</code>, and <code>thesauri</code>.
     </p>
-    <h3>Facets</h3>
-    <h3>Flags</h3>
-    <h3>Thesauri</h3>
-    <p>Each thesaurus is an object with these properties:</p>
+    <p>
+      There are two ways for editing these JSON-based resources: one lets you
+      directly work with the JSON code at once; another provides a visual
+      editing experience. You can freely swap between them at any time. While
+      code editing is always the same, the visual editing experience differs
+      according to the type of resource being edited. You can just go ahead and
+      <a routerLink="/profile/flow">have a try</a>, or keep reading for more
+      information.
+    </p>
+
+    <h2>Facets</h2>
+    <p>Each facet is an object with the following properties:</p>
+    <ul>
+      <li><code>id</code>: a unique arbitrarily defined ID.</li>
+      <li><code>label</code>: the label assigned to the facet.</li>
+      <li><code>description</code>: a short description of the facet.</li>
+      <li><code>colorKey</code>: the color assigned to the facet.</li>
+      <li>1 or more part definitions.</li>
+    </ul>
+    <p>Each part definition has the following properties:</p>
+    <ul>
+      <li>
+        <code>typeId</code>: the part's type ID. This comes from the backend
+        part's model. Each part has its own, unique type ID.
+      </li>
+      <li>
+        <code>roleId</code>: the optional role ID for the part. This is either
+        used to distinguish several specialized usages of the same part (e.g. 2
+        note parts, one for a generic note and another for a translation), or to
+        define different types of text layers. In the latter case this ID always
+        starts with prefix <code>fr.</code>.
+      </li>
+      <li><code>name</code>: a name for the part.</li>
+      <li><code>description</code>: a short description of the part.</li>
+      <li>
+        <code>isRequired</code>: true if the part is required in its item.
+      </li>
+      <li><code>colorKey</code>: the color assigned to the part.</li>
+      <li>
+        <code>groupKey</code>: the group the part belongs to. Grouping parts is
+        a way of better organizing them, and only affects their presentation in
+        the frontend.
+      </li>
+      <li>
+        <code>sortKey</code>: the sort key used to order the list of parts in
+        each group. This can be any string, and is used as a key for sorting. So
+        for instance you might just want to set this property to values like
+        <code>A</code>, <code>B</code>, etc. to specify your desired sort order.
+        Just like colors, names, descriptions, etc. this is a purely
+        presentational property which belongs to the frontend only.
+      </li>
+    </ul>
+    <h2>Flags</h2>
+    <p>Each flag is an object with the following properties:</p>
+    <ul>
+      <li>
+        <code>id</code>: a numeric unique ID. This is a bitvalue in an unsigned
+        32-bits integer. In visual editing, you just use a number from 1 to 32.
+      </li>
+      <li><code>label</code>: the label assigned to the flag.</li>
+      <li><code>description</code>: a short description of the flag.</li>
+      <li><code>colorKey</code>: the color assigned to the flag.</li>
+    </ul>
+    <p>Here are two sample flags:</p>
+    <code>
+      <pre>
+[
+  &#123;
+    "id": 1,
+    "label": "complete",
+    "description": "The item is complete.",
+    "colorKey": "F0B880"
+  &#125;,
+  &#123;
+    "id": 2,
+    "label": "revised",
+    "description": "The item has been revised.",
+    "colorKey": "80F080"
+    &#125;
+]
+</pre
+      >
+    </code>
+    <h2>Thesauri</h2>
+    <p>Each thesaurus is an object with the following properties:</p>
     <ul>
       <li>
         <code>id</code>: the thesaurus unique ID, suffixed with
         <code>@</code> followed by its ISO639-2 language code; e.g.
-        <code>languages@en</code>.
+        <code>languages@en</code>. NOTE: currently, the language suffix is not
+        used in the frontend implementation, so just leave it to english
+        (<code>en</code>), whatever the language you use in your entry's value.
       </li>
       <li>
         <code>entries</code>: an array of entries, each being an object having:
@@ -73,6 +155,68 @@
         </ul>
       </li>
     </ul>
+    <p>Here is a sample thesaurus with a couple of entries:</p>
+    <code>
+      <pre>
+&#123;
+  "id": "languages@en",
+  "entries": [
+    &#123;
+      "id": "lat",
+      "value": "Latin"
+    &#125;,
+    &#123;
+      "id": "grc",
+      "value": "Greek"
+      &#125;
+  ]
+&#125;
+</pre
+      >
+    </code>
+    <p>
+      You can also have hierarchical thesauri, where entries are arranged in a
+      hierarchy represented with dots in their IDs. For instance, say you want
+      to represent this simple 2-levels hierarchy:
+    </p>
+    <ul>
+      <li>
+        language:
+        <ul>
+          <li>language: phonology</li>
+          <li>language: morphology</li>
+          <li>language: syntax</li>
+        </ul>
+      </li>
+    </ul>
+    <p>
+      You can use a dot in each entry to represent three children entries under
+      the same node:
+    </p>
+    <code>
+      <pre>
+[
+  &#123; "id": "lang.pho", "value": "language: phonology" &#125;,
+  &#123; "id": "lang.mor", "value": "language: morphology" &#125;,
+  &#123; "id": "lang.syn", "value": "language: syntax" &#125;
+]
+</pre
+      >
+    </code>
+    <p>
+      Should you want to have a selectable entry also for the parent
+      <code>language</code> node, you just have to add another one, like this:
+    </p>
+    <code>
+      <pre>
+[
+  &#123; "id": "lang.-", "value": "language" &#125;,
+  ... other entries as above ...
+]
+</pre
+      >
+    </code>
+    <p>There is no limit to the level of nesting in such thesauri.</p>
     <p>
       Alternatively, the thesaurus can be just an alias targeting another,
       existing thesaurus. In this case it has no <code>entries</code>, but only

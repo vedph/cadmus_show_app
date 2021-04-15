@@ -45,6 +45,6 @@ export class ThesaurusListCodePageComponent {
     this._snackbar.open('Thesauri saved', 'OK', {
       duration: 1500,
     });
-    this._router.navigate(['/profile'], { queryParams: { step: 3 } });
+    this._router.navigate(['/profile/flow'], { queryParams: { step: 3 } });
   }
 }

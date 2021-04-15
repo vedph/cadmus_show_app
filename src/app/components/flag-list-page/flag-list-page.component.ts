@@ -36,6 +36,6 @@ export class FlagListPageComponent implements OnInit {
     this._snackbar.open('Flags saved', 'OK', {
       duration: 1500,
     });
-    this._router.navigate(['/profile'], { queryParams: { step: 2 } });
+    this._router.navigate(['/profile/flow'], { queryParams: { step: 2 } });
   }
 }
