@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ThesaurusEntry } from '@myrmidon/cadmus-core';
-import {
-  DataPage,
-  PagingOptions,
-} from '@myrmidon/cadmus-shop-core';
+import { DataPage, PagingOptions } from '@myrmidon/cadmus-shop-core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 
 /**
@@ -371,6 +368,68 @@ export class ThesaurusNodesService {
 
     // save
     this._nodes$.next(nodes);
+  }
+
+  private swapSiblings(id: string, up: boolean): void {
+    const nodes = [...this._nodes$.value];
+    const index = nodes.findIndex((n) => n.id === id);
+    if (index === -1) {
+      return;
+    }
+    const node = nodes[index];
+
+    if (up) {
+      // must not be 1st sibling
+      if (node.ordinal === 1) {
+        return;
+      }
+      // adjust and move
+      node.ordinal--;
+      nodes[index - 1].ordinal++;
+      if (nodes[index].lastSibling) {
+        nodes[index].lastSibling = undefined;
+        nodes[index - 1].lastSibling = true;
+      }
+      nodes.splice(index, 1);
+      nodes.splice(index - 1, 0, node);
+    } else {
+      // must not be last sibling
+      if (node.lastSibling) {
+        return;
+      }
+      // adjust and move
+      node.ordinal++;
+      nodes[index + 1].ordinal--;
+      if (nodes[index + 1].lastSibling) {
+        nodes[index].lastSibling = true;
+        nodes[index + 1].lastSibling = undefined;
+      }
+      nodes.splice(index, 1);
+      nodes.splice(index + 1, 0, node);
+    }
+
+    // refresh
+    this._nodes$.next(nodes);
+  }
+
+  /**
+   * Move the node with the specified ID up in the list of its
+   * sibling nodes.
+   *
+   * @param id The ID of the node to be moved.
+   */
+  public moveUp(id: string): void {
+    this.swapSiblings(id, true);
+  }
+
+  /**
+   * Move the node with the specified ID down in the list of its
+   * sibling nodes.
+   *
+   * @param id The ID of the node to be moved.
+   */
+  public moveDown(id: string): void {
+    this.swapSiblings(id, false);
   }
 
   /**

@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -56,6 +56,9 @@ export class ThesaurusEditorComponent implements OnInit {
     this.loadThesaurus();
   }
 
+  @Output()
+  public editorClose: EventEmitter<any>;
+
   public filter$: BehaviorSubject<ThesaurusNodeFilter>;
   public pageSize: FormControl;
 
@@ -85,6 +88,7 @@ export class ThesaurusEditorComponent implements OnInit {
     });
     this._refresh$ = new BehaviorSubject(0);
     this.pageSize = formBuilder.control(20);
+    this.editorClose = new EventEmitter<any>();
     // the list of all the parent nodes IDs in the edited thesaurus
     this.parentIds$ = this._nodesService.selectParentIds();
     // thesaurus form
@@ -267,13 +271,32 @@ export class ThesaurusEditorComponent implements OnInit {
         this._nodesService.add(node);
         this.refresh();
         break;
+      case 'move-up':
+        this._nodesService.moveUp(node.id);
+        this.refresh();
+        break;
+      case 'move-down':
+        this._nodesService.moveDown(node.id);
+        this.refresh();
+        break;
+      case 'delete':
+        this._nodesService.delete(node.id);
+        this.refresh();
+        break;
     }
+  }
+
+  public close(): void {
+    this.editorClose.emit();
   }
 
   public save(): void {
     if (this.form.invalid) {
       return;
     }
+
+    // create a thesaurus from current nodes/target ID
+    // and save it via the thesaurus service
     const thesaurus: Thesaurus = {
       id: this._id as string,
       language: 'en',
