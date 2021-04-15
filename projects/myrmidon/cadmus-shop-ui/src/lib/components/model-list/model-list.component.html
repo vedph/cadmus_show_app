@@ -4,7 +4,13 @@
       <mat-icon>shopping_bag</mat-icon>
       Models
     </mat-card-title>
-    <mat-checkbox [formControl]="fragment">fragments</mat-checkbox>
+    <mat-form-field style="width: 90px">
+      <mat-select [formControl]="fragment" placeholder="type">
+        <mat-option [value]="false">part</mat-option>
+        <mat-option [value]="true">fragment</mat-option>
+      </mat-select>
+    </mat-form-field>
+
   </mat-card-header>
   <mat-card-content
     gdAreas="spinner spinner | filters list | . paginator |  info info"
