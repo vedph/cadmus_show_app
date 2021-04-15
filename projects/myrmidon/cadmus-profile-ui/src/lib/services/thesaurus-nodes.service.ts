@@ -28,6 +28,9 @@ export interface ThesaurusNodeFilter extends PagingOptions {
 
 /**
  * Service used to edit a set of thesauri nodes.
+ * This set corresponds to the entries from a single thesaurus,
+ * and is thus used in thesaurus editing. The set includes all
+ * the entries, even if editing happens in a paged context.
  */
 @Injectable({
   providedIn: 'root',
@@ -45,18 +48,18 @@ export class ThesaurusNodesService {
    * Get an observable with the full list of nodes.
    */
   public selectNodes(): Observable<ThesaurusNode[]> {
-    return this._nodes$;
+    return this._nodes$.asObservable();
   }
 
   /**
    * Get an observable with the list of unique parent IDs.
    */
   public selectParentIds(): Observable<ThesaurusEntry[]> {
-    return this._parentIds$;
+    return this._parentIds$.asObservable();
   }
 
   /**
-   * Get the full list of nodes.
+   * Get a full list of all the nodes in this set.
    *
    * @returns An array of nodes.
    */
@@ -65,7 +68,7 @@ export class ThesaurusNodesService {
   }
 
   /**
-   * Get the list of unique parent IDs.
+   * Get the list of unique parent node IDs in this set.
    */
   public getParentIds(): ThesaurusEntry[] {
     return [...this._parentIds$.value];
@@ -142,24 +145,31 @@ export class ThesaurusNodesService {
    * @param nodes The nodes.
    */
   private assignOrdinals(nodes: ThesaurusNode[]): void {
+    // map to hold the last sibling of each set of children
     const map = new Map<string, { ordinal: number; node: ThesaurusNode }>();
 
-    for (let i = 0; i < nodes.length; i++) {
-      const node = nodes[i];
+    nodes.forEach((node) => {
       const key = node.parentId || '';
+      // if it's the 1st child of key, set ordinal=1
       if (!map.has(key)) {
         map.set(key, {
           ordinal: 1,
           node: node,
         });
       } else {
-        const old = map.get(key) as { ordinal: number; node: ThesaurusNode };
-        old.ordinal++;
+        // else increment the ordinal for the current key
+        const existing = map.get(key) as {
+          ordinal: number;
+          node: ThesaurusNode;
+        };
+        existing.ordinal++;
+        existing.node = node;
       }
+      // assign the ordinal to the node
       node.ordinal = map.get(key)?.ordinal as number;
-    }
+    });
 
-    // set last flags
+    // set the last-sibling flags
     for (let v of map.values()) {
       v.node.lastSibling = true;
     }
@@ -301,20 +311,10 @@ export class ThesaurusNodesService {
       }
     }
 
-    // save
+    // save (we must refresh parent IDs as we might have an updated node
+    // changing the original hierarchy)
+    this.refreshParentIds();
     this._nodes$.next(nodes);
-
-    // if the added node has a parent, update the parent IDs if required
-    if (
-      node.parentId &&
-      !this._parentIds$.value.find((entry) => entry.id === node.parentId)
-    ) {
-      const parent = this._nodes$.value.find((p) => p.id === node.parentId);
-      this._parentIds$.next([
-        ...this._parentIds$.value,
-        { id: node.parentId, value: parent?.value || node.parentId },
-      ]);
-    }
   }
 
   private getParentIndex(nodes: ThesaurusNode[], childIndex: number): number {
@@ -367,6 +367,7 @@ export class ThesaurusNodesService {
     }
 
     // save
+    this.refreshParentIds();
     this._nodes$.next(nodes);
   }
 
@@ -376,7 +377,8 @@ export class ThesaurusNodesService {
     if (index === -1) {
       return;
     }
-    const node = nodes[index];
+    const node = { ...nodes[index] };
+    let sibling: ThesaurusNode;
 
     if (up) {
       // must not be 1st sibling
@@ -384,28 +386,28 @@ export class ThesaurusNodesService {
         return;
       }
       // adjust and move
+      sibling = { ...nodes[index - 1] };
       node.ordinal--;
-      nodes[index - 1].ordinal++;
-      if (nodes[index].lastSibling) {
-        nodes[index].lastSibling = undefined;
-        nodes[index - 1].lastSibling = true;
+      sibling.ordinal++;
+      if (node.lastSibling) {
+        node.lastSibling = undefined;
+        sibling.lastSibling = true;
       }
-      nodes.splice(index, 1);
-      nodes.splice(index - 1, 0, node);
+      nodes.splice(index - 1, 2, node, sibling);
     } else {
       // must not be last sibling
       if (node.lastSibling) {
         return;
       }
       // adjust and move
+      sibling = { ...nodes[index + 1] };
       node.ordinal++;
-      nodes[index + 1].ordinal--;
-      if (nodes[index + 1].lastSibling) {
-        nodes[index].lastSibling = true;
-        nodes[index + 1].lastSibling = undefined;
+      sibling.ordinal--;
+      if (sibling.lastSibling) {
+        node.lastSibling = true;
+        sibling.lastSibling = undefined;
       }
-      nodes.splice(index, 1);
-      nodes.splice(index + 1, 0, node);
+      nodes.splice(index, 2, sibling, node);
     }
 
     // refresh

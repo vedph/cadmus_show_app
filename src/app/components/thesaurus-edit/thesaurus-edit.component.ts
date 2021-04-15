@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-thesaurus-edit',
@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 export class ThesaurusEditComponent implements OnInit {
   public id: string;
 
-  constructor(private _route: ActivatedRoute) {
+  constructor(private _route: ActivatedRoute, private _router: Router) {
     // get the edited thesaurus ID from the route
     this.id = this._route.snapshot.params.id;
     if (this.id === 'new') {
@@ -18,4 +18,8 @@ export class ThesaurusEditComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  public onEditorClose(): void {
+    this._router.navigate(['/thes-list']);
+  }
 }
