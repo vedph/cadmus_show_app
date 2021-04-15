@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -7,7 +7,6 @@ import {
 } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute } from '@angular/router';
 import { PaginationResponse, PaginatorPlugin } from '@datorama/akita';
 import { Thesaurus, ThesaurusEntry } from '@myrmidon/cadmus-core';
 import { ComponentSignal } from '@myrmidon/cadmus-profile-core';
@@ -45,9 +44,18 @@ import { ThesaurusEditorState } from './store/thesaurus-editor.store';
   styleUrls: ['./thesaurus-editor.component.css'],
 })
 export class ThesaurusEditorComponent implements OnInit {
+  private _id: string | undefined;
   private _refresh$: BehaviorSubject<number>;
 
-  public id: string;
+  @Input()
+  public get id(): string | undefined {
+    return this._id;
+  }
+  public set id(value: string | undefined) {
+    this._id = value === 'new' ? '' : value;
+    this.loadThesaurus();
+  }
+
   public filter$: BehaviorSubject<ThesaurusNodeFilter>;
   public pageSize: FormControl;
 
@@ -68,16 +76,9 @@ export class ThesaurusEditorComponent implements OnInit {
     public paginator: PaginatorPlugin<ThesaurusEditorState>,
     private _nodesService: ThesaurusNodesService,
     private _thesService: RamThesaurusService,
-    private _route: ActivatedRoute,
     private _snackbar: MatSnackBar,
     formBuilder: FormBuilder
   ) {
-    // get the edited thesaurus ID from the route
-    this.id = this._route.snapshot.params.id;
-    if (this.id === 'new') {
-      this.id = '';
-    }
-
     this.filter$ = new BehaviorSubject<ThesaurusNodeFilter>({
       pageNumber: 1,
       pageSize: 20,
@@ -115,7 +116,10 @@ export class ThesaurusEditorComponent implements OnInit {
   }
 
   private loadThesaurus(): void {
-    this._thesService.get(this.id).subscribe((thesaurus) => {
+    if (!this._id) {
+      return;
+    }
+    this._thesService.get(this._id).subscribe((thesaurus) => {
       if (!thesaurus) {
         thesaurus = {
           id: this.id || 'new-thesaurus',
@@ -271,7 +275,7 @@ export class ThesaurusEditorComponent implements OnInit {
       return;
     }
     const thesaurus: Thesaurus = {
-      id: this.id,
+      id: this._id as string,
       language: 'en',
       entries: [],
     };

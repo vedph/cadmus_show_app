@@ -35,6 +35,7 @@ import { ProfileFlowComponent } from './components/profile-flow/profile-flow.com
 import { ShopPageComponent } from './components/shop-page/shop-page.component';
 import { ThesaurusListPageComponent } from './components/thesaurus-list-page/thesaurus-list-page.component';
 import { ThesaurusListCodePageComponent } from './components/thesaurus-list-code-page/thesaurus-list-code-page.component';
+import { ThesaurusEditComponent } from './components/thesaurus-edit/thesaurus-edit.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { ThesaurusListCodePageComponent } from './components/thesaurus-list-code
     FlagListPageComponent,
     FlagListCodePageComponent,
     ProfileFlowComponent,
+    ThesaurusEditComponent,
     ThesaurusListPageComponent,
     ThesaurusListCodePageComponent,
     ShopPageComponent,
@@ -80,7 +82,7 @@ import { ThesaurusListCodePageComponent } from './components/thesaurus-list-code
         { path: 'flags-list', component: FlagListPageComponent },
         { path: 'thes-code', component: ThesaurusListCodePageComponent },
         { path: 'thes-list', component: ThesaurusListPageComponent },
-        { path: 'thes/:id', component: ThesaurusEditorComponent },
+        { path: 'thes/:id', component: ThesaurusEditComponent },
         { path: '**', component: HomeComponent },
       ],
       {
