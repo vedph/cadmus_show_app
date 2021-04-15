@@ -1,11 +1,59 @@
 <div>
-  <div id="banner"></div>
-</div>
-<article>
   <h1>Cadmus Profile</h1>
-  <p>
-    <a mat-flat-button color="primary" routerLink="/profile/flow">
-      <mat-icon>build</mat-icon> goto builder
-    </a>
-  </p>
-</article>
+  <div>
+    <div id="banner"></div>
+  </div>
+  <article>
+    <p>
+      <a mat-flat-button color="primary" routerLink="/profile/flow">
+        <mat-icon>build</mat-icon> goto builder
+      </a>
+    </p>
+    <p>
+      A Cadmus profile tells the editor about your data architecture. There are
+      three main areas here:
+    </p>
+    <ol>
+      <li>
+        <strong>facets</strong> define the data models ("parts") you pick to
+        compose your records ("items"). A facet lists all the parts an item can
+        (or should) contain. This is not a closed set: you are free to change it
+        at any moment, even when you have already entered data. In this way,
+        each item has an open, composable data model, resulting from the sum of
+        the parts it contains. Further, the same parts can be reused across
+        different items, and the same happens for their editing UI.
+      </li>
+      <li>
+        <strong>flags</strong> are optional tags which can be attached to any
+        item, in order to mark it in some meaningful way for editing purposes.
+        For instance, you might want to mark an item as to be revised, or
+        completed, revised, etc. You can define up to 32 such flags, giving each
+        a name, a color, and a description.
+      </li>
+      <li>
+        <strong>thesauri</strong> are taxonomies you can share across any number
+        of data models (parts), wherever users need to pick a value from a
+        predefined set. These taxonomies can be simple, "flat" lists, or rather
+        hierarchical. In both cases, they are defined as objects having each a
+        list of entries. Each entry has an arbitrarily assigned ID, which must
+        be unique whithin that object; and a text value to be displayed to the
+        user. For instance, you might have a list of languages to pick from,
+        like English, French, Italian, etc.: in this case, your thesaurus would
+        have its own ID, e.g. <code>languages</code>, plus a number of entries
+        like <code>eng</code>=<code>English</code>,
+        <code>fre</code>=<code>French</code>,
+        <code>ita</code>=<code>Italian</code>, etc. Here I'm using
+        <a href="https://en.wikipedia.org/wiki/ISO_639-3" target="_blank"
+          >ISO 639 for language codes</a
+        >, but IDs are totally arbitrary, even if it's suggested to use some
+        standard when available. These are the IDs which will be used internally
+        to represent any entry from your taxonomies.
+      </li>
+    </ol>
+    <h2>Syntax</h2>
+    <p>
+      The profile is a simple JSON text with an object for each of these three
+      areas: <code>facets</code>, <code>flags</code>, and <code>thesauri</code>.
+    </p>
+  </article>
+</div>
