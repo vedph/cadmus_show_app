@@ -28,7 +28,7 @@ import {
 import { THESAURUS_EDITOR_PAGINATOR } from './store/thesaurus-editor.paginator';
 import { ThesaurusEditorState } from './store/thesaurus-editor.store';
 
-const THES_ID_PATTERN = '^[a-zA-Z0-9][.-_a-zA-Z0-9]*$';
+const THES_ID_PATTERN = '^[a-zA-Z0-9][.-_a-zA-Z0-9]*@[a-z]{2}$';
 
 /**
  * Thesaurus editor. This edits a thesaurus per pages. Each page
@@ -207,7 +207,7 @@ export class ThesaurusEditorComponent implements OnInit {
       ),
       this.filter$.pipe(
         startWith(undefined),
-        // clear the cache when filters changed
+        // clear the cache when filters change
         tap((_) => {
           this.paginator.clearCache();
         })
