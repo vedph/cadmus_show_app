@@ -13,24 +13,13 @@ import {
   Validators,
 } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { PaginationResponse, PaginatorPlugin } from '@datorama/akita';
 import { Thesaurus, ThesaurusEntry } from '@myrmidon/cadmus-core';
 import { ComponentSignal } from '@myrmidon/cadmus-profile-core';
 import { DataPage } from '@myrmidon/cadmus-shop-core';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import {
-  debounceTime,
-  map,
-  startWith,
-  switchMap,
-  take,
-  tap,
-} from 'rxjs/operators';
-import {
-  LookupThesaurusEntry,
-  RamThesaurusService,
-} from '../../services/ram-thesaurus.service';
+import { debounceTime, map, startWith, switchMap, tap } from 'rxjs/operators';
+import { LookupThesaurusEntry } from '../../services/ram-thesaurus.service';
 import {
   ThesaurusNode,
   ThesaurusNodeFilter,
@@ -39,7 +28,7 @@ import {
 import { THESAURUS_EDITOR_PAGINATOR } from './store/thesaurus-editor.paginator';
 import { ThesaurusEditorState } from './store/thesaurus-editor.store';
 
-const THES_ID_PATTERN = '^[a-zA-Z0-9][-_a-zA-Z0-9]*$';
+const THES_ID_PATTERN = '^[a-zA-Z0-9][.-_a-zA-Z0-9]*$';
 
 /**
  * Thesaurus editor. This edits a thesaurus per pages. Each page
@@ -53,17 +42,20 @@ const THES_ID_PATTERN = '^[a-zA-Z0-9][-_a-zA-Z0-9]*$';
   styleUrls: ['./thesaurus-editor.component.css'],
 })
 export class ThesaurusEditorComponent implements OnInit {
-  private _id: string | undefined;
+  private _thesaurus: Thesaurus | undefined;
   private _refresh$: BehaviorSubject<number>;
 
   @Input()
-  public get id(): string | undefined {
-    return this._id;
+  public get thesaurus(): Thesaurus | undefined {
+    return this._thesaurus;
   }
-  public set id(value: string | undefined) {
-    this._id = value === 'new' ? '' : value;
-    this.loadThesaurus();
+  public set thesaurus(value: Thesaurus | undefined) {
+    this._thesaurus = value;
+    this.updateForm(value);
   }
+
+  @Output()
+  public thesaurusChange: EventEmitter<Thesaurus>;
 
   @Output()
   public editorClose: EventEmitter<any>;
@@ -72,6 +64,7 @@ export class ThesaurusEditorComponent implements OnInit {
   public pageSize: FormControl;
 
   // thesaurus form
+  public id: FormControl;
   public alias: FormControl;
   public targetId: FormControl;
   public entryCount: FormControl;
@@ -89,8 +82,6 @@ export class ThesaurusEditorComponent implements OnInit {
     @Inject(THESAURUS_EDITOR_PAGINATOR)
     public paginator: PaginatorPlugin<ThesaurusEditorState>,
     private _nodesService: ThesaurusNodesService,
-    private _thesService: RamThesaurusService,
-    private _snackbar: MatSnackBar,
     formBuilder: FormBuilder
   ) {
     this.filter$ = new BehaviorSubject<ThesaurusNodeFilter>({
@@ -99,14 +90,21 @@ export class ThesaurusEditorComponent implements OnInit {
     });
     this._refresh$ = new BehaviorSubject(0);
     this.pageSize = formBuilder.control(20);
+    this.thesaurusChange = new EventEmitter<Thesaurus>();
     this.editorClose = new EventEmitter<any>();
     // the list of all the parent nodes IDs in the edited thesaurus
     this.parentIds$ = this._nodesService.selectParentIds();
     // thesaurus form
+    this.id = formBuilder.control(null, [
+      Validators.required,
+      Validators.maxLength(50),
+      Validators.pattern(new RegExp(THES_ID_PATTERN)),
+    ]);
     this.alias = formBuilder.control(false);
     this.targetId = formBuilder.control(null);
     this.entryCount = formBuilder.control(0, Validators.min(1));
     this.form = formBuilder.group({
+      id: this.id,
       alias: this.alias,
       targetId: this.targetId,
       entryCount: this.entryCount,
@@ -150,27 +148,6 @@ export class ThesaurusEditorComponent implements OnInit {
     }
     this._refresh$.next(n);
     this.entryCount.setValue(this._nodesService.length);
-  }
-
-  private loadThesaurus(): void {
-    if (!this._id) {
-      return;
-    }
-    this._thesService.get(this._id).subscribe((thesaurus) => {
-      if (!thesaurus) {
-        thesaurus = {
-          id: this.id || 'new-thesaurus',
-          language: 'en',
-          entries: [],
-        };
-      }
-      const entries: ThesaurusEntry[] = [];
-      thesaurus.entries.forEach((e: ThesaurusEntry) => {
-        entries.push({ ...e });
-      });
-      this._nodesService.importEntries(entries);
-      this.refresh();
-    });
   }
 
   private getRequest(
@@ -257,7 +234,9 @@ export class ThesaurusEditorComponent implements OnInit {
     });
 
     // load
-    this.loadThesaurus();
+    if (this._thesaurus) {
+      this.updateForm(this._thesaurus);
+    }
   }
 
   public onTargetIdChange(targetId: LookupThesaurusEntry | null): void {
@@ -324,27 +303,34 @@ export class ThesaurusEditorComponent implements OnInit {
     }
   }
 
-  public close(): void {
-    this.editorClose.emit();
-  }
-
-  public save(): void {
-    if (this.form.invalid) {
+  private updateForm(thesaurus?: Thesaurus): void {
+    if (!thesaurus) {
+      this.form.reset();
       return;
     }
+    this.id.setValue(thesaurus.id);
+    this.targetId.setValue(thesaurus.targetId);
+    this.entryCount.setValue(thesaurus.entries?.length || 0);
+    this.alias.setValue(thesaurus.targetId? true : false);
+    this.form.markAsPristine();
 
-    // create a thesaurus from current nodes/target ID
-    // and save it via the thesaurus service
+    // nodes
+    const entries: ThesaurusEntry[] = [];
+    thesaurus.entries.forEach((e: ThesaurusEntry) => {
+      entries.push({ ...e });
+    });
+    this._nodesService.importEntries(entries);
+    this.refresh();
+  }
+
+  private getThesaurus(): Thesaurus {
     const thesaurus: Thesaurus = {
-      id: this._id as string,
+      id: this.id.value,
       language: 'en',
       entries: [],
     };
 
     if (this.alias.value) {
-      if (!this.targetId.value) {
-        return;
-      }
       thesaurus.targetId = this.targetId.value;
     } else {
       thesaurus.entries = this._nodesService.getNodes().map((n) => {
@@ -354,13 +340,18 @@ export class ThesaurusEditorComponent implements OnInit {
         };
       });
     }
-    this._thesService
-      .addThesaurus(thesaurus)
-      .pipe(take(1))
-      .subscribe((t) => {
-        this._snackbar.open('Thesaurus saved', 'OK', {
-          duration: 1500,
-        });
-      });
+
+    return thesaurus;
+  }
+
+  public close(): void {
+    this.editorClose.emit();
+  }
+
+  public save(): void {
+    if (this.form.invalid) {
+      return;
+    }
+    this.thesaurusChange.emit(this.getThesaurus());
   }
 }

@@ -1,4 +1,5 @@
 <cadmus-thesaurus-editor
-  [id]="id"
+  [thesaurus]="thesaurus"
+  (thesaurusChange)="onThesaurusChange($event)"
   (editorClose)="onEditorClose()"
 ></cadmus-thesaurus-editor>

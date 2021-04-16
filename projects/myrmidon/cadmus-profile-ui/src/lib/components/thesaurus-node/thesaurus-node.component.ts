@@ -60,7 +60,7 @@ export class ThesaurusNodeComponent implements OnInit {
     this.id = formBuilder.control(null, [
       Validators.required,
       Validators.maxLength(50),
-      Validators.pattern(/^[a-zA-Z0-9][-_a-zA-Z0-9]*$/),
+      Validators.pattern(/^[a-zA-Z0-9][.-_a-zA-Z0-9]*$/),
     ]);
     this.value = formBuilder.control(null, [
       Validators.required,
