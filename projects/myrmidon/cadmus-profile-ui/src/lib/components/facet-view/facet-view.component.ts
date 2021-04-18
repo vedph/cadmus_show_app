@@ -126,6 +126,18 @@ export class FacetViewComponent implements OnInit {
     });
   }
 
+  private addGroupControl(group?: PartDefinitionGroup): void {
+    const g = this.getGroupControl(group);
+    this._subs.push(
+      g.valueChanges.subscribe((_) => {
+        this.dirty = true;
+      })
+    );
+    this.groups.controls.push(g);
+    this.groups.markAsDirty();
+    this.dirty = true;
+  }
+
   private refresh(): void {
     // reset group keys
     this.groups.clear();
@@ -138,13 +150,7 @@ export class FacetViewComponent implements OnInit {
     // add groups from the facet
     if (this._facet) {
       for (let group of this._facet.groups) {
-        const g = this.getGroupControl(group);
-        this._subs.push(
-          g.valueChanges.subscribe((_) => {
-            this.dirty = true;
-          })
-        );
-        this.groups.controls.push(g);
+        this.addGroupControl(group);
       }
     }
 
@@ -157,9 +163,7 @@ export class FacetViewComponent implements OnInit {
     if (!this._facet) {
       return;
     }
-    this.groups.push(this.getGroupControl(group));
-    this.groups.markAsDirty();
-    this.dirty = true;
+    this.addGroupControl(group);
   }
 
   public addNewGroup(): void {
@@ -168,18 +172,15 @@ export class FacetViewComponent implements OnInit {
     }
     const group = {
       id: 'new-group',
-      partDefinitions: []
+      partDefinitions: [],
     };
     this.facet.groups.push(group);
-    this.addGroup(group);
+    this.addGroupControl(group);
   }
 
   public removeGroup(index: number): void {
     this._dialogService
-      .confirm(
-        'Confirmation',
-        `Delete group ${this.groups.at(index).value}?`
-      )
+      .confirm('Confirmation', `Delete group ${this.groups.at(index).value}?`)
       .pipe(take(1))
       .subscribe((yes) => {
         if (yes) {
@@ -196,9 +197,14 @@ export class FacetViewComponent implements OnInit {
     if (index < 1 || !this._facet) {
       return;
     }
+    const sub = this._subs[index];
+    this._subs[index] = this._subs[index - 1];
+    this._subs[index - 1] = sub;
+
     const ctl = this.groups.controls[index];
     this.groups.removeAt(index);
     this.groups.insert(index - 1, ctl);
+
     this.groups.markAsDirty();
     this.dirty = true;
   }
@@ -207,9 +213,14 @@ export class FacetViewComponent implements OnInit {
     if (index + 1 >= this.groups.length || !this._facet) {
       return;
     }
+    const sub = this._subs[index];
+    this._subs[index] = this._subs[index + 1];
+    this._subs[index + 1] = sub;
+
     const ctl = this.groups.controls[index];
     this.groups.removeAt(index);
     this.groups.insert(index + 1, ctl);
+
     this.groups.markAsDirty();
     this.dirty = true;
   }
