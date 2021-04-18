@@ -25,6 +25,8 @@ import {
 
 /**
  * A facet's view, with its groups and parts.
+ * This component receives a GroupingFacet, and when editable allows users
+ * editing it.
  */
 @Component({
   selector: 'cadmus-facet-view',
@@ -59,19 +61,25 @@ export class FacetViewComponent implements OnInit {
   @Output()
   public editFacetMetadata: EventEmitter<GroupingFacet>;
 
+  /**
+   * Emitted when a part definition edit is requested.
+   */
   @Output()
   public editPart: EventEmitter<GroupedPartDefinition>;
 
+  /**
+   * Emitted when viewing a part's information is requested.
+   */
   @Output()
   public viewPartInfo: EventEmitter<GroupedPartDefinition>;
 
   /**
-   * Emitted when facet is saved.
+   * Emitted when the facet is saved.
    */
   @Output()
   public facetChange: EventEmitter<GroupingFacet>;
 
-  public groupKeys: FormArray;
+  public groups: FormArray;
   public form: FormGroup;
 
   public color: FormControl;
@@ -96,9 +104,9 @@ export class FacetViewComponent implements OnInit {
     this.dirty = false;
     this._subs = [];
     // form
-    this.groupKeys = _formBuilder.array([]);
+    this.groups = _formBuilder.array([]);
     this.form = _formBuilder.group({
-      groupKeys: this.groupKeys,
+      groups: this.groups,
     });
     // color form
     this.color = _formBuilder.control(null, Validators.required);
@@ -120,21 +128,23 @@ export class FacetViewComponent implements OnInit {
 
   private refresh(): void {
     // reset group keys
-    this.groupKeys.clear();
+    this.groups.clear();
+
+    // unsubscribe from all the groups
     for (let i = 0; i < this._subs.length; i++) {
       this._subs[i].unsubscribe();
     }
 
-    // add group keys
+    // add groups from the facet
     if (this._facet) {
-      for (let g of this._facet.groups) {
-        const ctl = this.getGroupControl(g);
+      for (let group of this._facet.groups) {
+        const g = this.getGroupControl(group);
         this._subs.push(
-          ctl.valueChanges.subscribe((_) => {
+          g.valueChanges.subscribe((_) => {
             this.dirty = true;
           })
         );
-        this.groupKeys.controls.push(ctl);
+        this.groups.controls.push(g);
       }
     }
 
@@ -143,28 +153,40 @@ export class FacetViewComponent implements OnInit {
     this.dirty = false;
   }
 
-  public addGroup(item?: PartDefinitionGroup): void {
+  public addGroup(group?: PartDefinitionGroup): void {
     if (!this._facet) {
       return;
     }
-    this.groupKeys.push(this.getGroupControl(item));
-    this.groupKeys.markAsDirty();
+    this.groups.push(this.getGroupControl(group));
+    this.groups.markAsDirty();
     this.dirty = true;
+  }
+
+  public addNewGroup(): void {
+    if (!this.facet?.groups) {
+      return;
+    }
+    const group = {
+      id: 'new-group',
+      partDefinitions: []
+    };
+    this.facet.groups.push(group);
+    this.addGroup(group);
   }
 
   public removeGroup(index: number): void {
     this._dialogService
       .confirm(
         'Confirmation',
-        `Delete group ${this.groupKeys.at(index).value}?`
+        `Delete group ${this.groups.at(index).value}?`
       )
       .pipe(take(1))
       .subscribe((yes) => {
         if (yes) {
-          this.groupKeys.removeAt(index);
+          this.groups.removeAt(index);
           this._subs[index].unsubscribe();
           this._subs.splice(index, 1);
-          this.groupKeys.markAsDirty();
+          this.groups.markAsDirty();
           this.dirty = true;
         }
       });
@@ -174,21 +196,21 @@ export class FacetViewComponent implements OnInit {
     if (index < 1 || !this._facet) {
       return;
     }
-    const ctl = this.groupKeys.controls[index];
-    this.groupKeys.removeAt(index);
-    this.groupKeys.insert(index - 1, ctl);
-    this.groupKeys.markAsDirty();
+    const ctl = this.groups.controls[index];
+    this.groups.removeAt(index);
+    this.groups.insert(index - 1, ctl);
+    this.groups.markAsDirty();
     this.dirty = true;
   }
 
   public moveGroupDown(index: number): void {
-    if (index + 1 >= this.groupKeys.length || !this._facet) {
+    if (index + 1 >= this.groups.length || !this._facet) {
       return;
     }
-    const ctl = this.groupKeys.controls[index];
-    this.groupKeys.removeAt(index);
-    this.groupKeys.insert(index + 1, ctl);
-    this.groupKeys.markAsDirty();
+    const ctl = this.groups.controls[index];
+    this.groups.removeAt(index);
+    this.groups.insert(index + 1, ctl);
+    this.groups.markAsDirty();
     this.dirty = true;
   }
 
@@ -369,8 +391,8 @@ export class FacetViewComponent implements OnInit {
       return;
     }
     // update group IDs from controls
-    for (let i = 0; i < this.groupKeys.length; i++) {
-      this._facet.groups[i].id = (this.groupKeys.at(
+    for (let i = 0; i < this.groups.length; i++) {
+      this._facet.groups[i].id = (this.groups.at(
         i
       ) as FormGroup).controls.id.value?.trim();
     }

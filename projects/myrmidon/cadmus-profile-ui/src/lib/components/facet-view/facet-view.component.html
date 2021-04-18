@@ -11,6 +11,7 @@
         >
           {{ facet?.label }}
         </span>
+        <!-- id -->
         <span class="f-id">
           {{ facet?.id }}
         </span>
@@ -29,6 +30,7 @@
             mat-icon-button
             color="primary"
             matTooltip="Add a new group to this facet"
+            (click)="addNewGroup()"
           >
             <mat-icon>add_circle</mat-icon>
           </button>
@@ -89,10 +91,10 @@
           }}</mat-panel-description>
         </mat-expansion-panel-header>
 
-        <div formArrayName="groupKeys" cdkDropListGroup>
+        <div formArrayName="groups" cdkDropListGroup>
           <mat-card
             *ngFor="
-              let item of groupKeys.controls;
+              let item of groups.controls;
               let i = index;
               let first = first;
               let last = last
@@ -193,7 +195,7 @@
                 cdkDropList
                 class="f-chip-list"
                 cdkDropListOrientation="horizontal"
-                [cdkDropListData]="facet.groups[i].partDefinitions"
+                [cdkDropListData]="facet.groups[i]?.partDefinitions || []"
                 (cdkDropListDropped)="onPartDrop($event)"
               >
                 <mat-chip
