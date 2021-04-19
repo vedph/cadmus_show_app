@@ -31,17 +31,7 @@ export class FacetListService {
    */
   public set(facets: FacetDefinition[]): void {
     // map each facet into a GroupingFacet
-    const groupingFacets = facets.map((d, i) => {
-      return {
-        id: d.id,
-        index: i,
-        label: d.label,
-        description: d.description,
-        colorKey: d.colorKey,
-        groups: this._vmService.getFacetPartGroups(d),
-      };
-    });
-
+    const groupingFacets = this._vmService.getFacetGroups(facets);
     this._store.set(groupingFacets);
   }
 
@@ -185,7 +175,7 @@ export class FacetListService {
     groups[groupIndex].partDefinitions = [
       ...groups[groupIndex].partDefinitions,
       {
-        scopedId: this._vmService.buildPartId({
+        scopedId: this._vmService.buildScopedPartId({
           groupId: groupId,
           typeId: typeId,
         }),

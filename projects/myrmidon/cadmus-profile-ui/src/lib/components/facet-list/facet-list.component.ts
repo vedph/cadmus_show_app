@@ -13,10 +13,9 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { FacetDefinition, PartDefinition } from '@myrmidon/cadmus-core';
+import { FacetDefinition } from '@myrmidon/cadmus-core';
 import { CadmusShopAssetService } from '@myrmidon/cadmus-shop-asset';
 import { CadmusModel } from '@myrmidon/cadmus-shop-core';
-import { FacetListService } from './store/facet-list.service';
 import { GroupedPartDefinition, GroupingFacet } from './store/facet-list.store';
 
 @Component({
@@ -25,8 +24,6 @@ import { GroupedPartDefinition, GroupingFacet } from './store/facet-list.store';
   styleUrls: ['./facet-list.component.css'],
 })
 export class FacetListComponent implements OnInit {
-  private _editedPartFacetId: string | undefined;
-
   /**
    * The facets.
    */
@@ -49,7 +46,6 @@ export class FacetListComponent implements OnInit {
 
   constructor(
     formBuilder: FormBuilder,
-    private _facetListService: FacetListService,
     private _shopService: CadmusShopAssetService
   ) {
     this.facets = [];
@@ -101,7 +97,6 @@ export class FacetListComponent implements OnInit {
   }
 
   public onEditPart(part: GroupedPartDefinition): void {
-    this._editedPartFacetId = part.facetId;
     this.editedPart = part;
     this.tabIndex = 2;
   }

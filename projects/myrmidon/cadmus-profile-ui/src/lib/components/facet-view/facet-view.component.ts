@@ -94,7 +94,7 @@ export class FacetViewComponent {
     private _formBuilder: FormBuilder,
     private _dialogService: DialogService,
     private _colorService: ColorService,
-    private _partService: PartDefinitionVmService,
+    private _partService: PartDefinitionVmService
   ) {
     this.tabIndex = 0;
     this.editable = true;
@@ -250,7 +250,11 @@ export class FacetViewComponent {
 
   //#region Parts
   public buildScopedPartId(groupIndex: number, part: PartDefinition): string {
-    return this._partService.buildScopedPartId(groupIndex, part);
+    return this._partService.buildScopedPartId({
+      groupId: this._facet?.groups[groupIndex].id || '',
+      typeId: part.typeId,
+      roleId: part.roleId
+    });
   }
 
   private findPart(
@@ -260,8 +264,11 @@ export class FacetViewComponent {
       return null;
     }
     const parsedId = this._partService.parseScopedPartId(id);
+    const groupIndex = this._facet.groups.findIndex(
+      (g) => g.id === parsedId.groupId
+    );
 
-    const i = this._facet.groups[parsedId.groupIndex].partDefinitions.findIndex(
+    const i = this._facet.groups[groupIndex].partDefinitions.findIndex(
       (d) => {
         return (
           d.typeId === parsedId.typeId &&
@@ -271,7 +278,7 @@ export class FacetViewComponent {
     );
     return i > -1
       ? {
-          groupIndex: parsedId.groupIndex,
+          groupIndex: groupIndex,
           partIndex: i,
         }
       : null;
@@ -454,7 +461,7 @@ export class FacetViewComponent {
   public onPartChange(part: PartDefinition): void {
     // part has changed, we must refresh the whole facet
     // get part definitions from it
-    const parts = this._partService.getPartDefsFromGroupingFacet(
+    const parts = this._partService.getPartDefsFromGroup(
       this._facet as GroupingFacet
     );
     // replace the edited part definition

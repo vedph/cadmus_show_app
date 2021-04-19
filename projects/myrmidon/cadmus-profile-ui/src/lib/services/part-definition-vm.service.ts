@@ -26,38 +26,12 @@ export interface ScopedPartId {
 export class PartDefinitionVmService {
   constructor(private _profUtil: ProfileUtilService) {}
 
-  public buildScopedPartId(groupIndex: number, part: PartDefinition): string {
-    const sb: string[] = [];
-    sb.push(groupIndex.toString());
-    sb.push(':');
-    sb.push(part.typeId);
-    if (part.roleId) {
-      sb.push('@');
-      sb.push(part.roleId);
-    }
-    return sb.join('');
-  }
-
-  public parseScopedPartId(id: string): ScopedPartId {
-    const ci = id.indexOf(':');
-    const groupIndex = +id.substr(0, ci);
-
-    const ai = id.indexOf('@');
-    const typeId = id.substr(ci + 1, ai > -1 ? ai - 1 - ci : undefined);
-    const roleId = ai > -1 ? id.substr(ai + 1) : undefined;
-    return {
-      groupIndex: groupIndex,
-      typeId: typeId,
-      roleId: roleId,
-    };
-  }
-
   /**
    * Build the ID for the specified part definition in its group.
    *
    * @param part The part definition.
    */
-  public buildPartId(id: GroupedPartDefinitionId): string {
+  public buildScopedPartId(id: GroupedPartDefinitionId): string {
     const sb: string[] = [];
     sb.push(id.groupId || '-');
     sb.push(':');
@@ -75,7 +49,7 @@ export class PartDefinitionVmService {
    * @param id The part ID.
    * @returns An object with groupId, typeId, roleId.
    */
-  public parsePartId(id: string): GroupedPartDefinitionId {
+  public parseScopedPartId(id: string): GroupedPartDefinitionId {
     const ci = id.indexOf(':');
     const groupId = id.substr(0, ci);
 
@@ -103,7 +77,7 @@ export class PartDefinitionVmService {
       (d: PartDefinition) => {
         return Object.assign(
           {
-            scopedId: this.buildPartId({
+            scopedId: this.buildScopedPartId({
               groupId: d.groupKey || '',
               typeId: d.typeId,
               roleId: d.roleId,
@@ -127,12 +101,32 @@ export class PartDefinitionVmService {
   }
 
   /**
+   * Get an array of GroupingFacet's from the specified array of
+   * FacetDefinition's.
+   *
+   * @param facets The facets definitions.
+   * @returns Array of grouping facets.
+   */
+  public getFacetGroups(facets: FacetDefinition[]): GroupingFacet[] {
+    return facets.map((d, i) => {
+      return {
+        id: d.id,
+        index: i,
+        label: d.label,
+        description: d.description,
+        colorKey: d.colorKey,
+        groups: this.getFacetPartGroups(d),
+      };
+    });
+  }
+
+  /**
    * Maps a grouping facet into a flat list of part definitions.
    *
    * @param facet The grouping facet.
    * @returns The part definitions.
    */
-  public getPartDefsFromGroupingFacet(facet: GroupingFacet): PartDefinition[] {
+  public getPartDefsFromGroup(facet: GroupingFacet): PartDefinition[] {
     const defs: PartDefinition[] = [];
     facet.groups.forEach((g) => {
       g.partDefinitions.forEach((gd) => {
@@ -149,5 +143,21 @@ export class PartDefinitionVmService {
       });
     });
     return defs;
+  }
+
+  /**
+   * Get a facet definition from a grouping facet.
+   *
+   * @param facet The grouping facet.
+   * @returns The facet definition.
+   */
+  public getFacetDefFromGroup(facet: GroupingFacet): FacetDefinition {
+    return {
+      id: facet.id,
+      label: facet.label,
+      colorKey: facet.colorKey || '',
+      description: facet.description,
+      partDefinitions: this.getPartDefsFromGroup(facet)
+    };
   }
 }

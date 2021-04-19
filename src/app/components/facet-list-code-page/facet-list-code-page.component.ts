@@ -31,7 +31,7 @@ export class FacetListCodePageComponent {
             label: gf.label,
             colorKey: gf.colorKey || '',
             description: gf.description,
-            partDefinitions: this._partService.getPartDefsFromGroupingFacet(
+            partDefinitions: this._partService.getPartDefsFromGroup(
               gf
             ),
           };
