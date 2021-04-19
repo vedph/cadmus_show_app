@@ -3,7 +3,7 @@ import {
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -12,11 +12,16 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatChipEvent } from '@angular/material/chips';
-import { deepCopy, PartDefinition } from '@myrmidon/cadmus-core';
+import {
+  deepCopy,
+  FacetDefinition,
+  PartDefinition,
+} from '@myrmidon/cadmus-core';
 import { ColorService, DialogService } from '@myrmidon/cadmus-show-ui';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { PartDefinitionVmService } from '../../services/part-definition-vm.service';
+import { FacetListService } from '../facet-list/store/facet-list.service';
 import {
   GroupedPartDefinition,
   GroupingFacet,
@@ -33,7 +38,7 @@ import {
   templateUrl: './facet-view.component.html',
   styleUrls: ['./facet-view.component.css'],
 })
-export class FacetViewComponent implements OnInit {
+export class FacetViewComponent {
   private _facet: GroupingFacet | undefined;
   private _subs: Subscription[];
 
@@ -52,26 +57,8 @@ export class FacetViewComponent implements OnInit {
   }
   public set facet(value: GroupingFacet | undefined) {
     this._facet = value;
-    this.refresh();
+    this.updateForm();
   }
-
-  /**
-   * Emitted when facet metadata edit is requested.
-   */
-  @Output()
-  public editFacetMetadata: EventEmitter<GroupingFacet>;
-
-  /**
-   * Emitted when a part definition edit is requested.
-   */
-  @Output()
-  public editPart: EventEmitter<GroupedPartDefinition>;
-
-  /**
-   * Emitted when viewing a part's information is requested.
-   */
-  @Output()
-  public viewPartInfo: EventEmitter<GroupedPartDefinition>;
 
   /**
    * Emitted when the facet is saved.
@@ -79,30 +66,45 @@ export class FacetViewComponent implements OnInit {
   @Output()
   public facetChange: EventEmitter<GroupingFacet>;
 
+  /**
+   * Emitted when viewing a part's information is requested.
+   */
+  @Output()
+  public viewPartInfo: EventEmitter<GroupedPartDefinition>;
+
+  public tabIndex: number;
+  public dirty: boolean;
+
+  // form
   public groups: FormArray;
   public form: FormGroup;
 
+  // color form
   public color: FormControl;
   public colorForm: FormGroup;
 
+  // part editing
   public selectedPartId: string | undefined;
   public copiedPart: PartDefinition | undefined;
+  public editedPart: GroupedPartDefinition | undefined;
 
-  public dirty: boolean;
+  // facet metadata editing
+  public editedFacet: FacetDefinition | undefined;
 
   constructor(
     private _formBuilder: FormBuilder,
     private _dialogService: DialogService,
     private _colorService: ColorService,
-    private _partService: PartDefinitionVmService
+    private _partService: PartDefinitionVmService,
+    // TODO: refactor this service
+    private _facetListService: FacetListService
   ) {
+    this.tabIndex = 0;
     this.editable = true;
-    this.editFacetMetadata = new EventEmitter<GroupingFacet>();
-    this.facetChange = new EventEmitter<GroupingFacet>();
-    this.viewPartInfo = new EventEmitter<GroupedPartDefinition>();
-    this.editPart = new EventEmitter<GroupedPartDefinition>();
     this.dirty = false;
     this._subs = [];
+    this.facetChange = new EventEmitter<GroupingFacet>();
+    this.viewPartInfo = new EventEmitter<GroupedPartDefinition>();
     // form
     this.groups = _formBuilder.array([]);
     this.form = _formBuilder.group({
@@ -115,8 +117,28 @@ export class FacetViewComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  private updateForm(): void {
+    // reset group keys
+    this.groups.clear();
 
+    // unsubscribe from all the groups
+    for (let i = 0; i < this._subs.length; i++) {
+      this._subs[i].unsubscribe();
+    }
+
+    // add groups from the facet
+    if (this._facet) {
+      for (let group of this._facet.groups) {
+        this.addGroupControl(group);
+      }
+    }
+
+    // we're no more dirty
+    this.form.markAsPristine();
+    this.dirty = false;
+  }
+
+  //#region Groups
   private getGroupControl(group?: PartDefinitionGroup): FormGroup {
     return this._formBuilder.group({
       id: this._formBuilder.control(group?.id, [
@@ -136,27 +158,6 @@ export class FacetViewComponent implements OnInit {
     this.groups.controls.push(g);
     this.groups.markAsDirty();
     this.dirty = true;
-  }
-
-  private refresh(): void {
-    // reset group keys
-    this.groups.clear();
-
-    // unsubscribe from all the groups
-    for (let i = 0; i < this._subs.length; i++) {
-      this._subs[i].unsubscribe();
-    }
-
-    // add groups from the facet
-    if (this._facet) {
-      for (let group of this._facet.groups) {
-        this.addGroupControl(group);
-      }
-    }
-
-    // we're no more dirty
-    this.form.markAsPristine();
-    this.dirty = false;
   }
 
   public addGroup(group?: PartDefinitionGroup): void {
@@ -225,10 +226,32 @@ export class FacetViewComponent implements OnInit {
     this.dirty = true;
   }
 
+  public colorizeGroup(index: number): void {
+    if (!this._facet) {
+      return;
+    }
+    this._dialogService
+      .confirm('Confirmation', 'Reassign all the colors in group?')
+      .pipe(take(1))
+      .subscribe((yes) => {
+        if (yes && this._facet) {
+          const tot = this._facet.groups[index].partDefinitions.length || 0;
+          for (let i = 0; i < tot; i++) {
+            this._facet.groups[index].partDefinitions[
+              i
+            ].colorKey = this._colorService.nextPaletteColor(i, tot);
+          }
+          this.dirty = true;
+        }
+      });
+  }
+  //#endregion
+
   public getContrastColor(color: string | undefined): string {
     return this._colorService.getContrastColor(color || '');
   }
 
+  //#region Parts
   public buildScopedPartId(groupIndex: number, part: PartDefinition): string {
     return this._partService.buildScopedPartId(groupIndex, part);
   }
@@ -280,29 +303,16 @@ export class FacetViewComponent implements OnInit {
       description: '',
       groupKey: this._facet.groups[groupIndex].id,
       sortKey: '',
-      colorKey: 'E0E0E0'
+      colorKey: 'E0E0E0',
     };
     const newGroupedPart: GroupedPartDefinition = {
       facetId: this._facet.id,
       scopedId: this.buildScopedPartId(groupIndex, newPart),
-      ...newPart
+      ...newPart,
     };
     this._facet.groups[groupIndex].partDefinitions.push(newGroupedPart);
     this.selectedPartId = newGroupedPart.scopedId;
     this.editSelectedPart();
-  }
-
-  public editSelectedPart(): void {
-    if (!this.selectedPartId) {
-      return;
-    }
-    const gi = this.findPart(this.selectedPartId);
-    if (!gi) {
-      return;
-    }
-    this.editPart.emit(
-      this._facet?.groups[gi.groupIndex].partDefinitions[gi.partIndex]
-    );
   }
 
   public onPartRemoved(event: MatChipEvent): void {
@@ -356,26 +366,6 @@ export class FacetViewComponent implements OnInit {
     this.dirty = true;
   }
 
-  public colorizeGroup(index: number): void {
-    if (!this._facet) {
-      return;
-    }
-    this._dialogService
-      .confirm('Confirmation', 'Reassign all the colors in group?')
-      .pipe(take(1))
-      .subscribe((yes) => {
-        if (yes && this._facet) {
-          const tot = this._facet.groups[index].partDefinitions.length || 0;
-          for (let i = 0; i < tot; i++) {
-            this._facet.groups[index].partDefinitions[
-              i
-            ].colorKey = this._colorService.nextPaletteColor(i, tot);
-          }
-          this.dirty = true;
-        }
-      });
-  }
-
   public colorizeSelectedPart(): void {
     if (!this.selectedPartId || this.colorForm.invalid || !this._facet) {
       return;
@@ -386,12 +376,6 @@ export class FacetViewComponent implements OnInit {
         gi.partIndex
       ].colorKey = this.color.value.hex;
       this.dirty = true;
-    }
-  }
-
-  public editFacet(): void {
-    if (this.facet) {
-      this.editFacetMetadata.emit(this.facet);
     }
   }
 
@@ -420,6 +404,98 @@ export class FacetViewComponent implements OnInit {
       this.dirty = true;
     }
   }
+  //#endregion
+
+  //#region Facet editor
+  public editFacet(): void {
+    if (!this._facet) {
+      return;
+    }
+    this.editedFacet = {
+      id: this._facet.id,
+      label: this._facet.label,
+      description: this._facet.description,
+      colorKey: this._facet.colorKey || '',
+      partDefinitions: [],
+    };
+    setTimeout(() => {
+      this.tabIndex = 1;
+    }, 300);
+  }
+
+  public onFacetChange(facet: FacetDefinition): void {
+    this.facet = Object.assign(this._facet, facet);
+    this.dirty = true;
+    this.onFacetEditorClose();
+  }
+
+  public onFacetEditorClose(): void {
+    this.tabIndex = 0;
+    this.editedFacet = undefined;
+  }
+  //#endregion
+
+  //#region Part editor
+  public editSelectedPart(): void {
+    if (!this.selectedPartId) {
+      return;
+    }
+    const gi = this.findPart(this.selectedPartId);
+    if (!gi) {
+      return;
+    }
+
+    this.editedPart = this._facet?.groups[gi.groupIndex].partDefinitions[
+      gi.partIndex
+    ];
+
+    setTimeout(() => {
+      this.tabIndex = 2;
+    }, 300);
+  }
+
+  public onPartChange(part: PartDefinition): void {
+    // part has changed, we must refresh the whole facet
+    // get part definitions from it
+    const parts = this._facetListService.getPartDefsFromGroupingFacet(
+      this._facet as GroupingFacet
+    );
+    // replace the edited part definition
+    const i = parts.findIndex(
+      (p) =>
+        p.typeId === part.typeId &&
+        ((!p.roleId && !part.roleId) || p.roleId === part.roleId)
+    );
+    if (i === -1) {
+      return;
+    }
+    parts.splice(i, 1, part);
+
+    // get the facet including the part which was edited
+    // and replace its groups with updated groups
+    const gf = this._facet as GroupingFacet;
+    const facet: FacetDefinition = {
+      id: gf.id,
+      label: gf.label,
+      colorKey: gf.colorKey || '',
+      description: gf.description,
+      partDefinitions: parts,
+    };
+    this.onPartEditorClose();
+
+    // emit facet change
+    const newFacet: GroupingFacet = {
+      ...gf,
+      groups: this._facetListService.getFacetPartGroups(facet),
+    };
+    this.facetChange.emit(newFacet);
+  }
+
+  public onPartEditorClose(): void {
+    this.tabIndex = 0;
+    this.editedPart = undefined;
+  }
+  //#endregion
 
   private updateFacet() {
     if (!this._facet) {

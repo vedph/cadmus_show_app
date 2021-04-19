@@ -69,24 +69,6 @@ export class FacetListComponent implements OnInit {
   ngOnInit(): void {}
 
   /**
-   * Edit the specified facet's metadata.
-   *
-   * @param facet The grouping facet to edit.
-   */
-  public onEditFacet(facet: GroupingFacet): void {
-    this.editedFacet = {
-      id: facet.id,
-      label: facet.label,
-      description: facet.description,
-      colorKey: facet.colorKey || '',
-      partDefinitions: [],
-    };
-    setTimeout(() => {
-      this.tabIndex = 1;
-    }, 300);
-  }
-
-  /**
    * Add a new facet and edit it.
    */
   public addFacet(): void {
@@ -98,101 +80,30 @@ export class FacetListComponent implements OnInit {
       return;
     }
 
-    // edit a newly created facet
-    this.onEditFacet({
+    // add the new facet
+    const newFacet: GroupingFacet = {
       id: this.newFacetId.value,
-      label: '',
+      label: 'new-facet',
       description: '',
       groups: [],
-    });
+    };
+    this.facets.push(newFacet);
   }
 
-  /**
-   * Handle the facet metadata changes.
-   *
-   * @param facet The updated facet metadata.
-   */
-  public onFacetChange(facet: FacetDefinition): void {
-    if (!this.editedFacet) {
-      return;
-    }
+  public onFacetChange(facet: GroupingFacet): void {
     // add/replace the facet
     const i = this.facets.findIndex((f) => f.id === facet.id);
     if (i === -1) {
-      this.facets.push({ ...facet, groups: [] });
+      this.facets.push(facet);
     } else {
-      this.facets.splice(i, 1, Object.assign(this.facets[i], facet));
+      this.facets.splice(i, 1, facet);
     }
-
-    this.onFacetEditorClose();
-  }
-
-  /**
-   * Close the facet metadata editor.
-   */
-  public onFacetEditorClose(): void {
-    this.tabIndex = 0;
-    this.editedFacet = undefined;
   }
 
   public onEditPart(part: GroupedPartDefinition): void {
     this._editedPartFacetId = part.facetId;
     this.editedPart = part;
     this.tabIndex = 2;
-  }
-
-  public onPartChange(part: PartDefinition): void {
-    // part has changed, we must refresh the whole facet
-    const facetIndex = this.facets.findIndex(
-      (f) => f.id === this._editedPartFacetId
-    );
-    if (facetIndex === -1) {
-      return;
-    }
-    // get part definitions from it
-    const parts = this._facetListService.getPartDefsFromGroupingFacet(
-      this.facets[facetIndex]
-    );
-    // replace the edited part definition
-    const i = parts.findIndex(
-      (p) =>
-        p.typeId === part.typeId &&
-        ((!p.roleId && !part.roleId) || p.roleId === part.roleId)
-    );
-    if (i === -1) {
-      return;
-    }
-    parts.splice(i, 1, part);
-
-    // get the facet including the part which was edited
-    // and replace its groups with updated groups
-    const gf = this.facets[facetIndex];
-    const facet: FacetDefinition = {
-      id: gf.id,
-      label: gf.label,
-      colorKey: gf.colorKey || '',
-      description: gf.description,
-      partDefinitions: parts,
-    };
-
-    // replace the old facet with the updated one
-    const newFacet: GroupingFacet = {
-      ...gf,
-      groups: this._facetListService.getFacetPartGroups(facet),
-    };
-    this.facets.splice(
-      facetIndex,
-      1,
-      Object.assign(this.facets[facetIndex], newFacet)
-    );
-
-    this.onPartEditorClose();
-  }
-
-  public onPartEditorClose(): void {
-    this._editedPartFacetId = undefined;
-    this.tabIndex = 0;
-    this.editedPart = undefined;
   }
 
   public onViewPartInfo(part: GroupedPartDefinition): void {

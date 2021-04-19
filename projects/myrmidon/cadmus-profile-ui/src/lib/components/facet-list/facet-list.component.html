@@ -32,32 +32,12 @@
       <cadmus-facet-view
         *ngFor="let f of facets"
         [facet]="f"
-        (editFacetMetadata)="onEditFacet($event)"
         (viewPartInfo)="onViewPartInfo($event)"
         (facetChange)="onFacetChange($event)"
-        (editPart)="onEditPart($event)"
       ></cadmus-facet-view>
 
       <!-- info -->
       <cadmus-part-info [model]="currentModel" #info></cadmus-part-info>
-    </mat-tab>
-
-    <!-- facet editor -->
-    <mat-tab label="facet" *ngIf="editedFacet">
-      <cadmus-facet-metadata-editor
-        [facet]="editedFacet"
-        (facetChange)="onFacetChange($event)"
-        (editorClose)="onFacetEditorClose()"
-      ></cadmus-facet-metadata-editor>
-    </mat-tab>
-
-    <!-- part editor -->
-    <mat-tab label="part" *ngIf="editedPart">
-      <cadmus-part-definition-editor
-        [definition]="editedPart"
-        (definitionChange)="onPartChange($event)"
-        (editorClose)="onPartEditorClose()"
-      ></cadmus-part-definition-editor>
     </mat-tab>
   </mat-tab-group>
 </div>

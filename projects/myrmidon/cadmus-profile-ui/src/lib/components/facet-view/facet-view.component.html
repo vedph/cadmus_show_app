@@ -1,230 +1,253 @@
 <mat-card>
   <mat-card-content>
-    <div *ngIf="facet" [formGroup]="form">
-      <!-- head -->
-      <div>
-        <!-- label -->
-        <span
-          class="f-label"
-          [style.background]="'#' + facet?.colorKey"
-          [style.color]="getContrastColor(facet?.colorKey)"
-        >
-          {{ facet?.label }}
-        </span>
-        <!-- id -->
-        <span class="f-id">
-          {{ facet?.id }}
-        </span>
-        <ng-container *ngIf="editable">
-          <!-- edit facet -->
-          <button
-            mat-icon-button
-            color="primary"
-            matTooltip="Edit this facet's metadata"
-            (click)="editFacet()"
-          >
-            <mat-icon>edit</mat-icon>
-          </button>
-          <!-- add group -->
-          <button
-            mat-icon-button
-            color="primary"
-            matTooltip="Add a new group to this facet"
-            (click)="addNewGroup()"
-          >
-            <mat-icon>add_circle</mat-icon>
-          </button>
-          <!-- copy part -->
-          <button
-            mat-icon-button
-            matTooltip="Copy the selected part"
-            [disabled]="!selectedPartId"
-            (click)="copySelectedPart()"
-          >
-            <mat-icon>content_copy</mat-icon>
-          </button>
-          <!-- colorize part -->
-          <form
-            [formGroup]="colorForm"
-            style="display: inline-block"
-            (submit)="colorizeSelectedPart()"
-          >
-            <mat-form-field style="width: 8em">
-              <input
-                matInput
-                [ngxMatColorPicker]="picker"
-                [formControl]="color"
-              />
-              <ngx-mat-color-toggle
-                matSuffix
-                [for]="picker"
-              ></ngx-mat-color-toggle>
-              <ngx-mat-color-picker #picker></ngx-mat-color-picker>
-            </mat-form-field>
-            <button
-              mat-icon-button
-              matTooltip="Assign color to the selected part"
-              [disabled]="!selectedPartId"
-              (click)="colorizeSelectedPart()"
+    <mat-tab-group>
+      <!-- facet -->
+      <mat-tab label="facet">
+        <div *ngIf="facet" [formGroup]="form">
+          <!-- head -->
+          <div>
+            <!-- label -->
+            <span
+              class="f-label"
+              [style.background]="'#' + facet?.colorKey"
+              [style.color]="getContrastColor(facet?.colorKey)"
             >
-              <mat-icon>format_paint</mat-icon>
-            </button>
-          </form>
-          <!-- save facet -->
-          <button
-            type="button"
-            mat-icon-button
-            color="primary"
-            [disabled]="!dirty && !form.dirty"
-            (click)="save()"
-          >
-            <mat-icon>save</mat-icon> save
-          </button>
-        </ng-container>
-      </div>
-      <!-- groups -->
-      <mat-expansion-panel [disabled]="!facet.groups?.length">
-        <mat-expansion-panel-header>
-          <mat-panel-title>groups</mat-panel-title>
-          <mat-panel-description>{{
-            facet.groups.length
-          }}</mat-panel-description>
-        </mat-expansion-panel-header>
-
-        <div formArrayName="groups" cdkDropListGroup>
-          <mat-card
-            *ngFor="
-              let item of groups.controls;
-              let i = index;
-              let first = first;
-              let last = last
-            "
-            style="margin-bottom: 8px"
-          >
-            <mat-card-content>
-              <!-- child form -->
-              <div [formGroupName]="i">
-                <!-- child controls -->
-                <mat-form-field *ngIf="editable">
-                  <input matInput formControlName="id" placeholder="ID" />
-                  <mat-error
-                    *ngIf="
-                      $any(item).controls.id.errors?.required &&
-                      ($any(item).controls.id.dirty ||
-                        $any(item).controls.id.touched)
-                    "
-                    >required</mat-error
-                  >
-                  <mat-error
-                    *ngIf="
-                      $any(item).controls.id.errors?.maxLength &&
-                      ($any(item).controls.id.dirty ||
-                        $any(item).controls.id.touched)
-                    "
-                    >ID too long</mat-error
-                  >
-                </mat-form-field>
-                <ng-container *ngIf="!editable">
-                  <span>{{ facet.groups[i].id }}</span>
-                </ng-container>
-
-                <!-- buttons -->
-                <ng-container *ngIf="editable">
-                  <button
-                    mat-icon-button
-                    type="button"
-                    matTooltip="Remove this group"
-                    color="warn"
-                    (click)="removeGroup(i)"
-                  >
-                    <mat-icon>remove_circle</mat-icon>
-                  </button>
-                  <button
-                    [disabled]="first"
-                    mat-icon-button
-                    type="button"
-                    matTooltip="Move group up"
-                    (click)="moveGroupUp(i)"
-                  >
-                    <mat-icon>arrow_upward</mat-icon>
-                  </button>
-                  <button
-                    [disabled]="last"
-                    mat-icon-button
-                    type="button"
-                    matTooltip="Move group down"
-                    (click)="moveGroupDown(i)"
-                  >
-                    <mat-icon>arrow_downward</mat-icon>
-                  </button>
-                  <button
-                    mat-icon-button
-                    matTooltip="Reassign all colors"
-                    (click)="colorizeGroup(i)"
-                  >
-                    <mat-icon>palette</mat-icon>
-                  </button>
-                  <button
-                    mat-icon-button
-                    matTooltip="Add the copied part to this group"
-                    [disabled]="!copiedPart"
-                    (click)="addCopiedPart(i)"
-                  >
-                    <mat-icon>content_paste</mat-icon>
-                  </button>
-                  <button
-                    mat-icon-button
-                    color="primary"
-                    matTooltip="Edit the selected part"
-                    [disabled]="!selectedPartId"
-                    (click)="editSelectedPart()"
-                  >
-                    <mat-icon>edit_location_alt</mat-icon>
-                  </button>
-                  <button
-                    mat-icon-button
-                    matTooltip="Add a part to this group"
-                    color="primary"
-                    (click)="addNewPart(i)"
-                  >
-                    <mat-icon>add_circle</mat-icon>
-                  </button>
-                </ng-container>
-              </div>
-
-              <!-- parts -->
-              <mat-chip-list
-                cdkDropList
-                class="f-chip-list"
-                cdkDropListOrientation="horizontal"
-                [cdkDropListData]="facet.groups[i]?.partDefinitions || []"
-                (cdkDropListDropped)="onPartDrop($event)"
+              {{ facet?.label }}
+            </span>
+            <!-- id -->
+            <span class="f-id">
+              {{ facet?.id }}
+            </span>
+            <ng-container *ngIf="editable">
+              <!-- edit facet -->
+              <button
+                mat-icon-button
+                color="primary"
+                matTooltip="Edit this facet's metadata"
+                (click)="editFacet()"
               >
-                <mat-chip
-                  *ngFor="let d of facet.groups[i].partDefinitions"
-                  cdkDrag
-                  class="f-chip"
-                  [class.f-chip-selected]="
-                    buildScopedPartId(i, d) === selectedPartId
-                  "
-                  [id]="buildScopedPartId(i, d)"
-                  [value]="buildScopedPartId(i, d)"
-                  [removable]="editable"
-                  [style.background-color]="
-                    d.colorKey ? '#' + d.colorKey : 'transparent'
-                  "
-                  [style.color]="getContrastColor(d.colorKey)"
-                  (removed)="onPartRemoved($event)"
-                  (click)="onPartClick($event)"
+                <mat-icon>edit</mat-icon>
+              </button>
+              <!-- add group -->
+              <button
+                mat-icon-button
+                color="primary"
+                matTooltip="Add a new group to this facet"
+                (click)="addNewGroup()"
+              >
+                <mat-icon>add_circle</mat-icon>
+              </button>
+              <!-- copy part -->
+              <button
+                mat-icon-button
+                matTooltip="Copy the selected part"
+                [disabled]="!selectedPartId"
+                (click)="copySelectedPart()"
+              >
+                <mat-icon>content_copy</mat-icon>
+              </button>
+              <!-- colorize part -->
+              <form
+                [formGroup]="colorForm"
+                style="display: inline-block"
+                (submit)="colorizeSelectedPart()"
+              >
+                <mat-form-field style="width: 8em">
+                  <input
+                    matInput
+                    [ngxMatColorPicker]="picker"
+                    [formControl]="color"
+                  />
+                  <ngx-mat-color-toggle
+                    matSuffix
+                    [for]="picker"
+                  ></ngx-mat-color-toggle>
+                  <ngx-mat-color-picker #picker></ngx-mat-color-picker>
+                </mat-form-field>
+                <button
+                  mat-icon-button
+                  matTooltip="Assign color to the selected part"
+                  [disabled]="!selectedPartId"
+                  (click)="colorizeSelectedPart()"
                 >
-                  {{ d.name }}
-                  <mat-icon matChipRemove *ngIf="editable">cancel</mat-icon>
-                </mat-chip>
-              </mat-chip-list>
-            </mat-card-content>
-          </mat-card>
+                  <mat-icon>format_paint</mat-icon>
+                </button>
+              </form>
+              <!-- save facet -->
+              <button
+                type="button"
+                mat-icon-button
+                color="primary"
+                [disabled]="!dirty && !form.dirty"
+                (click)="save()"
+              >
+                <mat-icon>save</mat-icon> save
+              </button>
+            </ng-container>
+          </div>
+          <!-- groups -->
+          <mat-expansion-panel [disabled]="!facet.groups?.length">
+            <mat-expansion-panel-header>
+              <mat-panel-title>groups</mat-panel-title>
+              <mat-panel-description>{{
+                facet.groups.length
+              }}</mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <div formArrayName="groups" cdkDropListGroup>
+              <mat-card
+                *ngFor="
+                  let item of groups.controls;
+                  let i = index;
+                  let first = first;
+                  let last = last
+                "
+                style="margin-bottom: 8px"
+              >
+                <mat-card-content>
+                  <!-- child form -->
+                  <div [formGroupName]="i">
+                    <!-- child controls -->
+                    <mat-form-field *ngIf="editable">
+                      <input matInput formControlName="id" placeholder="ID" />
+                      <mat-error
+                        *ngIf="
+                          $any(item).controls.id.errors?.required &&
+                          ($any(item).controls.id.dirty ||
+                            $any(item).controls.id.touched)
+                        "
+                        >required</mat-error
+                      >
+                      <mat-error
+                        *ngIf="
+                          $any(item).controls.id.errors?.maxLength &&
+                          ($any(item).controls.id.dirty ||
+                            $any(item).controls.id.touched)
+                        "
+                        >ID too long</mat-error
+                      >
+                    </mat-form-field>
+                    <ng-container *ngIf="!editable">
+                      <span>{{ facet.groups[i].id }}</span>
+                    </ng-container>
+
+                    <!-- buttons -->
+                    <ng-container *ngIf="editable">
+                      <button
+                        mat-icon-button
+                        type="button"
+                        matTooltip="Remove this group"
+                        color="warn"
+                        (click)="removeGroup(i)"
+                      >
+                        <mat-icon>remove_circle</mat-icon>
+                      </button>
+                      <button
+                        [disabled]="first"
+                        mat-icon-button
+                        type="button"
+                        matTooltip="Move group up"
+                        (click)="moveGroupUp(i)"
+                      >
+                        <mat-icon>arrow_upward</mat-icon>
+                      </button>
+                      <button
+                        [disabled]="last"
+                        mat-icon-button
+                        type="button"
+                        matTooltip="Move group down"
+                        (click)="moveGroupDown(i)"
+                      >
+                        <mat-icon>arrow_downward</mat-icon>
+                      </button>
+                      <button
+                        mat-icon-button
+                        matTooltip="Reassign all colors"
+                        (click)="colorizeGroup(i)"
+                      >
+                        <mat-icon>palette</mat-icon>
+                      </button>
+                      <button
+                        mat-icon-button
+                        matTooltip="Add the copied part to this group"
+                        [disabled]="!copiedPart"
+                        (click)="addCopiedPart(i)"
+                      >
+                        <mat-icon>content_paste</mat-icon>
+                      </button>
+                      <button
+                        mat-icon-button
+                        color="primary"
+                        matTooltip="Edit the selected part"
+                        [disabled]="!selectedPartId"
+                        (click)="editSelectedPart()"
+                      >
+                        <mat-icon>edit_location_alt</mat-icon>
+                      </button>
+                      <button
+                        mat-icon-button
+                        matTooltip="Add a part to this group"
+                        color="primary"
+                        (click)="addNewPart(i)"
+                      >
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    </ng-container>
+                  </div>
+
+                  <!-- parts -->
+                  <mat-chip-list
+                    cdkDropList
+                    class="f-chip-list"
+                    cdkDropListOrientation="horizontal"
+                    [cdkDropListData]="facet.groups[i]?.partDefinitions || []"
+                    (cdkDropListDropped)="onPartDrop($event)"
+                  >
+                    <mat-chip
+                      *ngFor="let d of facet.groups[i].partDefinitions"
+                      cdkDrag
+                      class="f-chip"
+                      [class.f-chip-selected]="
+                        buildScopedPartId(i, d) === selectedPartId
+                      "
+                      [id]="buildScopedPartId(i, d)"
+                      [value]="buildScopedPartId(i, d)"
+                      [removable]="editable"
+                      [style.background-color]="
+                        d.colorKey ? '#' + d.colorKey : 'transparent'
+                      "
+                      [style.color]="getContrastColor(d.colorKey)"
+                      (removed)="onPartRemoved($event)"
+                      (click)="onPartClick($event)"
+                    >
+                      {{ d.name }}
+                      <mat-icon matChipRemove *ngIf="editable">cancel</mat-icon>
+                    </mat-chip>
+                  </mat-chip-list>
+                </mat-card-content>
+              </mat-card>
+            </div>
+          </mat-expansion-panel>
         </div>
-      </mat-expansion-panel>
-    </div>
+      </mat-tab>
+
+      <!-- facet editor -->
+      <mat-tab label="metadata" *ngIf="editedFacet">
+        <cadmus-facet-metadata-editor
+          [facet]="editedFacet"
+          (facetChange)="onFacetChange($event)"
+          (editorClose)="onFacetEditorClose()"
+        ></cadmus-facet-metadata-editor>
+      </mat-tab>
+
+      <!-- part editor -->
+      <mat-tab label="part" *ngIf="editedPart">
+        <cadmus-part-definition-editor
+          [definition]="editedPart"
+          (definitionChange)="onPartChange($event)"
+          (editorClose)="onPartEditorClose()"
+        ></cadmus-part-definition-editor>
+      </mat-tab>
+    </mat-tab-group>
   </mat-card-content>
 </mat-card>
