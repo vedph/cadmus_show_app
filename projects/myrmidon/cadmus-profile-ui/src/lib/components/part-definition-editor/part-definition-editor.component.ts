@@ -89,7 +89,7 @@ export class PartDefinitionEditorComponent implements OnInit {
     this.sortKey = formBuilder.control(null, [
       Validators.required,
       Validators.maxLength(50),
-      Validators.pattern(/^[a-zA-Z][-._a-zA-Z0-9]+$/),
+      Validators.pattern(/^[a-zA-Z][-._a-zA-Z0-9]*$/),
     ]);
     this.form = formBuilder.group({
       typeId: this.typeId,

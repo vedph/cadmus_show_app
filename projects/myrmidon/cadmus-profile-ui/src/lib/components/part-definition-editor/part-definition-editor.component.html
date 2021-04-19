@@ -113,15 +113,15 @@
       <input matInput [formControl]="sortKey" placeholder="sort key" />
       <mat-error
         *ngIf="sortKey.errors?.required && (sortKey.dirty || sortKey.touched)"
-        >s-key required</mat-error
+        >sort key required</mat-error
       >
       <mat-error
         *ngIf="sortKey.errors?.pattern && (sortKey.dirty || sortKey.touched)"
-        >s-key required</mat-error
+        >invalid sort key</mat-error
       >
       <mat-error
         *ngIf="sortKey.errors?.maxLength && (sortKey.dirty || sortKey.touched)"
-        >s-key too long</mat-error
+        >sort key too long</mat-error
       >
     </mat-form-field>
   </div>

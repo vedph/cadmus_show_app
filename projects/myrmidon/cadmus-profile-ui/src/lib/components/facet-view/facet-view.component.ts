@@ -268,6 +268,30 @@ export class FacetViewComponent implements OnInit {
     );
   }
 
+  public addNewPart(groupIndex: number): void {
+    if (!this._facet?.groups) {
+      return;
+    }
+    const newPart: PartDefinition = {
+      typeId: '',
+      roleId: '',
+      isRequired: false,
+      name: '',
+      description: '',
+      groupKey: this._facet.groups[groupIndex].id,
+      sortKey: '',
+      colorKey: 'E0E0E0'
+    };
+    const newGroupedPart: GroupedPartDefinition = {
+      facetId: this._facet.id,
+      scopedId: this.buildScopedPartId(groupIndex, newPart),
+      ...newPart
+    };
+    this._facet.groups[groupIndex].partDefinitions.push(newGroupedPart);
+    this.selectedPartId = newGroupedPart.scopedId;
+    this.editSelectedPart();
+  }
+
   public editSelectedPart(): void {
     if (!this.selectedPartId) {
       return;
