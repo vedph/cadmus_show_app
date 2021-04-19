@@ -1,17 +1,11 @@
 import { moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Injectable } from '@angular/core';
-import {
-  deepCopy,
-  FacetDefinition,
-  PartDefinition,
-} from '@myrmidon/cadmus-core';
-import { ProfileUtilService } from '@myrmidon/cadmus-profile-core';
+import { deepCopy, FacetDefinition } from '@myrmidon/cadmus-core';
 import { ColorService } from '@myrmidon/cadmus-show-ui';
+import { PartDefinitionVmService } from '../../../services/part-definition-vm.service';
 import { FacetListQuery } from './facet-list.query';
 import {
   FacetListStore,
-  GroupedPartDefinition,
-  GroupedPartDefinitionId,
   GroupingFacet,
   PartDefinitionGroup,
 } from './facet-list.store';
@@ -26,83 +20,9 @@ export class FacetListService {
   constructor(
     private _store: FacetListStore,
     private _query: FacetListQuery,
-    private _profUtil: ProfileUtilService,
+    private _vmService: PartDefinitionVmService,
     private _colorService: ColorService
   ) {}
-
-  /**
-   * Build the ID for the specified part definition in its group.
-   *
-   * @param part The part definition.
-   */
-  public buildPartId(id: GroupedPartDefinitionId): string {
-    const sb: string[] = [];
-    sb.push(id.groupId || '-');
-    sb.push(':');
-    sb.push(id.typeId);
-    if (id.roleId) {
-      sb.push('@');
-      sb.push(id.roleId);
-    }
-    return sb.join('');
-  }
-
-  /**
-   * Parse the part definition ID built by buildPartId.
-   *
-   * @param id The part ID.
-   * @returns An object with groupId, typeId, roleId.
-   */
-  public parsePartId(id: string): GroupedPartDefinitionId {
-    const ci = id.indexOf(':');
-    const groupId = id.substr(0, ci);
-
-    const ai = id.indexOf('@');
-    const typeId = id.substr(ci + 1, ai > -1 ? ai - ci : undefined);
-    const roleId = ai > -1 ? id.substr(ai + 1) : undefined;
-
-    return {
-      groupId: groupId,
-      typeId: typeId,
-      roleId: roleId,
-    };
-  }
-
-  /**
-   * Get the parts groups from the specified part definition.
-   *
-   * @param facet The facet definition.
-   */
-  public getFacetPartGroups(facet: FacetDefinition): PartDefinitionGroup[] {
-    // map the facet's part definitions into grouped part definitions,
-    // setting the scopedId of each part to a combination of group ID and
-    // part type and role IDs.
-    const grouped: GroupedPartDefinition[] = facet.partDefinitions.map(
-      (d: PartDefinition) => {
-        return Object.assign(
-          {
-            scopedId: this.buildPartId({
-              groupId: d.groupKey || '',
-              typeId: d.typeId,
-              roleId: d.roleId,
-            }),
-          },
-          d
-        );
-      }
-    );
-
-    // effectively group these part definitions
-    const groups = this._profUtil.groupIntoKeyedGroups<GroupedPartDefinition>(
-      grouped,
-      ['groupKey']
-    );
-
-    // map the groups into an array of PartDefinitionGroup's
-    return groups.map((g, i) => {
-      return { id: g.key, index: i, partDefinitions: g.items };
-    });
-  }
 
   /**
    * Set the list of facets.
@@ -118,36 +38,11 @@ export class FacetListService {
         label: d.label,
         description: d.description,
         colorKey: d.colorKey,
-        groups: this.getFacetPartGroups(d),
+        groups: this._vmService.getFacetPartGroups(d),
       };
     });
 
     this._store.set(groupingFacets);
-  }
-
-  /**
-   * Maps a grouping facet into a flat list of part definitions.
-   *
-   * @param facet The grouping facet.
-   * @returns The part definitions.
-   */
-  public getPartDefsFromGroupingFacet(facet: GroupingFacet): PartDefinition[] {
-    const defs: PartDefinition[] = [];
-    facet.groups.forEach((g) => {
-      g.partDefinitions.forEach((gd) => {
-        defs.push({
-          typeId: gd.typeId,
-          roleId: gd.roleId,
-          name: gd.name,
-          description: gd.description,
-          isRequired: gd.isRequired,
-          colorKey: gd.colorKey,
-          groupKey: gd.groupKey,
-          sortKey: gd.sortKey,
-        });
-      });
-    });
-    return defs;
   }
 
   /**
@@ -290,7 +185,7 @@ export class FacetListService {
     groups[groupIndex].partDefinitions = [
       ...groups[groupIndex].partDefinitions,
       {
-        scopedId: this.buildPartId({
+        scopedId: this._vmService.buildPartId({
           groupId: groupId,
           typeId: typeId,
         }),

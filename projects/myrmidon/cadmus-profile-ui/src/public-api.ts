@@ -39,6 +39,7 @@ export * from './lib/components/thesaurus-list/store/thesaurus-list.store';
 
 export * from './lib/components/thesaurus-lookup/thesaurus-lookup.component';
 
+export * from './lib/services/part-definition-vm.service';
 export * from './lib/services/ram-thesaurus.service';
 
 export * from './lib/cadmus-profile-ui.module';

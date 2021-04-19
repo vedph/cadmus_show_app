@@ -1,6 +1,6 @@
 <mat-card>
   <mat-card-content>
-    <mat-tab-group>
+    <mat-tab-group [(selectedIndex)]="tabIndex">
       <!-- facet -->
       <mat-tab label="facet">
         <div *ngIf="facet" [formGroup]="form">

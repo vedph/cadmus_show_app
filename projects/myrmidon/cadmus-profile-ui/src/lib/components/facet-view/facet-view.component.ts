@@ -21,7 +21,6 @@ import { ColorService, DialogService } from '@myrmidon/cadmus-show-ui';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { PartDefinitionVmService } from '../../services/part-definition-vm.service';
-import { FacetListService } from '../facet-list/store/facet-list.service';
 import {
   GroupedPartDefinition,
   GroupingFacet,
@@ -96,8 +95,6 @@ export class FacetViewComponent {
     private _dialogService: DialogService,
     private _colorService: ColorService,
     private _partService: PartDefinitionVmService,
-    // TODO: refactor this service
-    private _facetListService: FacetListService
   ) {
     this.tabIndex = 0;
     this.editable = true;
@@ -136,6 +133,10 @@ export class FacetViewComponent {
     // we're no more dirty
     this.form.markAsPristine();
     this.dirty = false;
+  }
+
+  public getContrastColor(color: string | undefined): string {
+    return this._colorService.getContrastColor(color || '');
   }
 
   //#region Groups
@@ -246,10 +247,6 @@ export class FacetViewComponent {
       });
   }
   //#endregion
-
-  public getContrastColor(color: string | undefined): string {
-    return this._colorService.getContrastColor(color || '');
-  }
 
   //#region Parts
   public buildScopedPartId(groupIndex: number, part: PartDefinition): string {
@@ -457,7 +454,7 @@ export class FacetViewComponent {
   public onPartChange(part: PartDefinition): void {
     // part has changed, we must refresh the whole facet
     // get part definitions from it
-    const parts = this._facetListService.getPartDefsFromGroupingFacet(
+    const parts = this._partService.getPartDefsFromGroupingFacet(
       this._facet as GroupingFacet
     );
     // replace the edited part definition
@@ -486,7 +483,7 @@ export class FacetViewComponent {
     // emit facet change
     const newFacet: GroupingFacet = {
       ...gf,
-      groups: this._facetListService.getFacetPartGroups(facet),
+      groups: this._partService.getFacetPartGroups(facet),
     };
     this.facetChange.emit(newFacet);
   }

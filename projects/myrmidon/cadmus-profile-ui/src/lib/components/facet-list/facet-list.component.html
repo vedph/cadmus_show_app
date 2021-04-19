@@ -26,18 +26,14 @@
   </button>
 </form>
 <div *ngIf="facets">
-  <mat-tab-group [(selectedIndex)]="tabIndex">
-    <!-- list -->
-    <mat-tab label="list">
-      <cadmus-facet-view
-        *ngFor="let f of facets"
-        [facet]="f"
-        (viewPartInfo)="onViewPartInfo($event)"
-        (facetChange)="onFacetChange($event)"
-      ></cadmus-facet-view>
+  <!-- list -->
+  <cadmus-facet-view
+    *ngFor="let f of facets"
+    [facet]="f"
+    (viewPartInfo)="onViewPartInfo($event)"
+    (facetChange)="onFacetChange($event)"
+  ></cadmus-facet-view>
 
-      <!-- info -->
-      <cadmus-part-info [model]="currentModel" #info></cadmus-part-info>
-    </mat-tab>
-  </mat-tab-group>
+  <!-- info -->
+  <cadmus-part-info [model]="currentModel" #info></cadmus-part-info>
 </div>

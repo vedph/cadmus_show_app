@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { FacetDefinition } from '@myrmidon/cadmus-core';
-import { FacetListQuery, FacetListService } from '@myrmidon/cadmus-profile-ui';
+import { FacetListQuery, FacetListService, PartDefinitionVmService } from '@myrmidon/cadmus-profile-ui';
 import { CadmusShopAssetService } from '@myrmidon/cadmus-shop-asset';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
@@ -18,6 +18,7 @@ export class FacetListCodePageComponent {
   constructor(
     facetListQuery: FacetListQuery,
     private _facetListService: FacetListService,
+    private _partService: PartDefinitionVmService,
     private _shopService: CadmusShopAssetService,
     private _snackbar: MatSnackBar,
     private _router: Router
@@ -30,7 +31,7 @@ export class FacetListCodePageComponent {
             label: gf.label,
             colorKey: gf.colorKey || '',
             description: gf.description,
-            partDefinitions: this._facetListService.getPartDefsFromGroupingFacet(
+            partDefinitions: this._partService.getPartDefsFromGroupingFacet(
               gf
             ),
           };
