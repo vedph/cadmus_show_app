@@ -82,5 +82,6 @@ export class ModelLookupComponent {
   public pickItem(item: CadmusModel): void {
     this.item = item;
     this.itemChange.emit(item);
+    this.lookup.reset();
   }
 }

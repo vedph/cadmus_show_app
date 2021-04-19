@@ -63,7 +63,7 @@ export class PartDefinitionEditorComponent implements OnInit {
     this.typeId = formBuilder.control(null, [
       Validators.required,
       Validators.maxLength(100),
-      Validators.pattern(/^[a-zA-Z][-_a-zA-Z0-9]+$/),
+      Validators.pattern(/^[a-zA-Z][-._a-zA-Z0-9]+$/),
     ]);
     this.roleId = formBuilder.control(null, [
       Validators.maxLength(50),
@@ -84,12 +84,12 @@ export class PartDefinitionEditorComponent implements OnInit {
     );
     this.groupKey = formBuilder.control(null, [
       Validators.maxLength(50),
-      Validators.pattern(/^[a-zA-Z][-_a-zA-Z0-9]+$/),
+      Validators.pattern(/^[a-zA-Z][-._a-zA-Z0-9]+$/),
     ]);
     this.sortKey = formBuilder.control(null, [
       Validators.required,
       Validators.maxLength(50),
-      Validators.pattern(/^[a-zA-Z][-_a-zA-Z0-9]+$/),
+      Validators.pattern(/^[a-zA-Z][-._a-zA-Z0-9]+$/),
     ]);
     this.form = formBuilder.group({
       typeId: this.typeId,
@@ -141,12 +141,14 @@ export class PartDefinitionEditorComponent implements OnInit {
   public onPartModelPicked(model: CadmusModel): void {
     if (model) {
       this.typeId.setValue(model.id);
+      this.typeId.updateValueAndValidity();
     }
   }
 
   public onFragmentModelPicked(model: CadmusModel): void {
     if (model) {
       this.roleId.setValue(model.id);
+      this.roleId.updateValueAndValidity();
     }
   }
 

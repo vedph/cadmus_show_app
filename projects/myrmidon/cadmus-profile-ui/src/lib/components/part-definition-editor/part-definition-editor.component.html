@@ -2,14 +2,14 @@
   <div>
     <!-- typeId -->
     <mat-form-field>
-      <input matInput [formControl]="typeId" placeholder="typeId" />
+      <input matInput [formControl]="typeId" placeholder="type ID" />
       <mat-error
         *ngIf="typeId.errors?.required && (typeId.dirty || typeId.touched)"
-        >typeId required</mat-error
+        >type ID required</mat-error
       >
       <mat-error
         *ngIf="typeId.errors?.maxLength && (typeId.dirty || typeId.touched)"
-        >typeId too long</mat-error
+        >type ID too long</mat-error
       >
     </mat-form-field>
     &nbsp;
