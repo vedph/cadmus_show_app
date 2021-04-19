@@ -52,6 +52,15 @@ export class RamThesaurusService {
   }
 
   /**
+   * Get an array with all the thesauri.
+   *
+   * @returns All the thesauri.
+   */
+  public getAll(): Thesaurus[] {
+    return [...this._thesauri$.value];
+  }
+
+  /**
    * Get the thesaurus with the specified ID.
    *
    * @param id The thesaurus ID.

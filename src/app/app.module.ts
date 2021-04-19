@@ -12,10 +12,7 @@ import { CadmusMaterialModule } from '@myrmidon/cadmus-material';
 import { CadmusUiModule } from '@myrmidon/cadmus-ui';
 import { CadmusProfileCoreModule } from '@myrmidon/cadmus-profile-core';
 import { NgTickerModule } from 'ng-ticker';
-import {
-  CadmusProfileUiModule,
-  ThesaurusEditorComponent,
-} from '@myrmidon/cadmus-profile-ui';
+import { CadmusProfileUiModule } from '@myrmidon/cadmus-profile-ui';
 import { CadmusShopCoreModule } from '@myrmidon/cadmus-shop-core';
 import { CadmusShopAssetModule } from '@myrmidon/cadmus-shop-asset';
 import { CadmusShowUiModule } from '@myrmidon/cadmus-show-ui';
@@ -37,6 +34,7 @@ import { ShopPageComponent } from './components/shop-page/shop-page.component';
 import { ThesaurusListPageComponent } from './components/thesaurus-list-page/thesaurus-list-page.component';
 import { ThesaurusListCodePageComponent } from './components/thesaurus-list-code-page/thesaurus-list-code-page.component';
 import { ThesaurusEditComponent } from './components/thesaurus-edit/thesaurus-edit.component';
+import { ProfileCodePageComponent } from './components/profile-code-page/profile-code-page.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +51,7 @@ import { ThesaurusEditComponent } from './components/thesaurus-edit/thesaurus-ed
     ThesaurusListPageComponent,
     ThesaurusListCodePageComponent,
     ShopPageComponent,
+    ProfileCodePageComponent,
   ],
   imports: [
     BrowserModule,
@@ -76,6 +75,7 @@ import { ThesaurusEditComponent } from './components/thesaurus-edit/thesaurus-ed
         { path: 'home', component: HomeComponent },
         { path: 'profile', component: ProfileHomeComponent },
         { path: 'profile/flow', component: ProfileFlowComponent },
+        { path: 'profile/code', component: ProfileCodePageComponent },
         { path: 'docs/complex-models', component: ComplexModelsComponent },
         { path: 'models', component: ShopPageComponent },
         { path: 'models/shop', component: ModelListComponent },

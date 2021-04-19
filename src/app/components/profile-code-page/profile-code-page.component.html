@@ -1,0 +1,13 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <h2>Flags List Code</h2>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <cadmus-json-editor
+      [data]="profile"
+      (dataChange)="onDataChange($event)"
+    ></cadmus-json-editor>
+  </mat-card-content>
+</mat-card>

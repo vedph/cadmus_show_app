@@ -37,6 +37,7 @@ export class JsonEditorComponent implements OnInit {
   @Output()
   public dataChange: EventEmitter<any>;
 
+  @Input()
   public editorOptions: JsonEditorOptions;
 
   public json: FormControl;
@@ -45,8 +46,6 @@ export class JsonEditorComponent implements OnInit {
   constructor(formBuilder: FormBuilder) {
     this.dataChange = new EventEmitter<string>();
     // options
-    this.editorOptions = new JsonEditorOptions();
-    this.editorOptions.modes = ['code', 'text', 'tree', 'view'];
     this.editorOptions = new JsonEditorOptions();
     this.editorOptions.modes = ['code', 'text', 'tree', 'view'];
     this.editorOptions.onModeChange = (newMode, oldMode) => {
