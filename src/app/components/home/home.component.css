@@ -2,8 +2,10 @@
   background-image: url("/assets/img/cadmus.png");
   background-repeat: no-repeat;
   background-position: center center;
+  margin: 8px;
+  height: calc(100vh - 200px);
 }
-.card {
+/* .card {
   min-height: 400px;
   background-color: #E2D6BC;
   border-radius: 24px;
@@ -23,4 +25,42 @@
   color: white;
   text-decoration: none;
   cursor: pointer;
+} */
+
+.widget {
+  width: 220px;
+  border: 2px solid silver;
+  border-radius: 16px;
+  background-color: white;
+  opacity: 0.85;
+  color: black;
+}
+.widget h2 {
+  text-align: center;
+  margin: 8px 0;
+}
+.widget img {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+.widget mat-icon {
+  margin: 40px 0 20px 0;
+  font-size: 200px;
+  width: 200px;
+  height: 200px;
+  color: #3F51B5;
+  margin: 0;
+}
+.widget a {
+  text-decoration: none;
+  cursor: pointer;
+  color: black;
+}
+.widget a:visited {
+  color: black;
+}
+.widget div {
+  text-align: center;
+  margin: 8px 0;
 }

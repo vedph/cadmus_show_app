@@ -1,36 +1,41 @@
-<div id="container" style="margin: 8px">
-  <div
-    gdAreas="intro docs | shop profile"
-    gdAreas.lt-md="intro | docs | shop | profile"
-    gdColumns="1fr 1fr"
-    gdColumns.lt-md="100%"
-    gdRows="auto auto"
-    gdRows.lt-md="auto auto auto auto"
-    gdGap="16px"
-  >
-    <div class="card">
-      <div>
-        <a><mat-icon>explore</mat-icon></a>
-      </div>
-      <div><a>Introduction</a></div>
+<div
+  id="container"
+  gdAreas="intro docs | shop profile"
+  gdAreas.lt-md="intro | docs | shop | profile"
+  gdColumns="50% 50%"
+  gdColumns.lt-md="100%"
+  gdRows="auto auto"
+  gdRows.lt-md="auto auto auto auto"
+  gdGap="16px"
+  gdAlignColumns="center"
+  style="justify-items:center"
+>
+  <div class="widget" gdArea="intro">
+    <h2>Explore</h2>
+    <div>
+      <a><mat-icon>explore</mat-icon></a>
+      <p><a>Introduction</a></p>
     </div>
-    <div class="card">
-      <div>
-        <a><mat-icon>description</mat-icon></a>
-      </div>
-      <div><a routerLink="/docs/complex-models">Documentation</a></div>
+  </div>
+  <div class="widget" gdArea="docs">
+    <h2>Learn</h2>
+    <div>
+      <a><mat-icon>description</mat-icon></a>
+      <p><a routerLink="/docs/complex-models">Documentation</a></p>
     </div>
-    <div class="card">
-      <div>
-        <a routerLink="/shop"><mat-icon>shopping_bag</mat-icon></a>
-      </div>
-      <div><a routerLink="/shop">Models Shop</a></div>
+  </div>
+  <div class="widget" gdArea="shop">
+    <h2>Models</h2>
+    <div>
+      <a routerLink="/shop"><mat-icon>shopping_bag</mat-icon></a>
+      <p><a routerLink="/shop">Models Shop</a></p>
     </div>
-    <div class="card">
-      <div>
-        <a routerLink="/profile"><mat-icon>build</mat-icon></a>
-      </div>
-      <div><a>Profile Builder</a></div>
+  </div>
+  <div class="widget" gdArea="profile">
+    <h2>Profile</h2>
+    <div>
+      <a routerLink="/profile"><mat-icon>build</mat-icon></a>
+      <p><a>Profile Builder</a></p>
     </div>
   </div>
 </div>
