@@ -33,6 +33,14 @@
   },
   {
     "fragment": true,
+    "id": "fr.it.vedph.pura.lemma-tag",
+    "project": "pura",
+    "name": "lemma tags",
+    "tip": "Tags related to reference lemma.",
+    "tags": ["linguistics", "text"]
+  },
+  {
+    "fragment": true,
     "id": "fr.it.vedph.quotations",
     "project": "shell",
     "name": "quotations",
@@ -62,13 +70,5 @@
     "name": "quotations",
     "tip": "Quotations with variants.",
     "tags": ["philology", "text"]
-  },
-  {
-    "fragment": true,
-    "id": "fr.it.vedph.pura.lemma-tag",
-    "project": "pura",
-    "name": "lemma tags",
-    "tip": "Lemma tags layer.",
-    "tags": ["linguistics", "text"]
   }
 ]
