@@ -26,6 +26,10 @@
       "@myrmidon/cadmus-show-ui": [
         "dist/myrmidon/cadmus-show-ui/myrmidon-cadmus-show-ui",
         "dist/myrmidon/cadmus-show-ui"
+      ],
+      "@myrmidon/cadmus-show-viz": [
+        "dist/myrmidon/cadmus-show-viz/myrmidon-cadmus-show-viz",
+        "dist/myrmidon/cadmus-show-viz"
       ]
     },
     "baseUrl": "./",
