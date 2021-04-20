@@ -1,0 +1,24 @@
+<h1>Cadmus Models Graph</h1>
+<div>
+  <button type="button" (click)="togglePause()">
+    {{ paused ? "start" : "pause" }}
+  </button>
+  <button type="button" (click)="reset()">reset</button>
+  <span class="info"
+    >zoom, pan, click or drag nodes - shift+drag=pin, ctrl+click=unpin.</span
+  >
+</div>
+<hr />
+<div
+  style="display: grid; grid-template-columns: auto; grid-template-rows: auto"
+>
+  <cadmus-force-graph
+    style="display: grid"
+    [data]="data"
+    [options]="options"
+    [paused]="paused"
+    [fitWindow]="true"
+    (nodeClick)="onNodeClick($event)"
+  ></cadmus-force-graph>
+</div>
+<div style="color: silver">{{ message }}</div>

@@ -16,6 +16,7 @@ import { CadmusProfileUiModule } from '@myrmidon/cadmus-profile-ui';
 import { CadmusShopCoreModule } from '@myrmidon/cadmus-shop-core';
 import { CadmusShopAssetModule } from '@myrmidon/cadmus-shop-asset';
 import { CadmusShowUiModule } from '@myrmidon/cadmus-show-ui';
+import { CadmusShowVizModule } from '@myrmidon/cadmus-show-viz';
 
 import { environment } from '../environments/environment';
 import { EnvServiceProvider } from '@myrmidon/cadmus-core';
@@ -35,6 +36,7 @@ import { ThesaurusListPageComponent } from './components/thesaurus-list-page/the
 import { ThesaurusListCodePageComponent } from './components/thesaurus-list-code-page/thesaurus-list-code-page.component';
 import { ThesaurusEditComponent } from './components/thesaurus-edit/thesaurus-edit.component';
 import { ProfileCodePageComponent } from './components/profile-code-page/profile-code-page.component';
+import { ModelGraphPageComponent } from './components/model-graph-page/model-graph-page.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +54,7 @@ import { ProfileCodePageComponent } from './components/profile-code-page/profile
     ThesaurusListCodePageComponent,
     ShopPageComponent,
     ProfileCodePageComponent,
+    ModelGraphPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,6 +72,7 @@ import { ProfileCodePageComponent } from './components/profile-code-page/profile
     CadmusShopCoreModule,
     CadmusShopAssetModule,
     CadmusShowUiModule,
+    CadmusShowVizModule,
     RouterModule.forRoot(
       [
         { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -79,6 +83,7 @@ import { ProfileCodePageComponent } from './components/profile-code-page/profile
         { path: 'docs/complex-models', component: ComplexModelsComponent },
         { path: 'models', component: ShopPageComponent },
         { path: 'models/shop', component: ModelListComponent },
+        { path: 'models/graph', component: ModelGraphPageComponent},
         { path: 'facets-code', component: FacetListCodePageComponent },
         { path: 'facets-list', component: FacetListPageComponent },
         { path: 'flags-code', component: FlagListCodePageComponent },
