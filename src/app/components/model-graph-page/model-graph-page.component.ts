@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CadmusShopAssetService } from '@myrmidon/cadmus-shop-asset';
+import { CadmusModel } from '@myrmidon/cadmus-shop-core';
 import {
   ForceGraphOptions,
   GraphData,
@@ -17,8 +18,9 @@ export class ModelGraphPageComponent {
   public data: GraphData;
   public paused: boolean;
   public message?: string;
+  public model: CadmusModel | undefined;
 
-  constructor(shopService: CadmusShopAssetService) {
+  constructor(private _shopService: CadmusShopAssetService) {
     this.options = {
       svgId: 'force-graph',
       width: 800,
@@ -32,7 +34,7 @@ export class ModelGraphPageComponent {
       links: [],
     };
     this.paused = false;
-    shopService
+    _shopService
       .loadObject<GraphData>('graph')
       .pipe(take(1))
       .subscribe((d) => {
@@ -41,7 +43,19 @@ export class ModelGraphPageComponent {
   }
 
   public onNodeClick(node: GraphNode): void {
-    this.message = JSON.stringify(node);
+    // a project label is capitalized
+    if (node.label === node.label?.toUpperCase()) {
+      return;
+    }
+    const id = node.id as string;
+    const fragment = id.startsWith('fr.');
+    this._shopService.getModel(id, fragment).subscribe((m) => {
+      if (m) {
+        this._shopService.getModelDetails(m).subscribe((dm) => {
+          this.model = dm;
+        });
+      }
+    });
   }
 
   public togglePause(): void {

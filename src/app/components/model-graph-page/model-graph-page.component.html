@@ -1,9 +1,22 @@
 <h1>Cadmus Models Graph</h1>
 <div>
-  <button type="button" (click)="togglePause()">
-    {{ paused ? "start" : "pause" }}
+  <button
+    mat-icon-button
+    color="primary"
+    type="button"
+    (click)="togglePause()"
+    matTooltip="Toggle pause"
+  >
+    <mat-icon>{{ paused ? "play_arrow" : "pause" }}</mat-icon>
   </button>
-  <button type="button" (click)="reset()">reset</button>
+  <button
+    mat-icon-button
+    type="button"
+    (click)="reset()"
+    matTooltip="Reset graph"
+  >
+    <mat-icon>restart_alt</mat-icon>
+  </button>
   <span class="info"
     >zoom, pan, click or drag nodes - shift+drag=pin, ctrl+click=unpin.</span
   >
@@ -21,4 +34,6 @@
     (nodeClick)="onNodeClick($event)"
   ></cadmus-force-graph>
 </div>
-<div style="color: silver">{{ message }}</div>
+<div>
+  <cadmus-part-info *ngIf="model" [model]="model"></cadmus-part-info>
+</div>
