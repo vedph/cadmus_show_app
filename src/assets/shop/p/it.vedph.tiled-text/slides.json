@@ -2,7 +2,7 @@
   {
     "id": "tiled-text01.png",
     "label": "tiled text",
-    "tip": "A text chopped in rows and arbitrarily defined tiles. Each row contains a set of tiles and an open set of metadata. Each tile contains text and an open set of metadata."
+    "tip": "A text which can be used as the base text for metatextual layers. Its content is chopped in rows and arbitrarily defined tiles. Each row contains a set of tiles and an open set of metadata. Each tile contains text and an open set of metadata."
   },
   {
     "id": "tiled-text01.png",

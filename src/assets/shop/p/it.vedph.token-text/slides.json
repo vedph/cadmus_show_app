@@ -1,2 +1,7 @@
 [
+  {
+    "id": "token-text01.png",
+    "label": "token-based text",
+    "tip": "A text, which can be used as the base text for metatextual layers. Here the text is referenced with coordinates related to line and token number, the token being defined as any portion of text delimited by space. An optional citation can be used to encode its citation according to any citation scheme. Also, a number of standard operations can be applied to transform the text when pasting it, so that it best fits this model. For instance, you can normalize whitespaces or split text into lines at full stops."
+  }
 ]
