@@ -10,6 +10,19 @@
         <mat-icon>input</mat-icon>
         load sample
       </button>
+      &nbsp;
+      <div style="display: inline-block">
+        <label for="file">
+          <mat-icon style="vertical-align: middle">folder_open</mat-icon> import
+          CSV
+        </label>
+        <input
+          type="file"
+          id="file"
+          accept=".txt,.csv,.tsv"
+          (chenge)="importCsv($event)"
+        />
+      </div>
     </div>
     <cadmus-json-editor
       [data]="(data$ | async) || '[]'"

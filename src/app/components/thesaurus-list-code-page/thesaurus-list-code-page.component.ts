@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Thesaurus } from '@myrmidon/cadmus-core';
+import { CsvParserService } from '@myrmidon/cadmus-profile-core';
 import { RamThesaurusService } from '@myrmidon/cadmus-profile-ui';
 import { CadmusShopAssetService } from '@myrmidon/cadmus-shop-asset';
 import { Observable } from 'rxjs';
@@ -25,6 +26,7 @@ export class ThesaurusListCodePageComponent {
   constructor(
     private _thesService: RamThesaurusService,
     private _shopService: CadmusShopAssetService,
+    private _csvService: CsvParserService,
     private _snackbar: MatSnackBar,
     private _router: Router
   ) {
@@ -46,5 +48,29 @@ export class ThesaurusListCodePageComponent {
       duration: 1500,
     });
     this._router.navigate(['/profile/flow'], { queryParams: { step: 3 } });
+  }
+
+  private parseCsv(text: string): void {
+    try {
+      const rows = this._csvService.parse(text);
+      // TODO
+    } catch (err) {
+      this._snackbar.open('Error parsing CSV', 'OK');
+      console.error(JSON.stringify(err));
+    }
+  }
+
+  // TODO: eventually use https://www.npmjs.com/package/@angular-material-components/file-input
+  public importCsv(event: any): void {
+    const file = event.target.files[0];
+    if (!file) {
+      return;
+    }
+    const reader = new FileReader();
+
+    reader.onload = (e: any) => {
+      this.parseCsv(e.target.result);
+    };
+    reader.readAsText(file);
   }
 }

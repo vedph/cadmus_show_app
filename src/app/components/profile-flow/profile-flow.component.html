@@ -5,6 +5,24 @@
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
+    <p>
+      Use this builder to create your Cadmus profile in 3 steps. In each step, you can either use a visual editor, or just paste/edit its corresponding JSON code.
+    </p>
+    <ol>
+      <li tourAnchor="profile-flow.facets">
+        <strong>facets</strong>: define data models.
+      </li>
+      <li tourAnchor="profile-flow.flags">
+        <strong>flags</strong>: optionally define flags with editorial purposes.
+      </li>
+      <li tourAnchor="profile-flow.thesauri">
+        <strong>thesauri</strong>: define taxonomies.
+      </li>
+    </ol>
+    <button type="button" mat-icon-button (click)="startTour()">
+      <mat-icon>live_help</mat-icon> more info
+    </button>
+
     <mat-vertical-stepper
       [selectedIndex]="initialIndex"
       (selectionChange)="onStepperSelectionChange($event)"

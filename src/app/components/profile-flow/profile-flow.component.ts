@@ -6,6 +6,7 @@ import {
   FlagListQuery,
   RamThesaurusService,
 } from '@myrmidon/cadmus-profile-ui';
+import { TourService } from 'ngx-ui-tour-md-menu';
 
 @Component({
   selector: 'app-profile-flow',
@@ -22,6 +23,7 @@ export class ProfileFlowComponent implements OnInit {
     private _facetQuery: FacetListQuery,
     private _flagQuery: FlagListQuery,
     private _thesService: RamThesaurusService,
+    private _tourService: TourService,
     route: ActivatedRoute
   ) {
     this._steps = [false, false, false];
@@ -54,5 +56,9 @@ export class ProfileFlowComponent implements OnInit {
       return;
     }
     this.setCounts(event.selectedIndex);
+  }
+
+  public startTour() {
+    this._tourService.start();
   }
 }

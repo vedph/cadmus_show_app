@@ -37,6 +37,7 @@ import { ThesaurusListCodePageComponent } from './components/thesaurus-list-code
 import { ThesaurusEditComponent } from './components/thesaurus-edit/thesaurus-edit.component';
 import { ProfileCodePageComponent } from './components/profile-code-page/profile-code-page.component';
 import { ModelGraphPageComponent } from './components/model-graph-page/model-graph-page.component';
+import { TourMatMenuModule } from 'ngx-ui-tour-md-menu';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,8 @@ import { ModelGraphPageComponent } from './components/model-graph-page/model-gra
     // markdown
     MarkdownModule.forRoot(),
     NgTickerModule,
+    // https://hakimio.github.io/ngx-ui-tour/
+    TourMatMenuModule.forRoot(),
     CadmusMaterialModule,
     CadmusUiModule,
     CadmusProfileCoreModule,
