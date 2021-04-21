@@ -1,7 +1,22 @@
 [
   {
-    "id": "comment.png",
+    "id": "comment01.png",
     "label": "comment",
-    "tip": "Generic comment."
+    "tip": "A generic comment tagged for geography. Text is Markdown, with preview."
+  },
+  {
+    "id": "comment02.png",
+    "label": "references",
+    "tip": "A set of documental references and/or IDs from external resources."
+  },
+  {
+    "id": "comment03.png",
+    "label": "categories",
+    "tip": "A hierarchic set of categories you can attach to the comment."
+  },
+  {
+    "id": "comment04.png",
+    "label": "keywords",
+    "tip": "A set of keywords you can attach to the comment. Each keyword can belong to a specific index, have a tag to further classify it, and has a language and a value plus an optional note."
   }
 ]
