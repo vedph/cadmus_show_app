@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Thesaurus } from '@myrmidon/cadmus-core';
-import { CsvParserService } from '@myrmidon/cadmus-profile-core';
 import { RamThesaurusService } from '@myrmidon/cadmus-profile-ui';
 import { CadmusShopAssetService } from '@myrmidon/cadmus-shop-asset';
 import { Observable } from 'rxjs';
@@ -26,7 +25,6 @@ export class ThesaurusListCodePageComponent {
   constructor(
     private _thesService: RamThesaurusService,
     private _shopService: CadmusShopAssetService,
-    private _csvService: CsvParserService,
     private _snackbar: MatSnackBar,
     private _router: Router
   ) {
@@ -52,7 +50,12 @@ export class ThesaurusListCodePageComponent {
 
   private parseCsv(text: string): void {
     try {
-      const rows = this._csvService.parse(text);
+      // by convention the CSV has column 1=ID and column 2=value
+      // for each thesaurus entry. Each thesaurus is started by a
+      // row having in the ID the thesaurus ID and an empty value.
+      // If a thesaurus ID is just an alias, the value starts with
+      // an equal sign (e.g. "biblio-languages,=languages") and
+      // has no other entries.
       // TODO
     } catch (err) {
       this._snackbar.open('Error parsing CSV', 'OK');

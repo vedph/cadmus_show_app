@@ -1,9 +1,7 @@
-import { Injectable } from '@angular/core';
-
 /**
- * Options for CsvParserService.
+ * Options for CsvReader.
  */
-export interface CsvParserOptions {
+export interface CsvReaderOptions {
   fieldSeparator?: string;
   lineSeparator?: string;
   quote?: string;
@@ -44,16 +42,12 @@ class ParseError extends Error {
 }
 
 /**
- * Simple CSV parser. Derived from
- * https://github.com/gregoranders/ts-csv/blob/master/src/index.ts.
- * Usage: eventually configure with the desired options, then use
- * parse to get an array of fields (=string arrays).
+ * CSV text reader.
+ * Refactored from https://github.com/gregoranders/ts-csv/blob/master/src/index.ts.
  */
-@Injectable({
-  providedIn: 'root',
-})
-export class CsvParserService {
-  private _rows = [] as string[][];
+export class CsvReader {
+  private readonly _text: string;
+  private _lastRow = [] as string[];
   private _row = [] as string[];
   private _cell = '';
   private _options = DEFAULT_OPTIONS;
@@ -61,101 +55,51 @@ export class CsvParserService {
   private _index = 0;
   private _current = '';
   private _previous = '';
-  private _quoteState = { ...CSV_INITAL_STATE };
 
-  constructor() {
-    this._options = Object.assign({}, DEFAULT_OPTIONS);
+  constructor(text: string, options?: CsvReaderOptions) {
+    this._text = text;
+    this._options = Object.assign({}, DEFAULT_OPTIONS, options || {});
+    this.reset();
   }
 
   /**
-   * Configure this service.
-   *
-   * @param options The options.
-   */
-  public configure(options: CsvParserOptions): void {
-    this._options = Object.assign({}, DEFAULT_OPTIONS, options);
-  }
-
-  /**
-   * Parse CSV text.
+   * Read the next row from the CSV text.
    *
    * @param text - CSV text
    * @returns array of fields, each being an array of strings.
    * @throws Error on parse error
    */
-  public parse(text: string): readonly string[][] {
-    this.reset();
-
-    for (this._index = 0; this._index < text.length; this._index++) {
+  public read(): readonly string[] | null {
+    while (this._index < this._text.length) {
       this._state.appendCell = true;
       this._previous = this._current;
-      this._current = text[this._index];
-      this.handleNext();
+      this._current = this._text[this._index];
+      if (this.handleNext()) {
+        this._index++;
+        return this._lastRow;
+      }
+      this._index++;
     }
 
     if (this._row.length > 0) {
       this.addField(this.fieldValue(this._cell), this._row, this._state);
-      this.addRow(this._row, this._rows, this._state);
+      this.nextRow(this._row, this._state);
+      this._row.length = 0;
+      return this._lastRow;
     }
 
-    if (this._state.quoted) {
-      throw new ParseError(this._quoteState.line, this._quoteState.lineOffset);
-    }
-
-    this.makeImmutable();
-
-    return this._rows;
+    return null;
   }
 
-  /**
-   * Returns rows.
-   *
-   * @returns array of fields, each being an array of strings.
-   */
-  public get rows(): readonly string[][] {
-    return this._rows;
-  }
-
-  /**
-   * Returns rows as an array of objects using the first row as property
-   * name provider.
-   *
-   * @returns an array of objects.
-   */
-  public getObject<T>(): readonly T[] {
-    if (this.rows.length > 0) {
-      const keys = this.rows[0].filter(
-        (field) => typeof field === 'string'
-      ) as string[];
-
-      return Object.freeze(
-        this.rows
-          .filter((row, idx) => row && idx > 0)
-          .map((row) => {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            const object = {} as any;
-            keys.forEach((key, keyIdx) => {
-              object[key] = row[keyIdx];
-            });
-
-            return Object.freeze(object);
-          })
-      );
-    }
-
-    return Object.freeze([]);
-  }
-
-  private handleNext() {
+  private handleNext(): boolean {
     this.handleQuote() ||
       this.handleFieldSeparator() ||
       this.handleLineSeparator();
-    this.processState();
+    return this.processState();
   }
 
   private handleQuote() {
     if (this._current === this._options.quote) {
-      this._quoteState = { ...this._state };
       if (this._index && this._previous !== '\\') {
         this.handleQuoteNotEscaped();
       } else {
@@ -202,7 +146,8 @@ export class CsvParserService {
     return false;
   }
 
-  private processState() {
+  private processState(): boolean {
+    let end = false;
     if (this._state.appendCell) {
       this._cell += this._current;
     }
@@ -213,12 +158,15 @@ export class CsvParserService {
     }
 
     if (this._state.appendRow) {
-      this.addRow(this._row, this._rows, this._state);
+      this.nextRow(this._row, this._state);
       this._row = [] as string[];
+      end = true;
     }
 
     this._state.lineOffset++;
     this._state.fieldOffset++;
+
+    return end;
   }
 
   private fieldValue(cell: string): string {
@@ -236,30 +184,21 @@ export class CsvParserService {
     state.appendField = false;
   }
 
-  private addRow<T extends string[]>(row: T, rows: T[], state: State) {
-    rows.push(row);
+  private nextRow<T extends string[]>(row: T, state: State) {
+    this._lastRow = row;
     state.field = 0;
     state.line++;
     state.lineOffset = -1;
     state.appendRow = false;
   }
 
-  private makeImmutable() {
-    this.rows.forEach((row) => {
-      row.forEach((value) => Object.freeze(value));
-      Object.freeze(row);
-    });
-    Object.freeze(this._rows);
-  }
-
   private reset() {
-    this._rows = [];
+    this._lastRow = [];
     this._row = [];
     this._cell = '';
     this._state = { ...CSV_INITAL_STATE };
     this._index = 0;
     this._current = '';
     this._previous = '';
-    this._quoteState = { ...CSV_INITAL_STATE };
   }
 }
