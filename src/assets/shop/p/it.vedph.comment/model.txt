@@ -1,1 +1,16 @@
-TODO
+- tag (string)
+- text* (string, MD)
+- references (DocReference[]):
+  - tag (string)
+  - author (string)
+  - work (string)
+  - location (string)
+  - note (string)
+- externalIds (string[])
+- categories (string[])
+- keywords (IndexKeyword[]):
+  - language* (string)
+  - value* (string)
+  - indexId (string)
+  - note (string)
+  - tag (string)
