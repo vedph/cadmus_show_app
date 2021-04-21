@@ -1,0 +1,7 @@
+[
+  {
+    "id": "token-text-layer01.png",
+    "label": "token-based text layers",
+    "tip": "This part shows a layer of metadata on top of a token-referenced base text. The layer has any number of so-called fragments, i.e. objects with their own model, representing structured information attached to any portion of the base text. Each fragment in the layer is highlighted in the base text. To add a new fragment, just select any portion of the text, and click the add button. To edit an existing fragment, select any portion of the highlighted text, and click the edit button."
+  }
+]
