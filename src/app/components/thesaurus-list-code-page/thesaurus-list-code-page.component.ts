@@ -50,12 +50,6 @@ export class ThesaurusListCodePageComponent {
 
   private parseCsv(text: string): void {
     try {
-      // by convention the CSV has column 1=ID and column 2=value
-      // for each thesaurus entry. Each thesaurus is started by a
-      // row having in the ID the thesaurus ID and an empty value.
-      // If a thesaurus ID is just an alias, the value starts with
-      // an equal sign (e.g. "biblio-languages,=languages") and
-      // has no other entries.
       // TODO
     } catch (err) {
       this._snackbar.open('Error parsing CSV', 'OK');

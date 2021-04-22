@@ -5,12 +5,14 @@ export interface CsvReaderOptions {
   fieldSeparator?: string;
   lineSeparator?: string;
   quote?: string;
+  trimming?: boolean;
 }
 
 const DEFAULT_OPTIONS = {
   fieldSeparator: ',',
   lineSeparator: '\n',
   quote: '"',
+  trimming: true
 };
 
 interface State {
@@ -178,7 +180,7 @@ export class CsvReader {
     row: T,
     state: State
   ) {
-    row.push(field);
+    row.push(this._options.trimming? field.trim() : field);
     state.field++;
     state.fieldOffset = -1;
     state.appendField = false;

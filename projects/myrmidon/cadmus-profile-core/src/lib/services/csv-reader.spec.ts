@@ -1,6 +1,6 @@
 import { CsvReader } from './csv-reader';
 
-fdescribe('CsvReader', () => {
+describe('CsvReader', () => {
   it('should be created', () => {
     expect(new CsvReader('')).toBeTruthy();
   });
