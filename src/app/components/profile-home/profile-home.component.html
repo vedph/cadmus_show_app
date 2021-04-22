@@ -258,5 +258,32 @@
         value column prefixed with an equals sign.
       </li>
     </ul>
+    <p>Sample:</p>
+    <code>
+      <pre>
+languages@en,
+eng,English
+ita,Italian
+lat,Latin
+grc,Greek
+biblio-languages@en,=languages
+colors@en,
+r,red
+g,green
+b,blue</pre
+      >
+    </code>
+    <p>
+      In this sample there are 3 thesauri: the first has ID=<code
+        >languages@en</code
+      >
+      (where <code>en</code>=English), with 4 entries, each with its ID/value
+      pair. For instance, the first entry in it has ID=<code>eng</code> and
+      value=<code>English</code>. The second thesaurus is just an alias, whose
+      ID (<code>biblio-languages@en</code>) redirects to the thesaurus with ID
+      <code>languages</code> (no language specifier is required in the target
+      ID). Finally, a third thesaurus has ID=<code>colors@en</code>, with 3
+      entries for 3 colors.
+    </p>
   </article>
 </div>

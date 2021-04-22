@@ -40,6 +40,7 @@ import { ProfileCodePageComponent } from './components/profile-code-page/profile
 import { ModelGraphPageComponent } from './components/model-graph-page/model-graph-page.component';
 import { TourMatMenuModule } from 'ngx-ui-tour-md-menu';
 import { ReactiveFormsModule } from '@angular/forms';
+import { IntroPageComponent } from './components/intro-page/intro-page.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ShopPageComponent,
     ProfileCodePageComponent,
     ModelGraphPageComponent,
+    IntroPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -84,6 +86,7 @@ import { ReactiveFormsModule } from '@angular/forms';
       [
         { path: '', redirectTo: 'home', pathMatch: 'full' },
         { path: 'home', component: HomeComponent },
+        { path: 'intro', component: IntroPageComponent },
         { path: 'profile', component: ProfileHomeComponent },
         { path: 'profile/flow', component: ProfileFlowComponent },
         { path: 'profile/code', component: ProfileCodePageComponent },
