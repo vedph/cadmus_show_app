@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 import { MarkdownModule } from 'ngx-markdown';
 import { NgJsonEditorModule } from 'ang-jsoneditor';
+import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 
 import { CadmusMaterialModule } from '@myrmidon/cadmus-material';
 import { CadmusUiModule } from '@myrmidon/cadmus-ui';
@@ -38,6 +39,7 @@ import { ThesaurusEditComponent } from './components/thesaurus-edit/thesaurus-ed
 import { ProfileCodePageComponent } from './components/profile-code-page/profile-code-page.component';
 import { ModelGraphPageComponent } from './components/model-graph-page/model-graph-page.component';
 import { TourMatMenuModule } from 'ngx-ui-tour-md-menu';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -61,11 +63,13 @@ import { TourMatMenuModule } from 'ngx-ui-tour-md-menu';
     BrowserModule,
     HttpClientModule,
     CommonModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     NgJsonEditorModule,
     // markdown
     MarkdownModule.forRoot(),
     NgTickerModule,
+    NgxMatFileInputModule,
     // https://hakimio.github.io/ngx-ui-tour/
     TourMatMenuModule.forRoot(),
     CadmusMaterialModule,

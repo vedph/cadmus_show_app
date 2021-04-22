@@ -11,18 +11,19 @@
         load sample
       </button>
       &nbsp;
-      <div style="display: inline-block">
-        <label for="file">
-          <mat-icon style="vertical-align: middle">folder_open</mat-icon> import
-          CSV
-        </label>
-        <input
-          type="file"
-          id="file"
-          accept=".txt,.csv,.tsv"
-          (chenge)="importCsv($event)"
-        />
-      </div>
+      <form [formGroup]="form" (submit)="importCsv()" style="display: inline-block;">
+        <mat-form-field>
+          <ngx-mat-file-input
+            placeholder="CSV file to import"
+            formControlName="csvFile"
+            accept=".csv,.tsv,.txt"
+          >
+          </ngx-mat-file-input>
+        </mat-form-field>
+        <button type="submit" mat-icon-button [disabled]="form.invalid">
+          <mat-icon>upload_file</mat-icon>
+        </button>
+      </form>
     </div>
     <cadmus-json-editor
       [data]="(data$ | async) || '[]'"

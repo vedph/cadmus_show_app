@@ -34,7 +34,7 @@ export class CsvThesaurusReader {
       id: this._id,
       language: this.parseLanguage(this._id),
       targetId: this._targetId,
-      entries: [...this._entries],
+      entries: this._targetId? undefined : [...this._entries],
     };
   }
 

@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Thesaurus } from '@myrmidon/cadmus-core';
+import { CsvThesaurusReader } from '@myrmidon/cadmus-profile-core';
 import { RamThesaurusService } from '@myrmidon/cadmus-profile-ui';
 import { CadmusShopAssetService } from '@myrmidon/cadmus-shop-asset';
 import { Observable } from 'rxjs';
@@ -21,14 +23,21 @@ import { take } from 'rxjs/operators';
 })
 export class ThesaurusListCodePageComponent {
   public data$: Observable<Thesaurus[]>;
+  public csvFile: FormControl;
+  public form: FormGroup;
 
   constructor(
     private _thesService: RamThesaurusService,
     private _shopService: CadmusShopAssetService,
     private _snackbar: MatSnackBar,
-    private _router: Router
+    private _router: Router,
+    formBuilder: FormBuilder
   ) {
     this.data$ = this._thesService.thesauri$;
+    this.csvFile = formBuilder.control(null, Validators.required);
+    this.form = formBuilder.group({
+      csvFile: this.csvFile
+    });
   }
 
   public loadSample(): void {
@@ -50,24 +59,27 @@ export class ThesaurusListCodePageComponent {
 
   private parseCsv(text: string): void {
     try {
-      // TODO
+      const thesauri: Thesaurus[] = [];
+      const reader = new CsvThesaurusReader(text);
+      let thesaurus: Thesaurus | null;
+      while (thesaurus = reader.read()) {
+        thesauri.push(thesaurus);
+      }
+      this._thesService.setAll(thesauri);
     } catch (err) {
       this._snackbar.open('Error parsing CSV', 'OK');
       console.error(JSON.stringify(err));
     }
   }
 
-  // TODO: eventually use https://www.npmjs.com/package/@angular-material-components/file-input
-  public importCsv(event: any): void {
-    const file = event.target.files[0];
-    if (!file) {
+  public importCsv(): void {
+    if (this.form.invalid) {
       return;
     }
     const reader = new FileReader();
-
     reader.onload = (e: any) => {
       this.parseCsv(e.target.result);
     };
-    reader.readAsText(file);
+    reader.readAsText(this.csvFile.value);
   }
 }

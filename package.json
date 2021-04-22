@@ -18,6 +18,7 @@
   "private": true,
   "dependencies": {
     "@angular-material-components/color-picker": "^5.0.2",
+    "@angular-material-components/file-input": "^5.0.1",
     "@angular/animations": "~11.2.7",
     "@angular/cdk": "^11.2.6",
     "@angular/common": "~11.2.7",
@@ -32,7 +33,7 @@
     "@auth0/angular-jwt": "^5.0.2",
     "@datorama/akita": "^6.0.0",
     "@myrmidon/cadmus-api": "0.0.11",
-    "@myrmidon/cadmus-core": "0.0.20",
+    "@myrmidon/cadmus-core": "0.0.21",
     "@myrmidon/cadmus-material": "0.0.5",
     "@myrmidon/cadmus-ui": "0.0.28",
     "ang-jsoneditor": "^1.10.5",
