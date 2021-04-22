@@ -1,3 +1,4 @@
+import { stringify } from '@angular/compiler/src/util';
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -24,6 +25,7 @@ import { take } from 'rxjs/operators';
 export class ThesaurusListCodePageComponent {
   public data$: Observable<Thesaurus[]>;
   public csvFile: FormControl;
+  public csvSeparator: FormControl;
   public form: FormGroup;
 
   constructor(
@@ -35,8 +37,10 @@ export class ThesaurusListCodePageComponent {
   ) {
     this.data$ = this._thesService.thesauri$;
     this.csvFile = formBuilder.control(null, Validators.required);
+    this.csvSeparator = formBuilder.control(',', Validators.required);
     this.form = formBuilder.group({
-      csvFile: this.csvFile
+      csvFile: this.csvFile,
+      csvSeparator: this.csvSeparator
     });
   }
 
@@ -57,10 +61,21 @@ export class ThesaurusListCodePageComponent {
     this._router.navigate(['/profile/flow'], { queryParams: { step: 3 } });
   }
 
+  private parseSeparator(text: string): string {
+    if (!text) {
+      return ',';
+    }
+    return text.replace(new RegExp('U\\+([0-9a-fA-F]{4})', 'g'), (m) => {
+      return String.fromCharCode(parseInt(m[1], 16));
+    });
+  }
+
   private parseCsv(text: string): void {
     try {
       const thesauri: Thesaurus[] = [];
-      const reader = new CsvThesaurusReader(text);
+      const reader = new CsvThesaurusReader(text, {
+        fieldSeparator: this.parseSeparator(this.csvSeparator.value)
+      });
       let thesaurus: Thesaurus | null;
       while (thesaurus = reader.read()) {
         thesauri.push(thesaurus);

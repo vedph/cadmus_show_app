@@ -233,5 +233,30 @@
       <code>it.vedph.categories</code>) and their human-friendly names (like
       <code>categories</code>).
     </p>
+    <h3>CSV Format for Thesauri</h3>
+    <p>
+      Given that you might have existing taxonomies in other digital formats,
+      the <a routerLink="/profile/flow">builder</a> allows you to import a full
+      set of thesauri from a simple CSV file.
+    </p>
+    <p>In this case, the CSV file must follow these conventions:</p>
+    <ul>
+      <li>
+        the delimiter can be specified in the builder, but usually it's a comma;
+      </li>
+      <li>
+        the CSV file must reserve its first 2 columns to represent the ID and
+        the value of each thesaurus entry.
+      </li>
+      <li>
+        to mark the start of a new thesaurus, place its ID in the ID column, and
+        leave the value blank.
+      </li>
+      <li>
+        to represent an alias (a thesaurus whose ID is just an alias for another
+        one), place the alias ID in the ID column, and the target ID in the
+        value column prefixed with an equals sign.
+      </li>
+    </ul>
   </article>
 </div>

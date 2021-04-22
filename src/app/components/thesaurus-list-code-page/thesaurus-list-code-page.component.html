@@ -11,7 +11,11 @@
         load sample
       </button>
       &nbsp;
-      <form [formGroup]="form" (submit)="importCsv()" style="display: inline-block;">
+      <form
+        [formGroup]="form"
+        (submit)="importCsv()"
+        style="display: inline-block"
+      >
         <mat-form-field>
           <ngx-mat-file-input
             placeholder="CSV file to import"
@@ -20,7 +24,27 @@
           >
           </ngx-mat-file-input>
         </mat-form-field>
-        <button type="submit" mat-icon-button [disabled]="form.invalid">
+        &nbsp;
+        <mat-form-field style="width: 3em">
+          <input
+            matInput
+            [formControl]="csvSeparator"
+            placeholder="separator"
+          />
+          <mat-error
+            *ngIf="
+              csvSeparator.errors?.required &&
+              (csvSeparator.dirty || csvSeparator.touched)
+            "
+            >required</mat-error
+          >
+        </mat-form-field>
+        <button
+          type="submit"
+          mat-icon-button
+          [disabled]="form.invalid"
+          color="primary"
+        >
           <mat-icon>upload_file</mat-icon>
         </button>
       </form>
