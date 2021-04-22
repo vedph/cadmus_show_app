@@ -185,7 +185,7 @@ export class CsvReader {
   }
 
   private nextRow<T extends string[]>(row: T, state: State) {
-    this._lastRow = row;
+    this._lastRow = [...row];
     state.field = 0;
     state.line++;
     state.lineOffset = -1;
