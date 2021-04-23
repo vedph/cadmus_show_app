@@ -96,7 +96,7 @@
       something else in the context of a longer flow.
     </p>
 
-    <h2>Content Vs Presentation</h2>
+    <h2>Content Before Presentation</h2>
     <p>
       It is crucial to notice that the approach used here implies that the
       database used in entering data is usually distinct from the one (if any)
@@ -118,17 +118,37 @@
     <p>
       In this context, the relational database of this sample is just one of the
       possible outputs derived from Cadmus content. For instance, another one
-      would be TEI, automatically built from the texts and their metadata in the
-      NoSql database. Also, the same could apply to any other entity we might
-      want to extract from the content, for instance to transform it in terms of
-      triples, using standard ontologies for their vocabulary. This has the
-      advantage of letting scholars work with their own data models, in a
-      bottom-up approach, where they just fill a number of different web forms,
-      and then generate from them a full export by selecting, transforming and
-      outputting RDF-based resources just like RDBMS or XML-TEI. In more general
-      terms, this workflow resembles the well-known trend towards a more and
-      more evident separation between the content and its presentations and
-      usages; for instance, in many popular software models we distinguish
+      would be TEI, or a set of RDF triples, whatever the ontologies you are
+      going to use, or PDF, static HTML, CSV, or any other format you want.
+    </p>
+    <h2>Different Content Stages</h2>
+    <p>
+      Thus, Cadmus provides a way of working which in a sense is similar to the
+      traditional, "bottom-up" approach, where scholars used to produce a set of
+      documents representing the "dossier" about their research subject, and
+      eventually later tried to summarize their results by means of collecting
+      and consolidating data from each of these documents, into a more
+      structured and rigid scheme. The crucial difference is that in a
+      pre-digital world they might even do this by simply writing a set of
+      documents using a word processor; here instead they still work on their
+      own "dossiers", adopting the model they see most fit to their subject and
+      purposes; but they are directly producing a highly structured content, by
+      filling a number of forms rather than just writing a free text.
+    </p>
+    <p>
+      Once this structured content is in place, you can do with it whatever you
+      want; for instance, generate TEI documents, or RDF sets. In fact, often
+      content is best created in a richer and more complex model, where only a
+      subset of it is extracted to be remodelled into triples. This is much
+      easier than striving to express any type of content, whatever its
+      complexity and traditional scholarly description, directly into a set of
+      triples, which anyway usually cover only a subset of the information we
+      want to share in this form.
+    </p>
+    <p>
+      In more general terms, this workflow resembles the well-known trend
+      towards an evident separation between the content and its presentations
+      and usages; for instance, in many popular software models we distinguish
       between the underlying model and logic on one side, and the view
       representing the user interface on the other side. Often, the mediator
       between these two sides is represented by a viewmodel, i.e. an adaptation
@@ -136,11 +156,30 @@
       well defined way and interactive behavior. Using this analogy, we could
       think of Cadmus native data as the model, defined only according to the
       domain requirements, with no specific constraint posed by a specific
-      serialization technology or intended presentation; then, a task-oriented
-      RDBMS derived from it would represent a viewmodel, serving the view we
-      want to use as our presentation, in its widest meaning, from an end-user,
-      interactive web application to a direct data sharing scenario via RDF or
-      web API.
+      serialization technology or intended presentation; then, for instance a
+      task-oriented RDBMS derived from it would represent a viewmodel, serving
+      the view we want to use as our presentation, in its widest meaning, from
+      an end-user, interactive web application to a direct data sharing scenario
+      via TEI or RDF exports, SPARQL endpoints, web APIs, etc.
+    </p>
+    <h2>Cross-Integration</h2>
+    <p>
+      The above workflow could be envisaged as a "horizontal" flow, where
+      content eventually coming from legacy or paper-based resources, or created
+      from scratch, enter the Cadmus editing environment with its dynamic,
+      modular and open modeling architecture, to be later exported in any
+      desired output.
+    </p>
+    <p>
+      In some cases, we could also imagine another workflow crossing this one,
+      where we also need to integrate some external resources into the editing
+      experience. For instance, think of a bibliography: usually we can be
+      satisfied with a bottom-up approach, where bibliographic entries are
+      scattered across a number of "dossiers", to be later collected and
+      consolidated into a unique resource. So this is a "bottom-up" approach,
+      where bibliography is built from a set of different "documents". Anyway,
+      there might be cases where we prefer a "top-down" approach, either because
+      we want
     </p>
   </article>
 </div>
