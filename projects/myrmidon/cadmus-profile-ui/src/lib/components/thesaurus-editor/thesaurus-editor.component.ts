@@ -316,7 +316,7 @@ export class ThesaurusEditorComponent implements OnInit {
 
     // nodes
     const entries: ThesaurusEntry[] = [];
-    thesaurus.entries.forEach((e: ThesaurusEntry) => {
+    thesaurus.entries?.forEach((e: ThesaurusEntry) => {
       entries.push({ ...e });
     });
     this._nodesService.importEntries(entries);
