@@ -1,1 +1,8 @@
-TODO
+- id (string): an optional arbitrary ID.
+- externalIds (string[])
+- type* (string; thesaurus: epist-attachment-types)
+- name* (string)
+- portion (string): the specification of the portion of the attachment. For instance, if the attachment is a work, this specifies the work's location (e.g. Aen. 1.13-2.26).
+- isLost (boolean)
+- isUnknown (boolean)
+- note: you can use this when the object is not identified to provide an informal description.

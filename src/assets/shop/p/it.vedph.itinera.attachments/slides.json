@@ -1,2 +1,7 @@
 [
+  {
+    "id": "attachments01.png",
+    "label": "attachments",
+    "tip": "Attachments to a document being exchanged (letters, manuscripts, etc.). You can edit, move, delete or add attachments to the list. When editing, the attachment editor appears below the list."
+  }
 ]
