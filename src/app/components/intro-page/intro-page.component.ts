@@ -110,11 +110,11 @@ export class IntroPageComponent implements OnInit {
     if (this.size.value.d) {
       sb.push(`  crm:P40_observed_dimension my:MySize_Depth;\n`);
     }
-    sb.push('  crm:P39_measured <MyObject>.\n');
+    sb.push('  crm:P39_measured my:MyObject.\n');
 
     // <MyObject> P43_has_dimension <MyMeasurement>.
     sb.push('\n# the object has the measured dimension:\n');
-    sb.push('<MyObject> P43_has_dimension <MyMeasurement>.\n');
+    sb.push('my:MyObject P43_has_dimension my:MyMeasurement.\n');
 
     // if user:
     // <You> P2_has_type E21_Person.
