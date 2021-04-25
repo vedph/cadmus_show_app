@@ -39,7 +39,7 @@ import { ThesaurusEditComponent } from './components/thesaurus-edit/thesaurus-ed
 import { ProfileCodePageComponent } from './components/profile-code-page/profile-code-page.component';
 import { ModelGraphPageComponent } from './components/model-graph-page/model-graph-page.component';
 import { TourMatMenuModule } from 'ngx-ui-tour-md-menu';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IntroPageComponent } from './components/intro-page/intro-page.component';
 
 @NgModule({
@@ -65,6 +65,7 @@ import { IntroPageComponent } from './components/intro-page/intro-page.component
     BrowserModule,
     HttpClientModule,
     CommonModule,
+    FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     NgJsonEditorModule,

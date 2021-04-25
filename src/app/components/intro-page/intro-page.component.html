@@ -162,6 +162,65 @@
       an end-user, interactive web application to a direct data sharing scenario
       via TEI or RDF exports, SPARQL endpoints, web APIs, etc.
     </p>
+    <p>
+      For instance, consider the trivial case of a linear physical measurement.
+      In Cadmus, it might be represented with a simple model, which is both
+      user-friendly and structured. This model includes 2 or 3 dimensions for
+      width, height, and depth; each with a value and a measurement unit.
+      Eventually, the user can tag each dimension (or the measurement as a
+      whole) to categorize or group it in some way. This model is edited in the
+      below UI; under it, you can find the model represented as an object with
+      its properties, serialized in JSON format.
+    </p>
+    <p>
+      Try playing with the UI, and then click the button. You will get a fake
+      CIDOC-CRM export, where a set of triples get exported from the data you
+      entered. According to the CIDOC-CRM model, we focus on the measurement
+      <em>event</em>, which includes several dimensions (for width etc.). Each
+      of these dimensions has a value, a unit, and a type (width etc.).
+    </p>
+    <p>
+      Further, you can also specify your name. This of course is not part of the
+      Cadmus model for the size; but is added here just to show you how the
+      export can collect and consolidate data from different models. In this
+      demo, when you enter a name you will get some additional triples, which
+      tell that the user with a specific identifier is a person, and the
+      measurement was taken by him/her.
+    </p>
+    <p>
+      So, here you can see a very small sample of this concept. The RDF export
+      using a CIDOC-CRM ontology is a graph, where each datum gets atomized and
+      linked to other nodes. This of course is the basis for the powerful
+      semantic web model; but for human users, it would be rather painful to
+      directly express themselves in this way. They usually want to create a
+      huge quantity of structured content in a more organic scenario, where a
+      number of "dossiers" about each topic gets created during their research.
+      So, here Cadmus acts a bridge between the requirements of human
+      researchers and those of data modeling and publication.
+    </p>
+    <form [formGroup]="form" (submit)="buildRdf()">
+      <mat-form-field>
+        <input matInput [formControl]="user" placeholder="your name" />
+      </mat-form-field>
+      <cadmus-physical-size
+        [unitEntries]="unitEntries"
+        [size]="initialSize"
+        (sizeChange)="onSizeChange($event)"
+      ></cadmus-physical-size>
+      <button type="submit" mat-icon-button color="primary">
+        <mat-icon>check_circle</mat-icon> enter data
+      </button>
+    </form>
+    <div>
+      <p><strong>Cadmus user-oriented model</strong></p>
+      <code>
+        <pre>{{ size?.value | json }}</pre>
+      </code>
+      <p *ngIf="rdf"><strong>Fake CIDOC-CRM export</strong></p>
+      <code>
+        <pre>{{ rdf }}</pre>
+      </code>
+    </div>
     <h2>Cross-Integration</h2>
     <p>
       The above workflow could be envisaged as a "horizontal" flow, where
