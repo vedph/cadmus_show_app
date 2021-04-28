@@ -4,6 +4,14 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 To run the corresponding Docker image: use `docker images` to list the images, and `docker run <image-name>` eventually adding `-d` to run detached and redirecting the port with `-p HOSTPORT:IMAGEPORT`.
 
+Deploy sample (for a subpath, here `apps/cadmus-show`):
+
+```txt
+ng build --prod --base-href /apps/cadmus-show/
+```
+
+For GitHub pages see [this tool](https://github.com/angular-schule/angular-cli-ghpages).
+
 ## Architecture
 
 Libraries and their dependencies:

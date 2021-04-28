@@ -38,7 +38,7 @@
       </mat-tab>
       <mat-tab label="image" *ngIf="(model.slides?.length || 0) === 1">
         <figure>
-          <img [src]="'assets/shop/' + $any(model.slides)[0].id" />
+          <img [src]="'./assets/shop/' + $any(model.slides)[0].id" />
           <figcaption>
             {{$any(model.slides)[0].label}}
             <p class="slide-tip" *ngIf="$any(model.slides)[0].tip">{{$any(model.slides)[0].tip}}</p>

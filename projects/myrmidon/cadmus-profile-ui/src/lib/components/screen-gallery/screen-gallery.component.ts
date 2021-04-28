@@ -36,7 +36,7 @@ export class ScreenGalleryComponent implements OnInit {
   }
 
   private refresh(): void {
-    const root = 'assets/shop/';
+    const root = './assets/shop/';
 
     this.items = this._slides.map(s => {
       const extIndex = s.id.lastIndexOf('.');
