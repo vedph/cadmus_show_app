@@ -9,7 +9,7 @@
     <aside class="pquote">
       <blockquote>
         Cadmus is not going to tell you how to model your data; you are rather
-        going to tell it.
+        going to tell it
       </blockquote>
     </aside>
     <p>
@@ -21,7 +21,7 @@
       its creation.
     </p>
     <aside class="pquote">
-      <blockquote>Logical, not physical modeling.</blockquote>
+      <blockquote>Logical, not physical modeling</blockquote>
     </aside>
     <p>
       Cadmus is <em>not</em> an encoding format, too. In fact, its underlying
@@ -39,7 +39,7 @@
       mess with them.
     </p>
     <aside class="pquote">
-      <blockquote>Text as a datum, rather than a data architecture.</blockquote>
+      <blockquote>Text as a datum, rather than a data architecture</blockquote>
     </aside>
     <p>
       Although mostly used with texts, Cadmus is <em>not</em> a text annotation
@@ -127,7 +127,10 @@
       a set of RDF triples, whatever the ontologies you are going to use; or
       PDF, static HTML, CSV, etc.
     </p>
-    <h2>Different Content Stages</h2>
+    <h2>Content Flow</h2>
+    <aside class="pquote">
+      <blockquote>Bottom-up</blockquote>
+    </aside>
     <p>
       Thus, Cadmus provides a way of working which in a sense is similar to the
       traditional, "bottom-up" approach, where scholars used to produce a set of
@@ -148,22 +151,9 @@
       complexity and traditional scholarly description, directly into a set of
       triples.
     </p>
-    <p>
-      In more general terms, this workflow resembles the well-known trend
-      towards an evident separation between the content and its presentations
-      and usages. For instance, in many popular software models we distinguish
-      between the underlying model and logic on one side, and the view
-      representing the user interface on the other side. Often, the mediator
-      between these two sides is represented by a viewmodel, i.e. an adaptation
-      of the model to the requirements of a specific view, presenting it with a
-      well defined way and interactive behavior. Using this analogy, we could
-      think of Cadmus native data as the model, defined only according to the
-      domain requirements. Then, for instance a task-oriented RDBMS derived from
-      it would represent a viewmodel, serving the view we want to use as our
-      presentation. This might range from an end-user, interactive web
-      application, to a direct data sharing scenario via TEI or RDF exports,
-      SPARQL endpoints, web APIs, etc.
-    </p>
+    <aside class="pquote">
+      <blockquote>Sample: extracting RDF from models</blockquote>
+    </aside>
     <p>
       For instance, consider the trivial case of a linear physical measurement.
       In Cadmus, it might be represented with a simple model, which is both
@@ -225,6 +215,9 @@
       </code>
     </div>
     <h2>Cross-Integration</h2>
+    <aside class="pquote">
+      <blockquote>Integrating resources in the data flow</blockquote>
+    </aside>
     <p>
       The above workflow could be envisaged as a "horizontal" flow, where
       content eventually coming from legacy or paper-based resources, or created
@@ -241,6 +234,9 @@
       consolidated into a unique resource. So this is a "bottom-up" approach,
       where bibliography is built from a set of different "documents".
     </p>
+    <aside class="pquote">
+      <blockquote>Top-down</blockquote>
+    </aside>
     <p>
       Anyway, there might be cases where we prefer a "top-down" approach, either
       because our references are so relevant that we want to build an
@@ -249,7 +245,17 @@
       service like <a href="www.zotero.org" target="_blank">Zotero</a>. In such
       scenarios, you can well integrate these resources into the editor,
       implementing a "top-down" approach, where you read (and eventually also
-      write) data from an external resource. The same could happen for any other
+      write) data from an external resource.
+    </p>
+    <p>
+      This simple example about bibliography was chosen right because Cadmus
+      already provides modules for both these approaches in this domain: a
+      <a href="https://github.com/vedph/cadmus_biblioapi" target="_blank"
+        >top-down bibliographic sub-system</a
+      >
+      is already implemented and used by one of the Cadmus-based projects, side
+      by side with other projects using a bottom-up approach. Anyway, that's
+      only the iceberg's tip; the same approach could prove useful for any other
       publicly available resource, like e.g. geographic gazetteers, IIIF
       services, etc. As each data model in the system has its own editor, and
       this essentially is a miniature web application, there is no limit to
