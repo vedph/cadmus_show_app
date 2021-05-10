@@ -6,6 +6,12 @@
   <article>
     <h2>What Is Cadmus?</h2>
     <p>It is somewhat easier to start with saying what Cadmus is not.</p>
+    <aside class="pquote">
+      <blockquote>
+        Cadmus is not going to tell you how to model your data; you are rather
+        going to tell it.
+      </blockquote>
+    </aside>
     <p>
       Cadmus is <em>not</em> a prebuilt set of models you are forced to embrace
       to create your content. Rather, it is just a framework where you can place
@@ -14,12 +20,27 @@
       be embodied by the flesh of your own content, to provide a quicker path to
       its creation.
     </p>
+    <aside class="pquote">
+      <blockquote>Logical, not physical modeling.</blockquote>
+    </aside>
     <p>
       Cadmus is <em>not</em> an encoding format, too. In fact, its underlying
       storage technology is handled through an abstraction, so it can be
       replaced with anything else at any moment, without affecting the other
       layers in the system.
     </p>
+    <p>
+      Thus, Cadmus is not going to replace your preferred models or
+      technologies. It is just going to eventually support them, by providing a
+      rapid development framework for creating highly structured content,
+      without having to train users in any specific technology. Cadmus is more
+      content-centric than technology-oriented; it focuses on domain models,
+      rather than on the details of their digital encoding. Users do not need to
+      mess with them.
+    </p>
+    <aside class="pquote">
+      <blockquote>Text as a datum, rather than a data architecture.</blockquote>
+    </aside>
     <p>
       Although mostly used with texts, Cadmus is <em>not</em> a text annotation
       system. It is content-agnostic, so you can well add text with any number
@@ -30,45 +51,32 @@
       like XML. Any type of content, either textual, meta-textual, or
       non-textual, can be equally created whithin the system, and whatever its
       nature it shares a common architecture. In fact, some of the projects
-      adopting Cadmus have no textual content at all.
+      adopting Cadmus have no textual content at all. By contrast, in a more
+      traditional content creation process of Scholarly Digital Editions, a
+      “text-centric” perspective is often responsible of the persistence of a
+      “book paradigm” in its digital reincarnation. When producing content, we
+      essentially deal with a text which flows from paper to a digital document
+      with annotations (XML), to be then published to HTML via XSLT. Here, the
+      tree structure laid on the text bears the whole data universe. This is
+      consistent with the typical usages of TEI, essentially oriented to the
+      “reconstruction of documents”. Yet, in some cases, especially with the
+      outgrow of data provided by new types of analysis (e.g. morphological,
+      syntactical or metrical tagging), and/or when handling very complex
+      documents (e.g. inscriptions or complex literary traditions), this may not
+      be the most efficient paradigm for creating content. In such scenarios a
+      paradigm shift might be beneficial; and Cadmus aims to provide at least a
+      concrete example of a tool which can effectively implement this shift in
+      real-world projects.
     </p>
+    <aside class="pquote">
+      <blockquote>Content vs Presentations</blockquote>
+    </aside>
     <p>
       Cadmus is <em>not</em> usually targeted to direct publication. It belongs
       to the content creation stage of a project, and everything in it is
       optimized for this purpose. It aims to provide a user-friendly environment
       for collaborative, web-based content creation, whatever the models of your
       content.
-    </p>
-    <p>
-      Cadmus is <em>not</em> the solution fit for any problem. It's just a
-      content-creation framework which may come handy whenever a high level of
-      structure is required, and more traditional approaches would suffer from a
-      number of issues connected to the nature of the project, its data, or its
-      team skills. In a more traditional content creation process of Scholarly
-      Digital Editions, a “text-centric” perspective is often responsible of the
-      persistence of a “book paradigm” in its digital reincarnation. At least
-      when producing content, we essentially deal with a text which flows from
-      paper to a digital document with annotations (XML), to be then published
-      to HTML via XSLT. Here, the tree structure laid on the text bears the
-      whole data universe. This is consistent with the typical usages of TEI,
-      essentially oriented to the “reconstruction of documents”. Yet, in some
-      cases, especially with the outgrow of data provided by new types of
-      analysis (e.g. morphological, syntactical or metrical tagging), and/or
-      when handling very complex documents (e.g. inscriptions or complex
-      literary traditions), this may not be the most efficient paradigm for
-      creating content. In such scenarios a paradigm shift might be beneficial;
-      and Cadmus aims to provide at least a concrete example of a tool which can
-      effectively implement this shift in real-world projects.
-    </p>
-    <p>
-      Thus, Cadmus is not going to replace your preferred models or
-      technologies. It is just going to eventually support them, by providing a
-      rapid development framework for creating highly structured content,
-      without having to train users in the usage of any specific technology. In
-      fact, users are totally shielded from the underlying technologies; they
-      just enter data in some web forms. Cadmus is more content-centric than
-      technology-oriented; it focuses on domain models, rather than on the
-      details of their digital encoding.
     </p>
     <p>
       So, for instance TEI might well be a product derived from Cadmus' content;
@@ -84,27 +92,25 @@
       with text files.
     </p>
     <p>
-      Finally, in this context Cadmus is not even a point-to-point comprehensive
+      In this context Cadmus is not even a point-to-point comprehensive
       solution; it rather stands at the center of a content production flow,
       which according to the complexity of the project may imply a number of
       preprocessing and import stages before it; and a number of indexing,
       transformations and exports after it. For some of these stages, e.g.
       importing legacy, often low-structured digital data, some solutions like
-      my ProteusTODOREF are designed to work side by side with it. At any rate,
-      Cadmus is the editing framework which works on content, either from
-      scratch, or derived from something else; and then usually produces
-      something else in the context of a longer flow.
+      my Proteus are designed to work side by side with it. At any rate, Cadmus
+      is the editing framework which works on content, either from scratch, or
+      derived from something else; and then usually produces something else in
+      the context of a longer flow.
     </p>
-
-    <h2>Content Before Presentation</h2>
     <p>
-      It is crucial to notice that the approach used here implies that the
-      database used in entering data is usually distinct from the one (if any)
-      used to publish them. For instance, a typical use case is represented by a
-      web application targeting end users, and drawing its data from a
-      traditional RDBMS backend. In this scenario, the RDBMS database will be an
-      automatic product of the data editing database; but the two databases are
-      kept distinct, because they serve different purposes.
+      This approach implies that the database used in entering data is usually
+      distinct from the one (if any) used to publish them. For instance, a
+      typical use case is represented by a web application targeting end users,
+      and drawing its data from a traditional RDBMS backend. In this scenario,
+      the RDBMS database will be an automatic product of the data editing
+      database; but the two databases are kept distinct, because they serve
+      different purposes.
     </p>
     <p>
       When entering data, we privilege an architecture widely <em>open</em> to
@@ -117,50 +123,46 @@
     </p>
     <p>
       In this context, the relational database of this sample is just one of the
-      possible outputs derived from Cadmus content. For instance, another one
-      would be TEI, or a set of RDF triples, whatever the ontologies you are
-      going to use, or PDF, static HTML, CSV, or any other format you want.
+      possible outputs derived from Cadmus content. Another one would be TEI, or
+      a set of RDF triples, whatever the ontologies you are going to use; or
+      PDF, static HTML, CSV, etc.
     </p>
     <h2>Different Content Stages</h2>
     <p>
       Thus, Cadmus provides a way of working which in a sense is similar to the
       traditional, "bottom-up" approach, where scholars used to produce a set of
-      documents representing the "dossier" about their research subject, and
-      eventually later tried to summarize their results by means of collecting
-      and consolidating data from each of these documents, into a more
-      structured and rigid scheme. The crucial difference is that in a
-      pre-digital world they might even do this by simply writing a set of
-      documents using a word processor; here instead they still work on their
-      own "dossiers", adopting the model they see most fit to their subject and
-      purposes; but they are directly producing a highly structured content, by
-      filling a number of forms rather than just writing a free text.
+      documents representing the "dossier" about their research subject. Later,
+      eventually they summarized their results by means of collecting and
+      consolidating data from each of these documents, into a more structured
+      and rigid scheme. The crucial difference is that in a pre-digital world
+      they have been doing this by simply writing a set of documents in a word
+      processor; here instead they they are producing highly structured content,
+      by filling a number of forms, rather than just writing a free text.
     </p>
     <p>
       Once this structured content is in place, you can do with it whatever you
       want; for instance, generate TEI documents, or RDF sets. In fact, often
       content is best created in a richer and more complex model, where only a
-      subset of it is extracted to be remodelled into triples. This is much
+      subset of it gets extracted and remodelled into triples. This is much
       easier than striving to express any type of content, whatever its
       complexity and traditional scholarly description, directly into a set of
-      triples, which anyway usually cover only a subset of the information we
-      want to share in this form.
+      triples.
     </p>
     <p>
       In more general terms, this workflow resembles the well-known trend
       towards an evident separation between the content and its presentations
-      and usages; for instance, in many popular software models we distinguish
+      and usages. For instance, in many popular software models we distinguish
       between the underlying model and logic on one side, and the view
       representing the user interface on the other side. Often, the mediator
       between these two sides is represented by a viewmodel, i.e. an adaptation
       of the model to the requirements of a specific view, presenting it with a
       well defined way and interactive behavior. Using this analogy, we could
       think of Cadmus native data as the model, defined only according to the
-      domain requirements, with no specific constraint posed by a specific
-      serialization technology or intended presentation; then, for instance a
-      task-oriented RDBMS derived from it would represent a viewmodel, serving
-      the view we want to use as our presentation, in its widest meaning, from
-      an end-user, interactive web application to a direct data sharing scenario
-      via TEI or RDF exports, SPARQL endpoints, web APIs, etc.
+      domain requirements. Then, for instance a task-oriented RDBMS derived from
+      it would represent a viewmodel, serving the view we want to use as our
+      presentation. This might range from an end-user, interactive web
+      application, to a direct data sharing scenario via TEI or RDF exports,
+      SPARQL endpoints, web APIs, etc.
     </p>
     <p>
       For instance, consider the trivial case of a linear physical measurement.

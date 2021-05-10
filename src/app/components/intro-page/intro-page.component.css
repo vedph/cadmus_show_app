@@ -25,3 +25,14 @@ pre {
   margin: 8px 16px;
   overflow: auto;
 }
+.pquote {
+  float: left;
+  width: 100px;
+  background: #E3F2F6;
+  font-weight: bold;
+  padding: 13px;
+  margin: 0 13px 13px 0;
+}
+blockquote {
+  margin: 0;
+}
