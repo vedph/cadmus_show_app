@@ -11,20 +11,37 @@
         <mat-icon>account_tree</mat-icon> models graph
       </a>
     </p>
+    <aside class="pquote">
+      <blockquote>Shopping for models</blockquote>
+    </aside>
     <p>
-      The shop here is just a demonstrative list. You will find all the models
-      defined and implemented for handling a number of different Cadmus-based
-      projects.
+      Welcome to the shop. This page is just a demonstrative list, to show the
+      potential of an approach focusing on sharing and reusing composable data
+      models and their editing user interfaces. As you can learn from the
+      <a routerLink="docs/data-architecture">Cadmus data architecture</a>, this
+      project focuses on an open-ended set of independent, self-contained data
+      models, the parts, which get composed into more complex items. This is a
+      recipe for reuse, as not only data, but also the user interfaces for
+      editing them can be shared and reused at will.
     </p>
     <p>
-      Models are grouped into two lists: one for <strong>parts</strong>, another
-      for <strong>fragments</strong>. From the point of view of the system, this
-      distinction is artificial; as we always deal with just parts. Some of
-      these parts are layer-parts: they contain a list of data (fragments), each
-      linked to a specific portion of a text (in turn, contained in another
-      part). Thus, layer parts all have the same model, as far as they are
-      regarded as a list of fragments; yet, the model of each fragment is
-      different, and that's what makes layer parts different.
+      As a sample, here you will find most of the models defined and implemented
+      for handling a number of different Cadmus-based projects. Hopefully, these
+      models should give you an idea about their variety and their potential for
+      reuse.
+    </p>
+    <aside class="pquote">
+      <blockquote>Shop's catalogs</blockquote>
+    </aside>
+    <p>
+      Models are grouped into two catalogs: one for parts, another for
+      fragments. From the point of view of the system, this distinction is
+      artificial; as we always deal with just parts. Some of these parts are
+      layer-parts: they contain a list of data (fragments), each linked to a
+      specific portion of a text (in turn, contained in another part). Thus,
+      layer parts all have the same model, as far as they are regarded as a list
+      of fragments; yet, the model of each fragment is different, and that's
+      what makes layer parts different.
     </p>
     <p>
       Thus, we may have a comments layer part, where each fragment represents a

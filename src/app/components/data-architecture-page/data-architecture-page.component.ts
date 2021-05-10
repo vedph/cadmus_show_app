@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { HistoricalDate, HistoricalDateModel } from '@myrmidon/cadmus-core';
 
 @Component({
-  selector: 'app-complex-models',
-  templateUrl: './complex-models.component.html',
-  styleUrls: ['./complex-models.component.css'],
+  selector: 'app-data-architecture',
+  templateUrl: './data-architecture-page.component.html',
+  styleUrls: ['./data-architecture-page.component.css'],
 })
-export class ComplexModelsComponent implements OnInit {
+export class DataArchitecturePageComponent implements OnInit {
   public date: HistoricalDateModel;
 
   constructor() {

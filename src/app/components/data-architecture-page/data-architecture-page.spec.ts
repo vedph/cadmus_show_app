@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ComplexModelsComponent } from './complex-models.component';
+import { DataArchitecturePageComponent } from './data-architecture-page.component';
 
 describe('ComplexModelsComponent', () => {
-  let component: ComplexModelsComponent;
-  let fixture: ComponentFixture<ComplexModelsComponent>;
+  let component: DataArchitecturePageComponent;
+  let fixture: ComponentFixture<DataArchitecturePageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ComplexModelsComponent ]
+      declarations: [ DataArchitecturePageComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ComplexModelsComponent);
+    fixture = TestBed.createComponent(DataArchitecturePageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
@@ -23,30 +24,29 @@ import { environment } from '../environments/environment';
 import { EnvServiceProvider } from '@myrmidon/cadmus-core';
 
 import { AppComponent } from './app.component';
-import { ComplexModelsComponent } from './components/complex-models/complex-models.component';
+import { DataArchitecturePageComponent } from './components/data-architecture-page/data-architecture-page.component';
 import { HomeComponent } from './components/home/home.component';
 import { FacetListPageComponent } from './components/facet-list-page/facet-list-page.component';
 import { FacetListCodePageComponent } from './components/facet-list-code-page/facet-list-code-page.component';
 import { FlagListPageComponent } from './components/flag-list-page/flag-list-page.component';
 import { FlagListCodePageComponent } from './components/flag-list-code-page/flag-list-code-page.component';
+import { IntroPageComponent } from './components/intro-page/intro-page.component';
+import { LearningPageComponent } from './components/learning-page/learning-page.component';
+import { ModelGraphPageComponent } from './components/model-graph-page/model-graph-page.component';
 import { ModelListComponent } from '@myrmidon/cadmus-shop-ui';
+import { ProfileCodePageComponent } from './components/profile-code-page/profile-code-page.component';
 import { ProfileFlowComponent } from './components/profile-flow/profile-flow.component';
 import { ProfileHomeComponent } from './components/profile-home/profile-home.component';
 import { ShopPageComponent } from './components/shop-page/shop-page.component';
 import { ThesaurusListPageComponent } from './components/thesaurus-list-page/thesaurus-list-page.component';
 import { ThesaurusListCodePageComponent } from './components/thesaurus-list-code-page/thesaurus-list-code-page.component';
 import { ThesaurusEditComponent } from './components/thesaurus-edit/thesaurus-edit.component';
-import { ProfileCodePageComponent } from './components/profile-code-page/profile-code-page.component';
-import { ModelGraphPageComponent } from './components/model-graph-page/model-graph-page.component';
 import { TourMatMenuModule } from 'ngx-ui-tour-md-menu';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { IntroPageComponent } from './components/intro-page/intro-page.component';
-import { LearningPageComponent } from './components/learning-page/learning-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ComplexModelsComponent,
+    DataArchitecturePageComponent,
     HomeComponent,
     FacetListPageComponent,
     FacetListCodePageComponent,
@@ -94,7 +94,7 @@ import { LearningPageComponent } from './components/learning-page/learning-page.
         { path: 'profile/flow', component: ProfileFlowComponent },
         { path: 'profile/code', component: ProfileCodePageComponent },
         { path: 'docs', component: LearningPageComponent },
-        { path: 'docs/data-architecture', component: ComplexModelsComponent },
+        { path: 'docs/data-architecture', component: DataArchitecturePageComponent },
         { path: 'models', component: ShopPageComponent },
         { path: 'models/shop', component: ModelListComponent },
         { path: 'models/graph', component: ModelGraphPageComponent},
