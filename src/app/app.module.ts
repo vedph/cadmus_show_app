@@ -41,6 +41,7 @@ import { ModelGraphPageComponent } from './components/model-graph-page/model-gra
 import { TourMatMenuModule } from 'ngx-ui-tour-md-menu';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IntroPageComponent } from './components/intro-page/intro-page.component';
+import { LearningPageComponent } from './components/learning-page/learning-page.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { IntroPageComponent } from './components/intro-page/intro-page.component
     ProfileCodePageComponent,
     ModelGraphPageComponent,
     IntroPageComponent,
+    LearningPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -91,7 +93,8 @@ import { IntroPageComponent } from './components/intro-page/intro-page.component
         { path: 'profile', component: ProfileHomeComponent },
         { path: 'profile/flow', component: ProfileFlowComponent },
         { path: 'profile/code', component: ProfileCodePageComponent },
-        { path: 'docs/complex-models', component: ComplexModelsComponent },
+        { path: 'docs', component: LearningPageComponent },
+        { path: 'docs/data-architecture', component: ComplexModelsComponent },
         { path: 'models', component: ShopPageComponent },
         { path: 'models/shop', component: ModelListComponent },
         { path: 'models/graph', component: ModelGraphPageComponent},
