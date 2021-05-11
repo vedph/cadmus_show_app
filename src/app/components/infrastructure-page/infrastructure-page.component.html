@@ -4,9 +4,160 @@
     <div id="banner"></div>
   </div>
   <article>
+    <ul>
+      <li>authentication and authorization levels</li>
+      <li>real-time search</li>
+      <li>auditing policy: editing history, full logging.</li>
+      <li>backup policy</li>
+    </ul>
+    TODO
+    <h2>Real-Time Search</h2>
     <aside class="pquote">
-      <blockquote>TODO</blockquote>
+      <blockquote>Indexing black boxes</blockquote>
     </aside>
-    <p></p>
+    <p>
+      Real-time search in Cadmus is strictly connected with its modular and open
+      <a routerLink="docs/data-architecture">architecture</a>. As we have seen,
+      there is no closed set of data models; everyone can design and add new
+      models at any time, for any type of data, with any relationship with text
+      (textual, meta-textual, or extra-textual). Items representing records are
+      composite models, built of parts. Each part is an independent,
+      self-contained data model.
+    </p>
+    <p>
+      In this context, the challenge for indexing data thus providing a
+      real-time search inside the editor comes from the fact that the
+      infrastructure cannot know anything about its models. These are
+      effectively blackboxes, and might have any structure. So, how it is
+      supposed to extract and filter data from them in order to build an index?
+      The only possible solution is deferring this task to the only entity which
+      knows about the model: i.e. the part itself. Only the part knows about its
+      own model, while the infrastructure is totally agnostic of it: that's one
+      of the tenets which ensure the openness of the architecture. Thus, the
+      part themselves are in charge of inspecting their own content, and select
+      and filter some properties from it to expose them for indexing.
+    </p>
+    <p>
+      Of course, keeping with components isolation, parts in turn need not to
+      know about the details of the index. These are buried inside the software
+      component in charge of dealing with search, and might change, together
+      with their underlying technology, by simply swapping this component with
+      another one.
+    </p>
+    <aside class="pquote">
+      <blockquote>Data pins</blockquote>
+    </aside>
+    <p>
+      Thus, the Cadmus architecture provides a generic mechanism for letting
+      parts expose data which need to be indexed, called
+      <strong>data pins</strong>. A data pin is just a name=value pair derived
+      from a part. Most parts expose a number of such pairs to the outer world.
+      For instance, a datation part might expose a numeric value representing
+      its content. The data pin is generic enough to represent different levels
+      of granularity: it may just be a name=value property, or a more complex
+      entity, e.g. a semantic web triple (usually with name acting as predicate
+      and value as object, the implicit subject being the data pin owner).
+    </p>
+    <p>
+      Parts thus are in charge of selecting data in the form of pins, eventually
+      filtering their values (e.g. by removing diacritics and flattening case in
+      text).
+    </p>
+    <p>
+      Each part also provides a list of metadata with all the details about each
+      data pin: its name, how it gets filtered, and whether it's unique or
+      multiple in that part. These metadata are consumed by the UI to provide
+      users with a list of all the things which can be searched for each part.
+    </p>
+    <aside class="pquote">
+      <blockquote>Real-time indexing</blockquote>
+    </aside>
+    <p>
+      Thus, whenever a part gets saved, the infrastructure queries it for all
+      its data pins, and stores them into its index, together with the part's
+      and item's identifiers. This way, users can search this index at any
+      moment, and find data as soon as they get stored.
+    </p>
+    <aside class="pquote">
+      <blockquote>Query language</blockquote>
+    </aside>
+    <p>
+      The search is based on a very simple query language, based on name/value
+      pairs connected by an operator.
+    </p>
+    <p>
+      Pairs are included between <code>[]</code>. Each pair has three
+      components: name, operator + field value. You can specify one or more
+      pairs, connecting them with <code>AND</code> and <code>OR</code>, and
+      group them using brackets. For instance, this query:
+    </p>
+    <pre><code>[<span>title</span>*=test] AND ([facet=default] OR [facet=tiled])</code></pre>
+    <p>
+      finds all the items whose title includes the text <code>test</code> and
+      whose facet ID is either <code>default</code> or <code>tiled</code>.
+    </p>
+    <p>The pair name can be any of the following:</p>
+    <ul>
+      <li><code>t</code>, <code>title</code>: item&#39;s title.</li>
+      <li>
+        <code>dsc</code>, <code>description</code>: item&#39;s description.
+      </li>
+      <li><code>facet</code>, <code>facetId</code>: item&#39;s facet ID.</li>
+      <li><code>group</code>, <code>groupId</code>: item&#39;s group ID.</li>
+      <li><code>sortKey</code>: item&#39;s sort key.</li>
+      <li><code>flags</code>: item&#39;s flags.</li>
+      <li>
+        <code>type</code>, <code>partType</code>, <code>partTypeId</code>: part
+        type ID.
+      </li>
+      <li><code>role</code>, <code>roleId</code>: part role ID.</li>
+      <li><code>n</code>, <code>name</code>: pin&#39;s name.</li>
+      <li><code>v</code>, <code>value</code>: pin&#39;s value.</li>
+    </ul>
+    <p>
+      Pins names depend on the parts used and which pins are emitted by each of
+      them.
+    </p>
+    <p>
+      You can also use escapes in the value, by prefixing its 16-bits Unicode
+      hex code value with a backslash. Also, you can insert square brackets by
+      prefixing them with a backslash.
+    </p>
+    <p>The operators are:</p>
+    <ul>
+      <li><code>=</code>: equal to.</li>
+      <li><code>&lt;&gt;</code>: not equal to.</li>
+      <li><code>*=</code>: contains.</li>
+      <li><code>^=</code>: starts with.</li>
+      <li><code>$=</code>: ends with.</li>
+      <li>
+        <code>?=</code>: wildcards: <code>?</code>=any single character,
+        <code>*</code>=0-N characters.
+      </li>
+      <li><code>~=</code>: regular expression.</li>
+      <li>
+        <code>%=</code>: fuzzy matching. The value is followed by
+        <code>:</code> and the minimum similarity treshold.
+      </li>
+      <li><code>==</code>: equal (numeric).</li>
+      <li><code>!=</code>: not equal (numeric).</li>
+      <li><code>&lt;</code>: less-than (numeric).</li>
+      <li><code>&gt;</code>: greater-than (numeric).</li>
+      <li><code>&lt;=</code>: less-than or equal (numeric).</li>
+      <li><code>&gt;=</code>: greater-than or equal (numeric).</li>
+      <li>
+        <code>:</code> (flags): any the specified flags (comma-separated) must
+        be present.
+      </li>
+      <li>
+        <code>&amp;:</code> (flags): all the specified flags (comma-separated)
+        must be present.
+      </li>
+      <li>
+        <code>!:</code> (flags): none of the specified flags (comma-separated)
+        must be present.
+      </li>
+    </ul>
+    <p>Flags can be specified either with name or value.</p>
   </article>
 </div>
