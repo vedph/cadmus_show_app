@@ -88,6 +88,15 @@
       share the same tradition).
     </p>
     <aside class="pquote">
+      <blockquote>Play with hierarchy</blockquote>
+    </aside>
+    <p>
+      You can have a feel of the typical user experience with a hierarchical set
+      of entries by playing with a list of manuscript scripts at the bottom of
+      this page. Just expand the hierarchy using the arrow buttons, or lookup it
+      with the integrated search. Finally, pick the entry by clicking it.
+    </p>
+    <aside class="pquote">
       <blockquote>Special usages</blockquote>
     </aside>
     <p>
@@ -122,13 +131,21 @@
       <blockquote>Playing with thesauri</blockquote>
     </aside>
     <p>
-      Thesauri are thus an essential aspect of the so called Cadmus profile, a
-      JSON document which defines the architecture of data with all its required
-      configuration. You can play with some example thesauri in the
+      Thesauri are thus an essential aspect of the so called Cadmus
+      <a routerLink="/profile">profile</a>, a JSON document which defines the
+      architecture of data with all its required configuration. You can play
+      with some example thesauri in the
       <a routerLink="/profile/flow">profile builder</a> (stage 3 in the build
       flow): browse their list, add new ones, import them from other formats
       like CSV, and freely edit their entries, both for flat and hierarchical
       thesauri.
     </p>
   </article>
+  <div class="sample">
+    <h2>Sample: Picking Entries from Hierarchy</h2>
+    <cadmus-thesaurus-tree
+      [entries]="entries || []"
+      (entryChange)="onEntryChange($event)"
+    ></cadmus-thesaurus-tree>
+  </div>
 </div>

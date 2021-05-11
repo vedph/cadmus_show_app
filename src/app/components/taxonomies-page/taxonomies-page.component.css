@@ -16,3 +16,6 @@ h1 {
   text-align: center;
   margin-top: 16px;
 }
+div.sample {
+  margin: 16px 64px;
+}
