@@ -43,6 +43,7 @@ import { ThesaurusListCodePageComponent } from './components/thesaurus-list-code
 import { ThesaurusEditComponent } from './components/thesaurus-edit/thesaurus-edit.component';
 import { TourMatMenuModule } from 'ngx-ui-tour-md-menu';
 import { TextArchitecturePageComponent } from './components/text-architecture-page/text-architecture-page.component';
+import { TaxonomiesPageComponent } from './components/taxonomies-page/taxonomies-page.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { TextArchitecturePageComponent } from './components/text-architecture-pa
     IntroPageComponent,
     LearningPageComponent,
     TextArchitecturePageComponent,
+    TaxonomiesPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -98,6 +100,7 @@ import { TextArchitecturePageComponent } from './components/text-architecture-pa
         { path: 'docs', component: LearningPageComponent },
         { path: 'docs/data-architecture', component: DataArchitecturePageComponent },
         { path: 'docs/text-architecture', component: TextArchitecturePageComponent },
+        { path: 'docs/taxonomies', component: TaxonomiesPageComponent },
         { path: 'models', component: ShopPageComponent },
         { path: 'models/shop', component: ModelListComponent },
         { path: 'models/graph', component: ModelGraphPageComponent},

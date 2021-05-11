@@ -1,0 +1,18 @@
+#banner {
+  height: 258px;
+  background-image: url("/assets/img/taxonomy.jpg");
+  background-size: cover;
+  margin-bottom: 16px;
+}
+article {
+  margin: 16px 64px;
+  column-width: 30em;
+  column-count: 4;
+  column-gap: 2em;
+  column-rule: 1px solid silver;
+}
+h1 {
+  font-size: 2rem;
+  text-align: center;
+  margin-top: 16px;
+}

@@ -1,0 +1,134 @@
+<div>
+  <h1>Taxonomies</h1>
+  <div>
+    <div id="banner"></div>
+  </div>
+  <article>
+    <aside class="pquote">
+      <blockquote>Vocabularies and taxonomies</blockquote>
+    </aside>
+    <p>
+      In creating content, a typical requirement is having some shared
+      vocabularies and taxonomies used across the whole dataset. Often, such
+      data come in the form of a graph of interconnected nodes, like in RDF, or
+      as a special form of graph, i.e. a tree (a graph whose nodes are arranged
+      hierarchically). Typically, from the users' point of view we require to
+      provide a closed set of values to pick from: for instance, it could be a
+      list of languages for a text or a person name, a list of manuscripts and
+      other testimonia for a critical apparatus, or a hierarchically arranged
+      list of linguistic phenomena like in the
+      <a routerLink="/docs/text-architecture" fragment="orthography"
+        >orthography layer part sample</a
+      >: we might start from the topmost levels of our interest, like maybe
+      phonology, morphology, syntax, and lexicon; and then walk the hierarchy
+      down, so that e.g. phonology branches into consonants, vowels, and
+      prosodies; consonants branches into plosives, liquids, nasals, sibilants,
+      semivowels; plosives branch into bilabial, velar, and dental plosives; and
+      so forth.
+    </p>
+    <p>
+      In a graphical UI, this typically corresponds to a number of controls like
+      a simple dropdown list (for a single selection), or a list of checkable
+      entries (for a multiple selection), or a browsable tree, from where you
+      can pick one or more entries.
+    </p>
+    <aside class="pquote">
+      <blockquote>Flat and hierarchical entries</blockquote>
+    </aside>
+    <p>
+      Whatever the UI, in such cases the editing system requires a common
+      infrastructure, providing any number of closed set of values, either as
+      flat lists or as hierarchies. Typically, in the case of flat lists entries
+      are just extracted from their context and presented to the end user; so
+      they may well belong to a graph in some external, standard vocabulary, but
+      what is required in editing is just picking one or more of them. Their
+      graph connections of course still exist, but they are outside of the
+      editing scope, as they are not required in editing.
+    </p>
+    <p>
+      In the case of hierarchies instead, we provide the entries together with
+      their hierarchical relationships, because in this case the hierarchy is
+      actively used to locate the desired entry in a logical way. This is
+      especially useful when dealing with huge lists, counting hundreds of
+      entries, like e.g. lists of authors with their works, or specialized
+      taxonomies like the classification of phenomena studied by ancient Latin
+      grammarians from the profile of a real-world
+      <a
+        href="https://github.com/vedph/cadmus_tgr_api/blob/master/CadmusTgrApi/wwwroot/seed-profile.json"
+        target="_blank"
+        >Cadmus project</a
+      >.
+    </p>
+    <aside class="pquote">
+      <blockquote>Cadmus thesauri</blockquote>
+    </aside>
+    <p>
+      As Cadmus is modular, both in its data and UI architectures, this
+      infrastructure is designed in the way which mostly fits its requirements.
+      Each model, i.e. each part or fragment, may require a number of such
+      resources, generically named <strong>thesauri</strong>. Whenever the user
+      wants to edit a part or a fragment, this asks the infrastructure for all
+      the requested thesauri, and then uses them in its preferred way.
+    </p>
+    <p>
+      In detail, a number of mechanisms are implemented for thesauri (you can
+      read more in the
+      <a
+        href="https://github.com/vedph/cadmus_doc/blob/master/core/profiles.md"
+        target="_blank"
+        >technical documentation</a
+      >): for instance, each thesaurus having its identifier, there is a
+      mechanism to allow for aliases pointing to the same content. Further,
+      there are cases where the required thesaurus must be determined at
+      runtime, because it varies not only according to the data type (the
+      model), but also to the data being edited. This is the case of critical
+      apparatus fragments, which requests an optional list of witnesses. Of
+      course, the critical apparatus for a work X must here request a set of
+      witnesses which is different from that of work Y (unless they happen to
+      share the same tradition).
+    </p>
+    <aside class="pquote">
+      <blockquote>Special usages</blockquote>
+    </aside>
+    <p>
+      Finally, in some cases thesauri can also be used to provide special
+      configurations to editors; for instance, this happens with a part
+      representing a set of manuscript's decorations, which in turn are
+      described with the set of their building elements. These elements have
+      different properties according to the nature of the decoration, which
+      might be an incipit or otherwise adorned page, an illustration, an
+      ornamentation, a headletter, a paragraphematic sign, or even whitespace.
+      So, in this case a thesaurus provides a list of decoration types, while
+      another one tells the UI about the details of each element's properties.
+      In this way, as all the elements are subsets of a full set of properties,
+      the UI can react to user's selection and show or hide the corresponding
+      controls according to what it finds specified in the second thesaurus; and
+      the whole behavior can be completely customized by users, by simply
+      editing the thesaurus. This is another aspect of model editors design,
+      geared towards generalization and reuse.
+    </p>
+    <aside class="pquote">
+      <blockquote>FAIR compliance</blockquote>
+    </aside>
+    <p>
+      Apart from technical details anyway, the essential value of thesauri not
+      only lies in providing more infrastructure to the editing system; but also
+      in connecting your data to taxonomies and ontologies either defined by
+      yourself, or imported from some existing vocabulary. This way, it's easy
+      to build content with all the attachment points required to integrate it
+      with metadata standards and LOD vocabularies.
+    </p>
+    <aside class="pquote">
+      <blockquote>Playing with thesauri</blockquote>
+    </aside>
+    <p>
+      Thesauri are thus an essential aspect of the so called Cadmus profile, a
+      JSON document which defines the architecture of data with all its required
+      configuration. You can play with some example thesauri in the
+      <a routerLink="/profile/flow">profile builder</a> (stage 3 in the build
+      flow): browse their list, add new ones, import them from other formats
+      like CSV, and freely edit their entries, both for flat and hierarchical
+      thesauri.
+    </p>
+  </article>
+</div>
