@@ -28,14 +28,14 @@
       In this context, the challenge for indexing data thus providing a
       real-time search inside the editor comes from the fact that the
       infrastructure cannot know anything about its models. These are
-      effectively blackboxes, and might have any structure. So, how it is
+      effectively black boxes, and might have any structure. So, how it is
       supposed to extract and filter data from them in order to build an index?
-      The only possible solution is deferring this task to the only entity which
-      knows about the model: i.e. the part itself. Only the part knows about its
-      own model, while the infrastructure is totally agnostic of it: that's one
-      of the tenets which ensure the openness of the architecture. Thus, the
-      part themselves are in charge of inspecting their own content, and select
-      and filter some properties from it to expose them for indexing.
+      The solution is deferring this task to the only entity which knows about
+      the model: i.e. the part itself. Only the part knows about its own model,
+      while the infrastructure is totally agnostic of it: that's one of the
+      tenets which ensure the openness of the architecture. Thus, the part
+      themselves are in charge of inspecting their own content, and select and
+      filter some properties from it to expose them for indexing.
     </p>
     <p>
       Of course, keeping with components isolation, parts in turn need not to
@@ -159,5 +159,31 @@
       </li>
     </ul>
     <p>Flags can be specified either with name or value.</p>
+    <aside class="pquote">
+      <blockquote>Lookup mechanism</blockquote>
+    </aside>
+    <p>
+      It should be noticed that user search is not the only usage for pins.
+      Another typical use case is provided by lookup mechanisms in the editor
+      infrastructure. In fact, even though in most cases parts are independent,
+      there can be cases where you need to insert into a part some identifiers
+      defined in another one. For instance, say you have a corpus of prison
+      graffiti: in this scenario, each graffiti is an item, and among its parts
+      has one telling its location: which prison, cell, and position in its
+      walls. Now, given that other items represent the prisons themselves, which
+      among other data include an ID, it is convenient for users to take
+      advantage of a lookup mechanism to recall the prison ID for each graffiti,
+      when entering its position.
+    </p>
+    <p>
+      To this end, Cadmus leverages the data pins already exposed by parts.
+      Assuming that the prison part exposes the prison ID among other data pins,
+      we already have the data to lookup in the index. All what we must do is
+      searching for a specific pin name for all the parts of a specific type.
+      This allows Cadmus user interfaces to provide auto-completion boxes
+      wherever is required: user just types some letters of the prison ID, and
+      the first matching IDs appear, so that the full ID can be picked from the
+      list.
+    </p>
   </article>
 </div>
