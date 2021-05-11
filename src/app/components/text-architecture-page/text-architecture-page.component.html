@@ -176,5 +176,188 @@
       capabilities, user authentication and different authorization levels,
       continuous backup, auditing, full editing history, etc.).
     </p>
+    <h2>Parts and Fragments: Layered Text</h2>
+    <aside class="pquote">
+      <blockquote>Text as parts</blockquote>
+    </aside>
+    <p>
+      So, text is just a datum, a part in Cadmus lingo. This usually implies
+      that longer texts get chunked into smaller, more manageable pieces, just
+      like in a TEI document we divide it into div sections. Of course this
+      happens adopting a semantic criterion, so that we can deal with relatively
+      self-contained and meaningful chunks.
+    </p>
+    <p>
+      This is usually all what is required for a text part; entering it is as
+      easy as typing or pasting in a simple textbox. We thus end up with a
+      uniform architecture, with objects of any types distributed in different
+      boxes, whatever their relationship with text: an object can indifferently
+      represent text, or non-textual data.
+    </p>
+    <aside class="pquote">
+      <blockquote>Meta-textual data as parts</blockquote>
+    </aside>
+    <p>
+      The same holds with meta-textual data, i.e. those data which are attached
+      to a specific portion of a text. Typically, this is what corresponds to
+      tags in an XML document. It should now come as no surprise that in Cadmus
+      meta-textual data are no different from any other datum: they are just
+      parts. Their only distinctive is that their model always consists of a
+      collection of sub-objects, whose model is designed to represent data from
+      a specialized domain. These sub-objects are named
+      <strong>fragments</strong>. Each fragment is linked to a specific portion
+      of the reference text, which as we have seen is separately stored in
+      another part.
+    </p>
+    <aside class="pquote">
+      <blockquote>Text layers</blockquote>
+    </aside>
+    <p>
+      There is no limit to the complexity of a fragment's model. Each set of
+      fragments sharing the same model belong to the same meta-textual part,
+      which can thus be seen as a <strong>layer</strong> on top of the reference
+      text part. Just like in GIS maps we stack specialized information in
+      several different layers, each devoted to a specific domain, here we stack
+      meta-textual layers on top of a text.
+    </p>
+    <p>
+      Going back to the above inscription sample, here we would end up with 1
+      item, representing it, with 7 parts:
+    </p>
+    <p>(1) 1 <em>text</em> part for the inscription's text.</p>
+    <p>
+      (2) 1 <em>prosopographic layer</em> part to add specialized annotations
+      about all the persons cited in a text.
+    </p>
+    <p>
+      (3) 1 <em>paleographic layer</em> part to describe all the relevant
+      paleographic features, like the chrismon or the punctuation signs.
+    </p>
+    <p>
+      (4) 1 <em>comment layer</em> part to contain any general-purpose comments
+      we want to attach to specific portions of the text. For instance, here we
+      might have 2 fragments: one about the implied word "requiescit" in the
+      first sentence, and another about the ablative case used in "annis", which
+      happens to be rare with respect to the more common accusative ("annos");
+      eventually, this comment would include also some references, like a
+      reference to Sandys 1927 for this syntactic annotation.
+    </p>
+    <p>
+      Also, different comments might be tagged in different ways: for instance,
+      the "requiescit" comment would be targeted to unexperienced users, whereas
+      the syntactic comment about "annis" would be useful to a more learned
+      audience. Further, each comment might also be tagged with reference to an
+      external taxonomy, maybe related to relevant linguistic phenomena,
+      relevant graphic features, or whatever else deserves special attention in
+      our edition.
+    </p>
+    <p>
+      (5) 1 <em>orthography layer</em> part to contain all the standard
+      orthography forms linked to the corresponding historical forms found in
+      the text. For instance, here we would have an annotation telling us that
+      "bixit" corresponds to "vixit". Of course, this is relevant for the
+      history of the language, so our orthography model is not limited to
+      providing the standard orthography, but can also be extended to encode the
+      details of each linguistic phenomenon underlying this orthography (see the
+      orthography fragment model in the
+      <a routerLink="/models/shop">shop</a> for more).
+    </p>
+    <p>
+      In turn, these phenomena can be connected to taxonomies, which can also
+      have a deep hierarchical structure. For instance, B for V in "vixit" might
+      be tagged as spirantization of plosives; in turn, this phenomenon might be
+      under the wider category of linguistic phenomena related to plosives; in
+      turn, plosives would be under consonants; and consonants under phonology.
+    </p>
+    <p>
+      It's easy to imagine the potential of this kind of annotations across the
+      whole spectrum of relevant linguistic phenomena, for all the texts of a
+      corpus, allowing highly granular and specialized searches. And of course,
+      the same holds for any other layer, even beyond the intentions of their
+      original creators.
+    </p>
+    <p>
+      For instance, an epigraphist interested in paleographic features might
+      take care of annotating each punctuation sign; and this could be used well
+      beyond the original intent, maybe by a linguist or a philologist, who are
+      looking for all the factors contributing to the definition of a list of
+      appositive words. As a matter of fact, ancient punctuation here is often
+      of help, as far as it does not occur between an appositive and its "host"
+      word. This is the case of "qui bixit" in our inscription, where the
+      prepositive status of the monosyllabic pronoun "qui" does not trigger a
+      punctuation sign which is used elsewhere in this inscription. That's just
+      a trivial sample, but it should be enough to emphasize the potential of a
+      highly refined annotation on top of several layers, each with its own
+      model, defined only whithin the boundaries of its conceptual domain, and
+      not affected by limitations imposed by any specific storage technology.
+    </p>
+    <p>
+      (6) 1 <em>chronology</em> layer part to contain all the chronological data
+      which can be attached to specific text portions. Here we just have a date,
+      but this layer might be handy for whatever textual reference which can be
+      dated, like a priesthood, a consulate, a battle, etc.
+    </p>
+    <p>
+      (7) 1 <em>abbreviations</em> layer part to resolve all the abbreviated
+      forms in the original text, like KAL for Kalendas.
+    </p>
+    <aside class="pquote">
+      <blockquote>Scalability</blockquote>
+    </aside>
+    <p>
+      Of course, this is far from exhausting the list of layers; for instance,
+      another typical layer would be an apparatus, where we collect different
+      types of annotations (proposed restorations, corrections, or expunctions;
+      notes strictly related to the text constitution; etc.). There is no limit
+      to the number of layers we can stack on top of a text; and whenever we add
+      a new layer, this does not affect in any way the existing text nor the
+      other layers. Compare this with a traditional XML-based text, where each
+      new annotation implies modifying or even refactoring the tree structure to
+      allow for it.
+    </p>
+    <p>
+      As a final remark, we should also emphasize how this architecture allows
+      not only adding new data, but also new data types (models), at any moment
+      in the lifetime of the project. This is an open, dynamic data modelling
+      architecture, where you can add as many new models as you want, without
+      having to care about side effects on existing data. Each model is
+      independent, and designed in the context of its conceptual domain; it's
+      somehow free from the cage of a specific technology and physical modelling
+      constraints. We can even think of an edition as the foundation for any
+      type of future expansions, in whatever direction. For instance, we could
+      start with a basic collection of raw inscription texts, and later decide
+      to progressively add new layers for linguistics, history, prospography,
+      paleography, metrics, or any other specialization we can think of. We thus
+      embrace the dynamic, Heraclitean flux of the digital edition, which
+      becomes a strength rather than an issue.
+    </p>
+    <aside class="pquote">
+      <blockquote>A models shop</blockquote>
+    </aside>
+    <p>
+      In this context, the idea of a
+      <a routerLink="/models/shop">"models shop"</a> comes in naturally; as
+      projects start defining their own data models as parts, they are not only
+      developing their own content, but also providing reusable models for other
+      projects. For instance, once a project has defined a good and generic
+      enough data model for critical apparatus, any other project requiring an
+      apparatus will not have to reinvent the wheel. Rather, it will just import
+      that model, and integrate it in its own architecture, which ultimately is
+      as easy as tossing a new type of object in its boxes.
+    </p>
+    <aside class="pquote">
+      <blockquote>Data reuse, UI reuse</blockquote>
+    </aside>
+    <p>
+      A crucial feature of Cadmus here is that not only we are going to reuse
+      the data model; we are also going to reuse its full-blown editing user
+      interface. Just like we build our dynamic data models by composition
+      (items consisting of parts), we build our content creation system by
+      composition (each part or fragment having its own editor). This can have a
+      huge impact on each project's economy, and also the benefit of promoting a
+      virtuous circle, where standards can potentially emerge starting from the
+      foundations laid out by several different projects working around the same
+      concepts.
+    </p>
   </article>
 </div>

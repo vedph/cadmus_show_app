@@ -5,6 +5,17 @@
     /></span>
     <a mat-button routerLink="/home">Cadmus Show</a>
 
+    <button type="button" mat-button [matMenuTriggerFor]="docMenu">
+      Documentation
+    </button>
+    <mat-menu #docMenu>
+      <a mat-menu-item routerLink="/docs">Documentation</a>
+      <a mat-menu-item routerLink="/docs/data-architecture">Data Architecture</a>
+      <a mat-menu-item routerLink="/docs/text-architecture">Text Architecture</a>
+      <a mat-menu-item routerLink="/docs/taxonomies">Taxonomies</a>
+      <a mat-menu-item routerLink="/docs/infrastructure">Infrastructure</a>
+    </mat-menu>
+
     <button type="button" mat-button [matMenuTriggerFor]="profileMenu">
       Profile
     </button>
