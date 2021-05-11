@@ -4,13 +4,73 @@
     <div id="banner"></div>
   </div>
   <article>
-    <ul>
-      <li>authentication and authorization levels</li>
-      <li>real-time search</li>
-      <li>auditing policy: editing history, full logging.</li>
-      <li>backup policy</li>
-    </ul>
-    TODO
+    <aside class="pquote">
+      <blockquote>Software layers</blockquote>
+    </aside>
+    <p>
+      As seen about Cadmus
+      <a routerLink="docs/data-architecture">architecture</a>, the shift from a
+      text-based model to a more abstract, data-centric one also implies a
+      fundamental shift from a set of file-system based documents to a true
+      database. This is an essential requirement to allow all the features which
+      nowadays are mostly given for granted for any content editing system, like
+      web-based UI, centralized data stores, concurrent editing, different
+      authorization levels for different users, real-time validation and search,
+      strong auditing and backup policies, etc.
+    </p>
+    <p>
+      In this context, Cadmus provides a sort of framework for building highly
+      specialized content-creation systems with a minimal effort. The framework
+      is designed according to widely used principles, and consists of several
+      software layers, each of them being dependent only from the lower one:
+    </p>
+    <ol>
+      <li>
+        database: the database layer is the deepest one. This layer is where all
+        data get stored: all the items and parts, authentication details,
+        logging, and search indexes. The layer includes a number of databases
+        using two technologies: a NoSql system for data and infrastructure
+        (currently
+        <a href="https://www.mongodb.com" target="_blank">MongoDB</a>), and a
+        RDBMS system for indexes (currently
+        <a href="https://www.mysql.com" target="_blank">MySql</a>). Both these
+        technologies are widely used and free, so ultimately all what Cadmus
+        produces is a standard database. It should be noticed that all the upper
+        layers access this layer only through a generic repository, which is an
+        abstraction built on top of the specific data storage technology chosen.
+        So, it would be easy to swap this technology with another one by simply
+        swapping the repository implementation, without the rest of the system
+        even noticing this change.
+      </li>
+      <li>
+        core and extensions: the core layer contains all the core components for
+        the Cadmus architecture. Also, a number of additional modules can be
+        introduced to handle all the models (parts and fragments) we want to use
+        in our dataset.
+      </li>
+      <li>
+        web API: all the editing functions required for the system to work are
+        published as a set of web API endpoints, which can be directly consumed
+        by machines, whatever the programming language used. This layer is
+        protected by standard authentication and authorization technology based
+        on OpenAuth.
+      </li>
+      <li>
+        frontend app: the topmost layer is the only one surfacing to the end
+        user. It provides the user with a full-blown editing user interface
+        running in his/her own web browser, so that the editing experience is
+        very friendly and requires no technical skills.
+      </li>
+    </ol>
+    <p>
+      All these layers (except the database one, which coincides with the
+      database technologies being used) provide a set of modules which represent
+      most part of the code for the whole editing system. Once scholars have
+      picked their models from a <a routerLink="/models/shop">"shop"</a>, or add
+      their own tailored to their views and purposes, the system gets assembled
+      by composition, just like it happens for data models and their editing
+      user interfaces.
+    </p>
     <h2>Real-Time Search</h2>
     <aside class="pquote">
       <blockquote>Indexing black boxes</blockquote>
@@ -167,13 +227,16 @@
       Another typical use case is provided by lookup mechanisms in the editor
       infrastructure. In fact, even though in most cases parts are independent,
       there can be cases where you need to insert into a part some identifiers
-      defined in another one. For instance, say you have a corpus of prison
-      graffiti: in this scenario, each graffiti is an item, and among its parts
-      has one telling its location: which prison, cell, and position in its
-      walls. Now, given that other items represent the prisons themselves, which
-      among other data include an ID, it is convenient for users to take
-      advantage of a lookup mechanism to recall the prison ID for each graffiti,
-      when entering its position.
+      defined in another one.
+    </p>
+    <p>
+      To make a real example, say you have a corpus of prison graffiti: in this
+      scenario, each graffiti is an item, and among its parts has one telling
+      its location: which prison, cell, and position in its walls. Now, given
+      that other items represent the prisons themselves, which among other data
+      include an ID, it is convenient for users to take advantage of a lookup
+      mechanism to recall the prison ID for each graffiti, when entering its
+      position.
     </p>
     <p>
       To this end, Cadmus leverages the data pins already exposed by parts.
