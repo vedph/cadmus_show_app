@@ -1,0 +1,180 @@
+<div>
+  <h1>Text Architecture</h1>
+  <div>
+    <div id="banner"></div>
+  </div>
+  <article>
+    <h2>Text in Cadmus</h2>
+    <aside class="pquote">
+      <blockquote>Text as a part</blockquote>
+    </aside>
+    <p>
+      As explained about
+      <a routerLink="/docs/data-architecture">data architecture</a>, in Cadmus
+      data are "objects" (named parts) tossed into "boxes" (named items). Each
+      item has a composite data model, built of self-contained, semantically
+      coherent sub-models, which represent its parts.
+    </p>
+    <p>
+      Items can be anything you may want to represent, from physical objects to
+      abstract entities, also including text with all its metadata. An essential
+      feature of this architecture is that the text itself is no more the
+      titanic structure condemned to bear the whole world of data, like Atlas;
+      text here is just a datum like any other, i.e. a part, one of the objects
+      tossed in a box.
+    </p>
+    <aside class="pquote">
+      <blockquote>Single-structure limitations</blockquote>
+    </aside>
+    <p>
+      In fact, modelling text as the unique structure on top of which all data
+      are laid out is the main cause of issues for some types of complex digital
+      editions. If you think to an XML tree, which is the usual technology in
+      this context, this tree is the only structure. All metatextual
+      annotations, and even non-textual data, must be somehow attached to it.
+      This usually is perfectly fine; but there are cases where we are going to
+      deal with a set of meta-textual or non-textual data which is much bigger
+      than the text itself, and may require highly structured, independent
+      models for each of its entities. This often happens either because of the
+      very nature of the text, or because we're trying to stuff more and more
+      data in it.
+    </p>
+    <aside class="pquote">
+      <blockquote>Intrinsic complexity</blockquote>
+    </aside>
+    <p>
+      A typical case of the former type is represented by an inscription. Even
+      the shortest one may require a lot of highly specialized metadata, related
+      to very different domains. Take for instance the inscription shown here;
+      its text runs for a dozen of words:
+    </p>
+    <cite style="text-align: center">
+      <p>
+        Decentius XP in pacem<br />
+        qui bixit • annis • V • menses • VI • depositus<br />
+        die • XIIII • Kal • Apriles •
+      </p>
+    </cite>
+  </article>
+  <div>
+    <img
+      style="display: block; margin: auto"
+      src="/assets/img/decentius.jpg"
+      alt="Inscription"
+    />
+  </div>
+  <article>
+    <h2>A Lot of Data on Text</h2>
+    <aside class="pquote">
+      <blockquote>Metadata from different domains</blockquote>
+    </aside>
+    <p>
+      Now, here we could add full prosopographic data to the name
+      <em>Decentius</em>; a paleographic description for the chrismon; explain
+      in a comment that <em>in pacem</em> implies a verb like
+      <em>requiescit</em>; provide a linguistic annotation about the
+      <em>BIXIT</em> (=<em>vixit</em>) orthography; again, add Decentius' age
+      (<em>annis V menses VI</em>) to his prosopographic data; convert the Roman
+      date (die XIII Kal. Apriles = March, 19); resolve the abbreviation (<em
+        >KAL</em
+      >
+      = <em>Kalendas</em>); etc.
+    </p>
+    <aside class="pquote">
+      <blockquote>Extra-textual data</blockquote>
+    </aside>
+    <p>
+      All these are meta-textual data, i.e. data which are connected to a
+      specific portion of the text. But we also have extra-textual data, like
+      archaeological context, excavation data, physical description, etc. So,
+      even with just a few words, our annotation possibilities are endless.
+    </p>
+    <aside class="pquote">
+      <blockquote>Extrinsic complexity</blockquote>
+    </aside>
+    <p>
+      Also, besides intrinsically complex documents, added complexity eventually
+      comes from the systematic application of analysis tools on texts. This
+      happens more and more frequently nowadays, for instance with POS tagging
+      in morphology; tree tagging in syntax; automatic metric analysis; etc. The
+      results of such tools would be encoded in multiple structures, often not
+      compatible among them. This would produce a more and more complex schema,
+      which still must be fitted in the same, unique structure; eventually
+      hitting the well-known XML overlap barrier.
+    </p>
+    <aside class="pquote">
+      <blockquote>The risk of polluting schemas</blockquote>
+    </aside>
+    <p>
+      Overlap is the ultimate barrier for XML, and it potentially comes up a lot
+      of times. Yet, in most cases it's very easy to overcome it by nesting a
+      tag inside another one, or by adding attributes to a single tag including
+      both annotations.
+    </p>
+    <p>
+      For instance, say a couple of words like QVE VIXIT occur in an inscription
+      with a graphical connection (ligature) between E and V. Imagine that we
+      have an XML tag to encode the historical orthography E for our standard AE
+      (QV[AE]); and another tag to encode the ligature between E and V (QVA[E
+      V]IXIT). It's easy to see that both these tags would overlap on letter E.
+      Overcoming this is trivial, but at the cost of mixing different semantic
+      domains (there is no connection between a ligature and the
+      monophthongization of AE).
+    </p>
+    <p>
+      Further, it's equally easy to imagine how things can get complicated when
+      we have a big number of highly granular annotations, ranging from a single
+      character to whole sentences, each with its own semantic domain, which
+      would require its own modelling. Even if in a single domain, models can
+      become very complex: just think about critical apparatus, and the various
+      strategies to encode it in XML-TEI (Location-Referenced, Parallel
+      Segmentation, Double End Point Attached), until we must resort to
+      duplicate the XML structure, by using two distinct documents with standoff
+      notation (which is very difficult to do by hand). You can learn more about
+      these issues in
+      <a
+        href="https://www.youtube.com/watch?v=lYykjz26TCg&t=838"
+        target="_blank"
+        >my presentation</a
+      >.
+    </p>
+    <p>
+      So, in a single structure like that of an XML document, bearing both text
+      and meta-textual annotations, every tag must be entangled in the existing
+      mosaic of tags. Just like attaching two balls on the same branch of a
+      tree, we have mutual constraints: adding new data is constrained (and
+      shaped) by existing data; and in turn it affects them, by changing the
+      tree's shape. Further, in some cases, data might be too complex, or too
+      big, to fit the tree. Yet, in this scenario data cannot live outside it.
+    </p>
+    <aside class="pquote">
+      <blockquote>An Occam's razor</blockquote>
+    </aside>
+    <p>
+      The Cadmus approach here comes with an Occam's razor to simply drop our
+      tree: it rather puts the balls (and any other object) in some boxes. We no
+      more have a single tree holding all the data; so data is free to be
+      modelled according to its own domain. Also, data has no necessary relation
+      with text: it can be anything. And finally, new data, and new data models,
+      can be thrown into a box at any moment, without affecting existing data,
+      nor being constrained by it.
+    </p>
+    <aside class="pquote">
+      <blockquote>The added benefits of switching infrastructure</blockquote>
+    </aside>
+    <p>
+      All data in Cadmus are just objects in boxes, and text is no exception.
+      Plus, this architecture implies that we no more rely on the file system to
+      store data; we rather use a true database, and provide a user-friendly
+      graphical UI to edit them. Of course, this change affects the whole
+      content creation process, which becomes a totally different user
+      experience: no more tagging a text, which requires technical skills and
+      sometimes hacks to encode things the way we want. Rather, users enter a
+      web application, browse and edit data in rich UIs, while getting all the
+      features expected from an ordinary editing system (concurrent editing,
+      centralized data store, robustness, real-time validation and search
+      capabilities, user authentication and different authorization levels,
+      continuous backup, auditing, full editing history, etc.).
+    </p>
+  </article>
+</div>
