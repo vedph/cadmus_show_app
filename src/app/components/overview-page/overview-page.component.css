@@ -4,13 +4,19 @@
   background-size: cover;
   margin-bottom: 16px;
 }
-article {
-  margin: 16px 64px;
-}
 h1 {
   font-size: 2rem;
   text-align: center;
   margin-top: 16px;
+}
+article.boxed {
+  background-color: #f0f0f0;
+  padding: 32px;
+  border-radius: 16px;
+}
+iframe {
+  display: block;
+  margin: auto;
 }
 /*
  * Responsive table: https://codepen.io/AllThingsSmitty/pen/MyqmdM

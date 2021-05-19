@@ -10,6 +10,9 @@
       together with the list of all its GitHub repositories and real-world
       projects using it.
     </p>
+    <aside class="pquote">
+      <blockquote>Read and play</blockquote>
+    </aside>
     <p>
       This site has been designed to be <em>simple</em> and to the point,
       leaving out most of technical and methodological discussions. It also
@@ -18,18 +21,59 @@
       using the system. In fact, technically this is a web application, rather
       than just a bunch of hypertexts.
     </p>
+    <aside class="pquote">
+      <blockquote>Contents</blockquote>
+    </aside>
+    <p>
+      The documentation found in these pages focuses on the most relevant Cadmus
+      topics. You can find a more detailed
+      <a href="https://github.com/vedph/cadmus_doc" target="_blank"
+        >technical documentation</a
+      >
+      in the GitHub repositories. The main topics covered here are:
+    </p>
     <ul>
       <li>
-        <a routerLink="/docs/data-architecture">data architecture</a>
+        <a routerLink="/docs/data-architecture">data architecture</a>: an
+        overview of the data architecture, introducing key terms in Cadmus lingo
+        like items and parts, in the context of dynamic modelling built by
+        composition.
       </li>
       <li>
-        <a routerLink="/docs/text-architecture">text architecture</a>
+        <a routerLink="/docs/text-architecture">text architecture</a>: more
+        focus on how text and metatextual data are handled in Cadmus. In fact, a
+        radical departure from traditional markup here is that text has any
+        number of separate, independent layers on top of it, including any type
+        of metadata, each with its model; and that text is just a datum like any
+        other, sharing the same architecture of the whole system.
       </li>
       <li>
-        <a routerLink="/docs/taxonomies">taxonomies</a>
+        <a routerLink="/docs/taxonomies">taxonomies</a>: a short discussion
+        about taxonomies and shared vocabularies, freely defined and available
+        across all the editors.
       </li>
       <li>
-        <a routerLink="/docs/infrastructure">infrastructure</a>
+        <a routerLink="/docs/infrastructure">infrastructure</a>: as Cadmus
+        relies on databases rather than on file system, it can provide a robust,
+        full-fledged editing environment, with all the features typically
+        expected from a content creation system. Here you can find more about
+        the general software architecture, and infrastructural features like
+        real-time indexing and search.
+      </li>
+      <li>
+        <a routerLink="/profile">profile</a>: your data architecture, and the
+        corresponding editing UIs, are configured in an external JSON document,
+        including all the data required by the system to fit your own project.
+        Here I introduce the main sections of the profile, which you can
+        directly create and edit in this site using the
+        <a routerLink="/profile/flow">profile builder</a>.
+      </li>
+      <li>
+        <a routerLink="/models">models shop</a>: finally, you can get a general
+        feeling of the Cadmus editing experience by exploring the data models
+        and their user interfaces in this sort of models shop. In fact, that's
+        not only a metaphor, as Cadmus projects are built by composing data
+        models and their editors, focusing on sharing and reuse.
       </li>
     </ul>
     <h2>GitHub Repositories</h2>
@@ -73,6 +117,54 @@
       platform (Linux, Windows, or Mac). No dependencies are needed except for
       Docker itself.
     </p>
+  </article>
+  <article class="boxed">
+    <h2>Video Presentations</h2>
+    <h3>Presenting Cadmus</h3>
+    <p>
+      Daniele Fusi, Presenting Cadmus: a general-purpose and modular content
+      editing alternative. Seminar delivered in English by Daniele Fusi (Venice
+      Centre for Digital and Public Humanities) on March 25, 2020 held ON LINE
+      within the VeDPH seminar series Seminars in Digital and Public Humanities.
+    </p>
+    <iframe
+      width="560"
+      height="315"
+      src="https://www.youtube.com/embed/lYykjz26TCg"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    ></iframe>
+    <h3>Encoding a critical apparatus</h3>
+    <p>
+      Daniele Fusi and Daniel Kiss, Encoding a critical apparatus. Webinar held
+      ON LINE in December 7, 2020 within the Webinar series in Theories and
+      Practices of the Annotation through Domain-Specific Languages.
+    </p>
+    <p>
+      This seminar focuses on the challenge of remodelling legacy digital
+      content to create highly structured digital critical editions, by using my
+      Proteus conversion system coupled with Cadmus as the target content
+      editor. The real-world usage case is represented here by Daniel Kiss
+      <a
+        href="http://www.catullusonline.org/CatullusOnline/index.php"
+        target="_blank"
+        >Catullus Online</a
+      >, where the apparatus is being remodelled also in the perspective of
+      major integration with resources like
+      <a href="https://mizar.unive.it/mqdq/public/">Musisque Deoque</a>. A
+      deeper insight in critical apparatus can be found in the above video.
+    </p>
+    <iframe
+      width="560"
+      height="315"
+      src="https://www.youtube.com/embed/27_7iBQVjg0"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    ></iframe>
   </article>
   <article>
     <h2>The Cadmus Projects</h2>

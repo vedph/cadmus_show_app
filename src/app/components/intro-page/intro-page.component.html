@@ -3,7 +3,7 @@
   <div>
     <div id="banner"></div>
   </div>
-  <article>
+  <article class="cols">
     <h2>What Is Cadmus?</h2>
     <p>
       In short, Cadmus is an open-source, tiny framework for building web-based,
@@ -16,17 +16,20 @@
     <p>It is somewhat easier to start with saying what Cadmus is not.</p>
     <aside class="pquote">
       <blockquote>
-        Cadmus is not going to tell you how to model your data; you are rather
-        going to tell it
+        Cadmus is not going to tell you how to model your data; you are
       </blockquote>
     </aside>
     <p>
       Cadmus is <em>not</em> a prebuilt set of models you are forced to embrace
       to create your content. Rather, it is just a framework where you can place
       your own data models, together with their editing UI. So, these models are
-      totally up to you. The architecture is designed to provide the skeleton to
-      be embodied by the flesh of your own content, to provide a quicker path to
-      its creation.
+      totally up to you. The
+      <a routerLink="/docs/data-architecture">architecture</a> is designed to
+      provide the skeleton to be embodied by the flesh of your own content. This
+      provides a quicker path to its creation. Nonetheless, Cadmus being a
+      modular system, you can take advantage of existing models and compose your
+      own with minimal effort. This provides not only data, but even UI reuse,
+      across the whole system.
     </p>
     <aside class="pquote">
       <blockquote>Logical, not physical modeling</blockquote>
@@ -58,23 +61,24 @@
       data connected to it, as it usually is the case with markup technologies
       like XML. Any type of content, either textual, meta-textual, or
       non-textual, can be equally created whithin the system, and whatever its
-      nature it shares a common architecture. In fact, some of the projects
-      adopting Cadmus have no textual content at all. By contrast, in a more
-      traditional content creation process of Scholarly Digital Editions, a
-      “text-centric” perspective is often responsible of the persistence of a
-      “book paradigm” in its digital reincarnation. When producing content, we
-      essentially deal with a text which flows from paper to a digital document
-      with annotations (XML), to be then published to HTML via XSLT. Here, the
-      tree structure laid on the text bears the whole data universe. This is
-      consistent with the typical usages of TEI, essentially oriented to the
-      “reconstruction of documents”. Yet, in some cases, especially with the
-      outgrow of data provided by new types of analysis (e.g. morphological,
-      syntactical or metrical tagging), and/or when handling very complex
-      documents (e.g. inscriptions or complex literary traditions), this may not
-      be the most efficient paradigm for creating content. In such scenarios a
-      paradigm shift might be beneficial; and Cadmus aims to provide at least a
-      concrete example of a tool which can effectively implement this shift in
-      real-world projects.
+      nature it shares a
+      <a routerLink="/docs/data-architecture">common architecture</a>. In fact,
+      some of the projects adopting Cadmus have no textual content at all. By
+      contrast, in a more traditional content creation process of Scholarly
+      Digital Editions, a “text-centric” perspective is often responsible of the
+      persistence of a “book paradigm” in its digital reincarnation. When
+      producing content, we essentially deal with a text which flows from paper
+      to a digital document with annotations (XML), to be then published to HTML
+      via XSLT. Here, the tree structure laid on the text bears the whole data
+      universe. This is consistent with the typical usages of TEI, essentially
+      oriented to the “reconstruction of documents”. Yet, in some cases,
+      especially with the outgrow of data provided by new types of analysis
+      (e.g. morphological, syntactical or metrical tagging), and/or when
+      handling very complex documents (e.g. inscriptions or complex literary
+      traditions), this may not be the most efficient paradigm for creating
+      content. In such scenarios a paradigm shift might be beneficial; and
+      Cadmus aims to provide at least a concrete example of a tool which can
+      effectively implement this shift in real-world projects.
     </p>
     <aside class="pquote">
       <blockquote>Content vs Presentations</blockquote>
@@ -230,8 +234,9 @@
       The above workflow could be envisaged as a "horizontal" flow, where
       content eventually coming from legacy or paper-based resources, or created
       from scratch, enter the Cadmus editing environment with its dynamic,
-      modular and open modeling architecture, to be later exported in any
-      desired output.
+      modular and open modeling
+      <a routerLink="/docs/data-architecture">architecture</a>, to be later
+      exported in any desired output.
     </p>
     <p>
       In some cases, we could also imagine another workflow crossing this one,
@@ -273,6 +278,11 @@
       Thus, this provides an open editing system, where integration is a key
       feature either by means of import/export and by means of resources
       connection.
+    </p>
+    <p>
+      <a mat-raised-button routerLink="/docs/data-architecture"
+        >Next: Data Architecture</a
+      >
     </p>
   </article>
 </div>

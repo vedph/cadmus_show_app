@@ -8,9 +8,10 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
-
-article.cols {
+article {
   margin: 16px 64px;
+}
+article.cols {
   column-width: 30em;
   column-count: 4;
   column-gap: 2em;
