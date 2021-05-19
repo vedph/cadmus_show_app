@@ -6,13 +6,6 @@
 }
 article {
   margin: 16px 64px;
-  column-width: 30em;
-  column-count: 4;
-  column-gap: 2em;
-  column-rule: 1px solid silver;
-}
-aside {
-  margin: 16px 64px;
 }
 h1 {
   font-size: 2rem;

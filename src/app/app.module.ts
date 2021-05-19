@@ -31,7 +31,7 @@ import { FacetListCodePageComponent } from './components/facet-list-code-page/fa
 import { FlagListPageComponent } from './components/flag-list-page/flag-list-page.component';
 import { FlagListCodePageComponent } from './components/flag-list-code-page/flag-list-code-page.component';
 import { IntroPageComponent } from './components/intro-page/intro-page.component';
-import { LearningPageComponent } from './components/learning-page/learning-page.component';
+import { OverviewPageComponent } from './components/overview-page/overview-page.component';
 import { ModelGraphPageComponent } from './components/model-graph-page/model-graph-page.component';
 import { ModelListComponent } from '@myrmidon/cadmus-shop-ui';
 import { ProfileCodePageComponent } from './components/profile-code-page/profile-code-page.component';
@@ -64,7 +64,7 @@ import { InfrastructurePageComponent } from './components/infrastructure-page/in
     ProfileCodePageComponent,
     ModelGraphPageComponent,
     IntroPageComponent,
-    LearningPageComponent,
+    OverviewPageComponent,
     TextArchitecturePageComponent,
     TaxonomiesPageComponent,
     InfrastructurePageComponent,
@@ -99,7 +99,7 @@ import { InfrastructurePageComponent } from './components/infrastructure-page/in
         { path: 'profile', component: ProfileHomeComponent },
         { path: 'profile/flow', component: ProfileFlowComponent },
         { path: 'profile/code', component: ProfileCodePageComponent },
-        { path: 'docs', component: LearningPageComponent },
+        { path: 'docs', component: OverviewPageComponent },
         { path: 'docs/data-architecture', component: DataArchitecturePageComponent },
         { path: 'docs/text-architecture', component: TextArchitecturePageComponent },
         { path: 'docs/taxonomies', component: TaxonomiesPageComponent },

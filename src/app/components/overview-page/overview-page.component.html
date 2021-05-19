@@ -3,7 +3,7 @@
   <div>
     <div id="banner"></div>
   </div>
-  <article>
+  <article class="cols">
     <h2>General Concepts</h2>
     <p>
       Here you can find a directory of Cadmus-related learning materials,
@@ -34,11 +34,47 @@
     </ul>
     <h2>GitHub Repositories</h2>
     <p>
-      All the Cadmus repositories are hosted at the
-      <a href="https://github.com/vedph/" target="_blank">VeDPH GitHub</a>.
+      All the Cadmus repositories are public and hosted at the
+      <a href="https://github.com/vedph/" target="_blank">VeDPH GitHub</a>. They
+      are usually organized per-project: a set of general repositories provide
+      the full infrastructure, and then each project has its own set of
+      repositories.
+    </p>
+    <aside class="pquote">
+      <blockquote>Repos and projects</blockquote>
+    </aside>
+    <p>
+      The number of repositories per project depends on the projects
+      requirements; usually, a full-fledged Cadmus project can have a
+      documentation repository, a models repository, an API repository, and a
+      frontend web app repository.
+    </p>
+    <p>
+      All these repositories represent a very limited portion of the code, as
+      most functionality is directly borrowed from the framework. In fact, some
+      projects may even provide just a wrapper for the backend API and the
+      frontend app (with their own homepage being the only resource typically
+      built ad-hoc), as they mostly reuse components and even data models.
+    </p>
+    <h2>Docker Images</h2>
+    <aside class="pquote">
+      <blockquote>Running and deployment</blockquote>
+    </aside>
+    <p>
+      All the images for the various Cadmus-based projects are public and hosted
+      in the
+      <a href="https://hub.docker.com/orgs/vedph2020" target="_blank"
+        >VeDPH Docker Hub</a
+      >.
+    </p>
+    <p>
+      The easiest way to play with a Cadmus project or setup it on a server is
+      just downloading a Docker-compose script and run it, whatever your
+      platform (Linux, Windows, or Mac). No dependencies are needed except for
+      Docker itself.
     </p>
   </article>
-  <aside>
+  <article>
     <h2>The Cadmus Projects</h2>
     <p>
       Here you can find a list of Cadmus-based projects, with the links to their
@@ -195,5 +231,5 @@
         </tr>
       </tbody>
     </table>
-  </aside>
+  </article>
 </div>

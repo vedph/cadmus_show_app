@@ -1,11 +1,25 @@
 @import "~jsoneditor/dist/jsoneditor.min.css";
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+article.cols {
+  margin: 16px 64px;
+  column-width: 30em;
+  column-count: 4;
+  column-gap: 2em;
+  column-rule: 1px solid silver;
+}
 .pquote {
   float: left;
   width: 100px;
-  background: #E3F2F6;
+  background: #e3f2f6;
   font-weight: bold;
   padding: 13px;
   margin: 0 13px 13px 0;

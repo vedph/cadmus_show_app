@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LearningPageComponent } from './learning-page.component';
+import { OverviewPageComponent } from './overview-page.component';
 
 describe('LearningPageComponent', () => {
-  let component: LearningPageComponent;
-  let fixture: ComponentFixture<LearningPageComponent>;
+  let component: OverviewPageComponent;
+  let fixture: ComponentFixture<OverviewPageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LearningPageComponent ]
+      declarations: [ OverviewPageComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LearningPageComponent);
+    fixture = TestBed.createComponent(OverviewPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
