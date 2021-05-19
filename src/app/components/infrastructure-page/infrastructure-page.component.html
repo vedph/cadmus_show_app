@@ -3,7 +3,7 @@
   <div>
     <div id="banner"></div>
   </div>
-  <article>
+  <article class="cols">
     <aside class="pquote">
       <blockquote>Software layers</blockquote>
     </aside>
@@ -22,41 +22,49 @@
       In this context, Cadmus provides a sort of framework for building highly
       specialized content-creation systems with a minimal effort. The framework
       is designed according to widely used principles, and consists of several
-      software layers, each of them being dependent only from the lower one:
+      software layers, each of them being dependent only from the lower one.
     </p>
+    <figure>
+      <img src="assets/img/layers.png" />
+      <figcaption>The Cadmus layers</figcaption>
+    </figure>
+    <p>Looking at the picture from top to bottom, the layers are:</p>
     <ol>
       <li>
-        database: the database layer is the deepest one. This layer is where all
-        data get stored: all the items and parts, authentication details,
-        logging, and search indexes. The layer includes a number of databases
-        using two technologies: a NoSql system for data and infrastructure
-        (currently
+        <em>databases</em>: the database layer is the deepest one. This layer is
+        where all data get stored: all the items and parts, authentication
+        details, logging, and search indexes. The layer includes a number of
+        databases using two technologies: a NoSql system for data and
+        infrastructure (currently
         <a href="https://www.mongodb.com" target="_blank">MongoDB</a>), and a
         RDBMS system for indexes (currently
         <a href="https://www.mysql.com" target="_blank">MySql</a>). Both these
         technologies are widely used and free, so ultimately all what Cadmus
-        produces is a standard database. It should be noticed that all the upper
-        layers access this layer only through a generic repository, which is an
-        abstraction built on top of the specific data storage technology chosen.
-        So, it would be easy to swap this technology with another one by simply
-        swapping the repository implementation, without the rest of the system
-        even noticing this change.
+        produces is a standard database.
       </li>
       <li>
-        core and extensions: the core layer contains all the core components for
-        the Cadmus architecture. Also, a number of additional modules can be
-        introduced to handle all the models (parts and fragments) we want to use
-        in our dataset.
+        <em>data layer</em>: all the upper layers access databases only through
+        a generic data layer, which is an abstraction built on top of the
+        specific data storage technology chosen. So, it would be easy to swap
+        this technology with another one by simply swapping this layer
+        implementation, without the rest of the system even noticing this
+        change.
       </li>
       <li>
-        web API: all the editing functions required for the system to work are
-        published as a set of web API endpoints, which can be directly consumed
-        by machines, whatever the programming language used. This layer is
-        protected by standard authentication and authorization technology based
-        on OpenAuth.
+        <em>business layer</em>, with core components and their extensions: the
+        core layer contains all the core components for the Cadmus architecture.
+        Also, a number of additional modules can be introduced to handle all the
+        models (parts and fragments) we want to use in our dataset.
       </li>
       <li>
-        frontend app: the topmost layer is the only one surfacing to the end
+        <em>web API</em>: all the editing functions required for the system to
+        work are published as a set of web API endpoints, which can be directly
+        consumed by machines, whatever the programming language used. This layer
+        is protected by standard authentication and authorization technology
+        based on OpenAuth.
+      </li>
+      <li>
+        <em>web app</em>: the topmost layer is the only one surfacing to the end
         user. It provides the user with a full-blown editing user interface
         running in his/her own web browser, so that the editing experience is
         very friendly and requires no technical skills.

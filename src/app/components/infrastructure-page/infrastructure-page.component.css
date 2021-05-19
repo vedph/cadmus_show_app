@@ -4,13 +4,6 @@
   background-size: cover;
   margin-bottom: 16px;
 }
-article {
-  margin: 16px 64px;
-  column-width: 30em;
-  column-count: 4;
-  column-gap: 2em;
-  column-rule: 1px solid silver;
-}
 h1 {
   font-size: 2rem;
   text-align: center;
@@ -24,4 +17,7 @@ pre {
   background-color: #f0f0f0;
   margin: 8px 16px;
   overflow: auto;
+}
+figcaption {
+  color: #808080;
 }
