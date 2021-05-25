@@ -7,7 +7,7 @@ To run the corresponding Docker image: use `docker images` to list the images, a
 Deploy sample (for a subpath, here `apps/cadmus-show`):
 
 ```txt
-ng build --prod --base-href /apps/cadmus-show/
+ng build --base-href /apps/cadmus-show/
 ```
 
 For GitHub pages see [this tool](https://github.com/angular-schule/angular-cli-ghpages).
