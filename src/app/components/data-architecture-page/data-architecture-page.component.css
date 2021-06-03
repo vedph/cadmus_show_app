@@ -3,12 +3,6 @@ h1 {
   margin-top: 16px;
   font-size: 300%;
 }
-#banner {
-  height: 258px;
-  background-image: url("/assets/img/blocks.jpg");
-  background-size: cover;
-  margin-bottom: 16px;
-}
 figure {
   font-size: 85%;
 }

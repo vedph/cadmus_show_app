@@ -1,6 +1,17 @@
 <div>
   <h1>The Models Shop</h1>
-  <div id="banner"></div>
+  <div>
+    <div class="banner">
+      <img
+        class="banner-img"
+        srcset="
+          ./assets/img/supermarket-1024.jpg 1024w,
+          ./assets/img/supermarket-512.jpg   512w
+        "
+        sizes="(max-width: 600px) 512px, 1024px"
+      />
+    </div>
+  </div>
   <article class="cols">
     <p>
       <a mat-flat-button color="primary" routerLink="/models/shop">

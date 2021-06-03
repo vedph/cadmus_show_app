@@ -1,7 +1,16 @@
 <div>
   <h1>Text Architecture</h1>
   <div>
-    <div id="banner"></div>
+    <div class="banner">
+      <img
+        class="banner-img"
+        srcset="
+          ./assets/img/text-1024.jpg 1024w,
+          ./assets/img/text-512.jpg   512w
+        "
+        sizes="(max-width: 600px) 512px, 1024px"
+      />
+    </div>
   </div>
   <article class="cols">
     <h2>Text in Cadmus</h2>
@@ -360,9 +369,7 @@
       concepts.
     </p>
     <p>
-      <a mat-raised-button routerLink="/docs/taxonomies"
-        >Next: Taxonomies</a
-      >
+      <a mat-raised-button routerLink="/docs/taxonomies">Next: Taxonomies</a>
     </p>
   </article>
 </div>
