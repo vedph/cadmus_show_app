@@ -3,10 +3,17 @@ h1 {
   text-align: center;
   margin-top: 16px;
 }
+#img-container {
+  position: absolute;
+  width: 100%;
+  height: calc(100vh - 200px);
+  display: flex;
+  justify-content: center;
+}
 #container {
-  background-image: url("/assets/img/cadmus-vase.png");
+  /* background-image: url("/assets/img/cadmus-vase.png");
   background-repeat: no-repeat;
-  background-position: center center;
+  background-position: center center; */
   margin: 8px;
   height: calc(100vh - 200px);
 }
