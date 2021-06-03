@@ -26,22 +26,22 @@ import {
   template: '<svg:svg #fg [id]="id"></svg:svg>',
   styles: [
     `
-      :host /deep/ .links line {
+      :host ::ng-deep .links line {
         stroke: #999;
         stroke-opacity: 0.6;
       }
 
-      :host /deep/ .nodes circle {
+      :host ::ng-deep .nodes circle {
         stroke: #fff;
         stroke-width: 1.5px;
       }
 
-      :host /deep/ text {
+      :host ::ng-deep text {
         font-family: sans-serif;
         font-size: 10px;
       }
 
-      :host /deep/ .nodes circle.pinned {
+      :host ::ng-deep .nodes circle.pinned {
         stroke: orange;
       }
     `,
