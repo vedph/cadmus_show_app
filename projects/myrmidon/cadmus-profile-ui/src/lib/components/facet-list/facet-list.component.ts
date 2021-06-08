@@ -102,9 +102,9 @@ export class FacetListComponent implements OnInit {
   }
 
   public onViewPartInfo(part: GroupedPartDefinition): void {
-    const fragment = part.roleId?.startsWith('fr.');
+    const fragment = part.roleId?.startsWith('fr.') ? true : false;
     const typeId = fragment ? part.roleId : part.typeId;
-    this._shopService.getModel(typeId, fragment).subscribe((m) => {
+    this._shopService.getModel(typeId!, fragment).subscribe((m) => {
       if (m) {
         this._shopService.getModelDetails(m).subscribe((dm) => {
           this.currentModel = dm;

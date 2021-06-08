@@ -16,7 +16,7 @@ import { PartDefinition } from '@myrmidon/cadmus-core';
 export interface GroupedPartDefinitionId {
   groupId: string;
   typeId: string;
-  roleId?: string;
+  roleId?: string | null;
 }
 
 /**
