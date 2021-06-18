@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store, StoreConfig } from '@datorama/akita';
-import { ThesaurusFilter } from '@myrmidon/cadmus-profile-core';
+import { ThesaurusFilter } from '@myrmidon/cadmus-core';
 
 const INITIAL_STATE: ThesaurusFilter = {
   pageNumber: 1,

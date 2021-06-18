@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ThesaurusFilter } from '@myrmidon/cadmus-profile-core';
+import { ThesaurusFilter } from '@myrmidon/cadmus-core';
 import { ThesaurusFilterStore } from './thesaurus-filter.store';
 
 /**
@@ -20,7 +20,7 @@ export class ThesaurusFilterService {
 
   public setFilter(filter: ThesaurusFilter): void {
     this._store.update({
-      idOrValue: filter.idOrValue,
+      id: filter.id,
       isAlias: filter.isAlias,
       language: filter.language
     });

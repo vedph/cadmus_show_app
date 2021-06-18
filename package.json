@@ -35,6 +35,7 @@
     "@myrmidon/cadmus-api": "0.0.12",
     "@myrmidon/cadmus-core": "0.0.23",
     "@myrmidon/cadmus-material": "0.0.6",
+    "@myrmidon/cadmus-profile-core": "0.0.1",
     "@myrmidon/cadmus-ui": "0.0.33",
     "ang-jsoneditor": "^1.10.5",
     "d3": "^6.7.0",

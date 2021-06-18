@@ -3,10 +3,6 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
-      "@myrmidon/cadmus-profile-core": [
-        "dist/myrmidon/cadmus-profile-core/myrmidon-cadmus-profile-core",
-        "dist/myrmidon/cadmus-profile-core"
-      ],
       "@myrmidon/cadmus-profile-ui": [
         "dist/myrmidon/cadmus-profile-ui/myrmidon-cadmus-profile-ui",
         "dist/myrmidon/cadmus-profile-ui"

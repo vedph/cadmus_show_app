@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Thesaurus } from '@myrmidon/cadmus-core';
-import { ThesaurusFilter } from '@myrmidon/cadmus-profile-core';
+import { ThesaurusFilter } from '@myrmidon/cadmus-core';
 import { DataPage } from '@myrmidon/cadmus-shop-core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 
@@ -74,7 +74,7 @@ export class RamThesaurusService {
     thesaurus: Thesaurus,
     filter: ThesaurusFilter
   ): boolean {
-    if (filter.idOrValue && !thesaurus.id.includes(filter.idOrValue)) {
+    if (filter.id && !thesaurus.id.includes(filter.id)) {
       return false;
     }
     if (filter.isAlias === true && !thesaurus.targetId) {

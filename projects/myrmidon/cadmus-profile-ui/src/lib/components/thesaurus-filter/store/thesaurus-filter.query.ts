@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Query } from '@datorama/akita';
-import { ThesaurusFilter } from '@myrmidon/cadmus-profile-core';
+import { ThesaurusFilter } from '@myrmidon/cadmus-core';
 import { ThesaurusFilterStore } from './thesaurus-filter.store';
 
 @Injectable({

@@ -214,46 +214,6 @@
         }
       }
     },
-    "@myrmidon/cadmus-profile-core": {
-      "projectType": "library",
-      "root": "projects/myrmidon/cadmus-profile-core",
-      "sourceRoot": "projects/myrmidon/cadmus-profile-core/src",
-      "prefix": "cadmus",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
-          "options": {
-            "tsConfig": "projects/myrmidon/cadmus-profile-core/tsconfig.lib.json",
-            "project": "projects/myrmidon/cadmus-profile-core/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/myrmidon/cadmus-profile-core/tsconfig.lib.prod.json"
-            }
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/myrmidon/cadmus-profile-core/src/test.ts",
-            "tsConfig": "projects/myrmidon/cadmus-profile-core/tsconfig.spec.json",
-            "karmaConfig": "projects/myrmidon/cadmus-profile-core/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/myrmidon/cadmus-profile-core/tsconfig.lib.json",
-              "projects/myrmidon/cadmus-profile-core/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    },
     "@myrmidon/cadmus-profile-ui": {
       "projectType": "library",
       "root": "projects/myrmidon/cadmus-profile-ui",

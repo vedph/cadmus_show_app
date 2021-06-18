@@ -5,7 +5,7 @@ import {
   FormControl,
   Validators,
 } from '@angular/forms';
-import { ThesaurusFilter } from '@myrmidon/cadmus-profile-core';
+import { ThesaurusFilter } from '@myrmidon/cadmus-core';
 
 @Component({
   selector: 'cadmus-thesaurus-filter',
@@ -58,7 +58,7 @@ export class ThesaurusFilterComponent implements OnInit {
       return;
     }
 
-    this.id.setValue(filter.idOrValue);
+    this.id.setValue(filter.id);
     this.alias.setValue(filter.isAlias);
     this.language.setValue(filter.language);
     this.form.markAsPristine();
@@ -68,7 +68,7 @@ export class ThesaurusFilterComponent implements OnInit {
     return {
       pageNumber: 0,
       pageSize: 0,
-      idOrValue: this.id.value,
+      id: this.id.value,
       isAlias: this.alias.value,
       language: this.language.value,
     };

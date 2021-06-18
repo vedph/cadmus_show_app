@@ -4,7 +4,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { PaginationResponse, PaginatorPlugin } from '@datorama/akita';
 import { Thesaurus } from '@myrmidon/cadmus-core';
-import { ThesaurusFilter } from '@myrmidon/cadmus-profile-core';
+import { ThesaurusFilter } from '@myrmidon/cadmus-core';
 import { DataPage } from '@myrmidon/cadmus-shop-core';
 import { DialogService } from '@myrmidon/cadmus-show-ui';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
