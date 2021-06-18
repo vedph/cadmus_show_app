@@ -1,5 +1,6 @@
 <cadmus-thesaurus-editor
   [thesaurus]="thesaurus"
+  [lookupFn]="wrapLookup(thesService)"
   (thesaurusChange)="onThesaurusChange($event)"
   (editorClose)="onEditorClose()"
 ></cadmus-thesaurus-editor>

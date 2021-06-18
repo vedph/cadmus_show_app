@@ -45,6 +45,7 @@ import { TourMatMenuModule } from 'ngx-ui-tour-md-menu';
 import { TextArchitecturePageComponent } from './components/text-architecture-page/text-architecture-page.component';
 import { TaxonomiesPageComponent } from './components/taxonomies-page/taxonomies-page.component';
 import { InfrastructurePageComponent } from './components/infrastructure-page/infrastructure-page.component';
+import { CadmusThesaurusUiModule } from '@myrmidon/cadmus-thesaurus-ui';
 
 @NgModule({
   declarations: [
@@ -91,6 +92,7 @@ import { InfrastructurePageComponent } from './components/infrastructure-page/in
     CadmusShopAssetModule,
     CadmusShowUiModule,
     CadmusShowVizModule,
+    CadmusThesaurusUiModule,
     RouterModule.forRoot(
       [
         { path: '', redirectTo: 'home', pathMatch: 'full' },

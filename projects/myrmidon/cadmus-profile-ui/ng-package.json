@@ -13,7 +13,8 @@
       "@myrmidon/cadmus-material": "@myrmidon/cadmus-material",
       "@myrmidon/cadmus-shop-asset": "@myrmidon/cadmus-shop-asset",
       "@myrmidon/cadmus-show-ui": "@myrmidon/cadmus-show-ui",
-      "@myrmidon/cadmus-profile-core": "@myrmidon/cadmus-profile-core"
+      "@myrmidon/cadmus-profile-core": "@myrmidon/cadmus-profile-core",
+      "@myrmidon/cadmus-thesaurus-ui": "@myrmidon/cadmus-thesaurus-ui"
     }
   }
 }

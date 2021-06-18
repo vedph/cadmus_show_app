@@ -25,9 +25,7 @@ import { PartDefinitionEditorComponent } from './components/part-definition-edit
 import { PartInfoComponent } from './components/part-info/part-info.component';
 import { ThesaurusListComponent } from './components/thesaurus-list/thesaurus-list.component';
 import { ThesaurusFilterComponent } from './components/thesaurus-filter/thesaurus-filter.component';
-import { ThesaurusEditorComponent } from './components/thesaurus-editor/thesaurus-editor.component';
-import { ThesaurusLookupComponent } from './components/thesaurus-lookup/thesaurus-lookup.component';
-import { ThesaurusNodeComponent } from './components/thesaurus-node/thesaurus-node.component';
+import { CadmusThesaurusUiModule } from '@myrmidon/cadmus-thesaurus-ui';
 
 @NgModule({
   declarations: [
@@ -41,11 +39,8 @@ import { ThesaurusNodeComponent } from './components/thesaurus-node/thesaurus-no
     ModelLookupComponent,
     PartDefinitionEditorComponent,
     PartInfoComponent,
-    ThesaurusEditorComponent,
     ThesaurusFilterComponent,
     ThesaurusListComponent,
-    ThesaurusLookupComponent,
-    ThesaurusNodeComponent,
   ],
   imports: [
     CommonModule,
@@ -60,6 +55,7 @@ import { ThesaurusNodeComponent } from './components/thesaurus-node/thesaurus-no
     CadmusMaterialModule,
     CadmusProfileCoreModule,
     CadmusShowUiModule,
+    CadmusThesaurusUiModule
   ],
   providers: [{ provide: MAT_COLOR_FORMATS, useValue: NGX_MAT_COLOR_FORMATS }],
   exports: [
@@ -72,11 +68,8 @@ import { ThesaurusNodeComponent } from './components/thesaurus-node/thesaurus-no
     ModelLookupComponent,
     PartDefinitionEditorComponent,
     PartInfoComponent,
-    ThesaurusEditorComponent,
     ThesaurusListComponent,
     ThesaurusFilterComponent,
-    ThesaurusLookupComponent,
-    ThesaurusNodeComponent,
   ],
 })
 export class CadmusProfileUiModule {}

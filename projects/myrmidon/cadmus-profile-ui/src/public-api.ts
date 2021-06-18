@@ -26,18 +26,13 @@ export * from './lib/components/part-definition-editor/part-definition-editor.co
 
 export * from './lib/components/part-info/part-info.component';
 
-export * from './lib/components/thesaurus-editor/thesaurus-editor.component';
-
 export * from './lib/components/thesaurus-filter/thesaurus-filter.component';
 
 export * from './lib/components/thesaurus-list/thesaurus-list.component';
 
-export * from './lib/components/thesaurus-node/thesaurus-node.component';
 export * from './lib/components/thesaurus-list/store/thesaurus-list.query';
 export * from './lib/components/thesaurus-list/store/thesaurus-list.service';
 export * from './lib/components/thesaurus-list/store/thesaurus-list.store';
-
-export * from './lib/components/thesaurus-lookup/thesaurus-lookup.component';
 
 export * from './lib/services/part-definition-vm.service';
 export * from './lib/services/profile-builder.service';

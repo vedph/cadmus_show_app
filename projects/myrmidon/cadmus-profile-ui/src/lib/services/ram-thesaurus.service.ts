@@ -177,4 +177,16 @@ export class RamThesaurusService {
         .slice(0, limit)
     );
   }
+
+  public getThesaurusIds(filter?: ThesaurusFilter): Observable<string[]> {
+    return of(
+      this._thesauri$.value
+        .filter((t) => !filter?.id || t.id.includes(filter.id))
+        .map((t) => {
+          return t.id;
+        })
+        .sort((a, b) => a.localeCompare(b))
+        .slice(0, filter?.pageSize || 10)
+    );
+  }
 }
