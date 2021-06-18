@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build-core": "ng build @myrmidon/cadmus-shop-core --configuration production && ng build @myrmidon/cadmus-profile-core --configuration production",
+    "build-core": "ng build @myrmidon/cadmus-shop-core --configuration production",
     "build-ui": "ng build @myrmidon/cadmus-show-ui --configuration production && ng build @myrmidon/cadmus-show-viz --configuration production",
     "build-prof": "ng build @myrmidon/cadmus-profile-ui --configuration production",
     "build-shop": "ng build @myrmidon/cadmus-shop-asset --configuration production && ng build @myrmidon/cadmus-shop-ui --configuration production",
