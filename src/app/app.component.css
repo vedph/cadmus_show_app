@@ -1,3 +1,15 @@
+header {
+  width: 100%;
+  height: 64px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+main, footer {
+  z-index: 0;
+}
+
 footer {
   color: #808080;
   padding: 4px;
