@@ -14,8 +14,8 @@ import { CadmusProfileUiModule } from '@myrmidon/cadmus-profile-ui';
   imports: [
     CommonModule,
     FormsModule,
-    BrowserAnimationsModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
     ClipboardModule,
     CadmusMaterialModule,
     CadmusProfileUiModule,

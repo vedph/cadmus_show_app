@@ -23,12 +23,12 @@ export class TaxonomiesPageComponent implements OnInit {
     this._shopService
       .loadObject<Thesaurus[]>('samples/thesauri')
       .pipe(take(1))
-      .subscribe((thesauri) => {
+      .subscribe((thesauri: Thesaurus[]) => {
         this._thesService.setAll(thesauri);
         this._thesService
           .get('ms-script-types@en')
           .pipe(take(1))
-          .subscribe((t) => {
+          .subscribe((t: Thesaurus | undefined) => {
             this.entries = t?.entries;
           });
       });

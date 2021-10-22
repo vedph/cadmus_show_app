@@ -19,9 +19,11 @@ import { CadmusShopCoreModule } from '@myrmidon/cadmus-shop-core';
 import { CadmusShopAssetModule } from '@myrmidon/cadmus-shop-asset';
 import { CadmusShowUiModule } from '@myrmidon/cadmus-show-ui';
 import { CadmusShowVizModule } from '@myrmidon/cadmus-show-viz';
+import { EnvServiceProvider } from '@myrmidon/cadmus-core';
+import { ModelListComponent } from '@myrmidon/cadmus-shop-ui';
+import { CadmusThesaurusUiModule } from '@myrmidon/cadmus-thesaurus-ui';
 
 import { environment } from '../environments/environment';
-import { EnvServiceProvider } from '@myrmidon/cadmus-core';
 
 import { AppComponent } from './app.component';
 import { DataArchitecturePageComponent } from './components/data-architecture-page/data-architecture-page.component';
@@ -33,7 +35,6 @@ import { FlagListCodePageComponent } from './components/flag-list-code-page/flag
 import { IntroPageComponent } from './components/intro-page/intro-page.component';
 import { OverviewPageComponent } from './components/overview-page/overview-page.component';
 import { ModelGraphPageComponent } from './components/model-graph-page/model-graph-page.component';
-import { ModelListComponent } from '@myrmidon/cadmus-shop-ui';
 import { ProfileCodePageComponent } from './components/profile-code-page/profile-code-page.component';
 import { ProfileFlowComponent } from './components/profile-flow/profile-flow.component';
 import { ProfileHomeComponent } from './components/profile-home/profile-home.component';
@@ -45,7 +46,6 @@ import { TourMatMenuModule } from 'ngx-ui-tour-md-menu';
 import { TextArchitecturePageComponent } from './components/text-architecture-page/text-architecture-page.component';
 import { TaxonomiesPageComponent } from './components/taxonomies-page/taxonomies-page.component';
 import { InfrastructurePageComponent } from './components/infrastructure-page/infrastructure-page.component';
-import { CadmusThesaurusUiModule } from '@myrmidon/cadmus-thesaurus-ui';
 
 @NgModule({
   declarations: [
