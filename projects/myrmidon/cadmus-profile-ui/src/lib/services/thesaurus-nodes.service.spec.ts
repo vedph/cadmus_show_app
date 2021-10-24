@@ -630,5 +630,23 @@ fdescribe('ThesaurusNodesService', () => {
     expect(nodes[8].ordinal).toBe(4);
     expect(nodes[8].lastSibling).toBeTrue();
   });
+
+  it('should add as 2nd top sibling in tree set', () => {
+    service.importEntries(getTreeEntries());
+    service.add({
+      id: 'shape',
+      value: 'shape',
+      ordinal: 2,
+      level: 1,
+    });
+    const nodes = service.getNodes();
+    expect(nodes.length).toBe(9);
+    expect(nodes[0].id).toBe('size');
+    expect(nodes[0].ordinal).toBe(1);
+    expect(nodes[4].id).toBe('shape');
+    expect(nodes[4].ordinal).toBe(2);
+    expect(nodes[5].id).toBe('color.r');
+    expect(nodes[5].ordinal).toBe(3);
+  });
   //#endregion
 });

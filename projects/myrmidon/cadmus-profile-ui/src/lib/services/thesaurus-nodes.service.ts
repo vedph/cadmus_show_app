@@ -286,8 +286,8 @@ export class ThesaurusNodesService {
     const nodes = this._nodes$.value;
     while (
       i < nodes.length &&
-      nodes[i].parentId === node.parentId &&
-      n < node.ordinal
+      (!node.parentId || nodes[i].parentId === node.parentId) &&
+      (node.level !== nodes[i].level || n < node.ordinal)
     ) {
       n++;
       i++;
