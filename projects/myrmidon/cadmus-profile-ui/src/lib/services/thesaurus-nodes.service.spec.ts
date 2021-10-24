@@ -1,11 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import { ThesaurusEntry } from '@myrmidon/cadmus-core';
+import { ThesaurusNode } from '@myrmidon/cadmus-thesaurus-ui';
 
 import { ThesaurusNodesService } from './thesaurus-nodes.service';
 
-fdescribe('ThesaurusNodesService', () => {
-  let service: ThesaurusNodesService;
-  let flatEntries: ThesaurusEntry[] = [
+function getFlatEntries(): ThesaurusEntry[] {
+  return [
     {
       id: 'r',
       value: 'red',
@@ -19,7 +19,10 @@ fdescribe('ThesaurusNodesService', () => {
       value: 'blue',
     },
   ];
-  let treeEntries: ThesaurusEntry[] = [
+}
+
+function getTreeEntries(): ThesaurusEntry[] {
+  return [
     {
       id: 'size',
       value: 'size',
@@ -53,6 +56,10 @@ fdescribe('ThesaurusNodesService', () => {
       value: 'blue',
     },
   ];
+}
+
+fdescribe('ThesaurusNodesService', () => {
+  let service: ThesaurusNodesService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
@@ -65,7 +72,7 @@ fdescribe('ThesaurusNodesService', () => {
 
   // #region flat set
   it('should import flat set', () => {
-    service.importEntries(flatEntries);
+    service.importEntries(getFlatEntries());
     expect(service.length).toBe(3);
     const nodes = service.getNodes();
     // r
@@ -92,12 +99,12 @@ fdescribe('ThesaurusNodesService', () => {
   });
 
   it('should have getParentIds empty for flat set', () => {
-    service.importEntries(flatEntries);
+    service.importEntries(getFlatEntries());
     expect(service.getParentIds().length).toBe(0);
   });
 
   it('should not move 1st entry up in flat set', () => {
-    service.importEntries(flatEntries);
+    service.importEntries(getFlatEntries());
     service.moveUp('r');
     const nodes = service.getNodes();
     expect(nodes[0].id).toBe('r');
@@ -106,7 +113,7 @@ fdescribe('ThesaurusNodesService', () => {
   });
 
   it('should not move last entry down in flat set', () => {
-    service.importEntries(flatEntries);
+    service.importEntries(getFlatEntries());
     service.moveDown('b');
     const nodes = service.getNodes();
     expect(nodes[0].id).toBe('r');
@@ -115,7 +122,7 @@ fdescribe('ThesaurusNodesService', () => {
   });
 
   it('should move 2nd entry up in flat set', () => {
-    service.importEntries(flatEntries);
+    service.importEntries(getFlatEntries());
     service.moveUp('g');
     const nodes = service.getNodes();
     expect(nodes[0].id).toBe('g');
@@ -128,7 +135,7 @@ fdescribe('ThesaurusNodesService', () => {
   });
 
   it('should move 2nd entry down in flat set', () => {
-    service.importEntries(flatEntries);
+    service.importEntries(getFlatEntries());
     service.moveDown('g');
     const nodes = service.getNodes();
     expect(nodes[0].id).toBe('r');
@@ -141,7 +148,7 @@ fdescribe('ThesaurusNodesService', () => {
   });
 
   it('should delete 1st entry in flat set', () => {
-    service.importEntries(flatEntries);
+    service.importEntries(getFlatEntries());
     service.delete('r');
     const nodes = service.getNodes();
     expect(nodes.length).toBe(2);
@@ -153,7 +160,7 @@ fdescribe('ThesaurusNodesService', () => {
   });
 
   it('should delete 2nd entry in flat set', () => {
-    service.importEntries(flatEntries);
+    service.importEntries(getFlatEntries());
     service.delete('g');
     const nodes = service.getNodes();
     expect(nodes.length).toBe(2);
@@ -165,7 +172,7 @@ fdescribe('ThesaurusNodesService', () => {
   });
 
   it('should delete last entry in flat set', () => {
-    service.importEntries(flatEntries);
+    service.importEntries(getFlatEntries());
     service.delete('b');
     const nodes = service.getNodes();
     expect(nodes.length).toBe(2);
@@ -177,7 +184,7 @@ fdescribe('ThesaurusNodesService', () => {
   });
 
   it('should replace 1st entry in flat set', () => {
-    service.importEntries(flatEntries);
+    service.importEntries(getFlatEntries());
     service.add({
       id: 'r',
       value: 'RED',
@@ -197,7 +204,7 @@ fdescribe('ThesaurusNodesService', () => {
   });
 
   it('should replace mid entry in flat set', () => {
-    service.importEntries(flatEntries);
+    service.importEntries(getFlatEntries());
     service.add({
       id: 'g',
       value: 'GREEN',
@@ -217,7 +224,7 @@ fdescribe('ThesaurusNodesService', () => {
   });
 
   it('should replace last entry in flat set', () => {
-    service.importEntries(flatEntries);
+    service.importEntries(getFlatEntries());
     service.add({
       id: 'b',
       value: 'BLUE',
@@ -235,11 +242,53 @@ fdescribe('ThesaurusNodesService', () => {
     expect(nodes[2].ordinal).toBe(3);
     expect(nodes[2].lastSibling).toBeTrue();
   });
+
+  it('should add as 2nd entry in flat set', () => {
+    service.importEntries(getFlatEntries());
+    service.add({
+      id: 'w',
+      value: 'white',
+      ordinal: 2,
+      level: 1,
+    });
+    const nodes = service.getNodes();
+    expect(nodes.length).toBe(4);
+    expect(nodes[0].id).toBe('r');
+    expect(nodes[0].ordinal).toBe(1);
+    expect(nodes[1].id).toBe('w');
+    expect(nodes[1].ordinal).toBe(2);
+    expect(nodes[2].id).toBe('g');
+    expect(nodes[2].ordinal).toBe(3);
+    expect(nodes[3].id).toBe('b');
+    expect(nodes[3].ordinal).toBe(4);
+    expect(nodes[3].lastSibling).toBeTrue();
+  });
+
+  it('should add as 3rd entry in flat set', () => {
+    service.importEntries(getFlatEntries());
+    service.add({
+      id: 'w',
+      value: 'white',
+      ordinal: 3,
+      level: 1,
+    });
+    const nodes = service.getNodes();
+    expect(nodes.length).toBe(4);
+    expect(nodes[0].id).toBe('r');
+    expect(nodes[0].ordinal).toBe(1);
+    expect(nodes[1].id).toBe('g');
+    expect(nodes[1].ordinal).toBe(2);
+    expect(nodes[2].id).toBe('w');
+    expect(nodes[2].ordinal).toBe(3);
+    expect(nodes[3].id).toBe('b');
+    expect(nodes[3].ordinal).toBe(4);
+    expect(nodes[3].lastSibling).toBeTrue();
+  });
   //#endregion
 
   // #region tree set
   it('should import tree set', () => {
-    service.importEntries(treeEntries);
+    service.importEntries(getTreeEntries());
     const nodes = service.getNodes();
     expect(nodes.length).toBe(8);
     // size
@@ -301,7 +350,7 @@ fdescribe('ThesaurusNodesService', () => {
   });
 
   it('should have getParentIds for tree set', () => {
-    service.importEntries(treeEntries);
+    service.importEntries(getTreeEntries());
     const entries = service.getParentIds();
     expect(entries.length).toBe(2);
     expect(entries[0].id).toBe('size');
@@ -309,7 +358,7 @@ fdescribe('ThesaurusNodesService', () => {
   });
 
   it('should not move 1st entry up in tree set', () => {
-    service.importEntries(treeEntries);
+    service.importEntries(getTreeEntries());
     service.moveUp('color.r');
     const nodes = service.getNodes();
     expect(nodes[5].id).toBe('color.r');
@@ -319,7 +368,7 @@ fdescribe('ThesaurusNodesService', () => {
   });
 
   it('should not move last entry down in tree set', () => {
-    service.importEntries(treeEntries);
+    service.importEntries(getTreeEntries());
     service.moveDown('size.l');
     const nodes = service.getNodes();
     expect(nodes[1].id).toBe('size.s');
@@ -329,7 +378,7 @@ fdescribe('ThesaurusNodesService', () => {
   });
 
   it('should move 2nd entry up in tree set', () => {
-    service.importEntries(treeEntries);
+    service.importEntries(getTreeEntries());
     service.moveUp('color.g');
     const nodes = service.getNodes();
     expect(nodes[5].id).toBe('color.g');
@@ -342,7 +391,7 @@ fdescribe('ThesaurusNodesService', () => {
   });
 
   it('should move 2nd entry down in tree set', () => {
-    service.importEntries(treeEntries);
+    service.importEntries(getTreeEntries());
     service.moveDown('color.g');
     const nodes = service.getNodes();
     expect(nodes[5].id).toBe('color.r');
@@ -355,7 +404,7 @@ fdescribe('ThesaurusNodesService', () => {
   });
 
   it('should delete 1st entry in tree set', () => {
-    service.importEntries(treeEntries);
+    service.importEntries(getTreeEntries());
     service.delete('color.r');
     const nodes = service.getNodes();
     expect(nodes.length).toBe(7);
@@ -367,7 +416,7 @@ fdescribe('ThesaurusNodesService', () => {
   });
 
   it('should delete 2nd entry in tree set', () => {
-    service.importEntries(treeEntries);
+    service.importEntries(getTreeEntries());
     service.delete('color.g');
     const nodes = service.getNodes();
     expect(nodes.length).toBe(7);
@@ -379,7 +428,7 @@ fdescribe('ThesaurusNodesService', () => {
   });
 
   it('should delete last entry in tree set', () => {
-    service.importEntries(treeEntries);
+    service.importEntries(getTreeEntries());
     service.delete('color.b');
     const nodes = service.getNodes();
     expect(nodes.length).toBe(7);
@@ -391,7 +440,7 @@ fdescribe('ThesaurusNodesService', () => {
   });
 
   it('should replace 1st entry in tree set', () => {
-    service.importEntries(treeEntries);
+    service.importEntries(getTreeEntries());
     service.add({
       id: 'color.r',
       value: 'RED',
@@ -411,7 +460,7 @@ fdescribe('ThesaurusNodesService', () => {
   });
 
   it('should replace mid entry in tree set', () => {
-    service.importEntries(treeEntries);
+    service.importEntries(getTreeEntries());
     service.add({
       id: 'color.g',
       value: 'GREEN',
@@ -431,7 +480,7 @@ fdescribe('ThesaurusNodesService', () => {
   });
 
   it('should replace last entry in tree set', () => {
-    service.importEntries(treeEntries);
+    service.importEntries(getTreeEntries());
     service.add({
       id: 'color.b',
       value: 'BLUE',
