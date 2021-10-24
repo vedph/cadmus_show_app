@@ -294,12 +294,18 @@ export class ThesaurusNodesService {
     }
     // insert
     node.lastSibling =
-      node.ordinal !== n ||
+      i === nodes.length ||
       (i + 1 < nodes.length && nodes[i + 1].parentId !== node.parentId);
     node.ordinal = n++;
-    nodes.splice(i++, 0, node);
+    nodes.splice(i, 0, node);
+
+    // preceding sibling is no more the last if it was
+    if (node.lastSibling && nodes[i - 1].lastSibling) {
+      nodes[i - 1].lastSibling = false;
+    }
 
     // update the following siblings if any
+    i++;
     while (i < nodes.length && nodes[i].parentId === node.parentId) {
       nodes[i++].ordinal = n++;
       // lastSibling is already ok when there are following siblings

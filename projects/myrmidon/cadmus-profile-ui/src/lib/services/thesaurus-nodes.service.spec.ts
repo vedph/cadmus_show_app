@@ -243,6 +243,27 @@ fdescribe('ThesaurusNodesService', () => {
     expect(nodes[2].lastSibling).toBeTrue();
   });
 
+  it('should add as 1st entry in flat set', () => {
+    service.importEntries(getFlatEntries());
+    service.add({
+      id: 'w',
+      value: 'white',
+      ordinal: 1,
+      level: 1,
+    });
+    const nodes = service.getNodes();
+    expect(nodes.length).toBe(4);
+    expect(nodes[0].id).toBe('w');
+    expect(nodes[0].ordinal).toBe(1);
+    expect(nodes[1].id).toBe('r');
+    expect(nodes[1].ordinal).toBe(2);
+    expect(nodes[2].id).toBe('g');
+    expect(nodes[2].ordinal).toBe(3);
+    expect(nodes[3].id).toBe('b');
+    expect(nodes[3].ordinal).toBe(4);
+    expect(nodes[3].lastSibling).toBeTrue();
+  });
+
   it('should add as 2nd entry in flat set', () => {
     service.importEntries(getFlatEntries());
     service.add({
@@ -264,7 +285,7 @@ fdescribe('ThesaurusNodesService', () => {
     expect(nodes[3].lastSibling).toBeTrue();
   });
 
-  it('should add as 3rd entry in flat set', () => {
+  it('should add as penultimate entry in flat set', () => {
     service.importEntries(getFlatEntries());
     service.add({
       id: 'w',
@@ -281,6 +302,27 @@ fdescribe('ThesaurusNodesService', () => {
     expect(nodes[2].id).toBe('w');
     expect(nodes[2].ordinal).toBe(3);
     expect(nodes[3].id).toBe('b');
+    expect(nodes[3].ordinal).toBe(4);
+    expect(nodes[3].lastSibling).toBeTrue();
+  });
+
+  it('should add as last entry in flat set', () => {
+    service.importEntries(getFlatEntries());
+    service.add({
+      id: 'w',
+      value: 'white',
+      ordinal: 4,
+      level: 1,
+    });
+    const nodes = service.getNodes();
+    expect(nodes.length).toBe(4);
+    expect(nodes[0].id).toBe('r');
+    expect(nodes[0].ordinal).toBe(1);
+    expect(nodes[1].id).toBe('g');
+    expect(nodes[1].ordinal).toBe(2);
+    expect(nodes[2].id).toBe('b');
+    expect(nodes[2].ordinal).toBe(3);
+    expect(nodes[3].id).toBe('w');
     expect(nodes[3].ordinal).toBe(4);
     expect(nodes[3].lastSibling).toBeTrue();
   });
@@ -497,6 +539,96 @@ fdescribe('ThesaurusNodesService', () => {
     expect(nodes[7].value).toBe('BLUE');
     expect(nodes[7].ordinal).toBe(3);
     expect(nodes[7].lastSibling).toBeTrue();
+  });
+
+  it('should add as 1st child entry in tree set', () => {
+    service.importEntries(getTreeEntries());
+    service.add({
+      id: 'color.w',
+      parentId: 'color',
+      value: 'white',
+      ordinal: 1,
+      level: 2,
+    });
+    const nodes = service.getNodes();
+    expect(nodes.length).toBe(9);
+    expect(nodes[5].id).toBe('color.w');
+    expect(nodes[5].ordinal).toBe(1);
+    expect(nodes[6].id).toBe('color.r');
+    expect(nodes[6].ordinal).toBe(2);
+    expect(nodes[7].id).toBe('color.g');
+    expect(nodes[7].ordinal).toBe(3);
+    expect(nodes[8].id).toBe('color.b');
+    expect(nodes[8].ordinal).toBe(4);
+    expect(nodes[8].lastSibling).toBeTrue();
+  });
+
+  it('should add as 2nd child entry in tree set', () => {
+    service.importEntries(getTreeEntries());
+    service.add({
+      id: 'color.w',
+      parentId: 'color',
+      value: 'white',
+      ordinal: 2,
+      level: 2,
+    });
+    const nodes = service.getNodes();
+    expect(nodes.length).toBe(9);
+    expect(nodes[5].id).toBe('color.r');
+    expect(nodes[5].ordinal).toBe(1);
+    expect(nodes[6].id).toBe('color.w');
+    expect(nodes[6].ordinal).toBe(2);
+    expect(nodes[7].id).toBe('color.g');
+    expect(nodes[7].ordinal).toBe(3);
+    expect(nodes[8].id).toBe('color.b');
+    expect(nodes[8].ordinal).toBe(4);
+    expect(nodes[8].lastSibling).toBeTrue();
+  });
+
+  it('should add as penultimate child entry in tree set', () => {
+    service.importEntries(getTreeEntries());
+    service.add({
+      id: 'color.w',
+      parentId: 'color',
+      value: 'white',
+      ordinal: 3,
+      level: 2,
+    });
+    const nodes = service.getNodes();
+    expect(nodes.length).toBe(9);
+    expect(nodes[5].id).toBe('color.r');
+    expect(nodes[5].ordinal).toBe(1);
+    expect(nodes[6].id).toBe('color.g');
+    expect(nodes[6].ordinal).toBe(2);
+    expect(nodes[7].id).toBe('color.w');
+    expect(nodes[7].ordinal).toBe(3);
+    expect(nodes[7].lastSibling).toBeFalsy();
+    expect(nodes[8].id).toBe('color.b');
+    expect(nodes[8].ordinal).toBe(4);
+    expect(nodes[8].lastSibling).toBeTrue();
+  });
+
+  it('should add as last child entry in tree set', () => {
+    service.importEntries(getTreeEntries());
+    service.add({
+      id: 'color.w',
+      parentId: 'color',
+      value: 'white',
+      ordinal: 4,
+      level: 2,
+    });
+    const nodes = service.getNodes();
+    expect(nodes.length).toBe(9);
+    expect(nodes[5].id).toBe('color.r');
+    expect(nodes[5].ordinal).toBe(1);
+    expect(nodes[6].id).toBe('color.g');
+    expect(nodes[6].ordinal).toBe(2);
+    expect(nodes[7].id).toBe('color.b');
+    expect(nodes[7].ordinal).toBe(3);
+    expect(nodes[7].lastSibling).toBeFalsy();
+    expect(nodes[8].id).toBe('color.w');
+    expect(nodes[8].ordinal).toBe(4);
+    expect(nodes[8].lastSibling).toBeTrue();
   });
   //#endregion
 });
