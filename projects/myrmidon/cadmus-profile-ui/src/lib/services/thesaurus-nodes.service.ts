@@ -195,10 +195,15 @@ export class ThesaurusNodesService {
    * Set all the nodes at once.
    *
    * @param entries The nodes to set.
+   * @param flat True if the entries belong to a flat thesaurus.
+   * This disables the hierarchical structure, and is used for special
+   * thesauri like model-types, which include non-hierarchy dots.
    */
-  public importEntries(entries: ThesaurusEntry[]): void {
+  public importEntries(entries: ThesaurusEntry[], flat = false): void {
     const nodes = entries as ThesaurusNode[];
-    this.assignParentIds(nodes);
+    if (!flat) {
+      this.assignParentIds(nodes);
+    }
     this.assignLevels(nodes);
     this.assignOrdinals(nodes);
 
@@ -317,21 +322,25 @@ export class ThesaurusNodesService {
 
     // preceding sibling is no more the last if it was
     if (node.lastSibling && nodes[i - 1]?.lastSibling) {
-      nodes[i - 1].lastSibling = false;
+      nodes.splice(i - 1, 1, { ...nodes[i - 1], lastSibling: false });
+      // nodes[i - 1].lastSibling = false;
     }
 
     // update the following siblings if any
     i++;
     if (node.parentId) {
       while (i < nodes.length && nodes[i].parentId === node.parentId) {
-        nodes[i++].ordinal = n++;
+        nodes.splice(i, 1, { ...nodes[i++], ordinal: n++ });
+        // nodes[i++].ordinal = n++;
         // lastSibling is already ok when there are following siblings
       }
     } else {
       while (i < nodes.length) {
         if (nodes[i].level === node.level) {
-          nodes[i].ordinal = n++;
+          nodes.splice(i, 1, { ...nodes[i], ordinal: n++ });
+          // nodes[i].ordinal = n++;
         }
+        i++;
       }
     }
     return nodes;
@@ -343,6 +352,14 @@ export class ThesaurusNodesService {
    * @param node The node.
    */
   public add(node: ThesaurusNode): void {
+    // delete a node with empty id; this corresponds to a previously
+    // added node, which now should be removed. Typically, a user adds
+    // a new node, which gets an empty ID; then he edits it, thus
+    // adding another node with a non-empty ID. At this stage, we should
+    // remove the empty node, which is to be replaced. In other terms,
+    // whenever adding a node we first remove the no-ID node if present.
+    this.delete('');
+
     // find the node being added
     let nodes = [...this._nodes$.value];
     const i = nodes.findIndex((n) => n.id === node.id);
