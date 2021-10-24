@@ -284,14 +284,30 @@ export class ThesaurusNodesService {
     let n = 1; // 1st child ordinal
     let i = startIndex;
     const nodes = this._nodes$.value;
-    while (
-      i < nodes.length &&
-      (!node.parentId || nodes[i].parentId === node.parentId) &&
-      (node.level !== nodes[i].level || n < node.ordinal)
-    ) {
-      n++;
-      i++;
+
+    // if it's a child, limit to the parent's scope
+    if (node.parentId) {
+      while (
+        i < nodes.length &&
+        nodes[i].parentId === node.parentId &&
+        n < node.ordinal
+      ) {
+        n++;
+        i++;
+      }
+    } else {
+      // else lookup the whole set
+      while (
+        i < nodes.length &&
+        (nodes[i].level !== node.level || n < node.ordinal)
+      ) {
+        if (nodes[i].level === node.level) {
+          n++;
+        }
+        i++;
+      }
     }
+
     // insert
     node.lastSibling =
       i === nodes.length ||
@@ -300,15 +316,23 @@ export class ThesaurusNodesService {
     nodes.splice(i, 0, node);
 
     // preceding sibling is no more the last if it was
-    if (node.lastSibling && nodes[i - 1].lastSibling) {
+    if (node.lastSibling && nodes[i - 1]?.lastSibling) {
       nodes[i - 1].lastSibling = false;
     }
 
     // update the following siblings if any
     i++;
-    while (i < nodes.length && nodes[i].parentId === node.parentId) {
-      nodes[i++].ordinal = n++;
-      // lastSibling is already ok when there are following siblings
+    if (node.parentId) {
+      while (i < nodes.length && nodes[i].parentId === node.parentId) {
+        nodes[i++].ordinal = n++;
+        // lastSibling is already ok when there are following siblings
+      }
+    } else {
+      while (i < nodes.length) {
+        if (nodes[i].level === node.level) {
+          nodes[i].ordinal = n++;
+        }
+      }
     }
     return nodes;
   }
