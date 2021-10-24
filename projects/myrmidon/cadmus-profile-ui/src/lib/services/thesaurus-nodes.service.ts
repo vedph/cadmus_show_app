@@ -82,19 +82,26 @@ export class ThesaurusNodesService {
   }
 
   private refreshParentIds(): void {
-    const entries = this._nodes$.value
-      .filter((n) => n.parentId)
-      .map((n) => {
-        return { id: n.id, value: n.value };
-      });
+    const nodes = this._nodes$.value;
+    // collect all the unique parent IDs
+    const ids: string[] = [
+      ...new Set(nodes.filter((n) => n.parentId).map((n) => n.parentId!)),
+    ];
 
-    const uniqueEntries: ThesaurusEntry[] = [];
-    entries.forEach((entry) => {
-      if (!uniqueEntries.find((e) => e.id === entry.id)) {
-        uniqueEntries.push(entry);
+    // get the value for each parent ID
+    const entries: ThesaurusEntry[] = [];
+    for (let i = 0; i < ids.length; i++) {
+      const node = nodes.find(n => n.id === ids[i]);
+      if (node) {
+        entries.push({
+          id: ids[i],
+          value: node.value
+        });
       }
-    });
-    this._parentIds$.next(uniqueEntries);
+    }
+
+    // update
+    this._parentIds$.next(entries);
   }
 
   /**
@@ -275,10 +282,11 @@ export class ThesaurusNodesService {
    * @param node The node.
    */
   public add(node: ThesaurusNode): void {
+    // find the node being added
     const nodes = [...this._nodes$.value];
     const i = nodes.findIndex((n) => n.id === node.id);
 
-    // replace an existing node
+    // if found, replace an existing node
     if (i > -1) {
       node.ordinal = nodes[i].ordinal;
       node.lastSibling = nodes[i].lastSibling;
@@ -286,10 +294,10 @@ export class ThesaurusNodesService {
     } else {
       // else it's a new node -- has the node a parent?
       if (node.parentId) {
-        // yes: append as the last child
+        // yes: append the new node as its last child
         let i = nodes.findIndex((p) => p.id === node.parentId);
         if (i === -1) {
-          console.log('Parent node not found: ' + node.parentId);
+          console.error('Parent node not found: ' + node.parentId);
           return;
         }
         // the parent should have its hasChildren set
@@ -297,16 +305,30 @@ export class ThesaurusNodesService {
         if (!parent.hasChildren) {
           nodes.splice(i, 1, { ...parent, hasChildren: true });
         }
-        // assign ordinals and lastSibling
-        i++;
-        let n = 1;
-        while (i < nodes.length && nodes[i].parentId === node.parentId) {
+        // start from its 1st child and find insertion position,
+        // as given by the new node's ordinal number
+        i++; // 1st child
+        let n = 1; // 1st child ordinal
+        while (
+          i < nodes.length &&
+          nodes[i].parentId === node.parentId &&
+          n <= node.ordinal
+        ) {
           n++;
           i++;
         }
-        node.lastSibling = true;
-        node.ordinal = n;
+        // insert
+        node.lastSibling =
+          node.ordinal !== n ||
+          (i + 1 < nodes.length && nodes[i + 1].parentId !== node.parentId);
+        node.ordinal = n++;
         nodes.splice(i, 0, node);
+
+        // update the following siblings if any
+        while (i < nodes.length && nodes[i].parentId === node.parentId) {
+          nodes[i++].ordinal = n++;
+          // lastSibling is already ok when there are following siblings
+        }
       } else {
         // no parent: just append
         if (nodes.length) {
@@ -338,7 +360,7 @@ export class ThesaurusNodesService {
    * @param id The ID of the node to delete.
    */
   public delete(id: string): void {
-    // delete
+    // find and delete
     const nodes = [...this._nodes$.value];
     const i = nodes.findIndex((n) => n.id === id);
     if (i === -1) {
@@ -369,7 +391,7 @@ export class ThesaurusNodesService {
     }
 
     // update ordinals for the next siblings if any
-    let j = i + 1;
+    let j = i;
     while (j < nodes.length && nodes[j].parentId === deleted.parentId) {
       const sibling = nodes[j];
       nodes.splice(j, 1, { ...sibling, ordinal: sibling.ordinal - 1 });
