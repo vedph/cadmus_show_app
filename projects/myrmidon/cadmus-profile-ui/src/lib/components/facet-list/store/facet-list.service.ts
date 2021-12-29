@@ -1,7 +1,8 @@
 import { moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Injectable } from '@angular/core';
-import { deepCopy, FacetDefinition } from '@myrmidon/cadmus-core';
+import { FacetDefinition } from '@myrmidon/cadmus-core';
 import { ColorService } from '@myrmidon/cadmus-show-ui';
+import { deepCopy } from '@myrmidon/ng-tools';
 import { PartDefinitionVmService } from '../../../services/part-definition-vm.service';
 import { FacetListQuery } from './facet-list.query';
 import {

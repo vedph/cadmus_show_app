@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { deepCopy, FlagDefinition } from '@myrmidon/cadmus-core';
+import { FlagDefinition } from '@myrmidon/cadmus-core';
 import { FlagListQuery, FlagListService } from '@myrmidon/cadmus-profile-ui';
+import { deepCopy } from '@myrmidon/ng-tools';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 

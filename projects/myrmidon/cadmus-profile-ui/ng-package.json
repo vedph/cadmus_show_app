@@ -2,19 +2,6 @@
   "$schema": "../../../node_modules/ng-packagr/ng-package.schema.json",
   "dest": "../../../dist/myrmidon/cadmus-profile-ui",
   "lib": {
-    "entryFile": "src/public-api.ts",
-    "umdModuleIds": {
-      "@angular-material-components/color-picker": "@angular-material-components/color-picker",
-      "@datorama/akita": "@datorama/akita",
-      "ang-jsoneditor": "ang-jsoneditor",
-      "ng-gallery": "ng-gallery",
-      "ngx-markdown": "ngx-markdown",
-      "@myrmidon/cadmus-core": "@myrmidon/cadmus-core",
-      "@myrmidon/cadmus-material": "@myrmidon/cadmus-material",
-      "@myrmidon/cadmus-shop-asset": "@myrmidon/cadmus-shop-asset",
-      "@myrmidon/cadmus-show-ui": "@myrmidon/cadmus-show-ui",
-      "@myrmidon/cadmus-profile-core": "@myrmidon/cadmus-profile-core",
-      "@myrmidon/cadmus-thesaurus-ui": "@myrmidon/cadmus-thesaurus-ui"
-    }
+    "entryFile": "src/public-api.ts"
   }
 }

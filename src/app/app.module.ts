@@ -15,11 +15,11 @@ import { CadmusUiModule } from '@myrmidon/cadmus-ui';
 import { CadmusProfileCoreModule } from '@myrmidon/cadmus-profile-core';
 import { NgTickerModule } from 'ng-ticker';
 import { CadmusProfileUiModule } from '@myrmidon/cadmus-profile-ui';
+import { CadmusRefsHistoricalDateModule } from '@myrmidon/cadmus-refs-historical-date';
 import { CadmusShopCoreModule } from '@myrmidon/cadmus-shop-core';
 import { CadmusShopAssetModule } from '@myrmidon/cadmus-shop-asset';
 import { CadmusShowUiModule } from '@myrmidon/cadmus-show-ui';
 import { CadmusShowVizModule } from '@myrmidon/cadmus-show-viz';
-import { EnvServiceProvider } from '@myrmidon/cadmus-core';
 import { ModelListComponent } from '@myrmidon/cadmus-shop-ui';
 import { CadmusThesaurusUiModule } from '@myrmidon/cadmus-thesaurus-ui';
 
@@ -46,6 +46,7 @@ import { TourMatMenuModule } from 'ngx-ui-tour-md-menu';
 import { TextArchitecturePageComponent } from './components/text-architecture-page/text-architecture-page.component';
 import { TaxonomiesPageComponent } from './components/taxonomies-page/taxonomies-page.component';
 import { InfrastructurePageComponent } from './components/infrastructure-page/infrastructure-page.component';
+import { EnvServiceProvider } from '@myrmidon/ng-tools';
 
 @NgModule({
   declarations: [
@@ -88,6 +89,7 @@ import { InfrastructurePageComponent } from './components/infrastructure-page/in
     CadmusUiModule,
     CadmusProfileCoreModule,
     CadmusProfileUiModule,
+    CadmusRefsHistoricalDateModule,
     CadmusShopCoreModule,
     CadmusShopAssetModule,
     CadmusShowUiModule,

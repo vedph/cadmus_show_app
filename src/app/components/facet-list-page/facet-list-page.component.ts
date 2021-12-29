@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { deepCopy } from '@myrmidon/cadmus-core';
-import { FacetListQuery, GroupingFacet } from '@myrmidon/cadmus-profile-ui';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+
+import { FacetListQuery, GroupingFacet } from '@myrmidon/cadmus-profile-ui';
+import { deepCopy } from '@myrmidon/ng-tools';
 
 @Component({
   selector: 'app-facet-list-page',

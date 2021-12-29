@@ -13,11 +13,11 @@ import {
 } from '@angular/forms';
 import { MatChipEvent } from '@angular/material/chips';
 import {
-  deepCopy,
   FacetDefinition,
   PartDefinition,
 } from '@myrmidon/cadmus-core';
 import { ColorService, DialogService } from '@myrmidon/cadmus-show-ui';
+import { deepCopy } from '@myrmidon/ng-tools';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { PartDefinitionVmService } from '../../services/part-definition-vm.service';
