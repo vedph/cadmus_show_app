@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { PhysicalDimension, PhysicalSize, ThesaurusEntry } from '@myrmidon/cadmus-core';
+
+import { ThesaurusEntry } from '@myrmidon/cadmus-core';
+import {
+  PhysicalDimension,
+  PhysicalSize,
+} from '@myrmidon/cadmus-mat-physical-size';
 
 @Component({
   selector: 'app-intro-page',
@@ -32,8 +37,8 @@ export class IntroPageComponent implements OnInit {
       },
       d: {
         value: 1,
-        unit: 'mm'
-      }
+        unit: 'mm',
+      },
     };
     this.size = formBuilder.control(this.initialSize);
     this.user = formBuilder.control('John Smith');
@@ -49,10 +54,7 @@ export class IntroPageComponent implements OnInit {
     this.size.setValue(size);
   }
 
-  private buildRdfDimension(
-    type: string,
-    d: PhysicalDimension
-  ): string {
+  private buildRdfDimension(type: string, d: PhysicalDimension): string {
     // <MySize_Width> P2_has_type E54_Dimension;
     //   P90_has_value "...";
     //   P91_has_unit "...";
@@ -126,12 +128,18 @@ export class IntroPageComponent implements OnInit {
       sb.push(`my:${user} crm:P2_has_type crm:E21_Person.\n`);
 
       const now = new Date();
-      const nowText = now.getUTCFullYear() + '-' +
-        (now.getUTCMonth() + 1).toString().padStart(2, '0') + '-' +
-        (now.getUTCDate()).toString().padStart(2, '0') + 'T' +
-        (now.getUTCHours()).toString().padStart(2, '0') + ':' +
-        (now.getUTCMinutes()).toString().padStart(2, '0') + ':' +
-        (now.getUTCSeconds()).toString().padStart(2, '0');
+      const nowText =
+        now.getUTCFullYear() +
+        '-' +
+        (now.getUTCMonth() + 1).toString().padStart(2, '0') +
+        '-' +
+        now.getUTCDate().toString().padStart(2, '0') +
+        'T' +
+        now.getUTCHours().toString().padStart(2, '0') +
+        ':' +
+        now.getUTCMinutes().toString().padStart(2, '0') +
+        ':' +
+        now.getUTCSeconds().toString().padStart(2, '0');
 
       sb.push('\n# and the measurement was taken by you:\n');
       sb.push(`my:MyMeasurement crm:P141_assigned my:${user};\n`);

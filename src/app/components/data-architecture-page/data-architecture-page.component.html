@@ -4,7 +4,10 @@
     <div class="banner">
       <img
         class="banner-img"
-        srcset="./assets/img/blocks-1024.jpg 1024w, ./assets/img/blocks-512.jpg 512w"
+        srcset="
+          ./assets/img/blocks-1024.jpg 1024w,
+          ./assets/img/blocks-512.jpg   512w
+        "
         sizes="(max-width: 600px) 512px, 1024px"
       />
     </div>
@@ -264,13 +267,14 @@
       You can enter a date using a simple syntax, or edit the date visually, by
       opening the visual editor with the arrow button. Usually, you start with
       the visual editor to get to know the syntax, and later directly use that
-      syntax, which is faster and more compact. Once finished, click the circle
-      button or just press enter. When you enter a new value, its corresponding
-      model is here shown below the editor. The numeric value shown next to the
-      date is its computed, approximate value used for sorting or filtering.
+      syntax, which is faster and more compact. When you enter a new value, its
+      corresponding model is here shown below the editor. The numeric value
+      shown next to the date is its computed, approximate value used for sorting
+      or filtering.
     </p>
     <cadmus-refs-historical-date
-      [(date)]="date"
+      [date]="initialDate"
+      (dateChange)="onDateChange($event)"
     ></cadmus-refs-historical-date>
     <div *ngIf="date">
       <pre>{{ date | json }}</pre>

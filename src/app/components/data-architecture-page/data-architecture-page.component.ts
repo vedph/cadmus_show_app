@@ -10,11 +10,18 @@ import {
   styleUrls: ['./data-architecture-page.component.css'],
 })
 export class DataArchitecturePageComponent implements OnInit {
-  public date: HistoricalDateModel;
+  public initialDate: HistoricalDateModel;
+  public date?: HistoricalDateModel;
 
   constructor() {
-    this.date = HistoricalDate.parse('367/6 BC? -- c. 150 AD {Roman copy}')!;
+    this.initialDate = HistoricalDate.parse(
+      '367/6 BC? -- c. 150 AD {Roman copy}'
+    )!;
   }
 
   ngOnInit(): void {}
+
+  public onDateChange(date: HistoricalDateModel): void {
+    this.date = date;
+  }
 }

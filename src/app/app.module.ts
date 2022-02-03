@@ -47,6 +47,7 @@ import { TextArchitecturePageComponent } from './components/text-architecture-pa
 import { TaxonomiesPageComponent } from './components/taxonomies-page/taxonomies-page.component';
 import { InfrastructurePageComponent } from './components/infrastructure-page/infrastructure-page.component';
 import { EnvServiceProvider } from '@myrmidon/ng-tools';
+import { CadmusMatPhysicalSizeModule } from '@myrmidon/cadmus-mat-physical-size';
 
 @NgModule({
   declarations: [
@@ -90,6 +91,7 @@ import { EnvServiceProvider } from '@myrmidon/ng-tools';
     CadmusProfileCoreModule,
     CadmusProfileUiModule,
     CadmusRefsHistoricalDateModule,
+    CadmusMatPhysicalSizeModule,
     CadmusShopCoreModule,
     CadmusShopAssetModule,
     CadmusShowUiModule,

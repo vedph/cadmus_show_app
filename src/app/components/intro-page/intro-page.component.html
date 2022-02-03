@@ -216,11 +216,11 @@
       <mat-form-field>
         <input matInput [formControl]="user" placeholder="your name" />
       </mat-form-field>
-      <cadmus-physical-size
+      <cadmus-mat-physical-size
         [unitEntries]="unitEntries"
         [size]="initialSize"
         (sizeChange)="onSizeChange($event)"
-      ></cadmus-physical-size>
+      ></cadmus-mat-physical-size>
       <button type="submit" mat-icon-button color="primary">
         <mat-icon>check_circle</mat-icon> enter data
       </button>
