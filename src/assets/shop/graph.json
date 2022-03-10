@@ -6,8 +6,11 @@
     { "id": "it.vedph.doc-references", "label": "doc-references" },
     { "id": "it.vedph.ext-bibliography", "label": "ext-bibliography" },
     { "id": "it.vedph.historical-date", "label": "historical-date" },
+    { "id": "it.vedph.historical-events", "label": "historical-events" },
     { "id": "it.vedph.index-keywords", "label": "index-keywords" },
     { "id": "it.vedph.keywords", "label": "keywords" },
+    { "id": "it.vedph.metadata", "label": "metadata" },
+    { "id": "it.vedph.names", "label": "names" },
     { "id": "it.vedph.note", "label": "note" },
     { "id": "it.vedph.tiled-text", "label": "tiled-text" },
     { "id": "it.vedph.token-text", "label": "token-text" },
@@ -19,56 +22,69 @@
     { "id": "it.vedph.ingra.prisoner-info", "label": "prisoner" },
     { "id": "it.vedph.ingra.prison-location", "label": "prison-loc" },
 
-    { "id": "it.vedph.itinera.attachments", "label": "attachments" },
-    { "id": "it.vedph.itinera.chronotopics", "label": "chronotopics" },
-    { "id": "it.vedph.itinera.cited-persons", "label": "cited-persons" },
-    { "id": "it.vedph.itinera.corr-exchanges", "label": "corr-exchanges" },
-    { "id": "it.vedph.itinera.lit-dedications", "label": "lit-dedications"},
-    { "id": "it.vedph.itinera.person", "label": "person" },
-    { "id": "it.vedph.itinera.person-events", "label": "person-events" },
+    { "id": "it.vedph.codicology.cod-bindings", "label": "cod-bindings" },
+    { "id": "it.vedph.codicology.cod-contents", "label": "cod-contents" },
+    { "id": "it.vedph.codicology.cod-decorations", "label": "cod-decorations" },
+    { "id": "it.vedph.codicology.cod-edits", "label": "cod-edits" },
+    { "id": "it.vedph.codicology.cod-hands", "label": "cod-hands" },
+    { "id": "it.vedph.codicology.cod-layouts", "label": "cod-layouts" },
+    { "id": "it.vedph.codicology.cod-material-dsc", "label": "cod-material" },
+    { "id": "it.vedph.codicology.cod-sheet-labels", "label": "cod-labels" },
+    { "id": "it.vedph.codicology.cod-shelfmarks", "label": "cod-shelfmarks" },
+    { "id": "it.vedph.codicology.cod-watermarks", "label": "cod-watermarks" },
+
+    { "id": "it.vedph.itinera.cod-loci", "label": "cod-loci" },
+    { "id": "it.vedph.itinera.cod-poem-ranges", "label": "cod-poem-ranges" },
+    { "id": "it.vedph.itinera.letter-info", "label": "letter-info" },
+    { "id": "it.vedph.itinera.literary-work-info", "label": "lit-work-info" },
+    { "id": "it.vedph.itinera.person-info", "label": "person-info" },
     { "id": "it.vedph.itinera.person-works", "label": "person-works" },
-    { "id": "it.vedph.itinera.serial-text-info", "label": "serial-text-info"},
-    { "id": "it.vedph.itinera.ms-binding", "label": "ms-binding" },
-    { "id": "it.vedph.itinera.ms-catchwords", "label": "ms-catchwords" },
-    { "id": "it.vedph.itinera.ms-composition", "label": "ms-composition" },
-    { "id": "it.vedph.itinera.ms-content-loci", "label": "ms-content-loci" },
-    { "id": "it.vedph.itinera.ms-contents", "label": "ms-contents" },
-    { "id": "it.vedph.itinera.ms-decorations", "label": "ms-decorations" },
-    { "id": "it.vedph.itinera.ms-hands", "label": "ms-hands" },
-    { "id": "it.vedph.itinera.ms-history", "label": "ms-history" },
-    { "id": "it.vedph.itinera.ms-layouts", "label": "ms-layouts" },
-    { "id": "it.vedph.itinera.ms-material-dsc", "label": "ms-material-dsc" },
-    { "id": "it.vedph.itinera.ms-numberings", "label": "ms-numberings" },
-    { "id": "it.vedph.itinera.ms-place", "label": "ms-place" },
-    { "id": "it.vedph.itinera.ms-poem-ranges", "label": "ms-poem-ranges" },
-    { "id": "it.vedph.itinera.ms-quires", "label": "ms-quires" },
-    { "id": "it.vedph.itinera.ms-signatures", "label": "ms-signatures" },
-    { "id": "it.vedph.itinera.ms-watermarks", "label": "ms-watermarks" },
+    { "id": "it.vedph.itinera.referenced-texts", "label": "ref-texts" },
+    { "id": "it.vedph.itinera.related-persons", "label": "rel-persons" },
+    { "id": "it.vedph.itinera.witnesses", "label": "witnesses" },
 
     { "id": "it.vedph.pura.word-forms", "label": "word-forms" },
 
-    { "id": "it.vedph.tgr.available-witnesses", "label": "available-witnesses" },
+    {
+      "id": "it.vedph.tgr.available-witnesses",
+      "label": "available-witnesses"
+    },
+    { "id": "it.vedph.tgr.ms-contents", "label": "ms-contents" },
+    { "id": "it.vedph.tgr.ms-history", "label": "ms-history" },
+    { "id": "it.vedph.tgr.ms-signatures", "label": "ms-signatures" },
     { "id": "it.vedph.tgr.ms-formal-features", "label": "ms-formal-features" },
     { "id": "it.vedph.tgr.ms-ornaments", "label": "ms-ornaments" },
     { "id": "it.vedph.tgr.ms-places", "label": "ms-places" },
-    { "id": "it.vedph.tgr.ms-scripts", "label": "it.vedph.tgr.ms-scripts" },
+    { "id": "it.vedph.tgr.ms-scripts", "label": "tgr.ms-scripts" },
     { "id": "it.vedph.tgr.ms-units", "label": "ms-units" },
+
+    { "id": "it.vedph.renovella.tale-info", "label": "tale-info" },
+    { "id": "it.vedph.renovella.tale-story", "label": "tale-story" },
 
     { "id": "fr.it.vedph.apparatus", "label": "apparatus-fr" },
     { "id": "fr.it.vedph.chronology", "label": "chronology-fr" },
-    { "id": "fr.it.vedph.it.vedph.comment", "label": "it.vedph.comment-fr" },
+    { "id": "fr.it.vedph.comment", "label": "comment-fr" },
+    { "id": "fr.it.vedph.orthography", "label": "orthography-fr" },
     { "id": "fr.it.vedph.tgr.interpolations", "label": "interpolations-fr" },
     { "id": "fr.it.vedph.pura.lemma-tags", "label": "lemma-tags-fr" },
     { "id": "fr.it.vedph.tgr.ling.tags", "label": "ling-tags-fr" },
     { "id": "fr.it.vedph.quotations", "label": "quotations-fr" },
     { "id": "fr.it.vedph.tgr.var-quotations", "label": "var-quotations-fr" },
 
+    { "id": "it.vedph.tivac.grf-location", "label": "grf-location" },
+    { "id": "it.vedph.tivac.grf-support", "label": "grf-support" },
+    { "id": "it.vedph.tivac.grf-writing", "label": "grf-writing" },
+
     { "id": "bdm", "label": "BDM" },
+    { "id": "codicology", "label": "CODICOLOGY" },
     { "id": "ingra", "label": "INGRA" },
     { "id": "itinera", "label": "ITINERA" },
     { "id": "mqdq", "label": "MQDQ" },
     { "id": "pura", "label": "PURA" },
-    { "id": "tgr", "label": "TGR" }
+    { "id": "tgr", "label": "TGR" },
+    { "id": "renovella", "label": "RENOVELLA" },
+    { "id": "sidon", "label": "SIDON" },
+    { "id": "tivac", "label": "TIVAC" }
   ],
   "links": [
     { "source": "mqdq", "target": "it.vedph.bibliography", "label": "" },
@@ -77,36 +93,159 @@
     { "source": "mqdq", "target": "it.vedph.note", "label": "" },
     { "source": "mqdq", "target": "it.vedph.tiled-text", "label": "" },
     { "source": "mqdq", "target": "it.vedph.token-text-layer", "label": "" },
+    { "source": "mqdq", "target": "fr.it.vedph.apparatus", "label": "" },
 
-    { "source": "itinera", "target": "it.vedph.doc-references", "label": "" },
+    {
+      "source": "codicology",
+      "target": "it.vedph.codicology.cod-bindings",
+      "label": ""
+    },
+    {
+      "source": "codicology",
+      "target": "it.vedph.codicology.cod-contents",
+      "label": ""
+    },
+    {
+      "source": "codicology",
+      "target": "it.vedph.codicology.cod-decorations",
+      "label": ""
+    },
+    {
+      "source": "codicology",
+      "target": "it.vedph.codicology.cod-edits",
+      "label": ""
+    },
+    {
+      "source": "codicology",
+      "target": "it.vedph.codicology.cod-hands",
+      "label": ""
+    },
+    {
+      "source": "codicology",
+      "target": "it.vedph.codicology.cod-layouts",
+      "label": ""
+    },
+    {
+      "source": "codicology",
+      "target": "it.vedph.codicology.cod-material-dsc",
+      "label": ""
+    },
+    {
+      "source": "codicology",
+      "target": "it.vedph.codicology.cod-sheet-labels",
+      "label": ""
+    },
+    {
+      "source": "codicology",
+      "target": "it.vedph.codicology.cod-shelfmarks",
+      "label": ""
+    },
+    {
+      "source": "codicology",
+      "target": "it.vedph.codicology.cod-watermarks",
+      "label": ""
+    },
+
     { "source": "itinera", "target": "it.vedph.ext-bibliography", "label": "" },
-    { "source": "itinera", "target": "it.vedph.historical-date", "label": "" },
+    {
+      "source": "itinera",
+      "target": "it.vedph.historical-events",
+      "label": ""
+    },
+    { "source": "itinera", "target": "it.vedph.metadata", "label": "" },
+    { "source": "itinera", "target": "it.vedph.names", "label": "" },
     { "source": "itinera", "target": "it.vedph.note", "label": "" },
-    { "source": "itinera", "target": "it.vedph.itinera.attachments", "label": "" },
-    { "source": "itinera", "target": "it.vedph.itinera.chronotopics", "label": "" },
-    { "source": "itinera", "target": "it.vedph.itinera.cited-persons", "label": "" },
-    { "source": "itinera", "target": "it.vedph.itinera.corr-exchanges", "label": "" },
-    { "source": "itinera", "target": "it.vedph.itinera.lit-dedications", "label": "" },
-    { "source": "itinera", "target": "it.vedph.itinera.person", "label": "" },
-    { "source": "itinera", "target": "it.vedph.itinera.person-events", "label": "" },
-    { "source": "itinera", "target": "it.vedph.itinera.person-works", "label": "" },
-    { "source": "itinera", "target": "it.vedph.itinera.serial-text-info", "label": "" },
-    { "source": "itinera", "target": "it.vedph.itinera.ms-binding", "label": "" },
-    { "source": "itinera", "target": "it.vedph.itinera.ms-catchwords", "label": "" },
-    { "source": "itinera", "target": "it.vedph.itinera.ms-composition", "label": "" },
-    { "source": "itinera", "target": "it.vedph.itinera.ms-content-loci", "label": "" },
-    { "source": "itinera", "target": "it.vedph.itinera.ms-contents", "label": "" },
-    { "source": "itinera", "target": "it.vedph.itinera.ms-decorations", "label": "" },
-    { "source": "itinera", "target": "it.vedph.itinera.ms-hands", "label": "" },
-    { "source": "itinera", "target": "it.vedph.itinera.ms-history", "label": "" },
-    { "source": "itinera", "target": "it.vedph.itinera.ms-layouts", "label": "" },
-    { "source": "itinera", "target": "it.vedph.itinera.ms-material-dsc", "label": "" },
-    { "source": "itinera", "target": "it.vedph.itinera.ms-numberings", "label": "" },
-    { "source": "itinera", "target": "it.vedph.itinera.ms-place", "label": "" },
-    { "source": "itinera", "target": "it.vedph.itinera.ms-poem-ranges", "label": "" },
-    { "source": "itinera", "target": "it.vedph.itinera.ms-quires", "label": "" },
-    { "source": "itinera", "target": "it.vedph.itinera.ms-signatures", "label": "" },
-    { "source": "itinera", "target": "it.vedph.itinera.ms-watermarks", "label": "" },
+    {
+      "source": "itinera",
+      "target": "it.vedph.codicology.cod-bindings",
+      "label": ""
+    },
+    {
+      "source": "itinera",
+      "target": "it.vedph.codicology.cod-contents",
+      "label": ""
+    },
+    {
+      "source": "itinera",
+      "target": "it.vedph.codicology.cod-decorations",
+      "label": ""
+    },
+    {
+      "source": "itinera",
+      "target": "it.vedph.codicology.cod-edits",
+      "label": ""
+    },
+    {
+      "source": "itinera",
+      "target": "it.vedph.codicology.cod-hands",
+      "label": ""
+    },
+    {
+      "source": "itinera",
+      "target": "it.vedph.codicology.cod-layouts",
+      "label": ""
+    },
+    {
+      "source": "itinera",
+      "target": "it.vedph.codicology.cod-material-dsc",
+      "label": ""
+    },
+    {
+      "source": "itinera",
+      "target": "it.vedph.codicology.cod-sheet-labels",
+      "label": ""
+    },
+    {
+      "source": "itinera",
+      "target": "it.vedph.codicology.cod-shelfmarks",
+      "label": ""
+    },
+    {
+      "source": "itinera",
+      "target": "it.vedph.codicology.cod-watermarks",
+      "label": ""
+    },
+    { "source": "itinera", "target": "it.vedph.itinera.cod-loci", "label": "" },
+    {
+      "source": "itinera",
+      "target": "it.vedph.itinera.cod-poem-ranges",
+      "label": ""
+    },
+    {
+      "source": "itinera",
+      "target": "it.vedph.itinera.letter-info",
+      "label": ""
+    },
+    {
+      "source": "itinera",
+      "target": "it.vedph.itinera.literary-work-info",
+      "label": ""
+    },
+    {
+      "source": "itinera",
+      "target": "it.vedph.itinera.person-info",
+      "label": ""
+    },
+    {
+      "source": "itinera",
+      "target": "it.vedph.itinera.person-works",
+      "label": ""
+    },
+    {
+      "source": "itinera",
+      "target": "it.vedph.itinera.referenced-texts",
+      "label": ""
+    },
+    {
+      "source": "itinera",
+      "target": "it.vedph.itinera.related-persons",
+      "label": ""
+    },
+    {
+      "source": "itinera",
+      "target": "it.vedph.itinera.witnesses",
+      "label": ""
+    },
 
     { "source": "tgr", "target": "it.vedph.bibliography", "label": "" },
     { "source": "tgr", "target": "it.vedph.categories", "label": "" },
@@ -116,18 +255,39 @@
     { "source": "tgr", "target": "it.vedph.token-text", "label": "" },
     { "source": "tgr", "target": "it.vedph.token-text-layer", "label": "" },
     { "source": "tgr", "target": "fr.it.vedph.apparatus", "label": "" },
-    { "source": "tgr", "target": "it.vedph.itinera.ms-signatures", "label": "" },
-    { "source": "tgr", "target": "it.vedph.tgr.available-witnesses", "label": "" },
-    { "source": "tgr", "target": "fr.it.vedph.tgr.interpolations", "label": "" },
+    {
+      "source": "tgr",
+      "target": "it.vedph.tgr.ms-signatures",
+      "label": ""
+    },
+    {
+      "source": "tgr",
+      "target": "it.vedph.tgr.available-witnesses",
+      "label": ""
+    },
+    {
+      "source": "tgr",
+      "target": "fr.it.vedph.tgr.interpolations",
+      "label": ""
+    },
     { "source": "tgr", "target": "fr.it.vedph.tgr.ling.tags", "label": "" },
-    { "source": "tgr", "target": "fr.it.vedph.tgr.var-quotations", "label": "" },
-    { "source": "tgr", "target": "it.vedph.itinera.ms-contents", "label": "" },
-    { "source": "tgr", "target": "it.vedph.tgr.ms-formal-features", "label": "" },
-    { "source": "tgr", "target": "it.vedph.itinera.ms-history", "label": "" },
+    {
+      "source": "tgr",
+      "target": "fr.it.vedph.tgr.var-quotations",
+      "label": ""
+    },
+    { "source": "tgr", "target": "it.vedph.tgr.ms-contents", "label": "" },
+    {
+      "source": "tgr",
+      "target": "it.vedph.tgr.ms-formal-features",
+      "label": ""
+    },
+    { "source": "tgr", "target": "it.vedph.tgr.ms-history", "label": "" },
     { "source": "tgr", "target": "it.vedph.tgr.ms-ornaments", "label": "" },
     { "source": "tgr", "target": "it.vedph.tgr.ms-places", "label": "" },
     { "source": "tgr", "target": "it.vedph.tgr.ms-scripts", "label": "" },
     { "source": "tgr", "target": "it.vedph.tgr.ms-units", "label": "" },
+
     { "source": "bdm", "target": "it.vedph.bibliography", "label": "" },
     { "source": "bdm", "target": "it.vedph.categories", "label": "" },
     { "source": "bdm", "target": "it.vedph.comment", "label": "" },
@@ -135,41 +295,98 @@
     { "source": "bdm", "target": "it.vedph.note", "label": "" },
     { "source": "bdm", "target": "it.vedph.token-text", "label": "" },
     { "source": "bdm", "target": "it.vedph.token-text-layer", "label": "" },
-    { "source": "bdm", "target": "fr.it.vedph.chronology", "label": "" },
-    { "source": "bdm", "target": "fr.it.vedph.it.vedph.comment", "label": "" },
     { "source": "bdm", "target": "fr.it.vedph.apparatus", "label": "" },
+    { "source": "bdm", "target": "fr.it.vedph.chronology", "label": "" },
+    { "source": "bdm", "target": "fr.it.vedph.comment", "label": "" },
     { "source": "bdm", "target": "fr.it.vedph.quotations", "label": "" },
+
     { "source": "pura", "target": "it.vedph.bibliography", "label": "" },
     { "source": "pura", "target": "it.vedph.categories", "label": "" },
-    { "source": "pura", "target": "it.vedph.comment", "label": "" },
     { "source": "pura", "target": "it.vedph.index-keywords", "label": "" },
     { "source": "pura", "target": "it.vedph.note", "label": "" },
     { "source": "pura", "target": "it.vedph.token-text", "label": "" },
-    { "source": "pura", "target": "it.vedph.token-text-layer", "label": "" },
-    { "source": "pura", "target": "fr.it.vedph.it.vedph.comment", "label": "" },
-    { "source": "pura", "target": "fr.it.vedph.apparatus", "label": "" },
-    { "source": "pura", "target": "it.vedph.itinera.ms-signatures", "label": "" },
-    { "source": "pura", "target": "fr.it.vedph.tgr.ling.tags", "label": "" },
-    { "source": "pura", "target": "it.vedph.itinera.ms-contents", "label": "" },
-    { "source": "pura", "target": "it.vedph.itinera.ms-history", "label": "" },
+    {
+      "source": "pura",
+      "target": "it.vedph.tgr.ms-signatures",
+      "label": ""
+    },
+    { "source": "pura", "target": "it.vedph.tgr.ms-contents", "label": "" },
+    { "source": "pura", "target": "it.vedph.tgr.ms-history", "label": "" },
     { "source": "pura", "target": "it.vedph.tgr.ms-ornaments", "label": "" },
     { "source": "pura", "target": "it.vedph.tgr.ms-places", "label": "" },
     { "source": "pura", "target": "it.vedph.tgr.ms-scripts", "label": "" },
     { "source": "pura", "target": "it.vedph.tgr.ms-units", "label": "" },
     { "source": "pura", "target": "it.vedph.pura.word-forms", "label": "" },
-    { "source": "pura", "target": "fr.it.vedph.pura.lemma-tags", "label": "" },
-    { "source": "ingra", "target": "it.vedph.ingra.prisoner-info", "label": "" },
+
     { "source": "ingra", "target": "it.vedph.bibliography", "label": "" },
-    { "source": "ingra", "target": "it.vedph.doc-references", "label": "" },
-    { "source": "ingra", "target": "it.vedph.ingra.prisoner-info", "label": "" },
-    { "source": "ingra", "target": "it.vedph.ingra.graffiti-info", "label": "" },
-    { "source": "ingra", "target": "it.vedph.ingra.prison-location", "label": "" },
-    { "source": "ingra", "target": "it.vedph.token-text", "label": "" },
     { "source": "ingra", "target": "it.vedph.categories", "label": "" },
     { "source": "ingra", "target": "it.vedph.comment", "label": "" },
+    { "source": "ingra", "target": "it.vedph.doc-references", "label": "" },
     { "source": "ingra", "target": "it.vedph.note", "label": "" },
+    { "source": "ingra", "target": "it.vedph.token-text", "label": "" },
     { "source": "ingra", "target": "fr.it.vedph.apparatus", "label": "" },
-    { "source": "ingra", "target": "fr.it.vedph.it.vedph.comment", "label": "" },
-    { "source": "ingra", "target": "it.vedph.ingra.drawing-info", "label": "" }
+    {
+      "source": "ingra",
+      "target": "fr.it.vedph.comment",
+      "label": ""
+    },
+    {
+      "source": "ingra",
+      "target": "it.vedph.ingra.prison-info",
+      "label": ""
+    },
+    {
+      "source": "ingra",
+      "target": "it.vedph.ingra.prisoner-info",
+      "label": ""
+    },
+    {
+      "source": "ingra",
+      "target": "it.vedph.ingra.graffiti-info",
+      "label": ""
+    },
+    {
+      "source": "ingra",
+      "target": "it.vedph.ingra.prison-location",
+      "label": ""
+    },
+    { "source": "ingra", "target": "it.vedph.ingra.drawing-info", "label": "" },
+
+    { "source": "renovella", "target": "it.vedph.bibliography", "label": "" },
+    { "source": "renovella", "target": "it.vedph.categories", "label": "" },
+    { "source": "renovella", "target": "it.vedph.doc-references", "label": "" },
+    { "source": "renovella", "target": "it.vedph.index-keywords", "label": "" },
+    { "source": "renovella", "target": "it.vedph.note", "label": "" },
+    {
+      "source": "renovella",
+      "target": "it.vedph.renovella.tale-info",
+      "label": ""
+    },
+    {
+      "source": "renovella",
+      "target": "it.vedph.renovella.tale-story",
+      "label": ""
+    },
+
+    { "source": "sidon", "target": "it.vedph.metadata", "label": "" },
+    { "source": "sidon", "target": "it.vedph.note", "label": "" },
+    { "source": "sidon", "target": "it.vedph.token-text", "label": "" },
+    { "source": "sidon", "target": "it.vedph.token-text-layer", "label": "" },
+    { "source": "sidon", "target": "fr.it.vedph.apparatus", "label": "" },
+
+    { "source": "tivac", "target": "it.vedph.bibliography", "label": "" },
+    { "source": "tivac", "target": "it.vedph.categories", "label": "" },
+    { "source": "tivac", "target": "it.vedph.historical-date", "label": "" },
+    { "source": "tivac", "target": "it.vedph.keywords", "label": "" },
+    { "source": "tivac", "target": "it.vedph.metadata", "label": "" },
+    { "source": "tivac", "target": "it.vedph.note", "label": "" },
+    { "source": "tivac", "target": "it.vedph.token-text", "label": "" },
+    { "source": "tivac", "target": "it.vedph.token-text-layer", "label": "" },
+    { "source": "tivac", "target": "fr.it.vedph.apparatus", "label": "" },
+    { "source": "tivac", "target": "fr.it.vedph.comment", "label": "" },
+    { "source": "tivac", "target": "fr.it.vedph.orthography", "label": "" },
+    { "source": "tivac", "target": "it.vedph.tivac.grf-location", "label": "" },
+    { "source": "tivac", "target": "it.vedph.tivac.grf-support", "label": "" },
+    { "source": "tivac", "target": "it.vedph.tivac.grf-writing", "label": "" }
   ]
 }

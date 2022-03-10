@@ -7,11 +7,25 @@
     "tags": ["references"]
   },
   {
+    "id": "it.vedph.ext-bibliography",
+    "project": "shell",
+    "name": "ext-bibliography",
+    "tip": "Top-down bibliography.",
+    "tags": ["references"]
+  },
+  {
     "id": "it.vedph.categories",
     "project": "shell",
     "name": "categories",
     "tip": "Categories from a thesaurus.",
     "tags": ["tags"]
+  },
+  {
+    "id": "it.vedph.chronotopes",
+    "project": "shell",
+    "name": "chronotopes",
+    "tip": "Place and/or date.",
+    "tags": ["place/time"]
   },
   {
     "id": "it.vedph.comment",
@@ -28,18 +42,18 @@
     "tags": ["references"]
   },
   {
-    "id": "it.vedph.ext-bibliography",
-    "project": "shell",
-    "name": "ext-bibliography",
-    "tip": "Top-down bibliography.",
-    "tags": ["references"]
-  },
-  {
     "id": "it.vedph.historical-date",
     "project": "shell",
     "name": "date",
     "tip": "Historical date with optional references.",
     "tags": ["time"]
+  },
+  {
+    "id": "it.vedph.historical-events",
+    "project": "shell",
+    "name": "events",
+    "tip": "Historical events.",
+    "tags": ["events"]
   },
   {
     "id": "it.vedph.index-keywords",
@@ -54,6 +68,20 @@
     "name": "keywords",
     "tip": "Simple keywords.",
     "tags": ["tags"]
+  },
+  {
+    "id": "it.vedph.metadata",
+    "project": "shell",
+    "name": "metadata",
+    "tip": "Custom metadata.",
+    "tags": ["tags"]
+  },
+  {
+    "id": "it.vedph.names",
+    "project": "shell",
+    "name": "names",
+    "tip": "Proper names.",
+    "tags": ["names"]
   },
   {
     "id": "it.vedph.note",
@@ -83,155 +111,153 @@
     "tip": "Tokens-based text layer.",
     "tags": ["text"]
   },
-
   {
-    "id": "it.vedph.itinera.ms-binding",
-    "project": "itinera",
-    "name": "ms.binding",
-    "tip": "Manuscript's binding.",
+    "id": "it.vedph.codicology.cod-bindings",
+    "project": "codicology",
+    "name": "cod-bindings",
+    "tip": "Manuscript's bindings.",
     "tags": ["codicology"]
   },
   {
-    "id": "it.vedph.itinera.ms-catchwords",
-    "project": "itinera",
-    "name": "ms.catchwords",
-    "tip": "Manuscript's catchwords.",
-    "tags": ["codicology"]
-  },
-  {
-    "id": "it.vedph.itinera.ms-composition",
-    "project": "itinera",
-    "name": "ms.composition",
-    "tip": "Manuscript's composition.",
-    "tags": ["codicology"]
-  },
-  {
-    "id": "it.vedph.itinera.ms-content-loci",
-    "project": "itinera",
-    "name": "ms.loci",
-    "tip": "Manuscript's loci critici.",
-    "tags": ["codicology"]
-  },
-  {
-    "id": "it.vedph.itinera.ms-contents",
-    "project": "itinera",
-    "name": "ms.contents",
+    "id": "it.vedph.codicology.cod-contents",
+    "project": "codicology",
+    "name": "cod-contents",
     "tip": "Manuscript's contents.",
     "tags": ["codicology"]
   },
   {
-    "id": "it.vedph.itinera.ms-decorations",
-    "project": "itinera",
-    "name": "ms.decorations",
+    "id": "it.vedph.codicology.cod-decorations",
+    "project": "codicology",
+    "name": "cod-decorations",
     "tip": "Manuscript's decorations.",
     "tags": ["codicology"]
   },
   {
-    "id": "it.vedph.itinera.ms-hands",
-    "project": "itinera",
-    "name": "ms.hands",
+    "id": "it.vedph.codicology.cod-edits",
+    "project": "codicology",
+    "name": "cod-edits",
+    "tip": "Manuscript's ancillary edits.",
+    "tags": ["codicology"]
+  },
+  {
+    "id": "it.vedph.codicology.cod-hands",
+    "project": "codicology",
+    "name": "cod-hands",
     "tip": "Manuscript's hands.",
     "tags": ["codicology"]
   },
   {
-    "id": "it.vedph.itinera.ms-history",
-    "project": "itinera",
-    "name": "ms.history",
-    "tip": "Manuscript's history.",
-    "tags": ["codicology"]
-  },
-  {
-    "id": "it.vedph.itinera.ms-layouts",
-    "project": "itinera",
-    "name": "ms.layouts",
+    "id": "it.vedph.codicology.cod-layouts",
+    "project": "codicology",
+    "name": "cod-layouts",
     "tip": "Manuscript's layouts.",
     "tags": ["codicology"]
   },
   {
-    "id": "it.vedph.itinera.ms-material-dsc",
-    "project": "itinera",
-    "name": "ms.material",
+    "id": "it.vedph.codicology.cod-material-dsc",
+    "project": "codicology",
+    "name": "cod-material",
     "tip": "Manuscript's material description.",
     "tags": ["codicology"]
   },
   {
-    "id": "it.vedph.itinera.ms-numberings",
-    "project": "itinera",
-    "name": "ms.numberings",
-    "tip": "Manuscript's numberings.",
+    "id": "it.vedph.codicology.cod-sheet-labels",
+    "project": "codicology",
+    "name": "cod-labels",
+    "tip": "Manuscript's quires, catchwords, signatures.",
     "tags": ["codicology"]
   },
   {
-    "id": "it.vedph.itinera.ms-place",
-    "project": "itinera",
-    "name": "ms.place",
-    "tip": "Manuscript's place of origin.",
+    "id": "it.vedph.codicology.cod-shelfmarks",
+    "project": "codicology",
+    "name": "cod-shelfmarks",
+    "tip": "Manuscript's shelfmarks.",
     "tags": ["codicology"]
   },
   {
-    "id": "it.vedph.itinera.ms-poem-ranges",
-    "project": "itinera",
-    "name": "ms.poem ranges",
-    "tip": "Manuscript's poem ranges.",
-    "tags": ["codicology"]
-  },
-  {
-    "id": "it.vedph.itinera.ms-quires",
-    "project": "itinera",
-    "name": "ms.quires",
-    "tip": "Manuscript's quires.",
-    "tags": ["codicology"]
-  },
-  {
-    "id": "it.vedph.itinera.ms-signatures",
-    "project": "itinera",
-    "name": "ms.signatures",
-    "tip": "Manuscript's signatures.",
-    "tags": ["codicology"]
-  },
-  {
-    "id": "it.vedph.itinera.ms-watermarks",
-    "project": "itinera",
-    "name": "ms.watermarks",
+    "id": "it.vedph.codicology.watermarks",
+    "project": "codicology",
+    "name": "cod-watermarks",
     "tip": "Manuscript's watermarks.",
     "tags": ["codicology"]
   },
   {
-    "id": "it.vedph.itinera.person",
+    "id": "it.vedph.itinera.cod-loci",
     "project": "itinera",
-    "name": "person",
-    "tip": "Person.",
-    "tags": ["prosopography"]
+    "name": "cod-loci",
+    "tip": "Loci critici in manuscript.",
+    "tags": ["itinera"]
   },
   {
-    "id": "it.vedph.itinera.person-events",
+    "id": "it.vedph.itinera.cod-poem-ranges",
     "project": "itinera",
-    "name": "person events",
-    "tip": "Biographic events.",
-    "tags": ["prosopography"]
+    "name": "cod-poem-ranges",
+    "tip": "Poem ranges in manuscript.",
+    "tags": ["itinera"]
   },
   {
-    "id": "it.vedph.itinera.person-hand",
+    "id": "it.vedph.itinera.letter-info",
     "project": "itinera",
-    "name": "hand",
-    "tip": "Person's hand.",
-    "tags": ["codicology"]
+    "name": "letter-info",
+    "tip": "Information about a letter.",
+    "tags": ["itinera"]
+  },
+  {
+    "id": "it.vedph.itinera.literary-work-info",
+    "project": "itinera",
+    "name": "lit-work-info",
+    "tip": "Information about a literary work.",
+    "tags": ["itinera"]
+  },
+  {
+    "id": "it.vedph.itinera.person-info",
+    "project": "itinera",
+    "name": "person-info",
+    "tip": "Information about a person.",
+    "tags": ["prosopography"]
   },
   {
     "id": "it.vedph.itinera.person-works",
     "project": "itinera",
-    "name": "person",
-    "tip": "Person's works.",
+    "name": "person-works",
+    "tip": "List of person's works.",
+    "tags": ["literature"]
+  },
+  {
+    "id": "it.vedph.itinera.referenced-texts",
+    "project": "itinera",
+    "name": "ref-texts",
+    "tip": "List of referenced texts.",
+    "tags": ["literature"]
+  },
+  {
+    "id": "it.vedph.itinera.related-persons",
+    "project": "itinera",
+    "name": "rel-persons",
+    "tip": "List of related persons.",
     "tags": ["prosopography"]
   },
   {
-    "id": "it.vedph.itinera.serial-text-info",
+    "id": "it.vedph.itinera.witnesses",
     "project": "itinera",
-    "name": "serial text info",
-    "tip": "Information about a text belonging to a series.",
-    "tags": ["text"]
+    "name": "witnesses",
+    "tip": "Witnesses for a work.",
+    "tags": ["philology"]
   },
-
+  {
+    "id": "it.vedph.tgr.available-witnesses",
+    "project": "tgr",
+    "name": "avail-witnesses",
+    "tip": "Available witnesses.",
+    "tags": ["philology"]
+  },
+  {
+    "id": "it.vedph.tgr.ms-signatures",
+    "project": "tgr",
+    "name": "ms-signatures",
+    "tip": "Manuscript's signatures.",
+    "tags": ["codicology"]
+  },
   {
     "id": "it.vedph.tgr.ms-contents",
     "project": "tgr",
@@ -281,12 +307,81 @@
     "tip": "Manuscript's codicological units.",
     "tags": ["codicology"]
   },
-
   {
     "id": "it.vedph.pura.word-forms",
     "project": "pura",
     "name": "word forms",
     "tip": "Word's form(s).",
     "tags": ["lexicography"]
+  },
+  {
+    "id": "it.vedph.ingra.prison-info",
+    "project": "ingra",
+    "name": "prison-info",
+    "tip": "Information about a prison.",
+    "tags": ["place"]
+  },
+  {
+    "id": "it.vedph.ingra.prisoner-info",
+    "project": "ingra",
+    "name": "prisoner-info",
+    "tip": "Information about a prisoner.",
+    "tags": ["prosopography"]
+  },
+  {
+    "id": "it.vedph.ingra.graffiti-info",
+    "project": "ingra",
+    "name": "graffiti-info",
+    "tip": "Information about a prison graffiti.",
+    "tags": ["epigraphy"]
+  },
+  {
+    "id": "it.vedph.ingra.prison-location",
+    "project": "ingra",
+    "name": "prison-location",
+    "tip": "Information about the location inside a prison.",
+    "tags": ["place"]
+  },
+  {
+    "id": "it.vedph.ingra.drawing-info",
+    "project": "ingra",
+    "name": "drawing-info",
+    "tip": "Information about a drawing.",
+    "tags": ["epigraphy"]
+  },
+  {
+    "id": "it.vedph.renovella.tale-info",
+    "project": "renovella",
+    "name": "tale-info",
+    "tip": "Information about a tale.",
+    "tags": ["literature"]
+  },
+  {
+    "id": "it.vedph.renovella.tale-story",
+    "project": "renovella",
+    "name": "tale-story",
+    "tip": "Tale's story.",
+    "tags": ["literature"]
+  },
+  {
+    "id": "it.vedph.tivac.grf-location",
+    "project": "tivac",
+    "name": "grf-location",
+    "tip": "Graffiti's location.",
+    "tags": ["place"]
+  },
+  {
+    "id": "it.vedph.tivac.grf-support",
+    "project": "tivac",
+    "name": "grf-support",
+    "tip": "Graffiti's material support.",
+    "tags": ["epigraphy"]
+  },
+  {
+    "id": "it.vedph.tivac.grf-writing",
+    "project": "tivac",
+    "name": "grf-writing",
+    "tip": "Graffiti's writing description.",
+    "tags": ["epigraphy"]
   }
 ]
