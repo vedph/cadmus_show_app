@@ -11,7 +11,7 @@ import { take } from 'rxjs/operators';
 @Component({
   selector: 'app-model-graph-page',
   templateUrl: './model-graph-page.component.html',
-  styleUrls: ['./model-graph-page.component.css'],
+  styleUrls: ['./model-graph-page.component.scss'],
 })
 export class ModelGraphPageComponent {
   public options: ForceGraphOptions;

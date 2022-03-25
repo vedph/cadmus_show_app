@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-flag-list-code-page',
   templateUrl: './flag-list-code-page.component.html',
-  styleUrls: ['./flag-list-code-page.component.css'],
+  styleUrls: ['./flag-list-code-page.component.scss'],
 })
 export class FlagListCodePageComponent {
   public data$: Observable<FlagDefinition[]>;

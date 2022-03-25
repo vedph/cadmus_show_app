@@ -14,7 +14,7 @@ import { ColorService } from '@myrmidon/cadmus-show-ui';
 @Component({
   selector: 'cadmus-part-definition-editor',
   templateUrl: './part-definition-editor.component.html',
-  styleUrls: ['./part-definition-editor.component.css'],
+  styleUrls: ['./part-definition-editor.component.scss'],
 })
 export class PartDefinitionEditorComponent implements OnInit {
   private _definition: PartDefinition | undefined;

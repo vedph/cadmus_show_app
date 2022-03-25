@@ -21,7 +21,7 @@ import { GroupedPartDefinition, GroupingFacet } from './store/facet-list.store';
 @Component({
   selector: 'cadmus-facet-list',
   templateUrl: './facet-list.component.html',
-  styleUrls: ['./facet-list.component.css'],
+  styleUrls: ['./facet-list.component.scss'],
 })
 export class FacetListComponent implements OnInit {
   /**

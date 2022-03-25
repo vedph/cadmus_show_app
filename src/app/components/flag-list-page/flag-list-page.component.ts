@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
 @Component({
   selector: 'app-flag-list-page',
   templateUrl: './flag-list-page.component.html',
-  styleUrls: ['./flag-list-page.component.css'],
+  styleUrls: ['./flag-list-page.component.scss'],
 })
 export class FlagListPageComponent implements OnInit {
   public flags$: Observable<FlagDefinition[]>;

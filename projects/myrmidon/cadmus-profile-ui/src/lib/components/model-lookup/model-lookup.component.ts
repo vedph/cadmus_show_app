@@ -8,7 +8,7 @@ import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 @Component({
   selector: 'cadmus-model-lookup',
   templateUrl: './model-lookup.component.html',
-  styleUrls: ['./model-lookup.component.css'],
+  styleUrls: ['./model-lookup.component.scss'],
 })
 export class ModelLookupComponent {
   /**

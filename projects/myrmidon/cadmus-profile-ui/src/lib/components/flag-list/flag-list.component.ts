@@ -1,13 +1,13 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FlagDefinition } from '@myrmidon/cadmus-core';
-import { DialogService } from '@myrmidon/cadmus-show-ui';
+import { DialogService } from '@myrmidon/ng-mat-tools';
 import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'cadmus-flag-list',
   templateUrl: './flag-list.component.html',
-  styleUrls: ['./flag-list.component.css'],
+  styleUrls: ['./flag-list.component.scss'],
   animations: [
     trigger('inOutAnimation', [
       transition(':enter', [

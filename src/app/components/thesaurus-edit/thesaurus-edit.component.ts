@@ -9,7 +9,7 @@ import { take } from 'rxjs/operators';
 @Component({
   selector: 'app-thesaurus-edit',
   templateUrl: './thesaurus-edit.component.html',
-  styleUrls: ['./thesaurus-edit.component.css'],
+  styleUrls: ['./thesaurus-edit.component.scss'],
 })
 export class ThesaurusEditComponent implements OnInit {
   public thesaurus: Thesaurus | undefined;

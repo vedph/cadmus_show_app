@@ -19,7 +19,7 @@ import { take } from 'rxjs/operators';
 @Component({
   selector: 'app-thesaurus-list-code-page',
   templateUrl: './thesaurus-list-code-page.component.html',
-  styleUrls: ['./thesaurus-list-code-page.component.css'],
+  styleUrls: ['./thesaurus-list-code-page.component.scss'],
 })
 export class ThesaurusListCodePageComponent {
   public data$: Observable<Thesaurus[]>;

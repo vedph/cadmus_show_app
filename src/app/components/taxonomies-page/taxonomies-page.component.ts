@@ -8,7 +8,7 @@ import { take } from 'rxjs/operators';
 @Component({
   selector: 'app-taxonomies-page',
   templateUrl: './taxonomies-page.component.html',
-  styleUrls: ['./taxonomies-page.component.css'],
+  styleUrls: ['./taxonomies-page.component.scss'],
 })
 export class TaxonomiesPageComponent implements OnInit {
   public entries: ThesaurusEntry[] | undefined;

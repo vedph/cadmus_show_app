@@ -8,7 +8,7 @@ import { deepCopy } from '@myrmidon/ng-tools';
 @Component({
   selector: 'app-facet-list-page',
   templateUrl: './facet-list-page.component.html',
-  styleUrls: ['./facet-list-page.component.css'],
+  styleUrls: ['./facet-list-page.component.scss'],
 })
 export class FacetListPageComponent implements OnInit {
   public facets$: Observable<GroupingFacet[]>;

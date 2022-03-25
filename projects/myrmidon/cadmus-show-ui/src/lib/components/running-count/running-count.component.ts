@@ -15,7 +15,7 @@ export interface RunningCountParams {
 @Component({
   selector: 'cadmus-running-count',
   templateUrl: './running-count.component.html',
-  styleUrls: ['./running-count.component.css'],
+  styleUrls: ['./running-count.component.scss'],
 })
 export class RunningCountComponent implements OnDestroy {
   private _counterSubject$: Subject<number>;

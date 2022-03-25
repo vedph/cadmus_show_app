@@ -11,7 +11,7 @@ import { TourService } from 'ngx-ui-tour-md-menu';
 @Component({
   selector: 'app-profile-flow',
   templateUrl: './profile-flow.component.html',
-  styleUrls: ['./profile-flow.component.css'],
+  styleUrls: ['./profile-flow.component.scss'],
 })
 export class ProfileFlowComponent implements OnInit {
   private _steps: boolean[];

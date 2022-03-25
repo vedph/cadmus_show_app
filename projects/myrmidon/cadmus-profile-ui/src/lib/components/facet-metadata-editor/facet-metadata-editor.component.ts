@@ -16,7 +16,7 @@ import { ColorService } from '@myrmidon/cadmus-show-ui';
 @Component({
   selector: 'cadmus-facet-metadata-editor',
   templateUrl: './facet-metadata-editor.component.html',
-  styleUrls: ['./facet-metadata-editor.component.css'],
+  styleUrls: ['./facet-metadata-editor.component.scss'],
 })
 export class FacetMetadataEditorComponent implements OnInit {
   private _facet: FacetDefinition | undefined;

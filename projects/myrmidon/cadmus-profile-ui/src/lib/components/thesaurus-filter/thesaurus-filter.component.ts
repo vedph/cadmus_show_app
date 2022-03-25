@@ -10,7 +10,7 @@ import { ThesaurusFilter } from '@myrmidon/cadmus-core';
 @Component({
   selector: 'cadmus-thesaurus-filter',
   templateUrl: './thesaurus-filter.component.html',
-  styleUrls: ['./thesaurus-filter.component.css'],
+  styleUrls: ['./thesaurus-filter.component.scss'],
 })
 export class ThesaurusFilterComponent implements OnInit {
   private _filter: ThesaurusFilter | undefined | null;

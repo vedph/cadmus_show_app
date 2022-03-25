@@ -11,7 +11,7 @@ import {
 @Component({
   selector: 'app-profile-code-page',
   templateUrl: './profile-code-page.component.html',
-  styleUrls: ['./profile-code-page.component.css'],
+  styleUrls: ['./profile-code-page.component.scss'],
 })
 export class ProfileCodePageComponent implements OnInit {
   public profile: CadmusProfile | undefined;

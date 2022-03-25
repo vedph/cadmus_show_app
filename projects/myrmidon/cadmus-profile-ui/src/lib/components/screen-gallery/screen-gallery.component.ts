@@ -6,7 +6,7 @@ import { ImageSlide } from '@myrmidon/cadmus-shop-core';
 @Component({
   selector: 'cadmus-screen-gallery',
   templateUrl: './screen-gallery.component.html',
-  styleUrls: ['./screen-gallery.component.css']
+  styleUrls: ['./screen-gallery.component.scss']
 })
 export class ScreenGalleryComponent implements OnInit {
   private _slides : ImageSlide[];

@@ -7,7 +7,7 @@ import {
 @Component({
   selector: 'app-data-architecture',
   templateUrl: './data-architecture-page.component.html',
-  styleUrls: ['./data-architecture-page.component.css'],
+  styleUrls: ['./data-architecture-page.component.scss'],
 })
 export class DataArchitecturePageComponent implements OnInit {
   public initialDate: HistoricalDateModel;

@@ -10,7 +10,7 @@ import { map, take } from 'rxjs/operators';
 @Component({
   selector: 'app-facet-list-code-page',
   templateUrl: './facet-list-code-page.component.html',
-  styleUrls: ['./facet-list-code-page.component.css'],
+  styleUrls: ['./facet-list-code-page.component.scss'],
 })
 export class FacetListCodePageComponent {
   public data$: Observable<FacetDefinition[]>;

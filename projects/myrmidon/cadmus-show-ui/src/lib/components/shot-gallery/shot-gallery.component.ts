@@ -11,7 +11,7 @@ import { ImageSlide } from '@myrmidon/cadmus-shop-core';
 @Component({
   selector: 'cadmus-shot-gallery',
   templateUrl: './shot-gallery.component.html',
-  styleUrls: ['./shot-gallery.component.css'],
+  styleUrls: ['./shot-gallery.component.scss'],
   // animations: [
   //   trigger('inOutAnimation', [
   //     transition(':enter', [

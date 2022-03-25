@@ -1,12 +1,27 @@
 @import "~jsoneditor/dist/jsoneditor.min.css";
 
+@import '~@angular/material/theming';
+
+// always include only once per project
+@include mat-core();
+
+// import our custom themes
+@import 'light-theme.scss';
+
+// theme classes: you can hardcode one of them
+// on the <body> tag, or switch dynamically at runtime
+// with [class] binding
+
+.light-theme {
+  @include angular-material-theme($light-theme);
+}
+
 html,
 body {
   height: 100%;
 }
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 .banner {
   height: 258px;

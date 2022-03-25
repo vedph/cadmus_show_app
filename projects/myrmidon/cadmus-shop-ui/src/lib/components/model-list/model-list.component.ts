@@ -25,7 +25,7 @@ import { ModelListState } from './store/model-list.store';
 @Component({
   selector: 'cadmus-model-list',
   templateUrl: './model-list.component.html',
-  styleUrls: ['./model-list.component.css'],
+  styleUrls: ['./model-list.component.scss'],
 })
 export class ModelListComponent implements OnInit {
   private _refresh$: BehaviorSubject<number>;

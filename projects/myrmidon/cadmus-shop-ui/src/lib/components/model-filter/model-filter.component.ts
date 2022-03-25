@@ -6,7 +6,7 @@ import { CadmusModelFilter } from '@myrmidon/cadmus-shop-core';
 @Component({
   selector: 'cadmus-model-filter',
   templateUrl: './model-filter.component.html',
-  styleUrls: ['./model-filter.component.css'],
+  styleUrls: ['./model-filter.component.scss'],
 })
 export class ModelFilterComponent implements OnInit {
   private _filter: CadmusModelFilter | undefined | null;

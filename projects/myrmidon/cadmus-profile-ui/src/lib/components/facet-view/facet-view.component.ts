@@ -16,7 +16,8 @@ import {
   FacetDefinition,
   PartDefinition,
 } from '@myrmidon/cadmus-core';
-import { ColorService, DialogService } from '@myrmidon/cadmus-show-ui';
+import { ColorService } from '@myrmidon/cadmus-show-ui';
+import { DialogService } from '@myrmidon/ng-mat-tools';
 import { deepCopy } from '@myrmidon/ng-tools';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -35,7 +36,7 @@ import {
 @Component({
   selector: 'cadmus-facet-view',
   templateUrl: './facet-view.component.html',
-  styleUrls: ['./facet-view.component.css'],
+  styleUrls: ['./facet-view.component.scss'],
 })
 export class FacetViewComponent {
   private _facet: GroupingFacet | undefined;

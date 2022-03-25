@@ -6,7 +6,7 @@ import { PaginationResponse, PaginatorPlugin } from '@datorama/akita';
 import { Thesaurus } from '@myrmidon/cadmus-core';
 import { ThesaurusFilter } from '@myrmidon/cadmus-core';
 import { DataPage } from '@myrmidon/cadmus-shop-core';
-import { DialogService } from '@myrmidon/cadmus-show-ui';
+import { DialogService } from '@myrmidon/ng-mat-tools';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import {
   debounceTime,
@@ -45,7 +45,7 @@ import { ThesaurusListState } from './store/thesaurus-list.store';
 @Component({
   selector: 'cadmus-thesaurus-list',
   templateUrl: './thesaurus-list.component.html',
-  styleUrls: ['./thesaurus-list.component.css'],
+  styleUrls: ['./thesaurus-list.component.scss'],
 })
 export class ThesaurusListComponent implements OnInit {
   private _refresh$: BehaviorSubject<number>;
