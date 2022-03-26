@@ -1,5 +1,5 @@
 <header>
-  <mat-toolbar style="background-color: transparent;" fxLayout="row" fxLayoutAlign="start center">
+  <mat-toolbar fxLayout="row" fxLayoutAlign="start center">
     <span style="flex: 0 0 60px"
       ><img src="./assets/img/logo-black-40.png" alt="Fusisoft"
     /></span>
@@ -19,6 +19,7 @@
       >
       <a mat-menu-item routerLink="/docs/taxonomies">Taxonomies</a>
       <a mat-menu-item routerLink="/docs/infrastructure">Infrastructure</a>
+      <a mat-menu-item routerLink="/docs/semantic-graph">Semantic graph</a>
     </mat-menu>
 
     <button type="button" mat-button [matMenuTriggerFor]="profileMenu">
@@ -49,7 +50,9 @@
 
 <footer>
   <div layout="row" layout-align="center center">
-    <a href="https://www.unive.it/pag/39287" target="_blank"><img src="assets/img/vedph-48.png" alt="VeDPH" /></a>
+    <a href="https://www.unive.it/pag/39287" target="_blank"
+      ><img src="assets/img/vedph-48.png" alt="VeDPH"
+    /></a>
     <div>
       Cadmus Show by
       <a href="https://www.fusisoft.net" target="_blank">Daniele Fusi</a> at

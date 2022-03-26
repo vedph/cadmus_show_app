@@ -1,0 +1,111 @@
+<div>
+  <h1>Cadmus Semantic Graph</h1>
+  <div>
+    <div class="banner">
+      <img
+        class="banner-img"
+        srcset="
+          ./assets/img/pencils-1024.jpg 1024w,
+          ./assets/img/pencils-512.jpg   512w
+        "
+        sizes="(max-width: 600px) 512px, 1024px"
+      />
+    </div>
+  </div>
+  <article class="cols">
+    <aside class="pquote">
+      <blockquote>Connecting monads</blockquote>
+    </aside>
+    <p>
+      As we have seen, our objects, the parts, are somewhat "monadic" models.
+      They must be self-contained and independent, because they need to be
+      composed into items; and they need to be reused across different items.
+      It's right their independency which makes them fit to reuse.
+    </p>
+    <p>
+      Yet, many entities defined by parts can enter a complex set of relations.
+    </p>
+    <p>
+      For instance, consider a manuscript. To start with, we want to fully
+      describe all the features we think relevant for such object. To this end,
+      we can use a lot of parts for its material features, textual content,
+      decorations, bindings, watermarks, etc. These are the objects in the box.
+    </p>
+    <p>
+      Yet, we also have a lot of relations involving a manuscript: a manuscript
+      can be commissioned; written; decorated; sold; attached to a letter sent
+      to a person, etc. Of course, there's no limit to such relationships. So,
+      where should we store all of them?
+    </p>
+    <p>
+      For sure, we can't make them properties of our monadic objects; because we
+      don't want to pollute our model with non-intrinsic data. The fact that a
+      manuscript at a certain point of its history gets sent to a person is not
+      something we want to cram into objects like material description,
+      decoration, binding, or the like. These are all features which are totally
+      independent from that event, and exist without it. So, our objects are not
+      the right place for them. Otherwise, we would stick together with scotch
+      tape two objects to represent a relation between them. Once we have done
+      this, we could no more put the first object in a box without carrying the
+      second one together with it.
+    </p>
+    <aside class="pquote">
+      <blockquote>An upper shelf</blockquote>
+    </aside>
+    <p>
+      So, we want relations outside and above our objects, stuffed into their
+      boxes; at a higher abstraction level, a sort of "upper shelf". This shelf
+      will host a deeply, interconnected network of relations; and
+      unsurprisingly, it will have a form of an RDF graph. This will provide the
+      network connecting all our objects and/or their parts together, even
+      outside the boundaries of our database.
+    </p>
+    <p>
+      In the spirit of Cadmus, we still want to preserve a simple user
+      experience. After all, that's one of the reasons for modeling records as
+      boxes with any type of object inside, and providing a free model and UI
+      for each object. Usually, human operators do not think in terms of highly
+      normalized and fragmented information; rather, they tend to group a set of
+      strictly interconnected data together, just like the old paper forms some
+      of them were used to.
+    </p>
+    <p>
+      So, Cadmus provides users with a similar experience: they edit different
+      sets of features for each object, each in its own UI. For a manuscript, he
+      may want to edit all the features connected to shelfmark identification;
+      bindings; watermarks; codicological units; sheet signatures like
+      numberings or catchwords; decorations; etc. At the same time, we want to
+      be able to "project" some of the features of these objects, and/or the
+      objects themselves, into a higher level plane, where each entity is
+      modeled as the node of a graph, representing their relationships. This
+      way, we would provide the best user experience from both worlds:
+      human-friendly data models and UI on one side, and highly networked data
+      on another one.
+    </p>
+    <p>
+      In a sense, just like we can use Cadmus to generate complex TEI documents
+      by just filling some web forms without knowing anything about XML, we can
+      use it to generate semantic graphs in exactly the same way, without doing
+      anything more than filling the same forms; and without having to know
+      about RDF.
+    </p>
+    <aside class="pquote">
+      <blockquote>Leveraging index for projection</blockquote>
+    </aside>
+    <p>
+      In short, this is implemented by leveraging the indexes which are
+      automatically updated whenever an object gets saved. As we have seen,
+      these are based on so-called
+      <a routerLink="/docs/infrastructure">"data pins"</a>, i.e.
+      name/value pairs coming from each object to represent all the features
+      relevant for real-time indexing and search.
+    </p>
+    <figure>
+      <img
+        src="assets/img/sem-graph1-400.jpg"
+        alt="Semantic graph editing flow"
+      />
+    </figure>
+    <p></p>
+  </article>
+</div>

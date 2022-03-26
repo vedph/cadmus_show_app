@@ -13,7 +13,99 @@
     </div>
   </div>
   <article class="cols">
-    <h2>General Concepts</h2>
+    <h2>Why Cadmus?</h2>
+    <aside class="pquote">
+      <blockquote>The challenge of content creation</blockquote>
+    </aside>
+    <p>
+      Traditionally scholars create structured content in several ways. The
+      simplest one is probably just a text document, typically using a word
+      processor, like Word. Documents here recall paper forms to be filled by
+      humans. This is one of the easiest ways to produce content, especially for
+      non-IT people. Eventually, these documents can even be migrated into a
+      database, by providing a more or less complex import tool.
+    </p>
+    <p>
+      Yet, of course a freely typed text is very limited in its structure; it's
+      also very error-prone, as it applies no constraints or validation; and
+      data are often scattered across a lot of files, which need to be kept in
+      synch, be exchanged among team members, etc.
+    </p>
+    <p>
+      Also, and more important, this approach often reflects a way of thinking
+      digital content as just a paper publication ported into a different
+      medium. Documents are directly shaped in the form desired for publication,
+      without distinguishing the content from its presentation; data cannot thus
+      be easily presented in different ways, or reused for other purposes.
+    </p>
+    <p>
+      Another more structured, yet still "office"-based approach is a
+      spreadsheet, like Excel: a big flat table, with everything in it. That's
+      easy to design and implement, and easier to migrate into a true database,
+      as it has way more structure. Yet, it's a flat table, and thus often
+      redundant. Also, it still happens to be prone to human error, and unfit
+      for complex data, which could not easily be represented in a flat grid;
+      and again, data are scattered across a number of files.
+    </p>
+    <p>
+      More involved approaches add different levels of structure to a document
+      with markup technologies like XML. These are especially suited for text,
+      and standards like TEI provide a huge number of tags for a lot of highly
+      specialized tasks. Also, TEI being a widely used standard, it comes with a
+      lot of tools already available, and it's the de-facto standard and a
+      wonderful way for archiving and sharing digital resources. Yet, sometimes
+      even XML may have practical shortcomings. Most XML usages are essentially
+      focused on text, which is represented in a single, tree-shaped structure;
+      and that may not be the best model when dealing with a lot of non-textual
+      material, or when the meta-textual data is so overwhelming that we end up
+      having our text fragmented and dispersed in a sea of markup, up to a point
+      where that's no more convenient to produce or mantain. Think about
+      stand-off annotation, which is often carried out by machines as it's too
+      complex to deal with for humans. At any rate, even in much simpler
+      documents, using XML of course requires some basic skills: we can't expect
+      an operator to step in and start being productive without knowing anything
+      about that technology. Sure, TEI still remains a desirable and even
+      essential goal: it's only that sometimes we might like an easier way to
+      get to it.
+    </p>
+    <p>
+      This list might well continue, but it should get you to the point: in many
+      cases, any of these solutions, and also others, are perfectly fine; it all
+      depends on the scenario and the purpose. But in other scenarios,
+      especially when dealing with highly structured data, whose models may be
+      reshaped by ongoing research and often have to ingest more and more types
+      of data in a never-ending process of revision and improvement, carried out
+      in parallel by teams or even communities, using simple, web-based UI
+      without no IT skills involved, and a centralized database in the context
+      of a layered and modular solution, these might not be the best tools.
+    </p>
+    <aside class="pquote">
+      <blockquote>Filling the editing gap</blockquote>
+    </aside>
+    <p>
+      Cadmus was designed right to fill these gaps, providing a sort of editing
+      hub at the center of simple or complex content creation flows. Whatever
+      the content type and complexity, the targeted technologies, and user
+      audience, the system offers a simple tool without forcing developers to
+      continuously reinvent the wheel. It provides users with a central data
+      store and a user friendly web-based UI, while keeping with the
+      requirements of complex structures, fit to any data model users might want
+      to represent. This is accomplished by introducing a modular way of working
+      with both data and software, so that both data models and their editing
+      UIs are composed by aggregation of reusable parts. This approach also has
+      the benefit of fostering communication across teams by promoting a virtual
+      circle, where models and software components built by one team can be
+      directly reused by another one, thus allowing creating shared models on
+      different knowledge domains in a bottom-up approach.
+    </p>
+    <p>
+      Once content has been created with this high level of structure, it can be
+      published in an unlimited number of ways, for both user and machine
+      consumption, like data export (TEI and other XML, HTML, PDF, SQL, RDF...),
+      software services (API, SPARQL endpoints...), software applications (web,
+      desktop, mobile...), etc.
+    </p>
+    <h2>Using this Site</h2>
     <p>
       Here you can find a directory of Cadmus-related learning materials,
       together with the list of all its GitHub repositories and real-world
@@ -30,9 +122,6 @@
       using the system. In fact, technically this is a web application, rather
       than just a bunch of hypertexts.
     </p>
-    <aside class="pquote">
-      <blockquote>Contents</blockquote>
-    </aside>
     <p>
       The documentation found in these pages focuses on the most relevant Cadmus
       topics. You can find a more detailed
@@ -68,6 +157,9 @@
         expected from a content creation system. Here you can find more about
         the general software architecture, and infrastructural features like
         real-time indexing and search.
+      </li>
+      <li>
+        <a routerLink="/docs/semantic-graph">semantic graph</a>: TODO
       </li>
       <li>
         <a routerLink="/profile">profile</a>: your data architecture, and the
