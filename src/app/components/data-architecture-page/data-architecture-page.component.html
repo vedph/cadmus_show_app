@@ -14,26 +14,63 @@
   </div>
   <article class="cols">
     <aside class="pquote">
-      <blockquote>The Cadmus warehouse</blockquote>
+      <blockquote>The reuse mantra: open data modeling</blockquote>
+    </aside>
+    <p>
+      Cadmus is focused on <em>reuse</em>, for the obvious reason that we can't
+      afford creating a new solution from scratch for every project. This is
+      true for both data models, and their editing software.
+    </p>
+    <p>
+      A key to reuse is being modular. Like in LEGO buildings, we can create a
+      lot of different constructions, by just reusing the same bricks. We just
+      need a way of making all the problems look similar, and split them into
+      shared pieces.
+    </p>
+    <p>
+      So, the Cadmus architecture is modular for both data models and their
+      editing software.
+    </p>
+    <aside class="pquote">
+      <blockquote>Objects ("parts")</blockquote>
     </aside>
     <p>
       A very simple analogy you can use to visualize the Cadmus data
       architecture is thinking of a set of objects of <em>any</em> type you want
-      to store in an organized way. New objects, and new object types, can enter
-      at any moment; and when they do, they must not affect all the objects
-      already stored in our warehouse. We thus have 3 essential levels:
+      to store in an organized way.
     </p>
-    <ol>
-      <li>
-        in our warehouse, we have a virtually unlimited set of <em>shelves</em>.
-      </li>
-      <li>on each shelf, we can store any number of <em>boxes</em>.</li>
-      <li>
-        a box contains our <em>objects</em>, and has a label so we can easily
-        find it among the others.
-      </li>
-    </ol>
     <p>
+      Objects represent a semantically coherent, self-contained and virtually
+      independent set of data, structured according to its own data model. An
+      object is something standing on its own, and having some properties. We
+      can have as many object types as we want; there is no limit. In Cadmus,
+      these objects are known as <em>parts</em>.
+    </p>
+    <aside class="pquote">
+      <blockquote>Boxes ("items")</blockquote>
+    </aside>
+    <p>
+      To better organize such objects, we put all the related objects in the
+      same box. That's the <em>item</em>: our data record. Thus, the item's
+      model is not statically defined; rather, it is just the sum of the part it
+      contains. So an item has a dynamic and open model.
+    </p>
+    <p>
+      Also, for better organization we attach a label on each box. This
+      corresponds to a set of metadata like title, description, last save time,
+      etc., we constantly attach to each item.
+    </p>
+    <p>
+      Our items can thus represent anything: an inscription, a person, an
+      archaeological artifact, a manuscript, a critical apparatus, a dictionary
+      entry... there is no limit to the types of data you may want to store. Of
+      course, just like you could not store a whole car in a box, such complex
+      items usually are disassembled into smaller, semantically coherent parts.
+      So we could store e.g. tires, windows, bumpers, lights, etc. in different
+      boxes, up to the level of disassembly we want to achieve.
+    </p>
+    <p>
+      The modularity of this architecture also grants its dynamic nature.
       Whenever we want to store new objects, whatever their type, we just grab
       them and toss in one of the boxes. This does not affect all the other
       objects already contained in that box: we don't have to care about what is
@@ -42,68 +79,51 @@
       itself; rather, it's the content of the box which changes whenever we add
       a new object.
     </p>
-    <p>
-      So, each object has its own type; whereas boxes are all created equal.
-      Yet, in a sense the type of the box depends on what we put into it: we
-      might have a box of books and newspapers, another of pencils and pens,
-      etc. From this point of view, while an object has its own type, the box
-      has a dynamic type, which results from the sum of all the objects it
-      contains.
-    </p>
     <aside class="pquote">
-      <blockquote>Opaque storage technology</blockquote>
+      <blockquote>Shelves</blockquote>
     </aside>
     <p>
-      If we now resolve this analogy, the warehouse with its shelves is our data
-      store. As such, it relies on some storage technology. In the current
-      implementation, this happens to be a NoSql database. At any rate, the
-      underlying storage technology is an implementation detail; users need not
-      to trouble with it. In fact, given Cadmus layered architecture, you could
-      even swap its data storage technology with another one, and the rest of
-      the system would not even be aware of it.
+      Finally, we store our boxes on a set of shelves. These are provided by the
+      database infrastructure. The system is not bound to a specific underlying
+      storage technology; yet, its implementation relies on a popular NoSql
+      database, which proves to be effective when dealing with high-volume and
+      dynamically shaped data. At any rate, the underlying storage technology is
+      an implementation detail; users need not to trouble with it. In fact,
+      given Cadmus layered architecture, you could even swap its data storage
+      technology with another one, and the rest of the system would not even be
+      aware of it.
     </p>
     <aside class="pquote">
-      <blockquote>Open data modelling: items and parts</blockquote>
+      <blockquote>Modular software for modular data</blockquote>
     </aside>
     <p>
-      Second, the boxes on the shelves are our "records"; in Cadmus lingo, these
-      are called <strong>items</strong>. As we have seen, all these records have
-      the same model, as they are just containers. In another sense anyway,
-      their model is composite, as the sum of all the contained objects.
-      Further, the label on each box represents a set of metadata, attached to
-      each record.
+      That's for our data. As for software, each part (our object) has its own
+      editing UI. As Cadmus is web-based, that's essentially like a web form.
+      Everyone can fill web forms: if you can surf the web, you can use Cadmus.
+      Yet, the UI can be as powerful as you want, ranging from a simple web form
+      to a full-fledged web application working inside the editor.
     </p>
     <p>
-      Finally, and most important, we come to objects. These are the meat of our
-      data, named <strong>parts</strong>. Boxes, shelves, and the whole
-      warehouse essentially are only infrastructure, used to store and organize
-      objects. The objects represent a semantically coherent, self-contained and
-      virtually independent set of data, structured according their own data
-      model. Just like boxes can contain any types of objects, so items can
-      contain any type of parts. Each part has its own model, while items have
-      their model resulting from the composition of these parts.
+      Also, it is essential to emphasize that each part editor is designed for
+      reuse, just like the model of the data it edits. So, data is modular; and
+      their editor too.
     </p>
     <p>
-      The items can thus represent anything: an inscription, a person, an
-      archaeological artifact, a manuscript, a critical apparatus, a dictionary
-      entry... there is no limit to the types of data you may want to store. Of
-      course, just like you could not store a whole car in a box, such complex
-      items usually are disassembled into smaller, semantically coherent parts.
-      So we could store e.g. tires, windows, bumpers, lights, etc. in different
-      boxes, up to the level of disassembly we want to achieve.
+      As for boxes (the items), they are all created equal: they are just boxes.
+      So their editor is unique, too, whatever their content.
     </p>
     <aside class="pquote">
-      <blockquote>Composite modelling</blockquote>
+      <blockquote>Composite modeling</blockquote>
     </aside>
     <p>
-      In fact, in most cases objects have complex structures, where we can
-      identify recurring sub-models. To make a trivial example, different
-      objects like an inscription, a literary text, a person, a lemma in a
-      dictionary, a coin, etc. all eventually share a datation. So, it makes
-      sense designing composite, rather than monolithic models. We model our
-      datation once, and reuse it everywhere; and the same happens with any
-      other part of a more complex model we might find useful to design in
-      isolation, and then compose with other parts.
+      This nicely fits with model complexity. In most cases, objects have complex
+      structures, where we can identify recurring sub-models. To make a trivial
+      example, different objects like an inscription, a literary text, a person,
+      a lemma in a dictionary, a coin, etc. all eventually share a datation. So,
+      it makes sense designing composite, rather than monolithic models. We
+      model our datation once, and reuse it everywhere; and the same happens
+      with any other part of a more complex model we might find useful to design
+      in isolation, and then compose with other parts.
     </p>
     <aside class="pquote">
       <blockquote>Taming models complexity: the datation sample</blockquote>

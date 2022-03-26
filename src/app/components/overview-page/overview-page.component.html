@@ -48,55 +48,115 @@
       and again, data are scattered across a number of files.
     </p>
     <p>
-      More involved approaches add different levels of structure to a document
-      with markup technologies like XML. These are especially suited for text,
-      and standards like TEI provide a huge number of tags for a lot of highly
-      specialized tasks. Also, TEI being a widely used standard, it comes with a
-      lot of tools already available, and it's the de-facto standard and a
-      wonderful way for archiving and sharing digital resources. Yet, sometimes
-      even XML may have practical shortcomings. Most XML usages are essentially
-      focused on text, which is represented in a single, tree-shaped structure;
-      and that may not be the best model when dealing with a lot of non-textual
-      material, or when the meta-textual data is so overwhelming that we end up
-      having our text fragmented and dispersed in a sea of markup, up to a point
-      where that's no more convenient to produce or mantain. Think about
-      stand-off annotation, which is often carried out by machines as it's too
-      complex to deal with for humans. At any rate, even in much simpler
-      documents, using XML of course requires some basic skills: we can't expect
-      an operator to step in and start being productive without knowing anything
-      about that technology. Sure, TEI still remains a desirable and even
-      essential goal: it's only that sometimes we might like an easier way to
-      get to it.
+      More involved approaches add different levels of structure. An optimal
+      solution often is creating a relational database. This grants us all the
+      power and benefits of this time-proven technology; but, it comes at the
+      price of a normalization level which is hard to handle in a friendly user
+      experience for data entry. In fact, solutions here either rely on data
+      entry software solutions tailored for a specific database, which often
+      imply a relevant cost and must be mantained in parallel with the data
+      model; or resort to frendlier environments where you can quickly and
+      visually build data entry forms, like Access or FileMaker. Yet, similar
+      "in house" solutions do not provide the same power of a true RDBMS, and
+      may even result in siloing data in a closed sandbox.
     </p>
     <p>
-      This list might well continue, but it should get you to the point: in many
-      cases, any of these solutions, and also others, are perfectly fine; it all
-      depends on the scenario and the purpose. But in other scenarios,
-      especially when dealing with highly structured data, whose models may be
-      reshaped by ongoing research and often have to ingest more and more types
-      of data in a never-ending process of revision and improvement, carried out
-      in parallel by teams or even communities, using simple, web-based UI
-      without no IT skills involved, and a centralized database in the context
-      of a layered and modular solution, these might not be the best tools.
+      Another popular approach is marking up texts, like in XML. This is
+      especially suited for text, and standards like TEI provide a huge number
+      of tags for a lot of highly specialized tasks. Also, TEI being a widely
+      used standard, it comes with a lot of tools already available, and it's
+      the de-facto standard and a wonderful way for archiving and sharing
+      digital resources. Yet, sometimes even XML may have practical
+      shortcomings. Most XML usages are essentially focused on text, which is
+      represented in a single, tree-shaped structure; and that may not be the
+      best model when dealing with a lot of non-textual material, or when the
+      meta-textual data is so overwhelming that we end up having our text
+      fragmented and dispersed in a sea of markup, up to a point where that's no
+      more convenient to produce or mantain. Think about stand-off annotation,
+      which is often carried out by machines as it's too complex to deal with
+      for humans. In some extreme cases, we may find ourselves trying to force
+      our knowledge domain in an entanglement game where the focus moves on how
+      to encode something, rather than how to model it. At any rate, even in
+      much simpler documents, using XML of course requires some basic skills: we
+      can't expect an operator to step in and start being productive without
+      knowing anything about that technology. Sure, TEI still remains a
+      desirable and even essential goal: it's only that sometimes we might like
+      an easier way to get to it.
     </p>
+
+    <aside class="pquote">
+      <blockquote>A wishlist</blockquote>
+    </aside>
+    <p>
+      This list might continue; but it should get you to the point: in most
+      cases, any of these solutions, and also others, are perfectly fine;
+      choosing the right depends on the scenario and the purpose. Yet, in other
+      scenarios we might desire something different. Our wishlist often includes
+      one or more of these points:
+    </p>
+    <ul>
+      <li>
+        have multiple users create structured content easily and concurrently,
+        without being IT experts, using a simple visual UI, just like filling a
+        web form.
+      </li>
+      <li>
+        let data be created in a central data store, providing all the essential
+        features expected from a modern system: offer a multi-platform
+        environment, authentication and authorization levels, auditing and
+        backup strategies, real-time data validation and search, etc.
+      </li>
+      <li>
+        let data be anything, and modeled according to its requirements, without
+        being constrained by a specific technology. We want our logical model to
+        be as free as possible from its underlying physical model, so that it
+        can be designed by focusing on its knowledge domain, rather than on a
+        specific technology.
+      </li>
+      <li>
+        let data models be open, so that they can change and grow in time,
+        without affecting existing data. Often in research we start with a
+        hypothesis, and our models grow and change over time. We thus prefer a
+        model which can be built by progressive aggregation, in the context of a
+        system where new data types do not affect neither existing data, nor the
+        software infrastructure used for creating it.
+      </li>
+      <li>
+        at the same time, be open to integration with external resources, which
+        could be provided as services, data imports, etc.
+      </li>
+      <li>
+        let content be created once, but output in any technology: RDBMS, RDF,
+        XML TEI, web services, apps and pages, PDF, etc.
+      </li>
+      <li>
+        use an open source implementation based on standard, modern technologies
+        and architectures, distributed across several layers from the database
+        through data, business, microservices and frontend layers. Also, embrace
+        a modern deployment strategy based on containerization (Docker in our
+        case), which ensures the greatest portability and prolonges the system
+        longevity.
+      </li>
+    </ul>
+
     <aside class="pquote">
       <blockquote>Filling the editing gap</blockquote>
     </aside>
     <p>
-      Cadmus was designed right to fill these gaps, providing a sort of editing
-      hub at the center of simple or complex content creation flows. Whatever
-      the content type and complexity, the targeted technologies, and user
-      audience, the system offers a simple tool without forcing developers to
-      continuously reinvent the wheel. It provides users with a central data
-      store and a user friendly web-based UI, while keeping with the
-      requirements of complex structures, fit to any data model users might want
-      to represent. This is accomplished by introducing a modular way of working
-      with both data and software, so that both data models and their editing
-      UIs are composed by aggregation of reusable parts. This approach also has
-      the benefit of fostering communication across teams by promoting a virtual
-      circle, where models and software components built by one team can be
-      directly reused by another one, thus allowing creating shared models on
-      different knowledge domains in a bottom-up approach.
+      Cadmus was designed right to fulfill similar requirements, providing a
+      sort of editing hub at the center of simple or complex content creation
+      flows. Whatever the content type and complexity, the targeted
+      technologies, and user audience, the system offers a simple tool without
+      forcing developers to continuously reinvent the wheel. It provides users
+      with a central data store and a user friendly web-based UI, while keeping
+      with the requirements of complex structures, fit to any data model users
+      might want to represent. This is accomplished by introducing a modular way
+      of working with both data and software, so that both data models and their
+      editing UIs are composed by aggregation of reusable parts. This approach
+      also has the benefit of fostering communication across teams by promoting
+      a virtual circle, where models and software components built by one team
+      can be directly reused by another one, thus allowing creating shared
+      models on different knowledge domains in a bottom-up approach.
     </p>
     <p>
       Once content has been created with this high level of structure, it can be
@@ -158,9 +218,7 @@
         the general software architecture, and infrastructural features like
         real-time indexing and search.
       </li>
-      <li>
-        <a routerLink="/docs/semantic-graph">semantic graph</a>: TODO
-      </li>
+      <li><a routerLink="/docs/semantic-graph">semantic graph</a>: TODO</li>
       <li>
         <a routerLink="/profile">profile</a>: your data architecture, and the
         corresponding editing UIs, are configured in an external JSON document,
