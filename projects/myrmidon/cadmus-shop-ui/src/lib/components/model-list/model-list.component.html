@@ -1,7 +1,5 @@
 <mat-card>
-  <mat-card-header
-    style="justify-content: space-between; align-content: center"
-  >
+  <mat-card-header>
     <mat-card-title>
       <mat-icon>shopping_bag</mat-icon>
       Models
@@ -50,7 +48,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let m of page.data">
-            <td>
+            <td class="fit-width">
               <!-- view -->
               <button
                 type="button"

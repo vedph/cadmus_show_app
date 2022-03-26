@@ -1,3 +1,6 @@
+table {
+  width: 100%;
+}
 tr:nth-child(odd) {
   background-color: #eaeaea;
 }
@@ -5,6 +8,10 @@ th {
   font-weight: normal;
   text-align: left;
   color: silver;
+}
+td.fit-width {
+  width: 1px;
+  white-space: nowrap;
 }
 .m-id {
   color: royalblue;
