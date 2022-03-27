@@ -28,6 +28,76 @@
     "tags": ["place/time"]
   },
   {
+    "id": "it.vedph.codicology.cod-bindings",
+    "project": "codicology",
+    "name": "cod-bindings",
+    "tip": "Manuscript's binding(s).",
+    "tags": ["codicology"]
+  },
+  {
+    "id": "it.vedph.codicology.cod-contents",
+    "project": "codicology",
+    "name": "cod-contents",
+    "tip": "Manuscript's contents.",
+    "tags": ["codicology"]
+  },
+  {
+    "id": "it.vedph.codicology.cod-decorations",
+    "project": "codicology",
+    "name": "cod-decorations",
+    "tip": "Manuscript's decorations.",
+    "tags": ["codicology"]
+  },
+  {
+    "id": "it.vedph.codicology.cod-edits",
+    "project": "codicology",
+    "name": "cod-edits",
+    "tip": "Miscellaneous edit events in a manuscript.",
+    "tags": ["codicology"]
+  },
+  {
+    "id": "it.vedph.codicology.cod-hands",
+    "project": "codicology",
+    "name": "cod-hands",
+    "tip": "Manuscript's hands descriptions.",
+    "tags": ["codicology"]
+  },
+  {
+    "id": "it.vedph.codicology.cod-layouts",
+    "project": "codicology",
+    "name": "cod-layouts",
+    "tip": "Manuscript's page layouts.",
+    "tags": ["codicology"]
+  },
+  {
+    "id": "it.vedph.codicology.cod-material-dsc",
+    "project": "codicology",
+    "name": "cod-material-dsc",
+    "tip": "Manuscript's material description.",
+    "tags": ["codicology"]
+  },
+  {
+    "id": "it.vedph.codicology.cod-sheet-labels",
+    "project": "codicology",
+    "name": "cod-sheet-labels",
+    "tip": "Manuscript's sheet labels and quires.",
+    "tags": ["codicology"]
+  },
+  {
+    "id": "it.vedph.codicology.cod-shelfmarks",
+    "project": "codicology",
+    "name": "cod-shelfmarks",
+    "tip": "Manuscript's shelfmark(s).",
+    "tags": ["codicology"]
+  },
+  {
+    "id": "it.vedph.codicology.cod-watermarks",
+    "project": "codicology",
+    "name": "cod-watermarks",
+    "tip": "Manuscript's watermarks.",
+    "tags": ["codicology"]
+  },
+  {
     "id": "it.vedph.comment",
     "project": "shell",
     "name": "comment",
@@ -252,13 +322,6 @@
     "tags": ["philology"]
   },
   {
-    "id": "it.vedph.tgr.ms-signatures",
-    "project": "tgr",
-    "name": "ms-signatures",
-    "tip": "Manuscript's signatures.",
-    "tags": ["codicology"]
-  },
-  {
     "id": "it.vedph.tgr.ms-contents",
     "project": "tgr",
     "name": "ms.contents",
@@ -301,6 +364,13 @@
     "tags": ["codicology"]
   },
   {
+    "id": "it.vedph.tgr.ms-signatures",
+    "project": "tgr",
+    "name": "ms-signatures",
+    "tip": "Manuscript's signatures.",
+    "tags": ["codicology"]
+  },
+  {
     "id": "it.vedph.tgr.ms-units",
     "project": "tgr",
     "name": "ms.units",
@@ -315,18 +385,11 @@
     "tags": ["lexicography"]
   },
   {
-    "id": "it.vedph.ingra.prison-info",
+    "id": "it.vedph.ingra.drawing-info",
     "project": "ingra",
-    "name": "prison-info",
-    "tip": "Information about a prison.",
-    "tags": ["place"]
-  },
-  {
-    "id": "it.vedph.ingra.prisoner-info",
-    "project": "ingra",
-    "name": "prisoner-info",
-    "tip": "Information about a prisoner.",
-    "tags": ["prosopography"]
+    "name": "drawing-info",
+    "tip": "Information about a drawing.",
+    "tags": ["epigraphy"]
   },
   {
     "id": "it.vedph.ingra.graffiti-info",
@@ -336,6 +399,13 @@
     "tags": ["epigraphy"]
   },
   {
+    "id": "it.vedph.ingra.prison-info",
+    "project": "ingra",
+    "name": "prison-info",
+    "tip": "Information about a prison.",
+    "tags": ["place"]
+  },
+  {
     "id": "it.vedph.ingra.prison-location",
     "project": "ingra",
     "name": "prison-location",
@@ -343,11 +413,11 @@
     "tags": ["place"]
   },
   {
-    "id": "it.vedph.ingra.drawing-info",
+    "id": "it.vedph.ingra.prisoner-info",
     "project": "ingra",
-    "name": "drawing-info",
-    "tip": "Information about a drawing.",
-    "tags": ["epigraphy"]
+    "name": "prisoner-info",
+    "tip": "Information about a prisoner.",
+    "tags": ["prosopography"]
   },
   {
     "id": "it.vedph.renovella.tale-info",
