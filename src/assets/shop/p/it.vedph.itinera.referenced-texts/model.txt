@@ -1,0 +1,6 @@
+- texts (ReferencedText[]):
+  - type* (string) T:related-text-types
+  - targetId* (string)
+  - targetCitation (string)
+  - sourceCitations (string[])
+  - assertion (Assertion)

@@ -1,0 +1,5 @@
+- persons (RelatedPerson[]):
+  - type* (string) T:related-person-types
+  - name* (string)
+  - targetId* (string)
+  - assertion (Assertion)

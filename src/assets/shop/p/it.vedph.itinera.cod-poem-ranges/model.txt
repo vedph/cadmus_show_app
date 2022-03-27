@@ -1,0 +1,7 @@
+- ranges (AlnumRange[]):
+  - a* (string)
+  - b (string)
+- sortType* T:cod-poem-range-sort-types
+- layouts (CodPoemLayout[]):
+  - range (AlnumRange)
+  - layout (string) T:cod-poem-range-layouts

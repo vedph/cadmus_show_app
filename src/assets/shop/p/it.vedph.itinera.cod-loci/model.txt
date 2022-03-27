@@ -1,0 +1,10 @@
+- loci (CodLocus[]):
+  - citation* (string)
+  - range* (CodLocationRange)
+  - text* (string)
+  - images (CodImage[]):
+    - id* (string)
+    - type* (string) T:cod-image-types
+    - sourceId (string)
+    - label (string)
+    - copyright (string)

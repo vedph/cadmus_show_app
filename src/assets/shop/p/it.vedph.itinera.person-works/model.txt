@@ -1,1 +1,4 @@
-TODO
+- works (PersonWork[]):
+  - eid (string)
+  - title* (string)
+  - assertion (Assertion)

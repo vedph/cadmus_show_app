@@ -1,8 +1,0 @@
-- personId (string): a unique, arbitrary internal ID assigned to the person whose hand is described here.
-- job (string, thesaurus)
-- others (DocReference[]):
-  - tag (string)
-  - author (string)
-  - work (string)
-  - location (string)
-  - note (string)

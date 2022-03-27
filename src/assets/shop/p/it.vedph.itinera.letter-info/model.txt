@@ -1,0 +1,3 @@
+- subject* (string)
+- header (string)
+- textDate (string)

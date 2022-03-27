@@ -1,0 +1,10 @@
+- languages* (string[]) T:literary-work-languages
+- genre* (string) T:literary-work-genres (hierarchical, single choice)
+- metres (string[]) T:literary-work-metres
+- strophes (string[])
+- isLost (boolean)
+- titles* (AssertedTitle[]):
+  - language (string) T:literary-work-languages
+  - value (string)
+  - assertion (Assertion)
+- note (string)
