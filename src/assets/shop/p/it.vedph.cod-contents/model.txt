@@ -1,0 +1,18 @@
+- contents (CodContent[]):
+  - eid (string)
+  - range* (CodLocationRange)
+  - states* (string[]) T:cod-content-states
+  - title* (string)
+  - location (string)
+  - claimedAuthor (string)
+  - claimedTitle (string)
+  - tag (string) T:cod-content-tags
+  - note (string)
+  - incipit (string)
+  - explicit (string)
+  - annotations (CodContentAnnotation[]):
+    - type* (string) T:cod-content-annotation-types
+    - range* (CodLocationRange)
+    - incipit* (string)
+    - explicit* (string)
+    - text* (string)

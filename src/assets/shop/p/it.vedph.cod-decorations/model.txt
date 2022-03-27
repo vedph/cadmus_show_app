@@ -1,0 +1,42 @@
+- decorations (CodDecoration[]):
+  - eid (string)
+  - name* (string)
+  - flags (string[]) T:cod-decoration-flags
+  - chronotopes (AssertedChronotope[]) T:assertion-tags, T:doc-reference-types, T:doc-reference-tags
+  - artists (CodDecorationArtist[]):
+    - eid (string)
+    - type* (string) T:cod-decoration-artist-types
+    - name* (string)
+    - ids (ExternalId[])
+    - styles (CodDecorationArtistStyle[]):
+      - name* (string) T:cod-decoration-artist-style-names
+      - chronotope (AssertedChronotope)
+      - assertion (Assertion)
+    - elementKeys (string[])
+    - note (string)
+  - note (string)
+  - references (DocReference[]) T:doc-reference-types, T:doc-reference-tags
+  - elements (CodDecorationElement[]):
+    - key (string)
+    - parentKey (string)
+    - type* (string) T:cod-decoration-element-types
+    - flags (string[]) T:cod-decoration-element-flags
+    - ranges* (CodLocationRange[])
+    - instanceCount (int)
+    - typologies (string) T:cod-decoration-element-typologies
+    - subject (string)
+    - colors (string[]) T:cod-decoration-element-colors
+    - gildings (string[]) T:cod-decoration-element-gildings
+    - techniques (string[]) T:cod-decoration-element-techniques
+    - tools (string[]) T:cod-decoration-element-tools
+    - positions (string[]) T:cod-decoration-element-positions
+    - lineHeight (int)
+    - textRelation (string)
+    - description (string MD)
+    - images (CodImage[]):
+      - id* (string)
+      - type* (string) T:cod-image-types
+      - sourceId (string)
+      - label (string)
+      - copyright (string)
+    - note (string)
