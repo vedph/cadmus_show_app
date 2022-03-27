@@ -1,0 +1,12 @@
+- edits (CodEdit[]):
+  - eid (string)
+  - type* (string) T:cod-edit-types
+  - tag (string) T:cod-edit-tags
+  - techniques (string[]) T:cod-edit-techniques
+  - ranges* (CodLocationRange[])
+  - language (string) T:cod-edit-languages
+  - colors (string[]) T:cod-edit-colors
+  - date (HistoricalDate)
+  - description (string)
+  - text (string)
+  - references (DocReference[]) T:doc-reference-types, T:doc-reference-tags

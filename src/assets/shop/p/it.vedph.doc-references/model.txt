@@ -1,1 +1,5 @@
-TODO
+- references (DocReference[]):
+  - type (string) T:doc-reference-types
+  - tag (string) T:doc-reference-tags
+  - citation\* (string)
+  - note (string)

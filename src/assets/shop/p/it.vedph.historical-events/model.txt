@@ -1,0 +1,10 @@
+- events (HistoricalEvent[]):
+  - eid (string)
+  - type (string)
+  - chronotope (AssertedChronotope)
+  - assertion (Assertion)
+  - description (string)
+  - relatedEntities (RelatedEntity[]):
+    - relation (string)
+    - id (string)
+  - note (string)

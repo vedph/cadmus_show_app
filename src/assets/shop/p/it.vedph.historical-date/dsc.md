@@ -43,7 +43,7 @@ In its initial state, the editor just shows the date in its textual form. This i
 
 For instance, `c.123 AD -- III AD` is a range composed by two points (A and B).
 
-Here you just type a date and press Enter, or click the corresponding button at the edge of the text box.
+Here you just type a date.
 
 If you expand the visual editor, you will be able to edit each point visually. Whenever you type in the textual editor, the visual editor is updated accordingly. At the bottom of the visual editor you can switch between single-point and two-points (interval) date. According to this selection, you are presented with one or two tabs for points A and B.
 

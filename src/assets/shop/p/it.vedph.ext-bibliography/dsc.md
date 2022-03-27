@@ -3,7 +3,3 @@
 ## Model
 
 TODO
-
-## Editor
-
-TODO

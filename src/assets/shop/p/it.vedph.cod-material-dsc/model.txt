@@ -1,0 +1,14 @@
+- units* (CodUnit[]):
+  - eid (string)
+  - tag (string) T:cod-unit-tags
+  - material* (string) T:cod-unit-materials
+  - format* (string) T:cod-unit-formats
+  - state* (string) T:cod-unit-states
+  - range* (CodLocationRange)
+  - chronotopes* (AssertedChronotope[]) T:chronotope-tags, T:assertion-tags, T:doc-reference-types, T:doc-reference-tags
+  - noGregory (boolean)
+  - note (string)
+- palimpsests (CodPalimpsest[]):
+  - range* (CodLocationRange)
+  - chronotope (AssertedChronotope) T:chronotope-tags, T:assertion-tags, T:doc-reference-types, T:doc-reference-tags
+  - note (string)

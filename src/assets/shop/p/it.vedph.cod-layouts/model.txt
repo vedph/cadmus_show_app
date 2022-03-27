@@ -1,0 +1,15 @@
+- layouts (CodLayout[]):
+  - sample* (CodLocation)
+  - ranges* (CodLocationRange[])
+  - dimensions (PhysicalDimension[]) T for dimension tag: cod-layout-dimension-tags, T:physical-size-dim-tags, T:physical-size-units
+  - rulingTechnique (string) T:cod-layout-ruling-techniques
+  - derolez (string) T:cod-layout-derolez
+  - pricking (string) T:cod-layout-prickings
+  - columnCount* (int)
+  - counts (DecoratedCount[]):
+    - id* (string) T:cod-layout-counts
+    - value* (int)
+    - tag (string)
+    - note (string)
+  - tag (string) T:cod-layout-tags
+  - note (string)
