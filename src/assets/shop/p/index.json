@@ -389,14 +389,14 @@
     "project": "ingra",
     "name": "drawing-info",
     "tip": "Information about a drawing.",
-    "tags": ["epigraphy"]
+    "tags": ["epigraphy", "graffiti"]
   },
   {
     "id": "it.vedph.ingra.graffiti-info",
     "project": "ingra",
     "name": "graffiti-info",
     "tip": "Information about a prison graffiti.",
-    "tags": ["epigraphy"]
+    "tags": ["epigraphy", "graffiti"]
   },
   {
     "id": "it.vedph.ingra.prison-info",
@@ -438,20 +438,20 @@
     "project": "tivac",
     "name": "grf-location",
     "tip": "Graffiti's location.",
-    "tags": ["place"]
+    "tags": ["place", "graffiti"]
   },
   {
     "id": "it.vedph.tivac.grf-support",
     "project": "tivac",
     "name": "grf-support",
     "tip": "Graffiti's material support.",
-    "tags": ["epigraphy"]
+    "tags": ["epigraphy", "graffiti"]
   },
   {
     "id": "it.vedph.tivac.grf-writing",
     "project": "tivac",
     "name": "grf-writing",
     "tip": "Graffiti's writing description.",
-    "tags": ["epigraphy"]
+    "tags": ["epigraphy", "graffiti"]
   }
 ]

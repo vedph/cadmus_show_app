@@ -1,0 +1,4 @@
+- place (string)
+- area (string)
+- district (string)
+- location (string)

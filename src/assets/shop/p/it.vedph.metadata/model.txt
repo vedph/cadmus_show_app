@@ -1,0 +1,4 @@
+- metadata (Metadatum[]):
+  - type (string)
+  - name (string)
+  - value (string)

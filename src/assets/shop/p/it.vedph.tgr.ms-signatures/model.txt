@@ -1,0 +1,6 @@
+- signatures (MsSignature[]):
+  - tag (string)
+  - city* (string)
+  - library* (string)
+  - fund (string)
+  - location (string)
