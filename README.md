@@ -6,8 +6,14 @@ To run the corresponding Docker image: use `docker images` to list the images, a
 
 Deploy sample (for a subpath, here `apps/cadmus-show`):
 
-```txt
+```bash
 ng build --base-href /apps/cadmus-show/
+```
+
+or just `ng build --configuration=production`. To create the image:
+
+```bash
+docker build . -t vedph2020/cadmus-show-app:1.0.0 -t vedph2020/cadmus-show-app:latest
 ```
 
 For GitHub pages see [this tool](https://github.com/angular-schule/angular-cli-ghpages).
