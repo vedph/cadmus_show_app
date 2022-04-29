@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { EnvService } from '@myrmidon/ng-tools';
 import { TourService } from 'ngx-ui-tour-md-menu';
 
 @Component({
@@ -7,7 +8,10 @@ import { TourService } from 'ngx-ui-tour-md-menu';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  constructor(tourService: TourService) {
+  public version: string;
+
+  constructor(tourService: TourService, env: EnvService) {
+    this.version = env.get('version') ?? '';
     tourService.initialize([
       {
         anchorId: 'profile-flow.facets',
