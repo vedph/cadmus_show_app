@@ -62,6 +62,7 @@
     { "id": "it.vedph.renovella.tale-story", "label": "tale-story" },
 
     { "id": "fr.it.vedph.apparatus", "label": "apparatus-fr" },
+    { "id": "fr.it.vedph.tgr.available-witnesses", "label": "witnesses-fr" },
     { "id": "fr.it.vedph.chronology", "label": "chronology-fr" },
     { "id": "fr.it.vedph.comment", "label": "comment-fr" },
     { "id": "fr.it.vedph.orthography", "label": "orthography-fr" },
@@ -287,6 +288,7 @@
     { "source": "tgr", "target": "it.vedph.tgr.ms-places", "label": "" },
     { "source": "tgr", "target": "it.vedph.tgr.ms-scripts", "label": "" },
     { "source": "tgr", "target": "it.vedph.tgr.ms-units", "label": "" },
+    { "source": "tgr", "target": "fr.it.vedph.tgr.available-witnesses", "label": "" },
 
     { "source": "bdm", "target": "it.vedph.bibliography", "label": "" },
     { "source": "bdm", "target": "it.vedph.categories", "label": "" },
@@ -317,6 +319,7 @@
     { "source": "pura", "target": "it.vedph.tgr.ms-scripts", "label": "" },
     { "source": "pura", "target": "it.vedph.tgr.ms-units", "label": "" },
     { "source": "pura", "target": "it.vedph.pura.word-forms", "label": "" },
+    { "source": "pura", "target": "fr.it.vedph.pura.lemma-tags", "label": "" },
 
     { "source": "ingra", "target": "it.vedph.bibliography", "label": "" },
     { "source": "ingra", "target": "it.vedph.categories", "label": "" },
