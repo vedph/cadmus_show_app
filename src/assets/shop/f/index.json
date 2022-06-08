@@ -49,6 +49,14 @@
   },
   {
     "fragment": true,
+    "id": "fr.it.vedph.tgr.available-witnesses",
+    "project": "tgr",
+    "name": "witnesses",
+    "tip": "Available witnesses layer.",
+    "tags": ["philology", "text"]
+  },
+  {
+    "fragment": true,
     "id": "fr.it.vedph.tgr.interpolations",
     "project": "tgr",
     "name": "interpolations",

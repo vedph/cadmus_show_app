@@ -1,7 +1,9 @@
 {
 	"$schema": "./node_modules/@angular/cli/lib/config/schema.json",
 	"cli": {
-		"defaultCollection": "@datorama/akita"
+		"schematicCollections": [
+			"@datorama/akita"
+		]
 	},
 	"version": 1,
 	"newProjectRoot": "projects",
@@ -292,6 +294,5 @@
 				}
 			}
 		}
-	},
-	"defaultProject": "cadmus-show"
+	}
 }

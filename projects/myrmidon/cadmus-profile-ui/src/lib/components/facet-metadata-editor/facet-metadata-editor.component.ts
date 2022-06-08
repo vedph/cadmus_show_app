@@ -1,9 +1,9 @@
 import { Color } from '@angular-material-components/color-picker';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 import { FacetDefinition } from '@myrmidon/cadmus-core';
@@ -47,13 +47,13 @@ export class FacetMetadataEditorComponent implements OnInit {
   @Output()
   public editorClose: EventEmitter<any>;
 
-  public id: FormControl;
-  public label: FormControl;
-  public colorKey: FormControl;
-  public description: FormControl;
-  public form: FormGroup;
+  public id: UntypedFormControl;
+  public label: UntypedFormControl;
+  public colorKey: UntypedFormControl;
+  public description: UntypedFormControl;
+  public form: UntypedFormGroup;
 
-  constructor(formBuilder: FormBuilder, private _colorService: ColorService) {
+  constructor(formBuilder: UntypedFormBuilder, private _colorService: ColorService) {
     this.facetChange = new EventEmitter<FacetDefinition>();
     this.editorClose = new EventEmitter<any>();
     // form

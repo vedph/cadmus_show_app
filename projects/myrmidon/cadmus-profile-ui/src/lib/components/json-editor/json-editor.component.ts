@@ -6,7 +6,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { JsonEditorOptions } from 'ang-jsoneditor';
 
 /**
@@ -40,10 +40,10 @@ export class JsonEditorComponent implements OnInit {
   @Input()
   public editorOptions: JsonEditorOptions;
 
-  public json: FormControl;
-  public form: FormGroup;
+  public json: UntypedFormControl;
+  public form: UntypedFormGroup;
 
-  constructor(formBuilder: FormBuilder) {
+  constructor(formBuilder: UntypedFormBuilder) {
     this.dataChange = new EventEmitter<string>();
     // options
     this.editorOptions = new JsonEditorOptions();

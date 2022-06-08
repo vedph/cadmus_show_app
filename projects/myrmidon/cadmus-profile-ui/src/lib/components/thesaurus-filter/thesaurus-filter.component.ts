@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import {
-  FormBuilder,
-  FormGroup,
-  FormControl,
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  UntypedFormControl,
   Validators,
 } from '@angular/forms';
 import { ThesaurusFilter } from '@myrmidon/cadmus-core';
@@ -27,12 +27,12 @@ export class ThesaurusFilterComponent implements OnInit {
   @Output()
   public filterChange: EventEmitter<ThesaurusFilter>;
 
-  public id: FormControl;
-  public alias: FormControl;
-  public language: FormControl;
-  public form: FormGroup;
+  public id: UntypedFormControl;
+  public alias: UntypedFormControl;
+  public language: UntypedFormControl;
+  public form: UntypedFormGroup;
 
-  constructor(formBuilder: FormBuilder) {
+  constructor(formBuilder: UntypedFormBuilder) {
     this.filterChange = new EventEmitter<ThesaurusFilter>();
     // form
     this.id = formBuilder.control('id');

@@ -1,6 +1,6 @@
 import { Output } from '@angular/core';
 import { Component, EventEmitter, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { CadmusModelFilter } from '@myrmidon/cadmus-shop-core';
 
 @Component({
@@ -23,14 +23,14 @@ export class ModelFilterComponent implements OnInit {
   @Output()
   public filterChange: EventEmitter<CadmusModelFilter>;
 
-  public project: FormControl;
-  public typeId: FormControl;
-  public name: FormControl;
-  public tags: FormControl;
-  public matchAny: FormControl;
-  public form: FormGroup;
+  public project: UntypedFormControl;
+  public typeId: UntypedFormControl;
+  public name: UntypedFormControl;
+  public tags: UntypedFormControl;
+  public matchAny: UntypedFormControl;
+  public form: UntypedFormGroup;
 
-  constructor(formBuilder: FormBuilder) {
+  constructor(formBuilder: UntypedFormBuilder) {
     this.filterChange = new EventEmitter<CadmusModelFilter>();
     // form
     this.project = formBuilder.control(null);

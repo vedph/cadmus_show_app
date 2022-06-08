@@ -2,9 +2,9 @@ import { Color } from '@angular-material-components/color-picker';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
   FormArray,
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 import { FlagDefinition } from '@myrmidon/cadmus-core';
@@ -35,14 +35,14 @@ export class FlagDefinitionEditorComponent implements OnInit {
   @Output()
   public editorClose: EventEmitter<any>;
 
-  public id: FormControl;
-  public label: FormControl;
-  public colorKey: FormControl;
-  public description: FormControl;
-  public form: FormGroup;
+  public id: UntypedFormControl;
+  public label: UntypedFormControl;
+  public colorKey: UntypedFormControl;
+  public description: UntypedFormControl;
+  public form: UntypedFormGroup;
   public flagNumbers: number[];
 
-  constructor(formBuilder: FormBuilder, private _colorService: ColorService) {
+  constructor(formBuilder: UntypedFormBuilder, private _colorService: ColorService) {
     this.flagChange = new EventEmitter<FlagDefinition>();
     this.editorClose = new EventEmitter<any>();
     // https://2ality.com/2014/05/es6-array-methods.html

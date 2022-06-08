@@ -1,9 +1,9 @@
 import { Color } from '@angular-material-components/color-picker';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 import { PartDefinition } from '@myrmidon/cadmus-core';
@@ -42,18 +42,18 @@ export class PartDefinitionEditorComponent implements OnInit {
   @Output()
   public editorClose: EventEmitter<any>;
 
-  public typeId: FormControl;
-  public roleId: FormControl;
-  public name: FormControl;
-  public description: FormControl;
-  public required: FormControl;
-  public colorKey: FormControl;
-  public groupKey: FormControl;
-  public sortKey: FormControl;
-  public form: FormGroup;
+  public typeId: UntypedFormControl;
+  public roleId: UntypedFormControl;
+  public name: UntypedFormControl;
+  public description: UntypedFormControl;
+  public required: UntypedFormControl;
+  public colorKey: UntypedFormControl;
+  public groupKey: UntypedFormControl;
+  public sortKey: UntypedFormControl;
+  public form: UntypedFormGroup;
 
   constructor(
-    formBuilder: FormBuilder,
+    formBuilder: UntypedFormBuilder,
     private _colorService: ColorService,
     private _shopService: CadmusShopAssetService
   ) {

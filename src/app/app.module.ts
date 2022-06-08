@@ -126,7 +126,7 @@ import { SemanticGraphPageComponent } from './components/semantic-graph-page/sem
         { path: '**', component: HomeComponent },
       ],
       {
-        initialNavigation: 'enabled',
+        initialNavigation: 'enabledBlocking',
         useHash: true,
         relativeLinkResolution: 'legacy',
       }

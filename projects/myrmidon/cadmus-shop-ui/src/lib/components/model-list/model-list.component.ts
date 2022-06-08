@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
 import { PaginationResponse, PaginatorPlugin } from '@datorama/akita';
 import { CadmusShopAssetService } from '@myrmidon/cadmus-shop-asset';
@@ -31,8 +31,8 @@ export class ModelListComponent implements OnInit {
   private _refresh$: BehaviorSubject<number>;
   public page$: Observable<PaginationResponse<CadmusModel>> | undefined;
   public filter$: Observable<CadmusModelFilter | undefined>;
-  public pageSize: FormControl;
-  public fragment: FormControl;
+  public pageSize: UntypedFormControl;
+  public fragment: UntypedFormControl;
   public model: CadmusModel | undefined;
 
   constructor(
@@ -43,7 +43,7 @@ export class ModelListComponent implements OnInit {
     // services related to the filter store
     private _filterService: ModelFilterService,
     private _filterQuery: ModelFilterQuery,
-    formBuilder: FormBuilder
+    formBuilder: UntypedFormBuilder
   ) {
     this.pageSize = formBuilder.control(20);
     this.fragment = formBuilder.control(false);

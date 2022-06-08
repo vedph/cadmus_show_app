@@ -8,9 +8,9 @@ import {
   ViewChild,
 } from '@angular/core';
 import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 import { FacetDefinition } from '@myrmidon/cadmus-core';
@@ -41,11 +41,11 @@ export class FacetListComponent implements OnInit {
   public currentModel: CadmusModel | undefined;
   public editedPart: GroupedPartDefinition | undefined;
   // new facet form
-  public newFacetId: FormControl;
-  public newFacetForm: FormGroup;
+  public newFacetId: UntypedFormControl;
+  public newFacetForm: UntypedFormGroup;
 
   constructor(
-    formBuilder: FormBuilder,
+    formBuilder: UntypedFormBuilder,
     private _shopService: CadmusShopAssetService
   ) {
     this.facets = [];

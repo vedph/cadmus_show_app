@@ -5,17 +5,14 @@ import {
 } from '@angular/cdk/drag-drop';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
-  FormArray,
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormArray,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 import { MatChipEvent } from '@angular/material/chips';
-import {
-  FacetDefinition,
-  PartDefinition,
-} from '@myrmidon/cadmus-core';
+import { FacetDefinition, PartDefinition } from '@myrmidon/cadmus-core';
 import { ColorService } from '@myrmidon/cadmus-show-ui';
 import { DialogService } from '@myrmidon/ng-mat-tools';
 import { deepCopy } from '@myrmidon/ng-tools';
@@ -76,12 +73,12 @@ export class FacetViewComponent {
   public dirty: boolean;
 
   // form
-  public groups: FormArray;
-  public form: FormGroup;
+  public groups: UntypedFormArray;
+  public form: UntypedFormGroup;
 
   // color form
-  public color: FormControl;
-  public colorForm: FormGroup;
+  public color: UntypedFormControl;
+  public colorForm: UntypedFormGroup;
 
   // part editing
   public selectedPartId: string | undefined;
@@ -92,7 +89,7 @@ export class FacetViewComponent {
   public editedFacet: FacetDefinition | undefined;
 
   constructor(
-    private _formBuilder: FormBuilder,
+    private _formBuilder: UntypedFormBuilder,
     private _dialogService: DialogService,
     private _colorService: ColorService,
     private _partService: PartDefinitionVmService
@@ -141,7 +138,7 @@ export class FacetViewComponent {
   }
 
   //#region Groups
-  private getGroupControl(group?: PartDefinitionGroup): FormGroup {
+  private getGroupControl(group?: PartDefinitionGroup): UntypedFormGroup {
     return this._formBuilder.group({
       id: this._formBuilder.control(group?.id, [
         Validators.required,
@@ -239,9 +236,8 @@ export class FacetViewComponent {
         if (yes && this._facet) {
           const tot = this._facet.groups[index].partDefinitions.length || 0;
           for (let i = 0; i < tot; i++) {
-            this._facet.groups[index].partDefinitions[
-              i
-            ].colorKey = this._colorService.nextPaletteColor(i, tot);
+            this._facet.groups[index].partDefinitions[i].colorKey =
+              this._colorService.nextPaletteColor(i, tot);
           }
           this.dirty = true;
         }
@@ -254,7 +250,7 @@ export class FacetViewComponent {
     return this._partService.buildScopedPartId({
       groupId: this._facet?.groups[groupIndex].id || '',
       typeId: part.typeId,
-      roleId: part.roleId
+      roleId: part.roleId,
     });
   }
 
@@ -269,14 +265,12 @@ export class FacetViewComponent {
       (g) => g.id === parsedId.groupId
     );
 
-    const i = this._facet.groups[groupIndex].partDefinitions.findIndex(
-      (d) => {
-        return (
-          d.typeId === parsedId.typeId &&
-          ((!d.roleId && !parsedId.roleId) || d.roleId === parsedId.roleId)
-        );
-      }
-    );
+    const i = this._facet.groups[groupIndex].partDefinitions.findIndex((d) => {
+      return (
+        d.typeId === parsedId.typeId &&
+        ((!d.roleId && !parsedId.roleId) || d.roleId === parsedId.roleId)
+      );
+    });
     return i > -1
       ? {
           groupIndex: groupIndex,
@@ -377,9 +371,8 @@ export class FacetViewComponent {
     }
     const gi = this.findPart(this.selectedPartId);
     if (gi) {
-      this._facet.groups[gi.groupIndex].partDefinitions[
-        gi.partIndex
-      ].colorKey = this.color.value.hex;
+      this._facet.groups[gi.groupIndex].partDefinitions[gi.partIndex].colorKey =
+        this.color.value.hex;
       this.dirty = true;
     }
   }
@@ -390,9 +383,8 @@ export class FacetViewComponent {
     }
     const gi = this.findPart(this.selectedPartId);
     if (gi) {
-      this.copiedPart = this._facet.groups[gi.groupIndex].partDefinitions[
-        gi.partIndex
-      ];
+      this.copiedPart =
+        this._facet.groups[gi.groupIndex].partDefinitions[gi.partIndex];
     }
   }
 
@@ -429,7 +421,13 @@ export class FacetViewComponent {
   }
 
   public onFacetChange(facet: FacetDefinition): void {
-    this.facet = Object.assign(this._facet, facet);
+    const gf: GroupingFacet = {
+      id: '',
+      label: '',
+      description: '',
+      groups: [],
+    };
+    this.facet = Object.assign(gf, this._facet, facet);
     this.dirty = true;
     this.onFacetEditorClose();
   }
@@ -450,9 +448,8 @@ export class FacetViewComponent {
       return;
     }
 
-    this.editedPart = this._facet?.groups[gi.groupIndex].partDefinitions[
-      gi.partIndex
-    ];
+    this.editedPart =
+      this._facet?.groups[gi.groupIndex].partDefinitions[gi.partIndex];
 
     setTimeout(() => {
       this.tabIndex = 2;
@@ -508,9 +505,9 @@ export class FacetViewComponent {
     }
     // update group IDs from controls
     for (let i = 0; i < this.groups.length; i++) {
-      this._facet.groups[i].id = (this.groups.at(
-        i
-      ) as FormGroup).controls.id.value?.trim();
+      this._facet.groups[i].id = (
+        this.groups.at(i) as UntypedFormGroup
+      ).controls.id.value?.trim();
     }
   }
 

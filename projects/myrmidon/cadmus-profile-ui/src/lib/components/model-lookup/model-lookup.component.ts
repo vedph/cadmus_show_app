@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { CadmusShopAssetService } from '@myrmidon/cadmus-shop-asset';
 import { CadmusModel } from '@myrmidon/cadmus-shop-core';
 import { Observable, of } from 'rxjs';
@@ -34,13 +34,13 @@ export class ModelLookupComponent {
   @Output()
   public itemChange: EventEmitter<CadmusModel>;
 
-  public form: FormGroup;
-  public lookup: FormControl;
+  public form: UntypedFormGroup;
+  public lookup: UntypedFormControl;
   public items$: Observable<CadmusModel[]>;
   public item: CadmusModel | undefined;
 
   constructor(
-    formBuilder: FormBuilder,
+    formBuilder: UntypedFormBuilder,
     private _shopService: CadmusShopAssetService
   ) {
     this.fragment = false;

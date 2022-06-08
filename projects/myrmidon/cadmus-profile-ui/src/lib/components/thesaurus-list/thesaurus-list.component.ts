@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { PaginationResponse, PaginatorPlugin } from '@datorama/akita';
@@ -51,7 +51,7 @@ export class ThesaurusListComponent implements OnInit {
   private _refresh$: BehaviorSubject<number>;
   public page$: Observable<PaginationResponse<Thesaurus>> | undefined;
   public filter$: Observable<ThesaurusFilter | undefined>;
-  public pageSize: FormControl;
+  public pageSize: UntypedFormControl;
 
   constructor(
     // the paginator factory
@@ -64,7 +64,7 @@ export class ThesaurusListComponent implements OnInit {
     private _filterQuery: ThesaurusFilterQuery,
     private _dialogService: DialogService,
     private _router: Router,
-    formBuilder: FormBuilder
+    formBuilder: UntypedFormBuilder
   ) {
     this.pageSize = formBuilder.control(20);
     this.filter$ = _filterQuery.select();

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Thesaurus } from '@myrmidon/cadmus-core';
@@ -23,16 +23,16 @@ import { take } from 'rxjs/operators';
 })
 export class ThesaurusListCodePageComponent {
   public data$: Observable<Thesaurus[]>;
-  public csvFile: FormControl;
-  public csvSeparator: FormControl;
-  public form: FormGroup;
+  public csvFile: UntypedFormControl;
+  public csvSeparator: UntypedFormControl;
+  public form: UntypedFormGroup;
 
   constructor(
     private _thesService: RamThesaurusService,
     private _shopService: CadmusShopAssetService,
     private _snackbar: MatSnackBar,
     private _router: Router,
-    formBuilder: FormBuilder
+    formBuilder: UntypedFormBuilder
   ) {
     this.data$ = this._thesService.thesauri$;
     this.csvFile = formBuilder.control(null, Validators.required);

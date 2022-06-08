@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 
 import { ThesaurusEntry } from '@myrmidon/cadmus-core';
 import {
@@ -14,13 +14,13 @@ import {
 })
 export class IntroPageComponent implements OnInit {
   public initialSize: PhysicalSize;
-  public size: FormControl;
-  public user: FormControl;
-  public form: FormGroup;
+  public size: UntypedFormControl;
+  public user: UntypedFormControl;
+  public form: UntypedFormGroup;
   public rdf: string | undefined;
   public unitEntries: ThesaurusEntry[];
 
-  constructor(formBuilder: FormBuilder) {
+  constructor(formBuilder: UntypedFormBuilder) {
     this.unitEntries = [
       { id: 'mm', value: 'mm' },
       { id: 'cm', value: 'cm' },
