@@ -24,9 +24,9 @@ export class ModelGraphPageComponent {
     this.options = {
       svgId: 'force-graph',
       width: 800,
-      height: 800,
+      height: 1200,
       nodeRadius: 10,
-      distance: 100,
+      distance: 200,
       initialZoom: 1.25,
     };
     this.data = {
