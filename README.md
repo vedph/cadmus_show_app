@@ -6,7 +6,7 @@ To run the corresponding Docker image: use `docker images` to list the images, a
 
 Deploy sample (for a subpath, here `apps/cadmus-show`):
 
-1. `npm run build-all`
+1. `npm run build-lib`
 2. update `env.js` for version number
 3. `ng build --configuration=production`
 
