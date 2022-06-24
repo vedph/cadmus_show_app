@@ -17,15 +17,19 @@
       <blockquote>Connecting monads</blockquote>
     </aside>
     <p>
-      As we have seen, our objects, the parts, are somewhat "monadic" models.
-      They must be self-contained and independent, because they need to be
-      composed into items; and they need to be reused across different items.
-      It's right their independency which makes them fit to reuse.
+      As we have seen, the basic Cadmus architecture includes objects of any
+      type (parts), contained in a box (item) with an attached label (item's
+      metadata); these boxes are stored on shelves (the database
+      infrastructure).
+    </p>
+    <p>
+      Our objects, the parts, are somewhat "monadic" models. They must be
+      self-contained and independent, because they need to be composed into
+      items; and they need to be reused across different items. It's right their
+      independency which makes them fit to reuse.
     </p>
     <p>
       Yet, many entities defined by parts can enter a complex set of relations.
-    </p>
-    <p>
       For instance, consider a manuscript. To start with, we want to fully
       describe all the features we think relevant for such object. To this end,
       we can use a lot of parts for its material features, textual content,
@@ -33,24 +37,47 @@
     </p>
     <p>
       Yet, we also have a lot of relations involving a manuscript: a manuscript
-      can be commissioned; written; decorated; sold; attached to a letter sent
-      to a person, etc. Of course, there's no limit to such relationships. So,
-      where should we store all of them?
-    </p>
-    <p>
-      For sure, we can't make them properties of our monadic objects; because we
-      don't want to pollute our model with non-intrinsic data. The fact that a
-      manuscript at a certain point of its history gets sent to a person is not
-      something we want to cram into objects like material description,
-      decoration, binding, or the like. These are all features which are totally
-      independent from that event, and exist without it. So, our objects are not
-      the right place for them. Otherwise, we would stick together with scotch
-      tape two objects to represent a relation between them. Once we have done
-      this, we could no more put the first object in a box without carrying the
-      second one together with it.
+      can be commissioned by one person; written by another; decorated by yet
+      another one; attached to a letter and sent to a person, etc. Of course,
+      there's no limit to such relationships. So, where should we store all of
+      them?
     </p>
     <aside class="pquote">
-      <blockquote>An upper shelf</blockquote>
+      <blockquote>A tale of three entities</blockquote>
+    </aside>
+    <p>
+      While properties considered intrinsic or relevant to such objects are part
+      of their model, relations with other objects are confined to the realm of
+      incidental events. Quoting a famous example used in
+      <a href="https://cidoc-crm.org/" target="_blank">CIDOC-CRM</a>, consider
+      the event of Caesar's murder by Brutus and others. In an event-centric
+      ontology like CIDOC-CRM, we have three segments on the timeline of
+      history, each corresponding to the lifespan of an entity: one for Caesar,
+      one for Brutus, and one for the sword used by Brutus to stab him. The
+      murder is the event which at a specific point in time (March 15, 44 BC)
+      links all these three entities together: it's like drawing a vertical line
+      which crosses all these segments, connecting them at some point in
+      history.
+    </p>
+    <p>
+      Now, of course this event is something which is not intrinsically part of
+      the description of a person like Caesar or Brutus, or of an object like a
+      sword. It's an incidental event which happens to bind these entities at
+      some point in time and space. Should we have a database of persons, or of
+      archaeological artefacts, we could not make the sword a property of the
+      person object, or vice-versa. These are not features considered intrinsic
+      to either a person or an object in general terms (unless we are
+      specifically collecting cases of murder). Adding such an optional property
+      just to make room for that information somewhere would pollute the model
+      of each object. So, where should we place things like events or other
+      types of less or more incidental relationships among various objects?
+      Clearly, outside each of these types. Given that Cadmus is designed also
+      for emitting RDF-like modeled data, thus allowing users to publish for the
+      semantic web, it's obvious that such relations can easily be represented
+      as edges connecting the nodes of a graph.
+    </p>
+    <aside class="pquote">
+      <blockquote>The upper shelf</blockquote>
     </aside>
     <p>
       So, we want relations outside and above our objects, stuffed into their
@@ -61,13 +88,14 @@
       outside the boundaries of our database.
     </p>
     <p>
-      In the spirit of Cadmus, we still want to preserve a simple user
+      Yet, in the spirit of Cadmus, we still want to preserve a simple user
       experience. After all, that's one of the reasons for modeling records as
       boxes with any type of object inside, and providing a free model and UI
       for each object. Usually, human operators do not think in terms of highly
-      normalized and fragmented information; rather, they tend to group a set of
-      strictly interconnected data together, just like the old paper forms some
-      of them were used to.
+      normalized and fragmented information, atomized to the level of triples,
+      where boundaries between objects fade out; rather, they tend to group a
+      set of strictly interconnected data together, just like the old paper
+      forms some of them were used to.
     </p>
     <p>
       So, Cadmus provides users with a similar experience: they edit different
@@ -90,48 +118,51 @@
       about RDF.
     </p>
     <aside class="pquote">
-      <blockquote>Leveraging index for projection</blockquote>
+      <blockquote>Mapping rules</blockquote>
     </aside>
     <p>
-      In short (see
-      <a
-        href="https://github.com/vedph/cadmus_doc/blob/master/core/core.graph.md"
-        target="_blank"
-        >here</a
-      >
-      for more), this is implemented by leveraging the indexes which are
-      automatically updated whenever an object gets saved. As we have seen,
-      these are based on so-called
-      <a routerLink="/docs/infrastructure">"data pins"</a>, i.e. name/value
-      pairs coming from each object to represent all the features relevant for
-      real-time indexing and search. Just like these pins provide data for the
-      index, a custom set of projection rules can use any part of them to place
-      nodes and/or links into a graph.
-    </p>
-    <figure>
-      <img
-        src="assets/img/sem-graph1-400.jpg"
-        alt="Semantic graph editing flow"
-      />
-      <legend>automatically creating graphs</legend>
-    </figure>
-    <p>
-      This way, users just continue editing in web forms, focusing on their
-      knowledge domain; yet, under the covers some of the pins generated by
-      automatic indexing work as input data to these projection rules, which
-      generate or update the graph accordingly.
+      Thus, having a graph of interconnected nodes representing such
+      relationships does not mean that users necessarily have to edit data in
+      terms of nodes and edges, which often is difficult for them. Most of the
+      data for this graph can effectively be derived from our traditional
+      monadic objects, to allow users continue work by focusing on an easily
+      understandable mental model and its GUI.
     </p>
     <p>
-      Additionally, users can also edit the graph directly, e.g. to add new
-      nodes or links, even from resources outside their database.
+      In fact, many objects can legitimately include some relational data which
+      fits their model and purpose. Some objects are even designed to contain
+      purely relational data, e.g. when dealing with relationships like events.
+      Among the general purpose parts, Cadmus provides a historical events
+      model, which contains a list of events of any type, each with a
+      description, optional date and/or time, and directly related entities.
+      Such part can be used for a lot of different purposes: for instance, in
+      the biography of a person it can represent all the relevant events
+      involving that person, including birth and death.
+    </p>
+    <p>
+      So, users can encode a lot of relations without leaving the user-friendly
+      environment of object-editing in a rich GUI. Whenever they save such
+      objects, Cadmus can optionally apply a number of
+      <em>mapping rules</em> for projecting a subset of their data into a
+      RDF-like graph. Yet, when required users can directly edit the graph, to
+      supply additional nodes or edges. Their edits get combined with the result
+      of projections, and are never overwritten by them, even though the
+      projection can keep in synch its nodes and triples whenever items and
+      parts are added, updated or deleted.
     </p>
     <aside class="pquote">
-      <blockquote>Editing levels</blockquote>
+      <blockquote>Layers of abstraction</blockquote>
     </aside>
     <p>
-      This way, Cadmus provides a set of editing levels, becoming more and more
-      abstract as we progress from bottom to top.
+      These rules bridge the gap between our monadic objects and the upper plane
+      of the graph, and are easily integreated in the Cadmus architecture. The
+      following picture summarizes the different layers of abstraction used in
+      Cadmus, from bottom to top.
     </p>
+    <figure>
+      <img src="assets/img/sem-graph2-400.jpg" alt="Layers of abstraction" />
+      <legend>layers of abstraction</legend>
+    </figure>
     <p>
       At the bottom, users edit single objects in their own UI. Each can be
       modeled and edited independently, which allows building dynamic models by
@@ -152,19 +183,16 @@
       real-time search feature in the editor.
     </p>
     <p>
-      If we defined graph projection rules, the indexing process in turn
-      triggers the projection process. All the pins matching the rules trigger
-      their execution, which adds or updates nodes and links in the graph. It is
-      important to notice that the automatic process only addresses nodes and
-      links derived from this projection; any manual edit on the graph by users
-      is preserved intact. This allows a continuous integration of a subset of
-      the graph coming from objects with that derived from direct user
-      intervention, or maybe from importing data into the database.
+      At the same time, if we defined graph mapping rules, all the matching
+      rules get executed, thus producing a new subset of nodes and edges. Then,
+      this subset is compared against the stored graph, which gets updated
+      accordingly. It is important to notice that the automatic process only
+      addresses nodes and links derived from this projection; any manual edit on
+      the graph by users is preserved intact. This allows a continuous
+      integration of a subset of the graph coming from objects with that derived
+      from direct user intervention, or maybe from importing data into the
+      database.
     </p>
-    <figure>
-      <img src="assets/img/sem-graph2-400.jpg" alt="Cadmus editing levels" />
-      <legend>Cadmus editing levels</legend>
-    </figure>
     <p>
       In this context, the projection rules are stored in the same database used
       for indexing Cadmus data. Just like changing export methods may lead to a
@@ -172,6 +200,15 @@
       different graphs. Thus, we can eventually generate different graphs from
       the same content, created once by users who do not need to know anything
       about TEI, RDF, or any other technology produced as an output.
+    </p>
+    <p>
+      For more information, see the
+      <a
+        href="https://github.com/vedph/cadmus-graph/blob/master/docs/index.md"
+        target="_blank"
+        >technical documentation</a
+      >
+      about the graph subsystem.
     </p>
   </article>
 </div>
