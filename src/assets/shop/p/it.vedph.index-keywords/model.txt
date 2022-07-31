@@ -1,3 +1,6 @@
-- keywords (Keyword[]):
+- keywords (IndexKeyword[]):
+  - indexId
   - language*
-  - value*
+  - value
+  - note
+  - tag
