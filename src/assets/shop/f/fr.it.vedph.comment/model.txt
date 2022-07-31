@@ -1,10 +1,9 @@
 - tag (string)
 - text (string)
 - references (DocReference[]):
+  - type (string)
   - tag (string)
-  - author (string)
-  - work (string)
-  - location (string)
+  - citation (string)
   - note (string)
 - externalIds (string[])
 - categories (string[])
