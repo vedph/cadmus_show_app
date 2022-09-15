@@ -5,8 +5,8 @@
       <img
         class="banner-img"
         srcset="
-          ./assets/img/graph-1024.jpg 1024w,
-          ./assets/img/graph-512.jpg   512w
+          ./assets/img/export-1024.jpg 1024w,
+          ./assets/img/export-512.jpg   512w
         "
         sizes="(max-width: 600px) 512px, 1024px"
       />
@@ -112,6 +112,181 @@
     <aside class="pquote">
       <blockquote>Layered Text Preview</blockquote>
     </aside>
-    <p></p>
+    <p>
+      Layered texts are a complex thing to handle when dealing with
+      presentation, right because all the layers stacked on top of the base text
+      must be merged down into the flat surface of the text itself. For
+      instance, say you have this line of text, where different portions of it
+      are annotated at different levels (each represented by a letter):
+    </p>
+    <table id="sample-text">
+      <colgroup>
+        <col />
+        <col />
+        <col />
+        <col />
+        <col />
+        <col />
+        <col />
+        <col />
+        <col />
+        <col />
+        <col />
+        <col />
+        <col />
+        <col />
+        <col />
+        <col />
+        <col />
+        <col />
+      </colgroup>
+      <tbody>
+        <tr>
+          <td>q</td>
+          <td>u</td>
+          <td>e</td>
+          <td></td>
+          <td>b</td>
+          <td>i</td>
+          <td>x</td>
+          <td>i</td>
+          <td>t</td>
+          <td></td>
+          <td>a</td>
+          <td>n</td>
+          <td>n</td>
+          <td>o</td>
+          <td>s</td>
+          <td></td>
+          <td>X</td>
+          <td>X</td>
+        </tr>
+        <tr>
+          <td>.</td>
+          <td>.</td>
+          <td>O</td>
+          <td>.</td>
+          <td>.</td>
+          <td>.</td>
+          <td>.</td>
+          <td>.</td>
+          <td>.</td>
+          <td>.</td>
+          <td>.</td>
+          <td>.</td>
+          <td>.</td>
+          <td>.</td>
+          <td>.</td>
+          <td>.</td>
+          <td>.</td>
+          <td>.</td>
+        </tr>
+        <tr>
+          <td>.</td>
+          <td>.</td>
+          <td>.</td>
+          <td>.</td>
+          <td>O</td>
+          <td>.</td>
+          <td>.</td>
+          <td>.</td>
+          <td>.</td>
+          <td>.</td>
+          <td>.</td>
+          <td>.</td>
+          <td>.</td>
+          <td>.</td>
+          <td>.</td>
+          <td>.</td>
+          <td>.</td>
+          <td>.</td>
+        </tr>
+        <tr>
+          <td>.</td>
+          <td>.</td>
+          <td>P</td>
+          <td>P</td>
+          <td>P</td>
+          <td>.</td>
+          <td>.</td>
+          <td>.</td>
+          <td>.</td>
+          <td>.</td>
+          <td>.</td>
+          <td>.</td>
+          <td>.</td>
+          <td>.</td>
+          <td>.</td>
+          <td>.</td>
+          <td>.</td>
+          <td>.</td>
+        </tr>
+        <tr>
+          <td>.</td>
+          <td>.</td>
+          <td>.</td>
+          <td>.</td>
+          <td>C</td>
+          <td>C</td>
+          <td>C</td>
+          <td>C</td>
+          <td>C</td>
+          <td>C</td>
+          <td>C</td>
+          <td>C</td>
+          <td>C</td>
+          <td>C</td>
+          <td>C</td>
+          <td>.</td>
+          <td>.</td>
+          <td>.</td>
+        </tr>
+      </tbody>
+    </table>
+    <br />
+    <p>
+      Here, <code>O</code> represents an orthographic annotation (<em>que</em>
+      for <em>quae</em>; <em>bixit</em> for <em>vixit</em>), which happens at
+      the maximum level of granularity (the character);
+      <code>P</code> represents a paleographic annotation (e.g. a graphical
+      connection between <code>E</code> and <code>B</code>); and
+      <code>C</code> a generic comment annotation (<em>bixit annos</em> to note
+      the usage of accusative rather than the more usual ablative). As you can
+      see, each annotation has its own extent: the two orthographic annotations
+      rest on single letters (<em>e</em>, <em>b</em>); the paleographic
+      annotation links two letters (final <em>e</em> and initial <em>b</em>),
+      including the space between them; and the comment annotation spans for a
+      couple of words.
+    </p>
+    <p>
+      Most of these spans overlap, but this is not an issue in Cadmus, as each
+      rests on its own layer. All what we have is a text part, representing the
+      base text, and 3 text layer parts connected to it for orthographic,
+      paleographic, and comment annotations. Yet, when we want to present the
+      text on a single plane, things get more complicated.
+    </p>
+    <p>
+      To this end, Cadmus provides a special category of export components known
+      as text flatteners, whose purpose is right merging all the layers down by
+      projecting them on the surface of the base text. This is done by examining
+      all the annotations in each layer, and split the text into blocks so that
+      each block represents the maximum span of characters linked to exactly the
+      same set of annotations, whatever the layer they come from.
+    </p>
+    <p>
+      So, in our case the resulting blocks will produce a text segmentation like
+      <code>qu|e| |b|ixit annos| XX</code>, where 6 text blocks are variously
+      linked to different layer annotations: for instance, <em>qu</em> is linked
+      to none, while the next <em>e</em> is linked to annotations from two
+      layers, <code>O</code> and <code>P</code>; and so forth.
+    </p>
+    <p>
+      With this model in place, we can easily present the text with as a list of
+      rows, each including a sequence of such blocks. Wherever we have a linked
+      block, a different color is used according to the layer. When the user
+      clicks on any linked block, he gets the rendition of the corresponding
+      annotation, which just uses the generic preview mechanism illustrated
+      above.
+    </p>
   </article>
 </div>

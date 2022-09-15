@@ -3,3 +3,6 @@ h1 {
   text-align: center;
   margin-top: 16px;
 }
+table#sample-text col:nth-child(odd) {
+  background: #f0f0f0;
+}
