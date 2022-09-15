@@ -1,0 +1,117 @@
+<div>
+  <h1>Data Export</h1>
+  <div>
+    <div class="banner">
+      <img
+        class="banner-img"
+        srcset="
+          ./assets/img/graph-1024.jpg 1024w,
+          ./assets/img/graph-512.jpg   512w
+        "
+        sizes="(max-width: 600px) 512px, 1024px"
+      />
+    </div>
+  </div>
+  <article class="cols">
+    <aside class="pquote">
+      <blockquote>A Data Hub</blockquote>
+    </aside>
+    <p>
+      As an open and modular content editor, capable of integrating internal and
+      external services and linking its data to other resources, Cadmus works as
+      a sort of content hub. As such, it is the target of various data import
+      procedures, and the source of various data export procedures.
+    </p>
+    <p>
+      Import procedures are more various, and for many of them a sibling
+      project, Proteus, can be used to import and remodel data from several
+      different sources and digital formats, either standard or even
+      proprietary.
+    </p>
+    <p>
+      Export procedures instead rely on the Cadmus content model, and as such
+      they can usually be handled in the same way for most cases. An export
+      procedure essentially draws data from the Cadmus database, selecting and
+      transforming it into some form of output.
+    </p>
+    <aside class="pquote">
+      <blockquote>"Preview" as Export</blockquote>
+    </aside>
+    <p>
+      This also works inside the editor itself, to generate a more
+      human-friendly rendition of any data model, a sort of "preview", borrowing
+      a term from the old practice of many text editors to generate a print
+      preview. Of course, printing or previewing here are out of concern: we are
+      just providing a less cluttered and more readable presentation of model
+      data. Anyway, in this sense the preview feature itself is just a part of
+      the bigger subsystem designed for data export, and is designed to work
+      inside the editor, so that operators can better look at the data they
+      enter.
+    </p>
+    <p>
+      Thus, in preview, as for any other export procedure, it all starts from
+      the Cadmus database, which contains items, with their parts. Some of these
+      parts may represent text (with a text part), or layered text (with a text
+      part and any number of text layer parts). Many other parts may well
+      represent non-textual data (e.g. the codicological description of a
+      manuscript).
+    </p>
+    <p>
+      From the perspective of preview, the main types are just two: a
+      <em>generic preview</em>, applicable to any part model; and a
+      <em>layered text preview</em>, specialized just for text with metadata
+      layers.
+    </p>
+    <aside class="pquote">
+      <blockquote>Generic Preview</blockquote>
+    </aside>
+    <p>
+      The generic preview relies on a JSON renderer component, which simply is a
+      component which takes JSON (representing any Cadmus data object: part,
+      fragment, or item), and renders it into some text-based format, like HTML,
+      XML, etc. After its own rendition, a JSON renderer can use any number of
+      filters, which further transform its output. Each filter has a specific
+      task, often general enough to be reused in other renderers. For instance,
+      some prebuilt filters allow you to lookup thesauri (resolving their IDs
+      into values), convert Markdown text into HTML or plain text, perform text
+      replacements (either based on literals, and on regular expressions), etc.
+    </p>
+    <p>
+      Though you are free to implement your own JSON renderers, most times you
+      can just stick to the generic ones, like the XSLT-based renderer. This is
+      one of the most customizable renderers, as it chains several
+      transformation stages:
+    </p>
+    <ol>
+      <li>
+        an optional pipeline of JSON transformations (using the
+        <a href="https://jmespath.org/tutorial.html" target="_blank"></a
+        >JMESPath query language). This is capable of deeply remodeling the data
+        object represented by JSON, by manipulating its own structure.
+      </li>
+      <li>an implicit and automatic transformation from JSON to XML.</li>
+      <li>
+        an XSLT-based transformation, which produces the desired output. Cadmus
+        models are serialized as JSON; yet, in most cases scholars are much more
+        confident with XML and XSLT. So, letting users design their own XSLT
+        transformations to get the desired data rendition is a way for combining
+        transformation power with ease of use.
+      </li>
+      <li>
+        an optional chain of renderer filters, to further transform the XSLT
+        output. For instance, we might want to use a Markdown filter to convert
+        Markdown regions into HTML.
+      </li>
+    </ol>
+    <p>
+      Given that all these transformations are configurable, and any number of
+      modules can be inserted in the pipeline, this renderer alone may be enough
+      for a whole project. The only specialization required is usually something
+      more complex for layered texts.
+    </p>
+    <aside class="pquote">
+      <blockquote>Layered Text Preview</blockquote>
+    </aside>
+    <p></p>
+  </article>
+</div>

@@ -49,6 +49,7 @@ import { InfrastructurePageComponent } from './components/infrastructure-page/in
 import { EnvServiceProvider } from '@myrmidon/ng-tools';
 import { CadmusMatPhysicalSizeModule } from '@myrmidon/cadmus-mat-physical-size';
 import { SemanticGraphPageComponent } from './components/semantic-graph-page/semantic-graph-page.component';
+import { ExportPageComponent } from './components/export-page/export-page.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,7 @@ import { SemanticGraphPageComponent } from './components/semantic-graph-page/sem
     TaxonomiesPageComponent,
     InfrastructurePageComponent,
     SemanticGraphPageComponent,
+    ExportPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -109,6 +111,7 @@ import { SemanticGraphPageComponent } from './components/semantic-graph-page/sem
         { path: 'profile/code', component: ProfileCodePageComponent },
         { path: 'docs', component: OverviewPageComponent },
         { path: 'docs/data-architecture', component: DataArchitecturePageComponent },
+        { path: 'docs/export', component: ExportPageComponent },
         { path: 'docs/text-architecture', component: TextArchitecturePageComponent },
         { path: 'docs/taxonomies', component: TaxonomiesPageComponent },
         { path: 'docs/infrastructure', component: InfrastructurePageComponent },
