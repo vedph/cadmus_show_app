@@ -280,7 +280,49 @@
       to none, while the next <em>e</em> is linked to annotations from two
       layers, <code>O</code> and <code>P</code>; and so forth.
     </p>
-    <img src="./assets/img/text-blocks.png" alt="Text blocks" />
+    <aside class="pquote">
+      <blockquote>Flattening Multiple Planes</blockquote>
+    </aside>
+    <p>
+      The following picture shows this remodeling. We start from a
+      multidimensional set of annotations, where any number of any type of data
+      are distributed on different planes, all linked to a base text. This is
+      the Cadmus model, where an item (the box) contains parts (the objects in
+      the box). An object is the text itself (the cube with T in the picture);
+      other objects represent layers on top of it (the cubes with L). Further,
+      the box can eventually contain many other objects which have no direct
+      relation with the text (the cube with X). Of course, as Cadmus has an open
+      and multilayered architecture, whereas TEI is a giant, yet relatively
+      closed standard, often not all these objects might have a corresponding
+      set of elements in TEI; and as we have seen, many objects may even be
+      non-textual at all. So you typically choose a subset of the objects in the
+      box, and eventually a subset of their properties, according to what you
+      want to get on the TEI side.
+    </p>
+    <p>
+      When exporting text, we must flatten the selected planes on a single one,
+      where all the annotations must be crushed and flattened on a text, modeled
+      as a sequence of blocks, as explained above.
+    </p>
+    <figure>
+      <img
+        src="./assets/img/text-blocks.png"
+        alt="Text blocks"
+        style="width: 600px"
+      />
+      <figcaption>text blocks</figcaption>
+    </figure>
+    <p>
+      So, in the picture each layer is represented by a horizontal band which
+      runs parallel to the base text (QVE...XX). In each band there are all the
+      annotations (fragments, in Cadmus terms) belonging to that layer. These
+      get projected onto the unique surface of the exported text, as shown by
+      the red rectangles.
+    </p>
+    <p>
+      The result of these projections is a flattened text, built of blocks; and
+      each block is linked to any number of annotations, each in its own layer.
+    </p>
     <p>
       With this model in place, we can easily present the text with as a list of
       rows, each including a sequence of such blocks. Wherever we have a linked
@@ -288,6 +330,42 @@
       clicks on any linked block, he gets the rendition of the corresponding
       annotation, which just uses the generic preview mechanism illustrated
       above.
+    </p>
+    <p>
+      Additionally, with the same model, we can serialize it into a standard
+      format like TEI with stand-off annotation. This is as easy as writing all
+      the blocks to a TEI text file, wrapping them in a neutral element like
+      <code>seg</code>, which gets a unique ID assigned. Then, we will have
+      another TEI file, one for each layer, having all the annotations from its
+      layer rendered in some TEI inside a <code>standOff</code> element. The
+      elements in the standoff section will be linked to the <code>seg</code>
+      elements in the text file via the segment's ID.
+    </p>
+    <p>
+      This also has an advantage over a traditional stand-off TEI: there, we
+      typically start by systematically splitting the text at a predefined level
+      of granularity, e.g. a "word". So, we will wrap every single word of the
+      text in <code>seg</code>, even though these elements will never be the
+      target of an annotation, because we can't know in advance whether this
+      will be required or not. This can be quickly result in an extremely
+      redundant and confusing text. Also, we are bound to the pre-selected level
+      of granularity, which in our sample is the "word"; should we ever want to
+      annotate something at a lower level (e.g. a syllable or even a single
+      character), this won't be possible, unless we manually edit the prepared
+      text. This can easily become a nightmare, both in terms of creation and
+      maintenance.
+    </p>
+    <p>
+      In Cadmus instead, TEI is just an automatic rendition of a more structured
+      and open set of data; so, when we decide which layers we want to export,
+      we already know in advance exactly which portions of it will require to be
+      wrapped in a <code>seg</code> element, whatever their extension, from a
+      single character to many words. This is right what provides us this text
+      blocks model, produced by text flatteners. The same model serves both the
+      logic of interactive presentation in a UI and export processes towards
+      third party standards. We thus get a more readable and more compact
+      standoff TEI, which can be totally rebuilt whenever we want to add new
+      layers, or just synchronize the output with our edits.
     </p>
   </article>
 </div>
