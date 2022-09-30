@@ -37,9 +37,9 @@ article {
   margin: 16px 64px;
 }
 article.cols {
-  column-width: 30em;
+  column-width: 600px;
   column-count: 4;
-  column-gap: 2em;
+  column-gap: 16px;
   column-rule: 1px solid silver;
 }
 .pquote {
@@ -53,7 +53,7 @@ article.cols {
 blockquote {
   margin: 0;
 }
-figure legend {
+figure figcaption {
   border-top: 1px solid silver;
   color: silver;
 }

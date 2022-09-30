@@ -13,6 +13,15 @@
     </div>
   </div>
   <article class="cols">
+    <p>
+      For more information, see the
+      <a
+        href="https://github.com/vedph/cadmus-graph/blob/master/docs/index.md"
+        target="_blank"
+        >technical documentation</a
+      >
+      about the graph subsystem.
+    </p>
     <aside class="pquote">
       <blockquote>Connecting monads</blockquote>
     </aside>
@@ -161,7 +170,7 @@
     </p>
     <figure>
       <img src="assets/img/sem-graph2-400.jpg" alt="Layers of abstraction" />
-      <legend>layers of abstraction</legend>
+      <figcaption>layers of abstraction</figcaption>
     </figure>
     <p>
       At the bottom, users edit single objects in their own UI. Each can be
@@ -201,14 +210,120 @@
       the same content, created once by users who do not need to know anything
       about TEI, RDF, or any other technology produced as an output.
     </p>
+    <aside class="pquote">
+      <blockquote>Bridging the Gap</blockquote>
+    </aside>
     <p>
-      For more information, see the
-      <a
-        href="https://github.com/vedph/cadmus-graph/blob/master/docs/index.md"
-        target="_blank"
-        >technical documentation</a
+      The following picture shows how the objects plane is projected into the
+      graph plane, by means of a set of mapping rules which establish a bridge
+      between certain object properties and their representation in the graph.
+      <figure>
+        <img
+          src="./assets/img/graph-projection.png"
+          style="width: 600px"
+          alt="Graph projection"
+        />
+        <figcaption>Projecting object into graph</figcaption>
+      </figure>
+    </p>
+    <p>
+      Imagine that your object (a Cadmus part) contains a list of events; and
+      that each event is an object whose model has a type (usually drawn from
+      some <a routerLink="docs/taxonomies">taxonomy</a>), a date and a place,
+      and an optional list of related entities. Users just enter events via the
+      part editor: so, they add an event, pick its type from a list, enter its
+      date and/or place, and eventually add related entities.
+    </p>
+    <p>
+      To the left you can see the objects area and the corresponding part
+      editor: the person Petrarch is our box; inside it, there is the events
+      object. In its editor, a user enters the birth event for Petrarch, which
+      happened at Arezzo in 1304, from ser Petracco (father) and Eletta Cangiani
+      (mother). This is all what a user has to do: filling a web UI, without any
+      other knowledge about models and semantic graphs.
+    </p>
+    <p>
+      Once the object gets saved, the mapper kicks in, and builds a portion of
+      our graph by means of projection rules, here represented by arrows. As you
+      can see from the picture, each portion of the UI, which in turn represents
+      a part of the object model, generates a portion of the graph. In the end,
+      we get an event node, Petrarch's birth, which is of type birth (as
+      specified in the dropdown list of the UI), took place at Arezzo in 1304,
+      from mother Eletta Cangiani and father ser Petracco. This event brought
+      into life Petrarch. This full graph is thus generated automatically, and
+      merged with the wider target graph. So, the user here is effectively
+      creating not only an object, but also a portion of a semantic graph,
+      without knowing anything about the respective technologies.
+    </p>
+    <aside class="pquote">
+      <blockquote>Walking the Graph</blockquote>
+    </aside>
+    <p>
+      Once all our objects are linked in a graph, we can walk it at will,
+      progressively discovering the connections of each node with others. This
+      may happen even inside the Cadmus editor.
+    </p>
+    <p>
+      As the graph may quickly grow up in size, it would be impractical to
+      represent all the nodes and their links (edges) at once; the graph would
+      be barely readable, overcrowded by a high number of overlapping shapes and
+      lines. The solution adopted in the editor, where users may want to explore
+      the relations starting from an object towards any other object, is
+      displaying nodes and edges as you walk across the graph. Also, all the
+      edges of the same type are initially grouped under a single graphical
+      element.
+    </p>
+    <p>
+      So, you start from a single node, and just see all its "outbound" (i.e.
+      where this node is the subject) and "inbound" (i.e. where this node is the
+      object) links, grouped by type, with their counts. For instance, if the
+      node has 4 labels in 4 different languages, you won't see 4 links, but
+      just a node representing their group. When you double click it, it will
+      expand into those 4 links, each leading to another node. In the same way,
+      you will be able to walk along all the links, from node to node,
+      progressively unveiling the graph.
+    </p>
+    <p>
+      Additionally, a number of filters are available to be freely combined, so
+      that you see only those links or nodes you are interested in. These
+      filters vary according to the node selected while walking, and each node
+      retains its own filtering state.
+    </p>
+    <p>
+      This is right what is shown by the video below (it is suggested to play it
+      maximized). You start from the node representing a person, Petrarch. It
+      has a number of links connected to it: 2 outbound links (for
+      <code>rdfs:label</code> and <code>rdf:type</code>), and 2 inbound (<code
+        >crm:P98_brought_into_life</code
       >
-      about the graph subsystem.
+      and <code>crm:P93_took_out_of_existence</code>). Each of these links is
+      connected to a specified number of nodes: in the case of
+      <code>rdfs:label</code>, we have 4 of them, as we have 4 different labels
+      attached to this person.
+    </p>
+    <figure>
+      <video controls width="600">
+        <source src="./assets/videos/walker.mp4" type="video/mp4" />
+      </video>
+      <figcaption>Walking the graph</figcaption>
+    </figure>
+    <p>
+      So, we stretch the graph a bit to adjust our view, and expand another
+      node: this time it's the <code>rdf:type</code> group of links. It brings
+      us to the person class node. That is to say, Petrarch is a person.
+    </p>
+    <p>
+      Let us walk again expanding <code>crm:P98_brought_into_life</code>; this
+      brings up back to the subject of the triple, a birth node. So, the birth
+      event brought Petrarch into life.
+    </p>
+    <p>
+      And finally, let us expand <code>crm:P93_took_out_of_existence</code>:
+      this brings us to the death node, which took Petrarch out of existence. As
+      you might see, this is right how CIDOC-CRM would represent such an event.
+      So, the biography of a person is no more a text talking about what
+      happened to him/her; nor just a list of structured event objects; but also
+      a graph of interconnected nodes following a LOD standard ontology.
     </p>
   </article>
 </div>

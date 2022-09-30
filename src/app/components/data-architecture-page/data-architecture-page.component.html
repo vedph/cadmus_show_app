@@ -116,14 +116,14 @@
       <blockquote>Composite modeling</blockquote>
     </aside>
     <p>
-      This nicely fits with model complexity. In most cases, objects have complex
-      structures, where we can identify recurring sub-models. To make a trivial
-      example, different objects like an inscription, a literary text, a person,
-      a lemma in a dictionary, a coin, etc. all eventually share a datation. So,
-      it makes sense designing composite, rather than monolithic models. We
-      model our datation once, and reuse it everywhere; and the same happens
-      with any other part of a more complex model we might find useful to design
-      in isolation, and then compose with other parts.
+      This nicely fits with model complexity. In most cases, objects have
+      complex structures, where we can identify recurring sub-models. To make a
+      trivial example, different objects like an inscription, a literary text, a
+      person, a lemma in a dictionary, a coin, etc. all eventually share a
+      datation. So, it makes sense designing composite, rather than monolithic
+      models. We model our datation once, and reuse it everywhere; and the same
+      happens with any other part of a more complex model we might find useful
+      to design in isolation, and then compose with other parts.
     </p>
     <aside class="pquote">
       <blockquote>Taming models complexity: the datation sample</blockquote>
@@ -167,9 +167,9 @@
     </p>
     <figure>
       <img src="./assets/img/d1.svg" />
-      <legend>
-        <p>A single point on a timeline, like <em>178 BC</em>.</p>
-      </legend>
+      <figcaption>
+        A single point on a timeline, like <em>178 BC</em>.
+      </figcaption>
     </figure>
     <p>
       By adding another point we can define an interval, which covers
@@ -178,12 +178,10 @@
     </p>
     <figure>
       <img src="./assets/img/d2.svg" />
-      <legend>
-        <p>
-          Two points on the timeline, defining an interval, like
-          <em>14-37 AD</em>.
-        </p>
-      </legend>
+      <figcaption>
+        Two points on the timeline, defining an interval, like
+        <em>14-37 AD</em>.
+      </figcaption>
     </figure>
     <p>
       Finally, the second point might be <em>somewhere</em> before the first one
@@ -192,23 +190,19 @@
     </p>
     <figure>
       <img src="./assets/img/d3.svg" />
-      <legend>
-        <p>
-          Two points on the timeline, defining an interval, where the first
-          point is not exactly defined. This is a <em>terminus ante</em>, like
-          <em>before 31 AD</em>.
-        </p>
-      </legend>
+      <figcaption>
+        Two points on the timeline, defining an interval, where the first point
+        is not exactly defined. This is a <em>terminus ante</em>, like
+        <em>before 31 AD</em>.
+      </figcaption>
     </figure>
     <figure>
       <img src="./assets/img/d4.svg" />
-      <legend>
-        <p>
-          Two points on the timeline, defining an interval, where the last point
-          is not exactly defined. This is a <em>terminus post</em>, like
-          <em>after 31 AD</em>.
-        </p>
-      </legend>
+      <figcaption>
+        Two points on the timeline, defining an interval, where the last point
+        is not exactly defined. This is a <em>terminus post</em>, like
+        <em>after 31 AD</em>.
+      </figcaption>
     </figure>
     <p>
       So, here is our model: it has either 0 points, when unknown; or 1 or 2
