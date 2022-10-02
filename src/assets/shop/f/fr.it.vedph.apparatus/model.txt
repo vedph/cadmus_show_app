@@ -1,6 +1,7 @@
 - tag (string)
 - entries (ApparatusEntry[]):
-  - type (string)
+  - type (int): 0=replacement, 1=addition before, 2=addition after, 3=note
+  - subrange (string)
   - value (string)
   - tag (string)
   - normValue (string)
@@ -8,6 +9,6 @@
   - witnesses (AnnotatedValue[]):
     - value (string)
     - note (string)
-  - authors ([])
+  - authors (AnnotatedValue[])
   - isAccepted (boolean)
   - groupId (string)
