@@ -5,6 +5,19 @@
   - tag (string)
   - citation (string)
   - note (string)
-- externalIds (string[])
+- externalIds (AssertedId[]):
+  - tag (string)
+  - value (string)
+  - scope (string)
+  - assertion (Assertion):
+    - tag (string)
+    - rank (short)
+    - references (DocReference[])
+    - note (string)
 - categories (string[])
-- keywords (IndexKeyword[])
+- keywords (IndexKeyword[]):
+  - indexId (string)
+  - language* (string)
+  - value (string)
+  - note (string)
+  - tag (string)
