@@ -1,26 +1,15 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
-import { PaginationResponse, PaginatorPlugin } from '@datorama/akita';
+import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
+
 import { CadmusShopAssetService } from '@myrmidon/cadmus-shop-asset';
-import {
-  CadmusModel,
-  CadmusModelFilter,
-  DataPage,
-} from '@myrmidon/cadmus-shop-core';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import {
-  debounceTime,
-  map,
-  startWith,
-  switchMap,
-  take,
-  tap,
-} from 'rxjs/operators';
-import { ModelFilterQuery } from '../model-filter/store/model-filter.query';
-import { ModelFilterService } from '../model-filter/store/model-filter.service';
-import { MODEL_LIST_PAGINATOR } from './store/model-list.paginator';
-import { ModelListState } from './store/model-list.store';
+import { CadmusModel, CadmusModelFilter } from '@myrmidon/cadmus-shop-core';
+
+import { PaginationData } from '@ngneat/elf-pagination';
+
+import { ModelListRepository } from './model-list.repository';
+import { StatusState } from '@ngneat/elf-requests';
 
 @Component({
   selector: 'cadmus-model-list',
@@ -28,139 +17,31 @@ import { ModelListState } from './store/model-list.store';
   styleUrls: ['./model-list.component.scss'],
 })
 export class ModelListComponent implements OnInit {
-  private _refresh$: BehaviorSubject<number>;
-  public page$: Observable<PaginationResponse<CadmusModel>> | undefined;
+  public pagination$: Observable<PaginationData & { data: CadmusModel[] }>;
   public filter$: Observable<CadmusModelFilter | undefined>;
-  public pageSize: UntypedFormControl;
-  public fragment: UntypedFormControl;
+  public loading$: Observable<boolean>;
   public model: CadmusModel | undefined;
 
   constructor(
-    // the paginator factory
-    @Inject(MODEL_LIST_PAGINATOR)
-    public paginator: PaginatorPlugin<ModelListState>,
     private _assetService: CadmusShopAssetService,
     // services related to the filter store
-    private _filterService: ModelFilterService,
-    private _filterQuery: ModelFilterQuery,
-    formBuilder: UntypedFormBuilder
+    private _repository: ModelListRepository
   ) {
-    this.pageSize = formBuilder.control(20);
-    this.fragment = formBuilder.control(false);
-    this.filter$ = _filterQuery.select();
-    this._refresh$ = new BehaviorSubject(0);
+    this.pagination$ = _repository.pagination$;
+    this.loading$ = _repository.loading$;
+    this.filter$ = _repository.filter$;
   }
 
-  /**
-   * Return a request function used to fetch data for
-   * the page specified by filter.
-   *
-   * @param filter The filter with paging and filtering data.
-   */
-  private getRequest(
-    filter: CadmusModelFilter
-  ): () => Observable<PaginationResponse<CadmusModel>> {
-    return () =>
-      this._assetService.getModels(filter, this.fragment.value).pipe(
-        // adapt page to paginator plugin
-        map((p: DataPage<CadmusModel>) => {
-          return {
-            currentPage: p.pageNumber,
-            perPage: p.pageSize,
-            lastPage: p.pageCount,
-            data: p.items,
-            total: p.total,
-          };
-        })
-      );
+  public pageChange(event: PageEvent): void {
+    this._repository.loadPage(event.pageIndex + 1, event.pageSize);
   }
 
-  /**
-   * Get the paginator response from its cache or from the
-   * underlying service. The filter is got from the filter
-   * state, and updated with paging parameters.
-   *
-   * @param pageNumber The page number.
-   * @param pageSize The page size.
-   */
-  private getPaginatorResponse(
-    pageNumber: number,
-    pageSize: number
-  ): Observable<PaginationResponse<CadmusModel>> {
-    const filter = {
-      ...this._filterQuery.getValue(),
-      pageNumber: pageNumber,
-      pageSize: pageSize,
-    };
-    const request = this.getRequest(filter);
-    // update saved filters
-    this.paginator.metadata.set('filter', filter);
-
-    return this.paginator.getPage(request);
+  public clearCache(): void {
+    this._repository.clearCache();
+    this._repository.loadPage(1);
   }
 
-  ngOnInit(): void {
-    // filter
-    const initialPageSize = 10;
-    this.pageSize.setValue(initialPageSize);
-
-    // combine and get latest:
-    // -page number changes from paginator;
-    // -page size changes from control;
-    // -filter changes from filter (in this case, clearing the cache);
-    // -refresh request (in this case, clearing the cache).
-    this.page$ = combineLatest([
-      this.paginator.pageChanges.pipe(startWith(0)),
-      this.pageSize.valueChanges.pipe(
-        // we are required to emit at least the initial value
-        // as combineLatest emits only if ALL observables have emitted
-        startWith(initialPageSize),
-        // clear the cache when page size changes
-        tap((_) => {
-          this.paginator.clearCache();
-        })
-      ),
-      this.fragment.valueChanges.pipe(
-        startWith(false),
-        tap((_) => {
-          this.paginator.clearCache();
-        })
-      ),
-      this.filter$.pipe(
-        // startWith(undefined),
-        // clear the cache when filters changed
-        tap((_) => {
-          this.paginator.clearCache();
-        })
-      ),
-      this._refresh$.pipe(
-        // clear the cache when forcing refresh
-        tap((_) => {
-          this.paginator.clearCache();
-        })
-      ),
-    ]).pipe(
-      // https://blog.strongbrew.io/combine-latest-glitch/
-      debounceTime(0),
-      // for each emitted value, combine into a filter and use it
-      // to request the page from server
-      switchMap(([pageNumber, pageSize, _]) => {
-        return this.getPaginatorResponse(pageNumber, pageSize);
-      })
-    );
-  }
-
-  public onFilterChange(filter: CadmusModelFilter): void {
-    this._filterService.setFilter(filter);
-  }
-
-  public pageChanged(event: PageEvent): void {
-    // https://material.angular.io/components/paginator/api
-    this.paginator.setPage(event.pageIndex + 1);
-    if (event.pageSize !== this.pageSize.value) {
-      this.pageSize.setValue(event.pageSize);
-    }
-  }
+  ngOnInit(): void {}
 
   public onViewModel(model: CadmusModel): void {
     this._assetService

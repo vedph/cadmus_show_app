@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { CadmusShopAssetService } from '@myrmidon/cadmus-shop-asset';
-import { FlagListQuery, FlagListService } from '@myrmidon/cadmus-profile-ui';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
+
+import { CadmusShopAssetService } from '@myrmidon/cadmus-shop-asset';
+import { FlagListRepository } from '@myrmidon/cadmus-profile-ui';
 import { FlagDefinition } from '@myrmidon/cadmus-core';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-flag-list-code-page',
@@ -16,13 +17,12 @@ export class FlagListCodePageComponent {
   public data$: Observable<FlagDefinition[]>;
 
   constructor(
-    flagListQuery: FlagListQuery,
-    private _flagListService: FlagListService,
+    private _repository: FlagListRepository,
     private _shopService: CadmusShopAssetService,
     private _snackbar: MatSnackBar,
     private _router: Router
   ) {
-    this.data$ = flagListQuery.selectAll();
+    this.data$ = _repository.flags$;
   }
 
   public loadSample(): void {
@@ -30,12 +30,12 @@ export class FlagListCodePageComponent {
       .loadObject<FlagDefinition[]>('samples/flags')
       .pipe(take(1))
       .subscribe((flags) => {
-        this._flagListService.set(flags);
+        this._repository.setFlags(flags);
       });
   }
 
   public onDataChange(data: FlagDefinition[]): void {
-    this._flagListService.set(data);
+    this._repository.setFlags(data);
     this._snackbar.open('Flags saved', 'OK', {
       duration: 1500,
     });

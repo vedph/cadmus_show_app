@@ -95,7 +95,11 @@ export class RamThesaurusService {
    * @param filter The filter.
    * @returns The page.
    */
-  public getPage(filter: ThesaurusFilter): Observable<DataPage<Thesaurus>> {
+  public getThesauri(
+    filter: ThesaurusFilter,
+    pageNumber = 1,
+    pageSize = 20
+  ): Observable<DataPage<Thesaurus>> {
     const thesauri = this._thesauri$.value
       .filter((t) => {
         return this.matchThesaurus(t, filter);
@@ -104,13 +108,13 @@ export class RamThesaurusService {
         return a.id.localeCompare(b.id);
       });
 
-    const offset = (filter.pageNumber - 1) * filter.pageSize;
+    const offset = (pageNumber - 1) * pageSize;
     return of({
-      pageNumber: filter.pageNumber,
-      pageSize: filter.pageSize,
-      pageCount: Math.ceil(thesauri.length / filter.pageSize),
+      pageNumber: pageNumber,
+      pageSize: pageSize,
+      pageCount: Math.ceil(thesauri.length / pageSize),
       total: thesauri.length,
-      items: thesauri.slice(offset, offset + filter.pageSize),
+      items: thesauri.slice(offset, offset + pageSize),
     });
   }
 
@@ -178,7 +182,17 @@ export class RamThesaurusService {
     );
   }
 
-  public getThesaurusIds(filter?: ThesaurusFilter): Observable<string[]> {
+  /**
+   * Get the list of thesauri IDs.
+   * @param filter The optional filter to use (page size can be 0 to get
+   * all the IDs at once).
+   * @returns Array of IDs.
+   */
+  public getThesaurusIds(
+    filter?: ThesaurusFilter,
+    pageNumber = 1,
+    pageSize = 20
+  ): Observable<string[]> {
     return of(
       this._thesauri$.value
         .filter((t) => !filter?.id || t.id.includes(filter.id))
@@ -186,7 +200,7 @@ export class RamThesaurusService {
           return t.id;
         })
         .sort((a, b) => a.localeCompare(b))
-        .slice(0, filter?.pageSize || 10)
+        .slice((pageNumber - 1) * pageSize, pageSize || undefined)
     );
   }
 }

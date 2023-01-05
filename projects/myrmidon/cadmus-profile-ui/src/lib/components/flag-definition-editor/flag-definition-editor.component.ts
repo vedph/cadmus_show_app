@@ -1,14 +1,13 @@
 import { Color } from '@angular-material-components/color-picker';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
-  FormArray,
-  UntypedFormBuilder,
-  UntypedFormControl,
-  UntypedFormGroup,
+  FormBuilder,
+  FormControl,
+  FormGroup,
   Validators,
 } from '@angular/forms';
 import { FlagDefinition } from '@myrmidon/cadmus-core';
-import { ColorService } from '@myrmidon/cadmus-show-ui';
+import { ColorService } from '@myrmidon/cadmus-ui';
 
 /**
  * Flag definition editor.
@@ -35,24 +34,23 @@ export class FlagDefinitionEditorComponent implements OnInit {
   @Output()
   public editorClose: EventEmitter<any>;
 
-  public id: UntypedFormControl;
-  public label: UntypedFormControl;
-  public colorKey: UntypedFormControl;
-  public description: UntypedFormControl;
-  public form: UntypedFormGroup;
+  public id: FormControl<number>;
+  public label: FormControl<string | null>;
+  public colorKey: FormControl<Color | null>;
+  public description: FormControl<string | null>;
+  public form: FormGroup;
   public flagNumbers: number[];
 
-  constructor(formBuilder: UntypedFormBuilder, private _colorService: ColorService) {
+  constructor(formBuilder: FormBuilder, private _colorService: ColorService) {
     this.flagChange = new EventEmitter<FlagDefinition>();
     this.editorClose = new EventEmitter<any>();
     // https://2ality.com/2014/05/es6-array-methods.html
     this.flagNumbers = Array.from({ length: 32 }, (_, i) => i + 1);
     // form
-    this.id = formBuilder.control(1, [
-      Validators.required,
-      Validators.min(1),
-      Validators.max(32),
-    ]);
+    this.id = formBuilder.control(1, {
+      validators: [Validators.required, Validators.min(1), Validators.max(32)],
+      nonNullable: true,
+    });
     this.label = formBuilder.control(null, [
       Validators.required,
       Validators.maxLength(50),
@@ -93,8 +91,8 @@ export class FlagDefinitionEditorComponent implements OnInit {
 
     this.id.setValue(this.getBit(definition.id) + 1);
     this.label.setValue(definition.label);
-    const rgb = this._colorService.parseRgb(definition.colorKey);
-    this.colorKey.setValue(rgb ? new Color(rgb.r, rgb.g, rgb.b) : null);
+    const rgb = this._colorService.getRgb(definition.colorKey);
+    this.colorKey.setValue(rgb ? new Color(rgb[0], rgb[1], rgb[2]) : null);
     this.description.setValue(definition.description);
 
     this.form.markAsPristine();
@@ -103,9 +101,9 @@ export class FlagDefinitionEditorComponent implements OnInit {
   private getFlag(): FlagDefinition {
     return {
       id: 1 << (this.id.value - 1),
-      label: this.label.value?.trim(),
-      colorKey: this.colorKey.value.hex,
-      description: this.description.value?.trim(),
+      label: this.label.value?.trim() || '',
+      colorKey: this.colorKey.value?.hex || '',
+      description: this.description.value?.trim() || '',
     };
   }
 

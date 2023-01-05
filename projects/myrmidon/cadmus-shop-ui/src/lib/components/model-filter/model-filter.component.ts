@@ -1,7 +1,10 @@
-import { Output } from '@angular/core';
-import { Component, EventEmitter, Input, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Observable } from 'rxjs';
+
 import { CadmusModelFilter } from '@myrmidon/cadmus-shop-core';
+
+import { ModelListRepository } from '../model-list/model-list.repository';
 
 @Component({
   selector: 'cadmus-model-filter',
@@ -9,36 +12,30 @@ import { CadmusModelFilter } from '@myrmidon/cadmus-shop-core';
   styleUrls: ['./model-filter.component.scss'],
 })
 export class ModelFilterComponent implements OnInit {
-  private _filter: CadmusModelFilter | undefined | null;
+  public filter$: Observable<CadmusModelFilter>;
 
-  @Input()
-  public get filter(): CadmusModelFilter | undefined | null {
-    return this._filter;
-  }
-  public set filter(value: CadmusModelFilter | undefined | null) {
-    this._filter = value;
-    this.updateForm(value);
-  }
+  public fragment: FormControl<boolean>;
+  public project: FormControl<string | null>;
+  public typeId: FormControl<string | null>;
+  public name: FormControl<string | null>;
+  public tags: FormControl<string | null>;
+  public matchAny: FormControl<boolean>;
+  public form: FormGroup;
 
-  @Output()
-  public filterChange: EventEmitter<CadmusModelFilter>;
-
-  public project: UntypedFormControl;
-  public typeId: UntypedFormControl;
-  public name: UntypedFormControl;
-  public tags: UntypedFormControl;
-  public matchAny: UntypedFormControl;
-  public form: UntypedFormGroup;
-
-  constructor(formBuilder: UntypedFormBuilder) {
-    this.filterChange = new EventEmitter<CadmusModelFilter>();
+  constructor(
+    formBuilder: FormBuilder,
+    private _repository: ModelListRepository
+  ) {
+    this.filter$ = _repository.filter$;
     // form
+    this.fragment = formBuilder.control(false, { nonNullable: true });
     this.project = formBuilder.control(null);
     this.typeId = formBuilder.control(null);
     this.name = formBuilder.control(null);
     this.tags = formBuilder.control(null);
-    this.matchAny = formBuilder.control(null);
+    this.matchAny = formBuilder.control(false, { nonNullable: true });
     this.form = formBuilder.group({
+      fragment: this.fragment,
       project: this.project,
       typeId: this.typeId,
       name: this.name,
@@ -48,30 +45,27 @@ export class ModelFilterComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.updateForm(this._filter);
+    this.filter$.subscribe((f) => {
+      this.updateForm(f);
+    });
   }
 
-  private updateForm(filter?: CadmusModelFilter | null): void {
-    if (!filter) {
-      this.form.reset();
-      return;
-    }
-
-    this.project.setValue(filter.project);
-    this.typeId.setValue(filter.typeId);
-    this.name.setValue(filter.name);
-    this.tags.setValue(filter.tags?.length ? filter.tags.join(' ') : null);
-    this.matchAny.setValue(filter.matchAny);
+  private updateForm(filter: CadmusModelFilter): void {
+    this.fragment.setValue(filter.fragment || false);
+    this.project.setValue(filter.project || null);
+    this.typeId.setValue(filter.typeId || null);
+    this.name.setValue(filter.name || null);
+    this.tags.setValue(filter.tags?.join(' ') || null);
+    this.matchAny.setValue(filter.matchAny || false);
     this.form.markAsPristine();
   }
 
   private getFilter(): CadmusModelFilter {
     return {
-      pageNumber: 0,
-      pageSize: 0,
+      fragment: this.fragment.value,
       project: this.project.value?.trim(),
       typeId: this.typeId.value?.trim(),
-      name: this.name.value,
+      name: this.name.value || undefined,
       tags: this.tags.value ? this.tags.value.split(' ') : undefined,
       matchAny: this.matchAny.value,
     };
@@ -86,6 +80,9 @@ export class ModelFilterComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-    this.filterChange.emit(this.getFilter());
+    const filter = this.getFilter();
+
+    // update filter in state
+    this._repository.setFilter(filter);
   }
 }

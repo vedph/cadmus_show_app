@@ -8,15 +8,16 @@ import {
   ViewChild,
 } from '@angular/core';
 import {
-  UntypedFormBuilder,
-  UntypedFormControl,
-  UntypedFormGroup,
+  FormBuilder,
+  FormControl,
+  FormGroup,
   Validators,
 } from '@angular/forms';
 import { FacetDefinition } from '@myrmidon/cadmus-core';
 import { CadmusShopAssetService } from '@myrmidon/cadmus-shop-asset';
 import { CadmusModel } from '@myrmidon/cadmus-shop-core';
-import { GroupedPartDefinition, GroupingFacet } from './store/facet-list.store';
+
+import { GroupedPartDefinition, GroupingFacet } from './facet-list.repository';
 
 @Component({
   selector: 'cadmus-facet-list',
@@ -41,11 +42,11 @@ export class FacetListComponent implements OnInit {
   public currentModel: CadmusModel | undefined;
   public editedPart: GroupedPartDefinition | undefined;
   // new facet form
-  public newFacetId: UntypedFormControl;
-  public newFacetForm: UntypedFormGroup;
+  public newFacetId: FormControl<string | null>;
+  public newFacetForm: FormGroup;
 
   constructor(
-    formBuilder: UntypedFormBuilder,
+    formBuilder: FormBuilder,
     private _shopService: CadmusShopAssetService
   ) {
     this.facets = [];
@@ -78,7 +79,7 @@ export class FacetListComponent implements OnInit {
 
     // add the new facet
     const newFacet: GroupingFacet = {
-      id: this.newFacetId.value,
+      id: this.newFacetId.value!,
       label: 'new-facet',
       description: '',
       groups: [],

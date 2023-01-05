@@ -1,11 +1,10 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 import { MarkdownModule } from 'ngx-markdown';
 import { NgJsonEditorModule } from 'ang-jsoneditor';
 import { NgxMatFileInputModule } from '@angular-material-components/file-input';
@@ -14,7 +13,10 @@ import { CadmusMaterialModule } from '@myrmidon/cadmus-material';
 import { CadmusUiModule } from '@myrmidon/cadmus-ui';
 import { CadmusProfileCoreModule } from '@myrmidon/cadmus-profile-core';
 import { NgTickerModule } from 'ng-ticker';
-import { CadmusProfileUiModule } from '@myrmidon/cadmus-profile-ui';
+import {
+  CadmusProfileUiModule,
+  RamThesaurusService,
+} from '@myrmidon/cadmus-profile-ui';
 import { CadmusRefsHistoricalDateModule } from '@myrmidon/cadmus-refs-historical-date';
 import { CadmusShopCoreModule } from '@myrmidon/cadmus-shop-core';
 import { CadmusShopAssetModule } from '@myrmidon/cadmus-shop-asset';
@@ -23,7 +25,12 @@ import { CadmusShowVizModule } from '@myrmidon/cadmus-show-viz';
 import { ModelListComponent } from '@myrmidon/cadmus-shop-ui';
 import { CadmusThesaurusUiModule } from '@myrmidon/cadmus-thesaurus-ui';
 
-import { environment } from '../environments/environment';
+// ELF
+import { devTools } from '@ngneat/elf-devtools';
+import { Actions } from '@ngneat/effects-ng';
+
+// myrmidon
+import { NgxDirtyCheckModule } from '@myrmidon/ngx-dirty-check';
 
 import { AppComponent } from './app.component';
 import { DataArchitecturePageComponent } from './components/data-architecture-page/data-architecture-page.component';
@@ -50,6 +57,19 @@ import { EnvServiceProvider } from '@myrmidon/ng-tools';
 import { CadmusMatPhysicalSizeModule } from '@myrmidon/cadmus-mat-physical-size';
 import { SemanticGraphPageComponent } from './components/semantic-graph-page/semantic-graph-page.component';
 import { ExportPageComponent } from './components/export-page/export-page.component';
+import { CadmusRefsLookupModule } from '@myrmidon/cadmus-refs-lookup';
+import { CadmusThesaurusListModule } from '@myrmidon/cadmus-thesaurus-list';
+import { ThesaurusService } from '@myrmidon/cadmus-api';
+
+// https://ngneat.github.io/elf/docs/dev-tools/
+export function initElfDevTools(actions: Actions) {
+  return () => {
+    devTools({
+      name: 'Cadmus Show',
+      actionsDispatcher: actions,
+    });
+  };
+}
 
 @NgModule({
   declarations: [
@@ -95,12 +115,15 @@ import { ExportPageComponent } from './components/export-page/export-page.compon
     CadmusProfileCoreModule,
     CadmusProfileUiModule,
     CadmusRefsHistoricalDateModule,
+    CadmusRefsLookupModule,
     CadmusMatPhysicalSizeModule,
     CadmusShopCoreModule,
     CadmusShopAssetModule,
     CadmusShowUiModule,
     CadmusShowVizModule,
+    CadmusThesaurusListModule,
     CadmusThesaurusUiModule,
+    NgxDirtyCheckModule,
     RouterModule.forRoot(
       [
         { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -110,33 +133,51 @@ import { ExportPageComponent } from './components/export-page/export-page.compon
         { path: 'profile/flow', component: ProfileFlowComponent },
         { path: 'profile/code', component: ProfileCodePageComponent },
         { path: 'docs', component: OverviewPageComponent },
-        { path: 'docs/data-architecture', component: DataArchitecturePageComponent },
+        {
+          path: 'docs/data-architecture',
+          component: DataArchitecturePageComponent,
+        },
         { path: 'docs/export', component: ExportPageComponent },
-        { path: 'docs/text-architecture', component: TextArchitecturePageComponent },
+        {
+          path: 'docs/text-architecture',
+          component: TextArchitecturePageComponent,
+        },
         { path: 'docs/taxonomies', component: TaxonomiesPageComponent },
         { path: 'docs/infrastructure', component: InfrastructurePageComponent },
         { path: 'docs/semantic-graph', component: SemanticGraphPageComponent },
         { path: 'models', component: ShopPageComponent },
         { path: 'models/shop', component: ModelListComponent },
-        { path: 'models/graph', component: ModelGraphPageComponent},
+        { path: 'models/graph', component: ModelGraphPageComponent },
         { path: 'facets-code', component: FacetListCodePageComponent },
         { path: 'facets-list', component: FacetListPageComponent },
         { path: 'flags-code', component: FlagListCodePageComponent },
         { path: 'flags-list', component: FlagListPageComponent },
         { path: 'thes-code', component: ThesaurusListCodePageComponent },
         { path: 'thes-list', component: ThesaurusListPageComponent },
-        { path: 'thes/:id', component: ThesaurusEditComponent },
+        { path: 'thesauri/:id', component: ThesaurusEditComponent },
         { path: '**', component: HomeComponent },
       ],
       {
         initialNavigation: 'enabledBlocking',
         useHash: true,
-        relativeLinkResolution: 'legacy',
       }
     ),
-    environment.production ? [] : AkitaNgDevtools.forRoot(),
   ],
-  providers: [EnvServiceProvider],
+  providers: [
+    EnvServiceProvider,
+    // ELF dev tools
+    {
+      provide: APP_INITIALIZER,
+      multi: true,
+      useFactory: initElfDevTools,
+      deps: [Actions],
+    },
+    // overrides
+    {
+      provide: ThesaurusService,
+      useExisting: RamThesaurusService,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

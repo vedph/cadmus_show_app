@@ -1,6 +1,7 @@
 <form [formGroup]="newFacetForm" (submit)="addFacet()">
   <mat-form-field>
-    <input matInput [formControl]="newFacetId" placeholder="facet ID" />
+    <mat-label>facet ID</mat-label>
+    <input matInput [formControl]="newFacetId" />
     <mat-error
       *ngIf="
         newFacetId.errors?.required && (newFacetId.dirty || newFacetId.touched)
@@ -20,7 +21,7 @@
       >invalid ID</mat-error
     >
   </mat-form-field>
-  <button mat-icon-button color="primary" (click)="addFacet()">
+  <button mat-flat-button color="primary" (click)="addFacet()">
     <mat-icon>add_circle</mat-icon>
     add facet
   </button>

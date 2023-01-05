@@ -2,7 +2,8 @@
   <div>
     <!-- typeId -->
     <mat-form-field>
-      <input matInput [formControl]="typeId" placeholder="type ID" />
+      <mat-label>type ID</mat-label>
+      <input matInput [formControl]="typeId" />
       <mat-error
         *ngIf="typeId.errors?.required && (typeId.dirty || typeId.touched)"
         >type ID required</mat-error
@@ -13,7 +14,8 @@
       >
     </mat-form-field>
     &nbsp;
-    <cadmus-model-lookup style="display: inline-block"
+    <cadmus-model-lookup
+      style="display: inline-block"
       label="part lookup"
       (itemChange)="onPartModelPicked($event)"
     ></cadmus-model-lookup>
@@ -22,7 +24,8 @@
   <div>
     <!-- name -->
     <mat-form-field>
-      <input matInput [formControl]="name" placeholder="name" />
+      <mat-label>name</mat-label>
+      <input matInput [formControl]="name" />
       <mat-error *ngIf="name.errors?.required && (name.dirty || name.touched)"
         >name required</mat-error
       >
@@ -38,7 +41,8 @@
   <div>
     <!-- roleId -->
     <mat-form-field>
-      <input matInput [formControl]="roleId" placeholder="role ID" />
+      <mat-label>role ID</mat-label>
+      <input matInput [formControl]="roleId" />
       <mat-error
         *ngIf="roleId.errors?.required && (roleId.dirty || roleId.touched)"
         >role ID required</mat-error
@@ -49,7 +53,8 @@
       >
     </mat-form-field>
     &nbsp;
-    <cadmus-model-lookup style="display: inline-block"
+    <cadmus-model-lookup
+      style="display: inline-block"
       [fragment]="true"
       label="fragment lookup"
       (itemChange)="onFragmentModelPicked($event)"
@@ -59,12 +64,8 @@
   <div>
     <!-- description -->
     <mat-form-field style="width: 100%; max-width: 800px">
-      <textarea
-        matInput
-        rows="2"
-        [formControl]="description"
-        placeholder="description"
-      ></textarea>
+      <mat-label>description</mat-label>
+      <textarea matInput rows="2" [formControl]="description"></textarea>
       <mat-error
         *ngIf="
           description.errors?.required &&
@@ -93,7 +94,8 @@
     <!-- groupKey -->
     &nbsp;
     <mat-form-field>
-      <input matInput [formControl]="groupKey" placeholder="group key" />
+      <mat-label>group key</mat-label>
+      <input matInput [formControl]="groupKey" />
       <mat-error
         *ngIf="groupKey.errors?.pattern && (groupKey.dirty || groupKey.touched)"
         >invalid g-key</mat-error
@@ -110,7 +112,8 @@
     <!-- sortKey -->
     &nbsp;
     <mat-form-field>
-      <input matInput [formControl]="sortKey" placeholder="sort key" />
+      <mat-label>sort key</mat-label>
+      <input matInput [formControl]="sortKey" />
       <mat-error
         *ngIf="sortKey.errors?.required && (sortKey.dirty || sortKey.touched)"
         >sort key required</mat-error

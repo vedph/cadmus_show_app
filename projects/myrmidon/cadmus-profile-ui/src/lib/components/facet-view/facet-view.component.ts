@@ -5,25 +5,28 @@ import {
 } from '@angular/cdk/drag-drop';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
-  UntypedFormArray,
-  UntypedFormBuilder,
-  UntypedFormControl,
-  UntypedFormGroup,
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
   Validators,
 } from '@angular/forms';
 import { MatChipEvent } from '@angular/material/chips';
-import { FacetDefinition, PartDefinition } from '@myrmidon/cadmus-core';
-import { ColorService } from '@myrmidon/cadmus-show-ui';
-import { DialogService } from '@myrmidon/ng-mat-tools';
-import { deepCopy } from '@myrmidon/ng-tools';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
+
+import { FacetDefinition, PartDefinition } from '@myrmidon/cadmus-core';
+import { DialogService } from '@myrmidon/ng-mat-tools';
+import { deepCopy } from '@myrmidon/ng-tools';
+
 import { PartDefinitionVmService } from '../../services/part-definition-vm.service';
 import {
   GroupedPartDefinition,
   GroupingFacet,
   PartDefinitionGroup,
-} from '../facet-list/store/facet-list.store';
+} from '../facet-list/facet-list.repository';
+import { ColorService } from '@myrmidon/cadmus-ui';
+import { Color } from '@angular-material-components/color-picker';
 
 /**
  * A facet's view, with its groups and parts.
@@ -73,12 +76,12 @@ export class FacetViewComponent {
   public dirty: boolean;
 
   // form
-  public groups: UntypedFormArray;
-  public form: UntypedFormGroup;
+  public groups: FormArray;
+  public form: FormGroup;
 
   // color form
-  public color: UntypedFormControl;
-  public colorForm: UntypedFormGroup;
+  public color: FormControl<Color | null>;
+  public colorForm: FormGroup;
 
   // part editing
   public selectedPartId: string | undefined;
@@ -89,7 +92,7 @@ export class FacetViewComponent {
   public editedFacet: FacetDefinition | undefined;
 
   constructor(
-    private _formBuilder: UntypedFormBuilder,
+    private _formBuilder: FormBuilder,
     private _dialogService: DialogService,
     private _colorService: ColorService,
     private _partService: PartDefinitionVmService
@@ -138,7 +141,7 @@ export class FacetViewComponent {
   }
 
   //#region Groups
-  private getGroupControl(group?: PartDefinitionGroup): UntypedFormGroup {
+  private getGroupControl(group?: PartDefinitionGroup): FormGroup {
     return this._formBuilder.group({
       id: this._formBuilder.control(group?.id, [
         Validators.required,
@@ -372,7 +375,7 @@ export class FacetViewComponent {
     const gi = this.findPart(this.selectedPartId);
     if (gi) {
       this._facet.groups[gi.groupIndex].partDefinitions[gi.partIndex].colorKey =
-        this.color.value.hex;
+        this.color.value?.hex || '';
       this.dirty = true;
     }
   }
@@ -506,7 +509,7 @@ export class FacetViewComponent {
     // update group IDs from controls
     for (let i = 0; i < this.groups.length; i++) {
       this._facet.groups[i].id = (
-        this.groups.at(i) as UntypedFormGroup
+        this.groups.at(i) as FormGroup
       ).controls.id.value?.trim();
     }
   }

@@ -4,5 +4,4 @@
 
 export * from './lib/components/running-count/running-count.component';
 export * from './lib/components/shot-gallery/shot-gallery.component';
-export * from './lib/services/color.service';
 export * from './lib/cadmus-show-ui.module';

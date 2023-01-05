@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { FlagDefinition } from '@myrmidon/cadmus-core';
-import { FlagListQuery, FlagListService } from '@myrmidon/cadmus-profile-ui';
-import { deepCopy } from '@myrmidon/ng-tools';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+
+import { FlagDefinition } from '@myrmidon/cadmus-core';
+import { FlagListRepository } from '@myrmidon/cadmus-profile-ui';
+import { deepCopy } from '@myrmidon/ng-tools';
 
 @Component({
   selector: 'app-flag-list-page',
@@ -16,12 +17,11 @@ export class FlagListPageComponent implements OnInit {
   public flags$: Observable<FlagDefinition[]>;
 
   constructor(
-    query: FlagListQuery,
-    private _flagListService: FlagListService,
+    private _repository: FlagListRepository,
     private _snackbar: MatSnackBar,
     private _router: Router
   ) {
-    this.flags$ = query.selectAll().pipe(
+    this.flags$ = _repository.flags$.pipe(
       map((flags) => {
         return flags.map((f) => {
           return deepCopy(f);
@@ -33,7 +33,7 @@ export class FlagListPageComponent implements OnInit {
   ngOnInit(): void {}
 
   public onFlagsChange(flags: FlagDefinition[]): void {
-    this._flagListService.set(flags);
+    this._repository.setFlags(flags);
     this._snackbar.open('Flags saved', 'OK', {
       duration: 1500,
     });

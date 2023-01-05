@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 import { ThesaurusEntry } from '@myrmidon/cadmus-core';
 import {
@@ -14,13 +14,13 @@ import {
 })
 export class IntroPageComponent implements OnInit {
   public initialSize: PhysicalSize;
-  public size: UntypedFormControl;
-  public user: UntypedFormControl;
-  public form: UntypedFormGroup;
+  public size: FormControl<PhysicalSize | null>;
+  public user: FormControl<string | null>;
+  public form: FormGroup;
   public rdf: string | undefined;
   public unitEntries: ThesaurusEntry[];
 
-  constructor(formBuilder: UntypedFormBuilder) {
+  constructor(formBuilder: FormBuilder) {
     this.unitEntries = [
       { id: 'mm', value: 'mm' },
       { id: 'cm', value: 'cm' },
@@ -71,7 +71,7 @@ export class IntroPageComponent implements OnInit {
 
   public buildRdf(): void {
     const sb: string[] = [];
-    if (!this.size.value.w && !this.size.value.h && !this.size.value.d) {
+    if (!this.size.value?.w && !this.size.value?.h && !this.size.value?.d) {
       return;
     }
 
@@ -122,7 +122,7 @@ export class IntroPageComponent implements OnInit {
     // <You> P2_has_type E21_Person.
     // <MyMeasurement> P141_assigned <You>;
     //   P7_took_place_at "...".
-    const user = this.user.value.replace(new RegExp('\\s+', 'g'), '');
+    const user = this.user.value?.replace(new RegExp('\\s+', 'g'), '');
     if (user) {
       sb.push(`\n# you (${this.user.value}) are a person:\n`);
       sb.push(`my:${user} crm:P2_has_type crm:E21_Person.\n`);

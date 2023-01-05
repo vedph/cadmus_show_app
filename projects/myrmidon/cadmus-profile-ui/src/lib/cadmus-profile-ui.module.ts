@@ -5,27 +5,27 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CadmusMaterialModule } from '@myrmidon/cadmus-material';
 import { CadmusProfileCoreModule } from '@myrmidon/cadmus-profile-core';
 import { CadmusShowUiModule } from '@myrmidon/cadmus-show-ui';
-import { FacetViewComponent } from './components/facet-view/facet-view.component';
-import { FacetMetadataEditorComponent } from './components/facet-metadata-editor/facet-metadata-editor.component';
 import {
   MAT_COLOR_FORMATS,
   NgxMatColorPickerModule,
   NGX_MAT_COLOR_FORMATS,
 } from '@angular-material-components/color-picker';
+import { CadmusThesaurusUiModule } from '@myrmidon/cadmus-thesaurus-ui';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MarkdownModule } from 'ngx-markdown';
+import { NgJsonEditorModule } from 'ang-jsoneditor';
+
 import { FacetListComponent } from './components/facet-list/facet-list.component';
+import { FacetViewComponent } from './components/facet-view/facet-view.component';
+import { FlagBitPipe } from './pipes/flag-bit.pipe';
 import { FlagDefinitionEditorComponent } from './components/flag-definition-editor/flag-definition-editor.component';
 import { FlagListComponent } from './components/flag-list/flag-list.component';
-import { FlagBitPipe } from './pipes/flag-bit.pipe';
+import { FacetMetadataEditorComponent } from './components/facet-metadata-editor/facet-metadata-editor.component';
 import { JsonEditorComponent } from './components/json-editor/json-editor.component';
-import { MarkdownModule } from 'ngx-markdown';
 import { ModelLookupComponent } from './components/model-lookup/model-lookup.component';
-import { NgJsonEditorModule } from 'ang-jsoneditor';
 import { PartDefinitionEditorComponent } from './components/part-definition-editor/part-definition-editor.component';
 import { PartInfoComponent } from './components/part-info/part-info.component';
-import { ThesaurusListComponent } from './components/thesaurus-list/thesaurus-list.component';
-import { ThesaurusFilterComponent } from './components/thesaurus-filter/thesaurus-filter.component';
-import { CadmusThesaurusUiModule } from '@myrmidon/cadmus-thesaurus-ui';
 
 @NgModule({
   declarations: [
@@ -39,8 +39,6 @@ import { CadmusThesaurusUiModule } from '@myrmidon/cadmus-thesaurus-ui';
     ModelLookupComponent,
     PartDefinitionEditorComponent,
     PartInfoComponent,
-    ThesaurusFilterComponent,
-    ThesaurusListComponent,
   ],
   imports: [
     CommonModule,
@@ -55,7 +53,7 @@ import { CadmusThesaurusUiModule } from '@myrmidon/cadmus-thesaurus-ui';
     CadmusMaterialModule,
     CadmusProfileCoreModule,
     CadmusShowUiModule,
-    CadmusThesaurusUiModule
+    CadmusThesaurusUiModule,
   ],
   providers: [{ provide: MAT_COLOR_FORMATS, useValue: NGX_MAT_COLOR_FORMATS }],
   exports: [
@@ -68,8 +66,6 @@ import { CadmusThesaurusUiModule } from '@myrmidon/cadmus-thesaurus-ui';
     ModelLookupComponent,
     PartDefinitionEditorComponent,
     PartInfoComponent,
-    ThesaurusListComponent,
-    ThesaurusFilterComponent,
   ],
 })
 export class CadmusProfileUiModule {}

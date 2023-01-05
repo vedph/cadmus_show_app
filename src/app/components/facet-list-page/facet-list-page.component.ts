@@ -2,8 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { FacetListQuery, GroupingFacet } from '@myrmidon/cadmus-profile-ui';
 import { deepCopy } from '@myrmidon/ng-tools';
+import {
+  FacetListRepository,
+  GroupingFacet,
+} from '@myrmidon/cadmus-profile-ui';
 
 @Component({
   selector: 'app-facet-list-page',
@@ -13,8 +16,8 @@ import { deepCopy } from '@myrmidon/ng-tools';
 export class FacetListPageComponent implements OnInit {
   public facets$: Observable<GroupingFacet[]>;
 
-  constructor(query: FacetListQuery) {
-    this.facets$ = query.selectAll().pipe(
+  constructor(repository: FacetListRepository) {
+    this.facets$ = repository.facets$.pipe(
       map((facets) => {
         return facets.map((f) => {
           return deepCopy(f);

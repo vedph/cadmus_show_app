@@ -1,54 +1,45 @@
-<mat-card>
+<mat-card appearance="outlined">
   <mat-card-header>
     <mat-card-title>
       <h2>Thesauri List Code</h2>
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <div>
+    <form
+      [formGroup]="form"
+      (submit)="importCsv()"
+      class="form-row"
+    >
       <button type="button" mat-stroked-button (click)="loadSample()">
         <mat-icon>input</mat-icon>
         load sample
       </button>
-      &nbsp;
-      <form
-        [formGroup]="form"
-        (submit)="importCsv()"
-        style="display: inline-block"
-      >
-        <mat-form-field>
-          <ngx-mat-file-input
-            placeholder="CSV file to import"
-            formControlName="csvFile"
-            accept=".csv,.tsv,.txt"
-          >
-          </ngx-mat-file-input>
-        </mat-form-field>
-        &nbsp;
-        <mat-form-field style="width: 3em">
-          <input
-            matInput
-            [formControl]="csvSeparator"
-            placeholder="separator"
-          />
-          <mat-error
-            *ngIf="
-              csvSeparator.errors?.required &&
-              (csvSeparator.dirty || csvSeparator.touched)
-            "
-            >required</mat-error
-          >
-        </mat-form-field>
-        <button
-          type="submit"
-          mat-icon-button
-          [disabled]="form.invalid"
-          color="primary"
+      <mat-form-field style="width: 270px">
+        CSV file to import
+        <ngx-mat-file-input formControlName="csvFile" accept=".csv,.tsv,.txt">
+        </ngx-mat-file-input>
+      </mat-form-field>
+
+      <mat-form-field style="width: 5em">
+        <mat-label>separator</mat-label>
+        <input matInput [formControl]="csvSeparator" />
+        <mat-error
+          *ngIf="
+            csvSeparator.errors?.required &&
+            (csvSeparator.dirty || csvSeparator.touched)
+          "
+          >required</mat-error
         >
-          <mat-icon>upload_file</mat-icon>
-        </button>
-      </form>
-    </div>
+      </mat-form-field>
+      <button
+        type="submit"
+        mat-icon-button
+        [disabled]="form.invalid"
+        color="primary"
+      >
+        <mat-icon>upload_file</mat-icon>
+      </button>
+    </form>
     <cadmus-json-editor
       [data]="(data$ | async) || '[]'"
       (dataChange)="onDataChange($event)"

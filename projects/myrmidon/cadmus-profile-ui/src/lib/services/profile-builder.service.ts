@@ -4,8 +4,9 @@ import {
   FlagDefinition,
   Thesaurus,
 } from '@myrmidon/cadmus-core';
-import { GroupingFacet } from '../components/facet-list/store/facet-list.store';
+
 import { PartDefinitionVmService } from './part-definition-vm.service';
+import { GroupingFacet } from '../components/facet-list/facet-list.repository';
 
 export interface CadmusProfile {
   facets: FacetDefinition[];

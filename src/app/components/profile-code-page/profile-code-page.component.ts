@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { TextToFileService } from '@myrmidon/cadmus-profile-core';
 import {
   CadmusProfile,
-  FacetListQuery,
-  FlagListQuery,
+  FacetListRepository,
+  FlagListRepository,
   ProfileBuilderService,
   RamThesaurusService,
 } from '@myrmidon/cadmus-profile-ui';
@@ -17,8 +17,8 @@ export class ProfileCodePageComponent implements OnInit {
   public profile: CadmusProfile | undefined;
 
   constructor(
-    private _facetListQuery: FacetListQuery,
-    private _flagListQuery: FlagListQuery,
+    private _facetRepository: FacetListRepository,
+    private _flagRepository: FlagListRepository,
     private _thesService: RamThesaurusService,
     private _builderService: ProfileBuilderService,
     private _textToFileService: TextToFileService
@@ -26,8 +26,8 @@ export class ProfileCodePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.profile = this._builderService.build(
-      this._facetListQuery.getAll(),
-      this._flagListQuery.getAll(),
+      this._facetRepository.getAll(),
+      this._flagRepository.getAll(),
       this._thesService.getAll()
     );
   }

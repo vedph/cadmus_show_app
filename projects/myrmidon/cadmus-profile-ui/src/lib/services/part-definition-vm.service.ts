@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { FacetDefinition, PartDefinition } from '@myrmidon/cadmus-core';
 import { ProfileUtilService } from '@myrmidon/cadmus-profile-core';
+
 import {
   GroupedPartDefinition,
   GroupedPartDefinitionId,
   GroupingFacet,
   PartDefinitionGroup,
-} from '../components/facet-list/store/facet-list.store';
+} from '../components/facet-list/facet-list.repository';
 
 /**
  * The ID for a part in the scope of its group.
@@ -157,7 +158,7 @@ export class PartDefinitionVmService {
       label: facet.label,
       colorKey: facet.colorKey || '',
       description: facet.description,
-      partDefinitions: this.getPartDefsFromGroup(facet)
+      partDefinitions: this.getPartDefsFromGroup(facet),
     };
   }
 }

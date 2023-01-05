@@ -1,22 +1,22 @@
-<mat-card>
+<mat-card appearance="outlined">
   <mat-card-content>
     <mat-tab-group [(selectedIndex)]="tabIndex">
       <!-- facet -->
       <mat-tab label="facet">
         <div *ngIf="facet" [formGroup]="form">
           <!-- head -->
-          <div>
+          <div class="form-row">
             <!-- label -->
             <span
               class="f-label"
-              [style.background]="'#' + facet?.colorKey"
-              [style.color]="getContrastColor(facet?.colorKey)"
+              [style.background]="'#' + facet.colorKey"
+              [style.color]="getContrastColor(facet.colorKey)"
             >
-              {{ facet?.label }}
+              {{ facet.label }}
             </span>
             <!-- id -->
             <span class="f-id">
-              {{ facet?.id }}
+              {{ facet.id }}
             </span>
             <ng-container *ngIf="editable">
               <!-- edit facet -->
@@ -76,7 +76,7 @@
               <!-- save facet -->
               <button
                 type="button"
-                mat-icon-button
+                mat-flat-button
                 color="primary"
                 [disabled]="!dirty && !form.dirty"
                 (click)="save()"
@@ -86,7 +86,7 @@
             </ng-container>
           </div>
           <!-- groups -->
-          <mat-expansion-panel [disabled]="!facet.groups?.length">
+          <mat-expansion-panel [disabled]="!facet.groups.length">
             <mat-expansion-panel-header>
               <mat-panel-title>groups</mat-panel-title>
               <mat-panel-description>{{
@@ -96,6 +96,7 @@
 
             <div formArrayName="groups" cdkDropListGroup>
               <mat-card
+                appearance="outlined"
                 *ngFor="
                   let item of groups.controls;
                   let i = index;
@@ -109,7 +110,8 @@
                   <div [formGroupName]="i">
                     <!-- child controls -->
                     <mat-form-field *ngIf="editable">
-                      <input matInput formControlName="id" placeholder="ID" />
+                      <mat-label>ID</mat-label>
+                      <input matInput formControlName="id" />
                       <mat-error
                         *ngIf="
                           $any(item).controls.id.errors?.required &&
@@ -196,14 +198,14 @@
                   </div>
 
                   <!-- parts -->
-                  <mat-chip-list
+                  <mat-chip-listbox
                     cdkDropList
                     class="f-chip-list"
                     cdkDropListOrientation="horizontal"
-                    [cdkDropListData]="facet.groups[i]?.partDefinitions || []"
+                    [cdkDropListData]="facet.groups[i].partDefinitions || []"
                     (cdkDropListDropped)="onPartDrop($event)"
                   >
-                    <mat-chip
+                    <mat-chip-option
                       *ngFor="let d of facet.groups[i].partDefinitions"
                       cdkDrag
                       class="f-chip"
@@ -222,8 +224,8 @@
                     >
                       {{ d.name }}
                       <mat-icon matChipRemove *ngIf="editable">cancel</mat-icon>
-                    </mat-chip>
-                  </mat-chip-list>
+                    </mat-chip-option>
+                  </mat-chip-listbox>
                 </mat-card-content>
               </mat-card>
             </div>

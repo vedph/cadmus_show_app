@@ -1,15 +1,14 @@
 import { Color } from '@angular-material-components/color-picker';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
-  UntypedFormBuilder,
-  UntypedFormControl,
-  UntypedFormGroup,
+  FormBuilder,
+  FormControl,
+  FormGroup,
   Validators,
 } from '@angular/forms';
 import { PartDefinition } from '@myrmidon/cadmus-core';
-import { CadmusShopAssetService } from '@myrmidon/cadmus-shop-asset';
 import { CadmusModel } from '@myrmidon/cadmus-shop-core';
-import { ColorService } from '@myrmidon/cadmus-show-ui';
+import { ColorService } from '@myrmidon/cadmus-ui';
 
 @Component({
   selector: 'cadmus-part-definition-editor',
@@ -42,21 +41,17 @@ export class PartDefinitionEditorComponent implements OnInit {
   @Output()
   public editorClose: EventEmitter<any>;
 
-  public typeId: UntypedFormControl;
-  public roleId: UntypedFormControl;
-  public name: UntypedFormControl;
-  public description: UntypedFormControl;
-  public required: UntypedFormControl;
-  public colorKey: UntypedFormControl;
-  public groupKey: UntypedFormControl;
-  public sortKey: UntypedFormControl;
-  public form: UntypedFormGroup;
+  public typeId: FormControl<string | null>;
+  public roleId: FormControl<string | null>;
+  public name: FormControl<string | null>;
+  public description: FormControl<string | null>;
+  public required: FormControl<boolean>;
+  public colorKey: FormControl<Color | null>;
+  public groupKey: FormControl<string | null>;
+  public sortKey: FormControl<string | null>;
+  public form: FormGroup;
 
-  constructor(
-    formBuilder: UntypedFormBuilder,
-    private _colorService: ColorService,
-    private _shopService: CadmusShopAssetService
-  ) {
+  constructor(formBuilder: FormBuilder, private _colorService: ColorService) {
     this.definitionChange = new EventEmitter<PartDefinition>();
     this.editorClose = new EventEmitter<any>();
     // form
@@ -77,7 +72,7 @@ export class PartDefinitionEditorComponent implements OnInit {
       Validators.required,
       Validators.maxLength(500),
     ]);
-    this.required = formBuilder.control(false);
+    this.required = formBuilder.control(false, { nonNullable: true });
     this.colorKey = formBuilder.control(
       new Color(200, 200, 200),
       Validators.required
@@ -114,12 +109,12 @@ export class PartDefinitionEditorComponent implements OnInit {
     }
 
     this.typeId.setValue(definition.typeId);
-    this.roleId.setValue(definition.roleId);
+    this.roleId.setValue(definition.roleId || null);
     this.name.setValue(definition.name);
     this.description.setValue(definition.description);
     this.required.setValue(definition.isRequired);
-    const rgb = this._colorService.parseRgb(definition.colorKey);
-    this.colorKey.setValue(rgb ? new Color(rgb.r, rgb.g, rgb.b) : null);
+    const rgb = this._colorService.getRgb(definition.colorKey);
+    this.colorKey.setValue(rgb ? new Color(rgb[0], rgb[1], rgb[2]) : null);
     this.groupKey.setValue(definition.groupKey);
     this.sortKey.setValue(definition.sortKey);
     this.form.markAsPristine();
@@ -127,14 +122,14 @@ export class PartDefinitionEditorComponent implements OnInit {
 
   private getDefinition(): PartDefinition {
     return {
-      typeId: this.typeId.value?.trim(),
+      typeId: this.typeId.value?.trim() || '',
       roleId: this.roleId.value?.trim(),
-      name: this.name.value?.trim(),
-      description: this.description.value?.trim(),
+      name: this.name.value?.trim() || '',
+      description: this.description.value?.trim() || '',
       isRequired: this.required.value ? true : false,
-      colorKey: this.colorKey.value.hex,
-      groupKey: this.groupKey.value?.trim(),
-      sortKey: this.sortKey.value?.trim(),
+      colorKey: this.colorKey.value?.hex || '',
+      groupKey: this.groupKey.value?.trim() || '',
+      sortKey: this.sortKey.value?.trim() || '',
     };
   }
 

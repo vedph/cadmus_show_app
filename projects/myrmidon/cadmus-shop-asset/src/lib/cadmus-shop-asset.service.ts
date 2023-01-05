@@ -83,19 +83,20 @@ export class CadmusShopAssetService {
 
   private getModelPage(
     filter: CadmusModelFilter,
-    modelMap: Map<string, CadmusModel>
+    modelMap: Map<string, CadmusModel>,
+    pageNumber: number = 1,
+    pageSize: number = 20
   ): DataPage<CadmusModel> {
-    const skip = (filter.pageNumber - 1) * filter.pageSize;
+    const skip = (pageNumber - 1) * pageSize;
     const items = [...modelMap.values()]
       .filter((u) => this.matchFilter(u, filter))
       .sort((a, b) => a.id.localeCompare(b.id));
     return {
-      pageNumber: filter.pageNumber,
-      pageSize: filter.pageSize,
+      pageNumber: pageNumber,
+      pageSize: pageSize,
       pageCount: 0,
       total: items.length,
-      items:
-        filter.pageSize > 0 ? items.slice(skip, skip + filter.pageSize) : items,
+      items: pageSize > 0 ? items.slice(skip, skip + pageSize) : items,
     };
   }
 
@@ -104,16 +105,16 @@ export class CadmusShopAssetService {
    * the models at once if the page size is 0.
    *
    * @param filter The filter.
-   * @param fragment True to get fragments, false to get parts.
    */
   public getModels(
     filter: CadmusModelFilter,
-    fragment: boolean
+    pageNumber = 1,
+    pageSize = 20
   ): Observable<DataPage<CadmusModel>> {
     let cachedMap: Map<string, CadmusModel> | undefined;
     let path: string;
 
-    if (fragment) {
+    if (filter.fragment) {
       cachedMap = this._frModels;
       path = 'f/index';
     } else {
@@ -132,7 +133,7 @@ export class CadmusShopAssetService {
         ),
         // store map for later use
         tap((m) => {
-          if (fragment) {
+          if (filter.fragment) {
             this._frModels = m;
           } else {
             this._partModels = m;
@@ -140,12 +141,12 @@ export class CadmusShopAssetService {
         }),
         // map to page
         map((m) => {
-          return this.getModelPage(filter, m);
+          return this.getModelPage(filter, m, pageNumber, pageSize);
         })
       );
     } else {
       // else just use the cached map
-      return of(this.getModelPage(filter, cachedMap));
+      return of(this.getModelPage(filter, cachedMap, pageNumber, pageSize));
     }
   }
 
@@ -163,13 +164,13 @@ export class CadmusShopAssetService {
   ): Observable<CadmusModel[]> {
     return this.getModels(
       {
-        pageNumber: 1,
-        pageSize: limit,
+        fragment: fragment,
         name: filter,
         typeId: filter,
         matchAny: true,
       },
-      fragment
+      1,
+      limit
     ).pipe(map((p) => p.items));
   }
 

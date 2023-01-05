@@ -24,14 +24,6 @@ export interface CadmusModel {
 }
 
 /**
- * Server paging options.
- */
-export interface PagingOptions {
-  pageNumber: number;
-  pageSize: number;
-}
-
-/**
  * A page of data.
  */
 export interface DataPage<T> {
@@ -45,7 +37,8 @@ export interface DataPage<T> {
 /**
  * A filter for CadmusModel's.
  */
-export interface CadmusModelFilter extends PagingOptions {
+export interface CadmusModelFilter {
+  fragment?: boolean;
   project?: string;
   typeId?: string;
   name?: string;

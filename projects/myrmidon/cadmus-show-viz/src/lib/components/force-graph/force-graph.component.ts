@@ -26,25 +26,25 @@ import {
   template: '<svg:svg #fg [id]="id"></svg:svg>',
   styles: [
     `
-      :host ::ng-deep .links line {
-        stroke: #999;
-        stroke-opacity: 0.6;
-      }
-
-      :host ::ng-deep .nodes circle {
-        stroke: #fff;
-        stroke-width: 1.5px;
-      }
-
-      :host ::ng-deep text {
-        font-family: sans-serif;
-        font-size: 10px;
-      }
-
-      :host ::ng-deep .nodes circle.pinned {
-        stroke: orange;
-      }
-    `,
+           :host ::ng-deep .links line {
+             stroke: #999;
+             stroke-opacity: 0.6;
+           }
+     
+           :host ::ng-deep .nodes circle {
+             stroke: #fff;
+             stroke-width: 1.5px;
+           }
+     
+           :host ::ng-deep text {
+             font-family: sans-serif;
+             font-size: 10px;
+           }
+     
+           :host ::ng-deep .nodes circle.pinned {
+             stroke: orange;
+           }
+         `,
   ],
 })
 export class ForceGraphComponent implements OnInit, AfterViewInit {

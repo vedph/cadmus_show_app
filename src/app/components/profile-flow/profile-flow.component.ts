@@ -2,8 +2,8 @@ import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
-  FacetListQuery,
-  FlagListQuery,
+  FacetListRepository,
+  FlagListRepository,
   RamThesaurusService,
 } from '@myrmidon/cadmus-profile-ui';
 import { TourService } from 'ngx-ui-tour-md-menu';
@@ -20,8 +20,8 @@ export class ProfileFlowComponent implements OnInit {
   public initialIndex: number;
 
   constructor(
-    private _facetQuery: FacetListQuery,
-    private _flagQuery: FlagListQuery,
+    private _facetRepository: FacetListRepository,
+    private _flagRepository: FlagListRepository,
     private _thesService: RamThesaurusService,
     private _tourService: TourService,
     route: ActivatedRoute
@@ -36,10 +36,10 @@ export class ProfileFlowComponent implements OnInit {
   private setCounts(index: number): void {
     switch (index) {
       case 0:
-        this.counts[0] = this._facetQuery.getCount();
+        this.counts[0] = this._facetRepository.getCount();
         break;
       case 1:
-        this.counts[1] = this._flagQuery.getCount();
+        this.counts[1] = this._flagRepository.getCount();
         break;
       case 2:
         this.counts[2] = this._thesService.count;

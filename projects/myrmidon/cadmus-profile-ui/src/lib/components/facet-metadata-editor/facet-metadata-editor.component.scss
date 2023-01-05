@@ -1,8 +1,17 @@
 .id {
-  font-family: 'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
   color: #808080;
   border: 1px solid silver;
   border-radius: 6px;
   padding: 4px;
   margin: 8px 0;
+}
+.form-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.form-row * {
+  flex: 0 0 auto;
 }

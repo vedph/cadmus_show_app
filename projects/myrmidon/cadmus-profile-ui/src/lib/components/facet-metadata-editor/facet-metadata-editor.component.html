@@ -2,7 +2,8 @@
   <!-- id -->
   <div>
     <mat-form-field *ngIf="editableId">
-      <input matInput [formControl]="id" placeholder="ID" />
+      <mat-label>ID</mat-label>
+      <input matInput [formControl]="id" />
       <mat-error *ngIf="id.errors?.required && (id.dirty || id.touched)"
         >ID required</mat-error
       >
@@ -13,13 +14,14 @@
         >invalid ID</mat-error
       >
     </mat-form-field>
-    <div class="id">{{ id?.value }}</div>
+    <div class="id">{{ id.value }}</div>
   </div>
 
   <!-- label -->
-  <div>
+  <div class="form-row">
     <mat-form-field>
-      <input matInput [formControl]="label" placeholder="label" />
+      <mat-label>label</mat-label>
+      <input matInput [formControl]="label" />
       <mat-error
         *ngIf="label.errors?.required && (label.dirty || label.touched)"
         >label required</mat-error
@@ -31,7 +33,6 @@
     </mat-form-field>
 
     <!-- colorKey -->
-    &nbsp;
     <mat-form-field style="width: 8em">
       <input matInput [ngxMatColorPicker]="picker" [formControl]="colorKey" />
       <ngx-mat-color-toggle matSuffix [for]="picker"></ngx-mat-color-toggle>
@@ -42,12 +43,8 @@
   <!-- description -->
   <div>
     <mat-form-field style="width: 100%; max-width: 800px">
-      <textarea
-        matInput
-        rows="2"
-        [formControl]="description"
-        placeholder="description"
-      ></textarea>
+      <mat-label>description</mat-label>
+      <textarea matInput rows="2" [formControl]="description"></textarea>
       <mat-error
         *ngIf="
           description.errors?.required &&

@@ -1,13 +1,13 @@
 import { Color } from '@angular-material-components/color-picker';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
-  UntypedFormBuilder,
-  UntypedFormControl,
-  UntypedFormGroup,
+  FormBuilder,
+  FormControl,
+  FormGroup,
   Validators,
 } from '@angular/forms';
 import { FacetDefinition } from '@myrmidon/cadmus-core';
-import { ColorService } from '@myrmidon/cadmus-show-ui';
+import { ColorService } from '@myrmidon/cadmus-ui';
 
 /**
  * Editor for facet definition metadata, i.e. all the data of a facet
@@ -47,13 +47,13 @@ export class FacetMetadataEditorComponent implements OnInit {
   @Output()
   public editorClose: EventEmitter<any>;
 
-  public id: UntypedFormControl;
-  public label: UntypedFormControl;
-  public colorKey: UntypedFormControl;
-  public description: UntypedFormControl;
-  public form: UntypedFormGroup;
+  public id: FormControl<string | null>;
+  public label: FormControl<string | null>;
+  public colorKey: FormControl<Color | null>;
+  public description: FormControl<string | null>;
+  public form: FormGroup;
 
-  constructor(formBuilder: UntypedFormBuilder, private _colorService: ColorService) {
+  constructor(formBuilder: FormBuilder, private _colorService: ColorService) {
     this.facetChange = new EventEmitter<FacetDefinition>();
     this.editorClose = new EventEmitter<any>();
     // form
@@ -88,8 +88,8 @@ export class FacetMetadataEditorComponent implements OnInit {
 
     this.id.setValue(model.id);
     this.label.setValue(model.label);
-    const rgb = this._colorService.parseRgb(model.colorKey);
-    this.colorKey.setValue(rgb ? new Color(rgb.r, rgb.g, rgb.b) : null);
+    const rgb = this._colorService.getRgb(model.colorKey);
+    this.colorKey.setValue(rgb ? new Color(rgb[0], rgb[1], rgb[2]) : null);
     this.description.setValue(model.description);
 
     this.form.markAsPristine();
@@ -97,10 +97,10 @@ export class FacetMetadataEditorComponent implements OnInit {
 
   private getFacet(): FacetDefinition {
     return {
-      id: this.id.value,
-      label: this.label.value?.trim(),
-      colorKey: this.colorKey.value.hex,
-      description: this.description.value?.trim(),
+      id: this.id.value!,
+      label: this.label.value?.trim() || '',
+      colorKey: this.colorKey.value?.hex || '',
+      description: this.description.value?.trim() || '',
       partDefinitions: [],
     };
   }

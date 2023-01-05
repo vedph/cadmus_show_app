@@ -1,105 +1,94 @@
-<mat-card>
+<mat-card appearance="outlined">
   <mat-card-header>
     <mat-card-title>
       <mat-icon>shopping_bag</mat-icon>
       Models
     </mat-card-title>
-    <mat-form-field style="width: 90px">
-      <mat-select [formControl]="fragment" placeholder="type">
-        <mat-option [value]="false">part</mat-option>
-        <mat-option [value]="true">fragment</mat-option>
-      </mat-select>
-    </mat-form-field>
   </mat-card-header>
-  <mat-card-content
-    gdAreas="spinner spinner | filters list | . paginator |  info info"
-    gdAreas.lt-md="spinner | list | paginator | filters | info"
-    gdColumns="210px 1fr"
-    gdColumns.lt-md="1fr"
-    gdGap="8px"
-  >
-    <!-- spinner -->
-    <div
-      *ngIf="paginator.isLoading$ | async"
-      gdArea="spinner"
-      gdAlignColumns="center"
-      gdAlignRows="center"
-    >
-      <mat-spinner [diameter]="48" [strokeWidth]="4"></mat-spinner>
-    </div>
+  <mat-card-content>
+    <div id="container">
+      <!-- filters -->
+      <div id="filters" gdAlignRows.lt-md="center">
+        <cadmus-model-filter></cadmus-model-filter>
+      </div>
 
-    <!-- filters -->
-    <div gdArea="filters" gdAlignRows.lt-md="center">
-      <cadmus-model-filter
-        [filter]="filter$ | async"
-        (filterChange)="onFilterChange($event)"
-      ></cadmus-model-filter>
-    </div>
+      <!-- list -->
+      <div id="list" *ngIf="pagination$ | async as pagination">
+        <mat-progress-bar
+          *ngIf="loading$ | async"
+          mode="indeterminate"
+        ></mat-progress-bar>
+        <table>
+          <thead>
+            <th></th>
+            <th>id</th>
+            <th>name</th>
+            <th>project</th>
+            <th>tags</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let m of pagination.data">
+              <td class="fit-width">
+                <!-- view -->
+                <button
+                  type="button"
+                  color="primary"
+                  matTooltip="View model's details"
+                  mat-icon-button
+                  (click)="onViewModel(m)"
+                >
+                  <mat-icon>preview</mat-icon>
+                </button>
+                <!-- copy -->
+                <button
+                  type="button"
+                  matTooltip="Copy the model's ID"
+                  mat-icon-button
+                  [cdkCopyToClipboard]="m.id"
+                >
+                  <mat-icon>content_copy</mat-icon>
+                </button>
+              </td>
+              <td>
+                <span class="m-id">{{ m.id }}</span>
+              </td>
+              <td>{{ m.name }}</td>
+              <td>
+                <span class="m-prj">{{ m.project }}</span>
+              </td>
+              <td>
+                <span class="m-tag">{{ m.tags?.join("; ") }}</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
 
-    <!-- list -->
-    <div gdArea="list" *ngIf="page$ | async as page">
-      <table *ngIf="page.data?.length">
-        <thead>
-          <th></th>
-          <th>id</th>
-          <th>name</th>
-          <th>project</th>
-          <th>tags</th>
-        </thead>
-        <tbody>
-          <tr *ngFor="let m of page.data">
-            <td class="fit-width">
-              <!-- view -->
-              <button
-                type="button"
-                color="primary"
-                matTooltip="View model's details"
-                mat-icon-button
-                (click)="onViewModel(m)"
-              >
-                <mat-icon>preview</mat-icon>
-              </button>
-              <!-- copy -->
-              <button
-                type="button"
-                matTooltip="Copy the model's ID"
-                mat-icon-button
-                [cdkCopyToClipboard]="m.id"
-              >
-                <mat-icon>content_copy</mat-icon>
-              </button>
-            </td>
-            <td>
-              <span class="m-id">{{ m.id }}</span>
-            </td>
-            <td>{{ m.name }}</td>
-            <td>
-              <span class="m-prj">{{ m.project }}</span>
-            </td>
-            <td>
-              <span class="m-tag">{{ m.tags?.join("; ") }}</span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <!-- paginator -->
-      <mat-paginator
-        *ngIf="page.data?.length"
-        gdArea="pagination"
-        gdAlignColumns="center"
-        gdAlignRows="start"
-        [length]="page.total"
-        [pageSize]="pageSize?.value"
-        [pageSizeOptions]="[20, 50, 75, 100]"
-        [pageIndex]="page.currentPage - 1"
-        [showFirstLastButtons]="true"
-        (page)="pageChanged($event)"
-      ></mat-paginator>
-    </div>
+        <!-- paginator -->
+        <div id="paginator" class="form-row">
+          <button
+            type="button"
+            mat-icon-button
+            color="warn"
+            matTooltip="Clear items cache"
+            (click)="clearCache()"
+          >
+            <mat-icon>autorenew</mat-icon>
+          </button>
+          <mat-paginator
+            [length]="pagination.total || 0"
+            [pageSize]="pagination.perPage || 20"
+            [pageSizeOptions]="[2, 20, 50, 75, 100]"
+            [pageIndex]="(pagination.currentPage || 1) - 1"
+            [showFirstLastButtons]="true"
+            (page)="pageChange($event)"
+          ></mat-paginator>
+        </div>
+      </div>
 
-    <!-- info -->
-    <div gdArea="info" *ngIf="model" style="border-top: 1px solid silver">
-      <cadmus-part-info [model]="model"></cadmus-part-info>
+      <!-- info -->
+      <div id="info" *ngIf="model">
+        <cadmus-part-info [model]="model"></cadmus-part-info>
+      </div>
     </div>
   </mat-card-content>
 </mat-card>

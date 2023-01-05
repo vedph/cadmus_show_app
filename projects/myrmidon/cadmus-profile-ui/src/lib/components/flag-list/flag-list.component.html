@@ -1,7 +1,7 @@
 <div>
-  <button mat-icon-button color="primary" (click)="addFlag()">
+  <button mat-flat-button color="primary" (click)="addFlag()">
     <mat-icon>add_circle</mat-icon>
-    add flag
+    flag
   </button>
   <table *ngIf="flags">
     <tbody>
@@ -39,7 +39,7 @@
       </tr>
     </tbody>
   </table>
-  <mat-card *ngIf="editedFlag" [@inOutAnimation]>
+  <mat-card appearance="outlined" *ngIf="editedFlag" [@inOutAnimation]>
     <mat-card-header>
       <mat-card-title>Flag</mat-card-title>
     </mat-card-header>

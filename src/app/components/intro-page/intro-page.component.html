@@ -214,14 +214,15 @@
     </p>
     <form [formGroup]="form" (submit)="buildRdf()">
       <mat-form-field>
-        <input matInput [formControl]="user" placeholder="your name" />
+        <mat-label>your name</mat-label>
+        <input matInput [formControl]="user" />
       </mat-form-field>
       <cadmus-mat-physical-size
         [unitEntries]="unitEntries"
         [size]="initialSize"
         (sizeChange)="onSizeChange($event)"
       ></cadmus-mat-physical-size>
-      <button type="submit" mat-icon-button color="primary">
+      <button type="submit" mat-flat-button color="primary">
         <mat-icon>check_circle</mat-icon> enter data
       </button>
     </form>

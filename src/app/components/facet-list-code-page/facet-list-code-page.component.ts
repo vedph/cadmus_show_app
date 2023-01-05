@@ -2,7 +2,10 @@ import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { FacetDefinition } from '@myrmidon/cadmus-core';
-import { FacetListQuery, FacetListService, PartDefinitionVmService } from '@myrmidon/cadmus-profile-ui';
+import {
+  FacetListRepository,
+  PartDefinitionVmService,
+} from '@myrmidon/cadmus-profile-ui';
 import { CadmusShopAssetService } from '@myrmidon/cadmus-shop-asset';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
@@ -16,14 +19,13 @@ export class FacetListCodePageComponent {
   public data$: Observable<FacetDefinition[]>;
 
   constructor(
-    facetListQuery: FacetListQuery,
-    private _facetListService: FacetListService,
+    private _repository: FacetListRepository,
     private _partService: PartDefinitionVmService,
     private _shopService: CadmusShopAssetService,
     private _snackbar: MatSnackBar,
     private _router: Router
   ) {
-    this.data$ = facetListQuery.selectAll().pipe(
+    this.data$ = _repository.facets$.pipe(
       map((facets) => {
         return facets.map((gf) => {
           return {
@@ -31,9 +33,7 @@ export class FacetListCodePageComponent {
             label: gf.label,
             colorKey: gf.colorKey || '',
             description: gf.description,
-            partDefinitions: this._partService.getPartDefsFromGroup(
-              gf
-            ),
+            partDefinitions: this._partService.getPartDefsFromGroup(gf),
           };
         });
       })
@@ -45,12 +45,12 @@ export class FacetListCodePageComponent {
       .loadObject<FacetDefinition[]>('samples/facets')
       .pipe(take(1))
       .subscribe((facets) => {
-        this._facetListService.set(facets);
+        this._repository.setFacets(facets);
       });
   }
 
   public onDataChange(data: FacetDefinition[]): void {
-    this._facetListService.set(data);
+    this._repository.setFacets(data);
     this._snackbar.open('Facets saved', 'OK', {
       duration: 1500,
     });

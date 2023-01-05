@@ -25,3 +25,52 @@ td.fit-width {
 .m-tag {
   color: #ffb200;
 }
+.form-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.form-row * {
+  flex: 0 0 auto;
+}
+
+div#container {
+  display: grid;
+  grid-template-rows: 1fr auto auto;
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    "filters list"
+    ". paginator"
+    "info info";
+  gap: 8px;
+}
+div#filters {
+  grid-area: filters;
+}
+div#list {
+  grid-area: list;
+}
+div#paginator {
+  grid-area: paginator;
+  justify-content: end;
+}
+div#info {
+  grid-area: info;
+  border-top: 1px solid silver;
+}
+
+/* lt-md */
+@media only screen and (max-width: 959px) {
+  div#container {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "list"
+      "paginator"
+      "filters"
+      "info";
+  }
+  .noif-lt-md {
+    display: none;
+  }
+}

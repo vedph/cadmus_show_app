@@ -1,36 +1,47 @@
 <form [formGroup]="form" (submit)="apply()">
+  <div>
+    <mat-checkbox [formControl]="fragment">fragment</mat-checkbox>
+  </div>
+
   <!-- project -->
   <div>
     <mat-form-field>
-      <input matInput [formControl]="project" placeholder="project" />
+      <mat-label>project</mat-label>
+      <input matInput [formControl]="project" />
     </mat-form-field>
   </div>
 
   <!-- typeId -->
   <div>
     <mat-form-field>
-      <input matInput [formControl]="typeId" placeholder="type ID" />
+      <mat-label>type ID</mat-label>
+      <input matInput [formControl]="typeId" />
     </mat-form-field>
   </div>
 
   <!-- name -->
   <div>
     <mat-form-field>
-      <input matInput [formControl]="name" placeholder="name" />
+      <mat-label>name</mat-label>
+      <input matInput [formControl]="name" />
     </mat-form-field>
   </div>
 
   <!-- tags -->
-  <div>
+  <fieldset>
+    <legend>tags</legend>
     <mat-form-field>
-      <input matInput [formControl]="tags" placeholder="tags" />
+      <mat-label>tags</mat-label>
+      <input matInput [formControl]="tags" />
+      <mat-hint>separated by spc</mat-hint>
     </mat-form-field>
-  </div>
+    <div>
+      <mat-checkbox [formControl]="matchAny">match any</mat-checkbox>
+    </div>
+  </fieldset>
 
   <!-- buttons -->
   <div>
-    <mat-checkbox [formControl]="matchAny">match any</mat-checkbox>
-    &nbsp;
     <button
       type="button"
       mat-icon-button

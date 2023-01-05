@@ -3,6 +3,11 @@ h1 {
   text-align: center;
   margin-top: 16px;
 }
+h2 {
+  font-size: 1.5rem;
+  text-align: center;
+  color: silver;
+}
 #img-container {
   position: absolute;
   width: 100%;
@@ -10,35 +15,6 @@ h1 {
   display: flex;
   justify-content: center;
 }
-#container {
-  /* background-image: url("/assets/img/cadmus-vase.png");
-  background-repeat: no-repeat;
-  background-position: center center; */
-  margin: 8px;
-  height: calc(100vh - 200px);
-}
-/* .card {
-  min-height: 400px;
-  background-color: #E2D6BC;
-  border-radius: 24px;
-  padding: 20px;
-  opacity: 0.85;
-  color: white;
-  text-align: center;
-  font-size: 32pt;
-}
-.card mat-icon {
-  margin: 40px 0 20px 0;
-  font-size: 200px;
-  width: 200px;
-  height: 200px;
-}
-.card a {
-  color: white;
-  text-decoration: none;
-  cursor: pointer;
-} */
-
 .widget {
   width: 220px;
   border: 2px solid silver;
@@ -61,7 +37,7 @@ h1 {
   font-size: 150px;
   width: 200px;
   height: 150px;
-  color: #3F51B5;
+  color: #3f51b5;
   margin: 0;
 }
 .widget a {
@@ -75,4 +51,41 @@ h1 {
 .widget div {
   text-align: center;
   margin: 8px 0;
+}
+#container {
+  margin: 8px;
+  height: calc(100vh - 200px);
+}
+div#container {
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "intro docs"
+    "shop profile";
+  gap: 8px;
+}
+div#intro {
+  grid-area: intro;
+}
+div#docs {
+  grid-area: docs;
+}
+div#shop {
+  grid-area: shop;
+}
+div#profile {
+  grid-area: profile;
+}
+/* lt-md */
+@media only screen and (max-width: 959px) {
+  div#container {
+    grid-template-rows: auto auto auto auto;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "intro"
+      "docs"
+      "shop"
+      "profile";
+  }
 }
