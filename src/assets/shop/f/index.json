@@ -25,6 +25,14 @@
   },
   {
     "fragment": true,
+    "id": "fr.it.vedph.epigraphy.ligatures",
+    "project": "epigraphy",
+    "name": "ligatures",
+    "tip": "Ligatures in inscription's text.",
+    "tags": ["epigraphy"]
+  },
+  {
+    "fragment": true,
     "id": "fr.it.vedph.orthography",
     "project": "shell",
     "name": "orthography",

@@ -112,6 +112,20 @@
     "tags": ["references"]
   },
   {
+    "id": "it.vedph.epigraphy.support",
+    "project": "epigraphy",
+    "name": "epigraphic support",
+    "tip": "Inscription's material support.",
+    "tags": ["epigraphy"]
+  },
+  {
+    "id": "it.vedph.epigraphy.writing",
+    "project": "epigraphy",
+    "name": "epigraphic writing",
+    "tip": "Inscription's writing.",
+    "tags": ["epigraphy"]
+  },
+  {
     "id": "it.vedph.geo.asserted-locations",
     "project": "geo",
     "name": "asserted locations",

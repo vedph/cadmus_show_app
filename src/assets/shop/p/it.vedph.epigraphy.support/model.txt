@@ -1,0 +1,17 @@
+- material* (string, thesaurus: epi-support-materials)
+- originalFn (string, thesaurus: epi-support-functions)
+- currentFn (string, thesaurus: epi-support-functions)
+- objectType (string, thesaurus: epi-support-object-types)
+- supportType (string, thesaurus: epi-support-types)
+- indoor (boolean)
+- size (PhysicalSize):
+  - tag (string, thesaurus: physical-size-tags)
+  - w (PhysicalSize):
+    - value* (number)
+    - unit* (string, thesaurus: physical-size-units)
+    - tag (string, thesaurus: physical-size-dim-tags)
+  - h (PhysicalSize)
+  - d (PhysicalSize)
+  - note (string)
+- state (string, thesaurus: epi-support-states)
+- lastSeen (date)
