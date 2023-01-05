@@ -1,0 +1,17 @@
+- point* (LocationPoint):
+  - lat (number)
+  - lon (number)
+- box (LocationBox):
+  - a* (LocationPoint)
+  - b* (LocationPoint)
+- altitude (number)
+- geometry (string)
+- assertion (Assertion):
+  - tag (string)
+  - rank (short)
+- references (DocReference[]):
+  - type (string)
+  - tag (string)
+  - citation (string)
+  - note (string)
+- note (string)

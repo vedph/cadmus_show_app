@@ -1,0 +1,9 @@
+- toponyms (AssertedToponym[]):
+  - eid (string)
+  - name* (ProperName):
+    - language (string)
+    - tag (string)
+    - pieces (ProperNamePiece[]):
+      - type* (string)
+      - value* (string)
+  - assertion (Assertion)

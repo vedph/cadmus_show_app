@@ -1,0 +1,8 @@
+- links (PinLink[]):
+  - label* (string)
+  - itemId* (string)
+  - partId* (string)
+  - partTypeId* (string)
+  - roleId (string)
+  - name* (string)
+  - value* (string)

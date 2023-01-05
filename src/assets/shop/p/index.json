@@ -112,6 +112,20 @@
     "tags": ["references"]
   },
   {
+    "id": "it.vedph.geo.asserted-locations",
+    "project": "geo",
+    "name": "asserted locations",
+    "tip": "Geographic locations with assertions.",
+    "tags": ["geography"]
+  },
+  {
+    "id": "it.vedph.geo.asserted-toponyms",
+    "project": "geo",
+    "name": "asserted toponyms",
+    "tip": "Geographic toponyms with assertions.",
+    "tags": ["geography"]
+  },
+  {
     "id": "it.vedph.historical-date",
     "project": "shell",
     "name": "date",
@@ -159,6 +173,13 @@
     "name": "note",
     "tip": "General-purpose rich text note.",
     "tags": ["note"]
+  },
+  {
+    "id": "it.vedph.pin-links",
+    "project": "shell",
+    "name": "pin-links",
+    "tip": "Pin-based item links.",
+    "tags": ["links"]
   },
   {
     "id": "it.vedph.tiled-text",
