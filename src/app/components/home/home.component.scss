@@ -2,30 +2,45 @@ h1 {
   font-size: 2rem;
   text-align: center;
   margin-top: 16px;
+  color: #5a3303;
 }
 h2 {
   font-size: 1.5rem;
   text-align: center;
-  color: silver;
+  color: #AD7B3E;
 }
+// #img-container {
+//   position: absolute;
+//   width: 100%;
+//   height: calc(100vh - 200px);
+//   display: flex;
+//   justify-content: center;
+// }
+// #img-container img {
+//   width: 50%;
+// }
 #img-container {
-  position: absolute;
-  width: 100%;
-  height: calc(100vh - 200px);
+  text-align: center;
+  margin-bottom: 32px;
+}
+#widget-container {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
+  gap: 32px;
 }
 .widget {
   width: 220px;
-  border: 2px solid silver;
+  border: 2px solid #ebe2d9;
   border-radius: 16px;
   background-color: white;
   opacity: 0.85;
-  color: black;
+  color: #AD7B3E;
 }
 .widget h2 {
   text-align: center;
   margin: 8px 0;
+  color: #AD7B3E;
 }
 .widget img {
   margin-left: auto;
@@ -37,55 +52,60 @@ h2 {
   font-size: 150px;
   width: 200px;
   height: 150px;
-  color: #3f51b5;
+  color: #ebe2d9;
   margin: 0;
+}
+.widget mat-icon:hover {
+  color: #AD7B3E;
 }
 .widget a {
   text-decoration: none;
   cursor: pointer;
-  color: black;
+  color: #AD7B3E;
 }
 .widget a:visited {
-  color: black;
+  color: #AD7B3E;
 }
 .widget div {
   text-align: center;
   margin: 8px 0;
 }
-#container {
-  margin: 8px;
-  height: calc(100vh - 200px);
-}
-div#container {
-  display: grid;
-  grid-template-rows: auto auto;
-  grid-template-columns: 1fr 1fr;
-  grid-template-areas:
-    "intro docs"
-    "shop profile";
-  gap: 8px;
-}
-div#intro {
-  grid-area: intro;
-}
-div#docs {
-  grid-area: docs;
-}
-div#shop {
-  grid-area: shop;
-}
-div#profile {
-  grid-area: profile;
-}
-/* lt-md */
-@media only screen and (max-width: 959px) {
-  div#container {
-    grid-template-rows: auto auto auto auto;
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "intro"
-      "docs"
-      "shop"
-      "profile";
-  }
-}
+// #container {
+//   margin: 8px;
+//   height: calc(100vh - 200px);
+// }
+// div#container {
+//   display: grid;
+//   grid-template-rows: auto auto;
+//   grid-template-columns: 1fr 1fr;
+//   grid-template-areas:
+//     "intro docs"
+//     "shop profile";
+//   gap: 8px;
+//   justify-items: center;
+//   align-items: center;
+// }
+// div#intro {
+//   grid-area: intro;
+// }
+// div#docs {
+//   grid-area: docs;
+// }
+// div#shop {
+//   grid-area: shop;
+// }
+// div#profile {
+//   grid-area: profile;
+// }
+// /* lt-md */
+// @media only screen and (max-width: 959px) {
+//   div#container {
+//     grid-template-rows: auto auto auto auto;
+//     grid-template-columns: 1fr;
+//     grid-template-areas:
+//       "intro"
+//       "docs"
+//       "shop"
+//       "profile";
+//   }
+// }

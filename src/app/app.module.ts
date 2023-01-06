@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MarkdownModule } from 'ngx-markdown';
 import { NgJsonEditorModule } from 'ang-jsoneditor';
@@ -49,7 +49,6 @@ import { ShopPageComponent } from './components/shop-page/shop-page.component';
 import { ThesaurusListPageComponent } from './components/thesaurus-list-page/thesaurus-list-page.component';
 import { ThesaurusListCodePageComponent } from './components/thesaurus-list-code-page/thesaurus-list-code-page.component';
 import { ThesaurusEditComponent } from './components/thesaurus-edit/thesaurus-edit.component';
-import { TourMatMenuModule } from 'ngx-ui-tour-md-menu';
 import { TextArchitecturePageComponent } from './components/text-architecture-page/text-architecture-page.component';
 import { TaxonomiesPageComponent } from './components/taxonomies-page/taxonomies-page.component';
 import { InfrastructurePageComponent } from './components/infrastructure-page/infrastructure-page.component';
@@ -70,6 +69,39 @@ export function initElfDevTools(actions: Actions) {
     });
   };
 }
+
+const routes: Routes = [
+  { path: 'home', component: HomeComponent },
+  { path: 'intro', component: IntroPageComponent },
+  { path: 'profile', component: ProfileHomeComponent },
+  { path: 'profile/flow', component: ProfileFlowComponent },
+  { path: 'profile/code', component: ProfileCodePageComponent },
+  { path: 'docs', component: OverviewPageComponent },
+  {
+    path: 'docs/data-architecture',
+    component: DataArchitecturePageComponent,
+  },
+  { path: 'docs/export', component: ExportPageComponent },
+  {
+    path: 'docs/text-architecture',
+    component: TextArchitecturePageComponent,
+  },
+  { path: 'docs/taxonomies', component: TaxonomiesPageComponent },
+  { path: 'docs/infrastructure', component: InfrastructurePageComponent },
+  { path: 'docs/semantic-graph', component: SemanticGraphPageComponent },
+  { path: 'models', component: ShopPageComponent },
+  { path: 'models/shop', component: ModelListComponent },
+  { path: 'models/graph', component: ModelGraphPageComponent },
+  { path: 'facets-code', component: FacetListCodePageComponent },
+  { path: 'facets-list', component: FacetListPageComponent },
+  { path: 'flags-code', component: FlagListCodePageComponent },
+  { path: 'flags-list', component: FlagListPageComponent },
+  { path: 'thes-code', component: ThesaurusListCodePageComponent },
+  { path: 'thes-list', component: ThesaurusListPageComponent },
+  { path: 'thesauri/:id', component: ThesaurusEditComponent },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '**', component: HomeComponent },
+];
 
 @NgModule({
   declarations: [
@@ -108,8 +140,6 @@ export function initElfDevTools(actions: Actions) {
     MarkdownModule.forRoot(),
     NgTickerModule,
     NgxMatFileInputModule,
-    // https://hakimio.github.io/ngx-ui-tour/
-    TourMatMenuModule.forRoot(),
     CadmusMaterialModule,
     CadmusUiModule,
     CadmusProfileCoreModule,
@@ -124,44 +154,7 @@ export function initElfDevTools(actions: Actions) {
     CadmusThesaurusListModule,
     CadmusThesaurusUiModule,
     NgxDirtyCheckModule,
-    RouterModule.forRoot(
-      [
-        { path: '', redirectTo: 'home', pathMatch: 'full' },
-        { path: 'home', component: HomeComponent },
-        { path: 'intro', component: IntroPageComponent },
-        { path: 'profile', component: ProfileHomeComponent },
-        { path: 'profile/flow', component: ProfileFlowComponent },
-        { path: 'profile/code', component: ProfileCodePageComponent },
-        { path: 'docs', component: OverviewPageComponent },
-        {
-          path: 'docs/data-architecture',
-          component: DataArchitecturePageComponent,
-        },
-        { path: 'docs/export', component: ExportPageComponent },
-        {
-          path: 'docs/text-architecture',
-          component: TextArchitecturePageComponent,
-        },
-        { path: 'docs/taxonomies', component: TaxonomiesPageComponent },
-        { path: 'docs/infrastructure', component: InfrastructurePageComponent },
-        { path: 'docs/semantic-graph', component: SemanticGraphPageComponent },
-        { path: 'models', component: ShopPageComponent },
-        { path: 'models/shop', component: ModelListComponent },
-        { path: 'models/graph', component: ModelGraphPageComponent },
-        { path: 'facets-code', component: FacetListCodePageComponent },
-        { path: 'facets-list', component: FacetListPageComponent },
-        { path: 'flags-code', component: FlagListCodePageComponent },
-        { path: 'flags-list', component: FlagListPageComponent },
-        { path: 'thes-code', component: ThesaurusListCodePageComponent },
-        { path: 'thes-list', component: ThesaurusListPageComponent },
-        { path: 'thesauri/:id', component: ThesaurusEditComponent },
-        { path: '**', component: HomeComponent },
-      ],
-      {
-        initialNavigation: 'enabledBlocking',
-        useHash: true,
-      }
-    ),
+    RouterModule.forRoot(routes, { useHash: true }),
   ],
   providers: [
     EnvServiceProvider,

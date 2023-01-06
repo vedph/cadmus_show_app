@@ -1,9 +1,9 @@
 <header>
-  <mat-toolbar fxLayout="row" fxLayoutAlign="start center">
+  <mat-toolbar>
     <span style="flex: 0 0 60px"
       ><img src="./assets/img/logo-black-40.png" alt="Fusisoft"
     /></span>
-    <a mat-button routerLink="/home">Cadmus Show</a>
+    <a mat-button routerLink="/home">Home</a>
 
     <button type="button" mat-button [matMenuTriggerFor]="docMenu">
       Documentation
@@ -46,11 +46,10 @@
 
 <main>
   <router-outlet></router-outlet>
-  <tour-step-template></tour-step-template>
 </main>
 
 <footer>
-  <div layout="row" layout-align="center center">
+  <div>
     <a href="https://www.unive.it/pag/39287" target="_blank"
       ><img src="assets/img/vedph-48.png" alt="VeDPH"
     /></a>

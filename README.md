@@ -19,12 +19,16 @@ ng build --base-href /apps/cadmus-show/
 Docker:
 
 ```bash
-docker build . -t vedph2020/cadmus-show-app:2.0.0 -t vedph2020/cadmus-show-app:latest
+docker build . -t vedph2020/cadmus-show-app:2.0.1 -t vedph2020/cadmus-show-app:latest
 ```
 
 For GitHub pages see [this tool](https://github.com/angular-schule/angular-cli-ghpages).
 
 ## History
+
+### 2.0.1
+
+- 2023-01-06: homepage
 
 ### 2.0.0
 
