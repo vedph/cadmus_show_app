@@ -74,10 +74,9 @@ export function initElfDevTools(actions: Actions) {
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'intro', component: IntroPageComponent },
-  { path: 'profile', component: ProfileHomeComponent },
   { path: 'profile/flow', component: ProfileFlowComponent },
   { path: 'profile/code', component: ProfileCodePageComponent },
-  { path: 'docs', component: OverviewPageComponent },
+  { path: 'profile', component: ProfileHomeComponent },
   {
     path: 'docs/data-architecture',
     component: DataArchitecturePageComponent,
@@ -90,9 +89,10 @@ const routes: Routes = [
   { path: 'docs/taxonomies', component: TaxonomiesPageComponent },
   { path: 'docs/infrastructure', component: InfrastructurePageComponent },
   { path: 'docs/semantic-graph', component: SemanticGraphPageComponent },
-  { path: 'models', component: ShopPageComponent },
+  { path: 'docs', component: OverviewPageComponent },
   { path: 'models/shop', component: ModelListComponent },
   { path: 'models/graph', component: ModelGraphPageComponent },
+  { path: 'models', component: ShopPageComponent },
   { path: 'facets-code', component: FacetListCodePageComponent },
   { path: 'facets-list', component: FacetListPageComponent },
   { path: 'flags-code', component: FlagListCodePageComponent },

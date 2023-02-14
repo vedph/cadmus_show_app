@@ -1,6 +1,6 @@
 version: '3.7'
 services:
   cadmus-show:
-    image: vedph2020/cadmus-show-app:2.0.2
+    image: vedph2020/cadmus-show-app:2.0.3
     ports:
       - 4200:80
