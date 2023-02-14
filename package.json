@@ -17,9 +17,7 @@
   },
   "private": true,
   "dependencies": {
-    "@angular-material-components/color-picker": "^8.0.0",
     "@angular-material-components/file-input": "^8.0.0",
-    "@angular/animations": "^15.1.4",
     "@angular/cdk": "^15.1.4",
     "@angular/common": "^15.1.4",
     "@angular/compiler": "^15.1.4",

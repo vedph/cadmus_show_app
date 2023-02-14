@@ -1,4 +1,3 @@
-import { Color } from '@angular-material-components/color-picker';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
   FormBuilder,
@@ -36,7 +35,7 @@ export class FlagDefinitionEditorComponent implements OnInit {
 
   public id: FormControl<number>;
   public label: FormControl<string | null>;
-  public colorKey: FormControl<Color | null>;
+  public colorKey: FormControl<string | null>;
   public description: FormControl<string | null>;
   public form: FormGroup;
   public flagNumbers: number[];
@@ -91,8 +90,7 @@ export class FlagDefinitionEditorComponent implements OnInit {
 
     this.id.setValue(this.getBit(definition.id) + 1);
     this.label.setValue(definition.label);
-    const rgb = this._colorService.getRgb(definition.colorKey);
-    this.colorKey.setValue(rgb ? new Color(rgb[0], rgb[1], rgb[2]) : null);
+    this.colorKey.setValue(definition.colorKey || null);
     this.description.setValue(definition.description);
 
     this.form.markAsPristine();
@@ -102,7 +100,7 @@ export class FlagDefinitionEditorComponent implements OnInit {
     return {
       id: 1 << (this.id.value - 1),
       label: this.label.value?.trim() || '',
-      colorKey: this.colorKey.value?.hex || '',
+      colorKey: this.colorKey.value || '',
       description: this.description.value?.trim() || '',
     };
   }

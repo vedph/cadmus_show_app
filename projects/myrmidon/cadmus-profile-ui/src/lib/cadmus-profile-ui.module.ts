@@ -5,11 +5,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CadmusMaterialModule } from '@myrmidon/cadmus-material';
 import { CadmusProfileCoreModule } from '@myrmidon/cadmus-profile-core';
 import { CadmusShowUiModule } from '@myrmidon/cadmus-show-ui';
-import {
-  MAT_COLOR_FORMATS,
-  NgxMatColorPickerModule,
-  NGX_MAT_COLOR_FORMATS,
-} from '@angular-material-components/color-picker';
 import { CadmusThesaurusUiModule } from '@myrmidon/cadmus-thesaurus-ui';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -46,7 +41,6 @@ import { PartInfoComponent } from './components/part-info/part-info.component';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     DragDropModule,
-    NgxMatColorPickerModule,
     NgJsonEditorModule,
     // MarkdownModule.forChild(),
     MarkdownModule,
@@ -55,7 +49,6 @@ import { PartInfoComponent } from './components/part-info/part-info.component';
     CadmusShowUiModule,
     CadmusThesaurusUiModule,
   ],
-  providers: [{ provide: MAT_COLOR_FORMATS, useValue: NGX_MAT_COLOR_FORMATS }],
   exports: [
     FacetViewComponent,
     FacetMetadataEditorComponent,

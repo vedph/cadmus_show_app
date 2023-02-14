@@ -52,26 +52,26 @@
                 style="display: inline-block"
                 (submit)="colorizeSelectedPart()"
               >
-                <mat-form-field style="width: 8em">
-                  <input
-                    matInput
-                    [ngxMatColorPicker]="picker"
-                    [formControl]="color"
-                  />
-                  <ngx-mat-color-toggle
+                <mat-form-field style="width: 6em">
+                  <mat-label>color</mat-label>
+                  <input matInput type="color" [formControl]="color" />
+                  <mat-error
+                    *ngIf="
+                      $any(color).errors?.required &&
+                      (color.dirty || color.touched)
+                    "
+                    >color required</mat-error
+                  >
+                  <button
                     matSuffix
-                    [for]="picker"
-                  ></ngx-mat-color-toggle>
-                  <ngx-mat-color-picker #picker></ngx-mat-color-picker>
+                    mat-icon-button
+                    matTooltip="Assign color to the selected part"
+                    [disabled]="!selectedPartId"
+                    (click)="colorizeSelectedPart()"
+                  >
+                    <mat-icon>format_paint</mat-icon>
+                  </button>
                 </mat-form-field>
-                <button
-                  mat-icon-button
-                  matTooltip="Assign color to the selected part"
-                  [disabled]="!selectedPartId"
-                  (click)="colorizeSelectedPart()"
-                >
-                  <mat-icon>format_paint</mat-icon>
-                </button>
               </form>
               <!-- save facet -->
               <button

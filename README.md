@@ -26,7 +26,9 @@ For GitHub pages see [this tool](https://github.com/angular-schule/angular-cli-g
 
 ## History
 
-- 2023-02-14: updated Angular and packages.
+- 2023-02-14:
+  - updated Angular and packages.
+  - replaced [ngx color picker](https://www.npmjs.com/package/@angular-material-components/color-picker) as it [does not render well](https://github.com/h2qutc/angular-material-components/issues/303) with basic HTML input of type color.
 
 ### 2.0.1
 

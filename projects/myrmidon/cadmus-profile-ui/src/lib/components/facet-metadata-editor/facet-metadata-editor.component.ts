@@ -1,4 +1,3 @@
-import { Color } from '@angular-material-components/color-picker';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
   FormBuilder,
@@ -49,7 +48,7 @@ export class FacetMetadataEditorComponent implements OnInit {
 
   public id: FormControl<string | null>;
   public label: FormControl<string | null>;
-  public colorKey: FormControl<Color | null>;
+  public colorKey: FormControl<string | null>;
   public description: FormControl<string | null>;
   public form: FormGroup;
 
@@ -88,8 +87,7 @@ export class FacetMetadataEditorComponent implements OnInit {
 
     this.id.setValue(model.id);
     this.label.setValue(model.label);
-    const rgb = this._colorService.getRgb(model.colorKey);
-    this.colorKey.setValue(rgb ? new Color(rgb[0], rgb[1], rgb[2]) : null);
+    this.colorKey.setValue(model.colorKey);
     this.description.setValue(model.description);
 
     this.form.markAsPristine();
@@ -99,7 +97,7 @@ export class FacetMetadataEditorComponent implements OnInit {
     return {
       id: this.id.value!,
       label: this.label.value?.trim() || '',
-      colorKey: this.colorKey.value?.hex || '',
+      colorKey: this.colorKey.value || '',
       description: this.description.value?.trim() || '',
       partDefinitions: [],
     };

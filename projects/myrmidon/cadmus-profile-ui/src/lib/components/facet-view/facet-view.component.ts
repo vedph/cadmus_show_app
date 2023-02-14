@@ -11,13 +11,15 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { MatChipEvent } from '@angular/material/chips';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
+
+import { MatChipEvent } from '@angular/material/chips';
 
 import { FacetDefinition, PartDefinition } from '@myrmidon/cadmus-core';
 import { DialogService } from '@myrmidon/ng-mat-tools';
 import { deepCopy } from '@myrmidon/ng-tools';
+import { ColorService } from '@myrmidon/cadmus-ui';
 
 import { PartDefinitionVmService } from '../../services/part-definition-vm.service';
 import {
@@ -25,8 +27,6 @@ import {
   GroupingFacet,
   PartDefinitionGroup,
 } from '../facet-list/facet-list.repository';
-import { ColorService } from '@myrmidon/cadmus-ui';
-import { Color } from '@angular-material-components/color-picker';
 
 /**
  * A facet's view, with its groups and parts.
@@ -56,6 +56,9 @@ export class FacetViewComponent {
     return this._facet;
   }
   public set facet(value: GroupingFacet | undefined) {
+    if (this._facet === value) {
+      return;
+    }
     this._facet = value;
     this.updateForm();
   }
@@ -80,7 +83,7 @@ export class FacetViewComponent {
   public form: FormGroup;
 
   // color form
-  public color: FormControl<Color | null>;
+  public color: FormControl<string | null>;
   public colorForm: FormGroup;
 
   // part editing
@@ -375,7 +378,7 @@ export class FacetViewComponent {
     const gi = this.findPart(this.selectedPartId);
     if (gi) {
       this._facet.groups[gi.groupIndex].partDefinitions[gi.partIndex].colorKey =
-        this.color.value?.hex || '';
+        this.color.value?.substring(1) || '';
       this.dirty = true;
     }
   }

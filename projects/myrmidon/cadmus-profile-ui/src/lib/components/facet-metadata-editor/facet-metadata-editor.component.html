@@ -33,10 +33,9 @@
     </mat-form-field>
 
     <!-- colorKey -->
-    <mat-form-field style="width: 8em">
-      <input matInput [ngxMatColorPicker]="picker" [formControl]="colorKey" />
-      <ngx-mat-color-toggle matSuffix [for]="picker"></ngx-mat-color-toggle>
-      <ngx-mat-color-picker #picker></ngx-mat-color-picker>
+    <mat-form-field style="width: 6em">
+      <mat-label>color</mat-label>
+      <input matInput type="color" [formControl]="colorKey" />
     </mat-form-field>
   </div>
 

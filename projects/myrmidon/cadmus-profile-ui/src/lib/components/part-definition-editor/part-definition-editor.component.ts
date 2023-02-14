@@ -1,4 +1,3 @@
-import { Color } from '@angular-material-components/color-picker';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
   FormBuilder,
@@ -46,7 +45,7 @@ export class PartDefinitionEditorComponent implements OnInit {
   public name: FormControl<string | null>;
   public description: FormControl<string | null>;
   public required: FormControl<boolean>;
-  public colorKey: FormControl<Color | null>;
+  public colorKey: FormControl<string | null>;
   public groupKey: FormControl<string | null>;
   public sortKey: FormControl<string | null>;
   public form: FormGroup;
@@ -73,10 +72,7 @@ export class PartDefinitionEditorComponent implements OnInit {
       Validators.maxLength(500),
     ]);
     this.required = formBuilder.control(false, { nonNullable: true });
-    this.colorKey = formBuilder.control(
-      new Color(200, 200, 200),
-      Validators.required
-    );
+    this.colorKey = formBuilder.control('#e0e0e0', Validators.required);
     this.groupKey = formBuilder.control(null, [
       Validators.maxLength(50),
       Validators.pattern(/^[a-zA-Z][-._a-zA-Z0-9]+$/),
@@ -113,8 +109,7 @@ export class PartDefinitionEditorComponent implements OnInit {
     this.name.setValue(definition.name);
     this.description.setValue(definition.description);
     this.required.setValue(definition.isRequired);
-    const rgb = this._colorService.getRgb(definition.colorKey);
-    this.colorKey.setValue(rgb ? new Color(rgb[0], rgb[1], rgb[2]) : null);
+    this.colorKey.setValue(definition.colorKey);
     this.groupKey.setValue(definition.groupKey);
     this.sortKey.setValue(definition.sortKey);
     this.form.markAsPristine();
@@ -127,7 +122,7 @@ export class PartDefinitionEditorComponent implements OnInit {
       name: this.name.value?.trim() || '',
       description: this.description.value?.trim() || '',
       isRequired: this.required.value ? true : false,
-      colorKey: this.colorKey.value?.hex || '',
+      colorKey: this.colorKey.value || '',
       groupKey: this.groupKey.value?.trim() || '',
       sortKey: this.sortKey.value?.trim() || '',
     };
