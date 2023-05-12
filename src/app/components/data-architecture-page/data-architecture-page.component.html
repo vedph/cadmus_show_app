@@ -149,15 +149,20 @@
       <mat-expansion-panel-header>
         Some datation samples
       </mat-expansion-panel-header>
-      <ng-ticker [stopOnHover]="true" speed="20s">
-        <p>
-          &#x2022; unknown &#x2022; iii century AD &#x2022; before the ii
-          century BC &#x2022; after the i century AD (?) &#x2022; between the ii
-          and iii century AD &#x2022; about iv-iii century BC &#x2022; May 30,
-          178 BC &#x2022; 136/5 BC &#x2022; after 178 BC &#x2022; before 136/5
-          BC &#x2022; 150-125 BC &#x2022; Tiberius reign (14-37 AD) ...
-        </p>
-      </ng-ticker>
+      <ul>
+        <li>unknown</li>
+        <li>iii century AD</li>
+        <li>before the ii century BC</li>
+        <li>after the i century AD (?)</li>
+        <li>between the ii and iii century AD</li>
+        <li>about iv-iii century BC</li>
+        <li>May 30, 178 BC</li>
+        <li>136/5 BC</li>
+        <li>after 178 BC</li>
+        <li>before 136/5 BC</li>
+        <li>150-125 BC</li>
+        <li>Tiberius reign (14-37 AD)</li>
+      </ul>
     </mat-expansion-panel>
     <br />
     <p>
@@ -166,7 +171,7 @@
       etc.
     </p>
     <figure>
-      <img src="./assets/img/d1.svg" />
+      <img src="./assets/img/d1.svg" alt="single point" />
       <figcaption>
         A single point on a timeline, like <em>178 BC</em>.
       </figcaption>
@@ -177,7 +182,7 @@
       century BC", "150-125 BC", "Tiberius reign (14-37 AD)", etc.
     </p>
     <figure>
-      <img src="./assets/img/d2.svg" />
+      <img src="./assets/img/d2.svg" alt="two points" />
       <figcaption>
         Two points on the timeline, defining an interval, like
         <em>14-37 AD</em>.
@@ -189,7 +194,7 @@
       <em>terminus post</em>).
     </p>
     <figure>
-      <img src="./assets/img/d3.svg" />
+      <img src="./assets/img/d3.svg" alt="terminus ante" />
       <figcaption>
         Two points on the timeline, defining an interval, where the first point
         is not exactly defined. This is a <em>terminus ante</em>, like
@@ -197,7 +202,7 @@
       </figcaption>
     </figure>
     <figure>
-      <img src="./assets/img/d4.svg" />
+      <img src="./assets/img/d4.svg" alt="terminus post" />
       <figcaption>
         Two points on the timeline, defining an interval, where the last point
         is not exactly defined. This is a <em>terminus post</em>, like

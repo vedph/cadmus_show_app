@@ -13,7 +13,6 @@ import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 import { CadmusMaterialModule } from '@myrmidon/cadmus-material';
 import { CadmusUiModule } from '@myrmidon/cadmus-ui';
 import { CadmusProfileCoreModule } from '@myrmidon/cadmus-profile-core';
-import { NgTickerModule } from 'ng-ticker';
 import {
   CadmusProfileUiModule,
   RamThesaurusService,
@@ -139,7 +138,6 @@ const routes: Routes = [
     NgJsonEditorModule,
     // markdown
     MarkdownModule.forRoot(),
-    NgTickerModule,
     NgxMatFileInputModule,
     CadmusMaterialModule,
     CadmusUiModule,

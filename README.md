@@ -26,6 +26,7 @@ For GitHub pages see [this tool](https://github.com/angular-schule/angular-cli-g
 
 ## History
 
+- 2023-05-12: updated to Angular 16.
 - 2023-03-11: updated Angular and packages.
 
 ### 2.0.3
