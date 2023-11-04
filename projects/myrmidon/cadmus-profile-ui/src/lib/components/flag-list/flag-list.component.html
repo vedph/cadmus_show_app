@@ -1,5 +1,5 @@
 <div>
-  <button mat-flat-button color="primary" (click)="addFlag()">
+  <button type="button" mat-flat-button color="primary" (click)="addFlag()">
     <mat-icon>add_circle</mat-icon>
     flag
   </button>
@@ -28,9 +28,7 @@
           </button>
         </td>
         <td>
-          <span [style.color]="'#' + f.colorKey">
-            <mat-icon>flag</mat-icon>
-          </span>
+          <mat-icon [style.color]="'#' + f.colorKey">flag</mat-icon>
         </td>
         <td>{{ f.id | flagBit }}</td>
         <td [matTooltip]="f.description">

@@ -153,7 +153,7 @@ const routes: Routes = [
     CadmusThesaurusListModule,
     CadmusThesaurusUiModule,
     NgxDirtyCheckModule,
-    RouterModule.forRoot(routes, { useHash: true }),
+    RouterModule.forRoot(routes),
   ],
   providers: [
     EnvServiceProvider,

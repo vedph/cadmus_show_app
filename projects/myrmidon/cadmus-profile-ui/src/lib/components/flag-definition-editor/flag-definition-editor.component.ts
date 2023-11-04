@@ -90,7 +90,7 @@ export class FlagDefinitionEditorComponent implements OnInit {
 
     this.id.setValue(this.getBit(definition.id) + 1);
     this.label.setValue(definition.label);
-    this.colorKey.setValue(definition.colorKey || null);
+    this.colorKey.setValue('#' + definition.colorKey || null);
     this.description.setValue(definition.description);
 
     this.form.markAsPristine();
@@ -100,7 +100,7 @@ export class FlagDefinitionEditorComponent implements OnInit {
     return {
       id: 1 << (this.id.value - 1),
       label: this.label.value?.trim() || '',
-      colorKey: this.colorKey.value || '',
+      colorKey: this.colorKey.value?.substring(1) || '',
       description: this.description.value?.trim() || '',
     };
   }

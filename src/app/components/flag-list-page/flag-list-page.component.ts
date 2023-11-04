@@ -33,7 +33,7 @@ export class FlagListPageComponent implements OnInit {
   ngOnInit(): void {}
 
   public onFlagsChange(flags: FlagDefinition[]): void {
-    this._repository.setFlags(flags);
+    this._repository.addFlags(flags);
     this._snackbar.open('Flags saved', 'OK', {
       duration: 1500,
     });

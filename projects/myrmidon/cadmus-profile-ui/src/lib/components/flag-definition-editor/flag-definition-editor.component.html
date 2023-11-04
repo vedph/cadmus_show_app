@@ -1,7 +1,7 @@
 <form [formGroup]="form" (submit)="save()">
   <div class="form-row">
     <!-- id -->
-    <mat-form-field style="width: 5em">
+    <mat-form-field class="input-nr">
       <mat-label>ID</mat-label>
       <mat-select [formControl]="id">
         <mat-option *ngFor="let n of flagNumbers" [value]="n">{{
@@ -28,7 +28,7 @@
     </mat-form-field>
 
     <!-- colorKey -->
-    <mat-form-field style="width: 6em">
+    <mat-form-field class="input-color">
       <mat-label>color</mat-label>
       <input matInput type="color" [formControl]="colorKey" />
     </mat-form-field>

@@ -30,12 +30,12 @@ export class FlagListCodePageComponent {
       .loadObject<FlagDefinition[]>('samples/flags')
       .pipe(take(1))
       .subscribe((flags) => {
-        this._repository.setFlags(flags);
+        this._repository.addFlags(flags);
       });
   }
 
   public onDataChange(data: FlagDefinition[]): void {
-    this._repository.setFlags(data);
+    this._repository.addFlags(data);
     this._snackbar.open('Flags saved', 'OK', {
       duration: 1500,
     });

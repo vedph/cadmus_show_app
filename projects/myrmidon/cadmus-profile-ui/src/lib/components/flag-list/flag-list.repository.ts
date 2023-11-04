@@ -20,7 +20,7 @@ export class FlagListRepository {
     return this._busy$.asObservable();
   }
 
-  constructor(@Optional() private _flagService: FlagService) {
+  constructor(@Optional() private _flagService?: FlagService) {
     this._flags$ = new BehaviorSubject<FlagDefinition[]>([]);
     this._activeFlag$ = new BehaviorSubject<FlagDefinition | null>(null);
     this._busy$ = new BehaviorSubject<boolean>(false);
@@ -36,10 +36,34 @@ export class FlagListRepository {
     return this._flags$.value || [];
   }
 
-  public save(): void {
+  public getCount(): number {
+    return this._flags$.value?.length || 0;
+  }
+
+  public addFlags(flags: FlagDefinition[]): void {
+    this._flags$.next(flags);
+  }
+
+  public load(): void {
+    if (!this._flagService) {
+      return;
+    }
     this._busy$.next(true);
-    // TODO
-    // this._flagService.addFlags
+    this._flagService.getFlags().subscribe((defs) => {
+      this._flags$.next(defs);
+      this._busy$.next(false);
+    });
+  }
+
+  public save(): void {
+    if (!this._flagService) {
+      return;
+    }
+    this._busy$.next(true);
+    this._flagService.addFlags(this._flags$.value).subscribe((_) => {
+      this._busy$.next(false);
+      this.load();
+    });
   }
 
   private getNextId(): number {
