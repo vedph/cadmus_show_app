@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -24,10 +24,6 @@ import { CadmusShowUiModule } from '@myrmidon/cadmus-show-ui';
 import { CadmusShowVizModule } from '@myrmidon/cadmus-show-viz';
 import { ModelListComponent } from '@myrmidon/cadmus-shop-ui';
 import { CadmusThesaurusUiModule } from '@myrmidon/cadmus-thesaurus-ui';
-
-// ELF
-import { devTools } from '@ngneat/elf-devtools';
-import { Actions } from '@ngneat/effects-ng';
 
 // myrmidon
 import { NgxDirtyCheckModule } from '@myrmidon/ngx-dirty-check';
@@ -59,16 +55,6 @@ import { ExportPageComponent } from './components/export-page/export-page.compon
 import { CadmusRefsLookupModule } from '@myrmidon/cadmus-refs-lookup';
 import { CadmusThesaurusListModule } from '@myrmidon/cadmus-thesaurus-list';
 import { ThesaurusService } from '@myrmidon/cadmus-api';
-
-// https://ngneat.github.io/elf/docs/dev-tools/
-export function initElfDevTools(actions: Actions) {
-  return () => {
-    devTools({
-      name: 'Cadmus Show',
-      actionsDispatcher: actions,
-    });
-  };
-}
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -157,13 +143,6 @@ const routes: Routes = [
   ],
   providers: [
     EnvServiceProvider,
-    // ELF dev tools
-    {
-      provide: APP_INITIALIZER,
-      multi: true,
-      useFactory: initElfDevTools,
-      deps: [Actions],
-    },
     // overrides
     {
       provide: ThesaurusService,

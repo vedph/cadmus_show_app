@@ -1,18 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
 
 import { CadmusModelFilter } from '@myrmidon/cadmus-shop-core';
-
-import { ModelListRepository } from '../model-list/model-list.repository';
 
 @Component({
   selector: 'cadmus-model-filter',
   templateUrl: './model-filter.component.html',
   styleUrls: ['./model-filter.component.scss'],
 })
-export class ModelFilterComponent implements OnInit {
-  public filter$: Observable<CadmusModelFilter>;
+export class ModelFilterComponent {
+  private _filter: CadmusModelFilter | undefined;
+
+  @Input()
+  public get filter(): CadmusModelFilter | undefined | null {
+    return this._filter;
+  }
+  public set filter(value: CadmusModelFilter | undefined | null) {
+    if (value === this._filter) {
+      return;
+    }
+    this._filter = value || undefined;
+    this.updateForm(this._filter);
+  }
+
+  @Output()
+  public filterChange: EventEmitter<CadmusModelFilter>;
 
   public fragment: FormControl<boolean>;
   public project: FormControl<string | null>;
@@ -22,11 +34,7 @@ export class ModelFilterComponent implements OnInit {
   public matchAny: FormControl<boolean>;
   public form: FormGroup;
 
-  constructor(
-    formBuilder: FormBuilder,
-    private _repository: ModelListRepository
-  ) {
-    this.filter$ = _repository.filter$;
+  constructor(formBuilder: FormBuilder) {
     // form
     this.fragment = formBuilder.control(false, { nonNullable: true });
     this.project = formBuilder.control(null);
@@ -42,15 +50,16 @@ export class ModelFilterComponent implements OnInit {
       tags: this.tags,
       matchAny: this.matchAny,
     });
+    // events
+    this.filterChange = new EventEmitter<CadmusModelFilter>();
   }
 
-  public ngOnInit(): void {
-    this.filter$.subscribe((f) => {
-      this.updateForm(f);
-    });
-  }
+  private updateForm(filter?: CadmusModelFilter): void {
+    if (!filter) {
+      this.form.reset();
+      return;
+    }
 
-  private updateForm(filter: CadmusModelFilter): void {
     this.fragment.setValue(filter.fragment || false);
     this.project.setValue(filter.project || null);
     this.typeId.setValue(filter.typeId || null);
@@ -80,9 +89,6 @@ export class ModelFilterComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-    const filter = this.getFilter();
-
-    // update filter in state
-    this._repository.setFilter(filter);
+    this._filter = this.getFilter();
   }
 }

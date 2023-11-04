@@ -1,24 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 
 import { CadmusShopAssetService } from '@myrmidon/cadmus-shop-asset';
-import { CadmusModel, CadmusModelFilter } from '@myrmidon/cadmus-shop-core';
-
-import { PaginationData } from '@ngneat/elf-pagination';
+import { CadmusModel, DataPage } from '@myrmidon/cadmus-shop-core';
 
 import { ModelListRepository } from './model-list.repository';
-import { StatusState } from '@ngneat/elf-requests';
 
 @Component({
   selector: 'cadmus-model-list',
   templateUrl: './model-list.component.html',
   styleUrls: ['./model-list.component.scss'],
 })
-export class ModelListComponent implements OnInit {
-  public pagination$: Observable<PaginationData & { data: CadmusModel[] }>;
-  public filter$: Observable<CadmusModelFilter | undefined>;
+export class ModelListComponent {
+  public page$: Observable<DataPage<CadmusModel>>;
   public loading$: Observable<boolean>;
   public model: CadmusModel | undefined;
 
@@ -27,21 +23,17 @@ export class ModelListComponent implements OnInit {
     // services related to the filter store
     private _repository: ModelListRepository
   ) {
-    this.pagination$ = _repository.pagination$;
+    this.page$ = _repository.page$;
     this.loading$ = _repository.loading$;
-    this.filter$ = _repository.filter$;
   }
 
-  public pageChange(event: PageEvent): void {
-    this._repository.loadPage(event.pageIndex + 1, event.pageSize);
+  public onPageChange(event: PageEvent): void {
+    this._repository.setPage(event.pageIndex + 1, event.pageSize);
   }
 
-  public clearCache(): void {
-    this._repository.clearCache();
-    this._repository.loadPage(1);
+  public reset(): void {
+    this._repository.reset();
   }
-
-  ngOnInit(): void {}
 
   public onViewModel(model: CadmusModel): void {
     this._assetService
