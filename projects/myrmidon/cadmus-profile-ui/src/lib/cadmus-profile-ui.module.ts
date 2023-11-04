@@ -21,6 +21,7 @@ import { JsonEditorComponent } from './components/json-editor/json-editor.compon
 import { ModelLookupComponent } from './components/model-lookup/model-lookup.component';
 import { PartDefinitionEditorComponent } from './components/part-definition-editor/part-definition-editor.component';
 import { PartInfoComponent } from './components/part-info/part-info.component';
+import { PagedDataBrowsersModule } from '@myrmidon/paged-data-browsers';
 
 @NgModule({
   declarations: [
@@ -42,12 +43,12 @@ import { PartInfoComponent } from './components/part-info/part-info.component';
     ReactiveFormsModule,
     DragDropModule,
     NgJsonEditorModule,
-    // MarkdownModule.forChild(),
     MarkdownModule,
     CadmusMaterialModule,
     CadmusProfileCoreModule,
     CadmusShowUiModule,
     CadmusThesaurusUiModule,
+    PagedDataBrowsersModule,
   ],
   exports: [
     FacetViewComponent,

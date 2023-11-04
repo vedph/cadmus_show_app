@@ -1,62 +1,49 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Optional } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+
 import { FlagDefinition } from '@myrmidon/cadmus-core';
-import { createStore } from '@ngneat/elf';
-
-import {
-  addEntities,
-  deleteEntities,
-  getAllEntities,
-  getEntitiesCount,
-  getEntity,
-  selectAllEntities,
-  setActiveId,
-  setEntities,
-  upsertEntities,
-  withActiveId,
-  withEntities,
-} from '@ngneat/elf-entities';
-
-import { Observable } from 'rxjs';
+import { FlagService } from '@myrmidon/cadmus-api';
 
 @Injectable({ providedIn: 'root' })
 export class FlagListRepository {
-  private _store;
+  private _flags$: BehaviorSubject<FlagDefinition[]>;
+  private _activeFlag$: BehaviorSubject<FlagDefinition | null>;
+  private _busy$: BehaviorSubject<boolean>;
 
-  public flags$: Observable<FlagDefinition[]>;
-
-  constructor() {
-    this._store = this.createStore();
-    this.flags$ = this._store.pipe(selectAllEntities());
+  public get flags$(): Observable<FlagDefinition[]> {
+    return this._flags$.asObservable();
+  }
+  public get activeFlag$(): Observable<FlagDefinition | null> {
+    return this._activeFlag$.asObservable();
+  }
+  public get busy$(): Observable<boolean> {
+    return this._busy$.asObservable();
   }
 
-  private createStore(): typeof store {
-    const store = createStore(
-      { name: 'flag-list' },
-      withEntities<FlagDefinition>(),
-      withActiveId()
-    );
-    return store;
+  constructor(@Optional() private _flagService: FlagService) {
+    this._flags$ = new BehaviorSubject<FlagDefinition[]>([]);
+    this._activeFlag$ = new BehaviorSubject<FlagDefinition | null>(null);
+    this._busy$ = new BehaviorSubject<boolean>(false);
+    this.reset();
   }
 
-  public getAll(): FlagDefinition[] {
-    return this._store.query(getAllEntities());
+  public reset(flags?: FlagDefinition[]): void {
+    this._activeFlag$.next(null);
+    this._flags$.next(flags || []);
   }
 
-  public getCount(): number {
-    return this._store.query(getEntitiesCount());
+  public getFlags(): FlagDefinition[] {
+    return this._flags$.value || [];
   }
 
-  /**
-   * Set all the flags.
-   *
-   * @param flags The flags to set.
-   */
-  public setFlags(flags: FlagDefinition[]): void {
-    this._store.update(setEntities(flags));
+  public save(): void {
+    this._busy$.next(true);
+    // TODO
+    // this._flagService.addFlags
   }
 
   private getNextId(): number {
-    const ids = this._store.getValue().ids || [];
+    const ids = this._flags$.value.map((d) => d.id) || [];
 
     for (let i = 0; i < 32; i++) {
       const testId = 1 << i;
@@ -72,27 +59,23 @@ export class FlagListRepository {
   }
 
   /**
-   * Add a new flag.
+   * Add a new flag definition to the list.
    *
-   * @returns The new flag's ID, or 0 if no more flags available.
+   * @returns The ID of the new flag definition or 0 if no more flags
+   * available.
    */
-  public addFlag(): number {
+  public addNewFlag(): number {
     const id = this.getNextId();
     if (!id) {
       return 0;
     }
-    const flag = this._store.query(getEntity(id));
-    if (!flag) {
-      this._store.update(
-        addEntities({
-          id: id,
-          label: id.toString(),
-          description: '',
-          colorKey: 'f00000',
-        })
-      );
-    }
-    this._store.update(setActiveId(id));
+    const def: FlagDefinition = {
+      id: id,
+      label: id.toString(),
+      description: '',
+      colorKey: 'f00000',
+    };
+    this._flags$.next([...this._flags$.value, def]);
     return id;
   }
 
@@ -102,7 +85,11 @@ export class FlagListRepository {
    * @param id The flag's ID.
    */
   public deleteFlag(id: number): void {
-    this._store.update(deleteEntities(id));
+    this._flags$.next(
+      this._flags$.value.filter((f) => {
+        return f.id !== id;
+      })
+    );
   }
 
   /**
@@ -111,7 +98,16 @@ export class FlagListRepository {
    * @param flag The updated flag.
    */
   public updateFlag(flag: FlagDefinition): void {
-    this._store.update(upsertEntities(flag));
+    const flags = [...this._flags$.value];
+    const i = flags.findIndex((f) => {
+      return f.id === flag.id;
+    });
+    if (i > -1) {
+      flags.splice(i, 1, flag);
+      this._flags$.next(flags);
+    } else {
+      this._flags$.next([...flags, flag]);
+    }
   }
 
   /**
@@ -120,6 +116,9 @@ export class FlagListRepository {
    * @param id The ID of the flag to set, or null.
    */
   public setActive(id: number | null): void {
-    this._store.update(setActiveId(id));
+    const flag = this._flags$.value.find((f) => {
+      return f.id === id;
+    });
+    this._activeFlag$.next(flag || null);
   }
 }

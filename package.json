@@ -43,6 +43,7 @@
     "@myrmidon/ng-mat-tools": "2.0.0",
     "@myrmidon/ng-tools": "2.0.0",
     "@myrmidon/ngx-dirty-check": "^1.0.0",
+    "@myrmidon/paged-data-browsers": "^0.0.5",
     "@ngneat/effects-ng": "^3.1.2",
     "@ngneat/elf": "^2.3.1",
     "@ngneat/elf-cli-ng": "^1.0.0",
