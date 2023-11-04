@@ -1,25 +1,12 @@
 import { moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+
+import { deepCopy } from '@myrmidon/ng-tools';
 
 import { FacetDefinition, PartDefinition } from '@myrmidon/cadmus-core';
 import { ColorService } from '@myrmidon/cadmus-ui';
-import { deepCopy } from '@myrmidon/ng-tools';
-import { createStore } from '@ngneat/elf';
-import {
-  addEntities,
-  deleteEntities,
-  getAllEntities,
-  getEntitiesCount,
-  getEntity,
-  moveEntity,
-  selectAllEntities,
-  setActiveId,
-  setEntities,
-  updateEntities,
-  withActiveId,
-  withEntities,
-} from '@ngneat/elf-entities';
-import { Observable } from 'rxjs';
+
 import { PartDefinitionVmService } from '../../services/part-definition-vm.service';
 
 // - GroupingFacet (id, label, description, colorKey, groups)
@@ -62,44 +49,44 @@ export interface GroupingFacet {
 
 @Injectable({ providedIn: 'root' })
 export class FacetListRepository {
-  private _store;
+  private _facets$: BehaviorSubject<GroupingFacet[]>;
+  private _activeFacet$: BehaviorSubject<GroupingFacet | undefined>;
 
-  public facets$: Observable<GroupingFacet[]>;
+  public get facets$(): Observable<GroupingFacet[]> {
+    return this._facets$;
+  }
+
+  public get activeFacet$(): Observable<GroupingFacet | undefined> {
+    return this._activeFacet$;
+  }
 
   constructor(
     private _vmService: PartDefinitionVmService,
     private _colorService: ColorService
   ) {
-    this._store = this.createStore();
-    this.facets$ = this._store.pipe(selectAllEntities());
-  }
-
-  private createStore(): typeof store {
-    const store = createStore(
-      { name: 'facet-list' },
-      withEntities<GroupingFacet>(),
-      withActiveId()
+    this._activeFacet$ = new BehaviorSubject<GroupingFacet | undefined>(
+      undefined
     );
-    return store;
+    this._facets$ = new BehaviorSubject<GroupingFacet[]>([]);
   }
 
-  public getAll(): GroupingFacet[] {
-    return this._store.query(getAllEntities());
+  public getFacets(): GroupingFacet[] {
+    return this._facets$.value;
   }
 
   public getCount(): number {
-    return this._store.query(getEntitiesCount());
+    return this._facets$.value.length;
   }
 
   /**
-   * Set the list of facets.
+   * Set the facets.
    *
    * @param facets The facets definitions.
    */
   public setFacets(facets: FacetDefinition[]): void {
     // map each facet into a GroupingFacet
     const groupingFacets = this._vmService.getFacetGroups(facets);
-    this._store.update(setEntities(groupingFacets));
+    this._facets$.next(groupingFacets);
   }
 
   /**
@@ -115,8 +102,9 @@ export class FacetListRepository {
       description: '',
       groups: [],
     };
-    this._store.update(addEntities(facet));
-    this._store.update(setActiveId(id));
+    // add facet and set as the active
+    this._facets$.next([...this._facets$.value, facet]);
+    this._activeFacet$.next(facet);
   }
 
   /**
@@ -125,14 +113,16 @@ export class FacetListRepository {
    * @param facet The new facet's metadata.
    */
   public updateFacetMetadata(facet: FacetDefinition): void {
-    const old = this._store.query(getEntity(facet.id));
+    const old = this._facets$.value.find((f) => f.id === facet.id);
     if (old) {
-      this._store.update(
-        updateEntities(facet.id, {
-          label: facet.label,
-          colorKey: facet.colorKey,
-          description: facet.description,
-        })
+      const updated = {
+        ...old,
+        label: facet.label,
+        description: facet.description,
+        colorKey: facet.colorKey,
+      };
+      this._facets$.next(
+        this._facets$.value.map((f) => (f.id === facet.id ? updated : f))
       );
     }
   }
@@ -144,7 +134,15 @@ export class FacetListRepository {
    * @param to The target index.
    */
   public moveFacet(from: number, to: number): void {
-    this._store.update(moveEntity({ fromIndex: from, toIndex: to }));
+    this._facets$.next(
+      this._facets$.value.map((f, i) => {
+        return i === from
+          ? this._facets$.value[to]
+          : i === to
+          ? this._facets$.value[from]
+          : f;
+      })
+    );
   }
 
   /**
@@ -153,7 +151,11 @@ export class FacetListRepository {
    * @param id The facet's ID.
    */
   public deleteFacet(id: string): void {
-    this._store.update(deleteEntities(id));
+    this._facets$.next(
+      this._facets$.value.filter((f) => {
+        return f.id !== id;
+      })
+    );
   }
 
   /**
@@ -163,7 +165,7 @@ export class FacetListRepository {
    * @param id The new group ID.
    */
   public addGroup(facetId: string, id = 'new'): void {
-    const facet = this._store.query(getEntity(facetId));
+    const facet = this._facets$.value.find((f) => f.id === facetId);
     if (!facet) {
       return;
     }
@@ -171,10 +173,9 @@ export class FacetListRepository {
       id: id,
       partDefinitions: [],
     };
-    this._store.update(
-      updateEntities(facetId, {
-        groups: [...facet.groups, group],
-      })
+    const updated = { ...facet, groups: [...facet.groups, group] };
+    this._facets$.next(
+      this._facets$.value.map((f) => (f.id === facetId ? updated : f))
     );
   }
 
@@ -187,17 +188,17 @@ export class FacetListRepository {
    * @param to The target index.
    */
   public moveGroup(facetId: string, from: number, to: number): void {
-    const facet = this._store.query(getEntity(facetId));
+    const facet = this._facets$.value.find((f) => f.id === facetId);
     if (!facet) {
       return;
     }
     const groups = [...facet.groups];
     moveItemInArray(groups, from, to);
 
-    this._store.update(
-      updateEntities(facetId, {
-        groups: groups,
-      })
+    this._facets$.next(
+      this._facets$.value.map((f) =>
+        f.id === facetId ? { ...facet, groups } : f
+      )
     );
   }
 
@@ -209,7 +210,7 @@ export class FacetListRepository {
    * @param id The group's ID.
    */
   public deleteGroup(facetId: string, id: string): void {
-    const facet = this._store.query(getEntity(facetId));
+    const facet = this._facets$.value.find((f) => f.id === facetId);
     if (!facet) {
       return;
     }
@@ -221,10 +222,10 @@ export class FacetListRepository {
       return;
     }
     groups.splice(i, 1);
-    this._store.update(
-      updateEntities(facetId, {
-        groups: groups,
-      })
+    this._facets$.next(
+      this._facets$.value.map((f) =>
+        f.id === facetId ? { ...facet, groups } : f
+      )
     );
   }
 
@@ -237,7 +238,7 @@ export class FacetListRepository {
    */
   public addPart(facetId: string, groupId: string, typeId = 'new'): void {
     // find facet
-    const facet = this._store.query(getEntity(facetId));
+    const facet = this._facets$.value.find((f) => f.id === facetId);
     if (!facet) {
       return;
     }
@@ -267,11 +268,11 @@ export class FacetListRepository {
         colorKey: '#808080',
       },
     ];
-    // update groups
-    this._store.update(
-      updateEntities(facetId, {
-        groups: groups,
-      })
+    // update groups in facet
+    this._facets$.next(
+      this._facets$.value.map((f) =>
+        f.id === facetId ? { ...facet, groups } : f
+      )
     );
   }
 
@@ -293,7 +294,7 @@ export class FacetListRepository {
     to: number
   ): void {
     // find facet
-    const facet = this._store.query(getEntity(facetId));
+    const facet = this._facets$.value.find((f) => f.id === facetId);
     if (!facet) {
       return;
     }
@@ -330,7 +331,11 @@ export class FacetListRepository {
     }
 
     // update facet
-    this._store.update(updateEntities(facetId, editableFacet));
+    this._facets$.next(
+      this._facets$.value.map((f) =>
+        f.id === facetId ? { ...editableFacet } : f
+      )
+    );
   }
 
   /**
@@ -342,7 +347,7 @@ export class FacetListRepository {
    */
   public deletePart(facetId: string, groupId: string, index: number): void {
     // find facet
-    const facet = this._store.query(getEntity(facetId));
+    const facet = this._facets$.value.find((f) => f.id === facetId);
     if (!facet) {
       return;
     }
@@ -357,10 +362,10 @@ export class FacetListRepository {
     // remove part from that group
     groups[groupIndex].partDefinitions.splice(index, 1);
     // update groups
-    this._store.update(
-      updateEntities(facetId, {
-        groups: groups,
-      })
+    this._facets$.next(
+      this._facets$.value.map((f) =>
+        f.id === facetId ? { ...facet, groups } : f
+      )
     );
   }
 
@@ -373,7 +378,7 @@ export class FacetListRepository {
    */
   public colorizeGroup(facetId: string, groupId: string): void {
     // find facet
-    const facet = this._store.query(getEntity(facetId));
+    const facet = this._facets$.value.find((f) => f.id === facetId);
     if (!facet) {
       return;
     }
@@ -392,10 +397,10 @@ export class FacetListRepository {
     }
     groups[groupIndex].partDefinitions = parts;
     // update
-    this._store.update(
-      updateEntities(facetId, {
-        groups: groups,
-      })
+    this._facets$.next(
+      this._facets$.value.map((f) =>
+        f.id === facetId ? { ...facet, groups } : f
+      )
     );
   }
 }

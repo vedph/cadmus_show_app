@@ -26,7 +26,7 @@ export class ProfileCodePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.profile = this._builderService.build(
-      this._facetRepository.getAll(),
+      this._facetRepository.getFacets(),
       this._flagRepository.getFlags(),
       this._thesService.getAll()
     );

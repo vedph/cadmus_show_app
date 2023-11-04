@@ -21,7 +21,6 @@ import { JsonEditorComponent } from './components/json-editor/json-editor.compon
 import { ModelLookupComponent } from './components/model-lookup/model-lookup.component';
 import { PartDefinitionEditorComponent } from './components/part-definition-editor/part-definition-editor.component';
 import { PartInfoComponent } from './components/part-info/part-info.component';
-import { PagedDataBrowsersModule } from '@myrmidon/paged-data-browsers';
 
 @NgModule({
   declarations: [
@@ -48,7 +47,6 @@ import { PagedDataBrowsersModule } from '@myrmidon/paged-data-browsers';
     CadmusProfileCoreModule,
     CadmusShowUiModule,
     CadmusThesaurusUiModule,
-    PagedDataBrowsersModule,
   ],
   exports: [
     FacetViewComponent,
