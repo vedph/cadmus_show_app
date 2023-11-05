@@ -1,15 +1,11 @@
 <div>
-  <button type="button" mat-flat-button color="primary" (click)="addFlag()">
-    <mat-icon>add_circle</mat-icon>
-    flag
-  </button>
   <table *ngIf="flags">
     <tbody>
       <tr
         *ngFor="let f of flags; let i = index"
         [class.selected]="f === editedFlag"
       >
-        <td>
+        <td class="fit-width">
           <button
             type="button"
             mat-icon-button
@@ -27,10 +23,10 @@
             <mat-icon>remove_circle</mat-icon>
           </button>
         </td>
-        <td>
+        <td class="fit-width">
           <mat-icon [style.color]="'#' + f.colorKey">flag</mat-icon>
         </td>
-        <td>{{ f.id | flagBit }}</td>
+        <td class="fit-width">{{ f.id | flagBit }}</td>
         <td [matTooltip]="f.description">
           {{ f.label }}
         </td>
@@ -49,14 +45,25 @@
       ></cadmus-flag-definition-editor>
     </mat-card-content>
   </mat-card>
-  <hr />
-  <button
-    type="button"
-    mat-flat-button
-    color="primary"
-    matTooltip="Save flags"
-    (click)="save()"
-  >
-    <mat-icon>save</mat-icon> save
-  </button>
+
+  <div class="form-row">
+    <button
+      type="button"
+      mat-icon-button
+      color="primary"
+      matTooltip="Add a new flag"
+      (click)="addFlag()"
+    >
+      <mat-icon>add_circle</mat-icon>
+    </button>
+    <button
+      type="button"
+      mat-flat-button
+      color="primary"
+      matTooltip="Save flags"
+      (click)="save()"
+    >
+      <mat-icon>check_circle</mat-icon> save
+    </button>
+  </div>
 </div>
