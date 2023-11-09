@@ -83,18 +83,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "cadmus-show:build"
+            "buildTarget": "cadmus-show:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "cadmus-show:build:production"
+              "buildTarget": "cadmus-show:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "cadmus-show:build"
+            "buildTarget": "cadmus-show:build"
           }
         },
         "test": {

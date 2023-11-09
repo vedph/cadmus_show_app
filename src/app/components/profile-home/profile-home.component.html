@@ -156,8 +156,8 @@
     <ul>
       <li>
         <code>id</code>: the thesaurus unique ID, suffixed with
-        <code>@</code> followed by its ISO639-2 language code; e.g.
-        <code>languages@en</code>. NOTE: currently, the language suffix is not
+        <code>&#64;</code> followed by its ISO639-2 language code; e.g.
+        <code>languages&#64;en</code>. NOTE: currently, the language suffix is not
         used in the frontend implementation, so just leave it to english
         (<code>en</code>), whatever the language you use in your entry's value.
       </li>
@@ -173,7 +173,7 @@
     <code>
       <pre>
 &#123;
-  "id": "languages@en",
+  "id": "languages&#64;en",
   "entries": [
     &#123;
       "id": "lat",
@@ -270,13 +270,13 @@
     <p>Sample:</p>
     <code>
       <pre>
-languages@en,
+languages&#64;en,
 eng,English
 ita,Italian
 lat,Latin
 grc,Greek
-biblio-languages@en,=languages
-colors@en,
+biblio-languages&#64;en,=languages
+colors&#64;en,
 r,red
 g,green
 b,blue</pre
@@ -284,14 +284,14 @@ b,blue</pre
     </code>
     <p>
       In this sample there are 3 thesauri: the first has ID=<code
-        >languages@en</code
+        >languages&#64;en</code
       >
       (where <code>en</code>=English), with 4 entries, each with its ID/value
       pair. For instance, the first entry in it has ID=<code>eng</code> and
       value=<code>English</code>. The second thesaurus is just an alias, whose
-      ID (<code>biblio-languages@en</code>) redirects to the thesaurus with ID
+      ID (<code>biblio-languages&#64;en</code>) redirects to the thesaurus with ID
       <code>languages</code> (no language specifier is required in the target
-      ID). Finally, a third thesaurus has ID=<code>colors@en</code>, with 3
+      ID). Finally, a third thesaurus has ID=<code>colors&#64;en</code>, with 3
       entries for 3 colors.
     </p>
   </article>
