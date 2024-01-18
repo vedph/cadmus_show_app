@@ -19,13 +19,16 @@ ng build --base-href /apps/cadmus-show/
 🐋 Docker:
 
 ```bash
-docker build . -t vedph2020/cadmus-show-app:2.0.3 -t vedph2020/cadmus-show-app:latest
+docker build . -t vedph2020/cadmus-show-app:3.0.0 -t vedph2020/cadmus-show-app:latest
 ```
 
 For GitHub pages see [this tool](https://github.com/angular-schule/angular-cli-ghpages).
 
 ## History
 
+### 3.0.0
+
+- 2024-01-18: updated Angular and packages.
 - 2023-11-09: ⚠️ upgraded to Angular 17 and removed legacy dependency on Cadmus material.
 - 2023-05-12: updated to Angular 16.
 - 2023-03-11: updated Angular and packages.

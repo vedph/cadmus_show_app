@@ -107,11 +107,11 @@ export class PartDefinitionEditorComponent implements OnInit {
     this.typeId.setValue(definition.typeId);
     this.roleId.setValue(definition.roleId || null);
     this.name.setValue(definition.name);
-    this.description.setValue(definition.description);
-    this.required.setValue(definition.isRequired);
-    this.colorKey.setValue(definition.colorKey);
-    this.groupKey.setValue(definition.groupKey);
-    this.sortKey.setValue(definition.sortKey);
+    this.description.setValue(definition.description || null);
+    this.required.setValue(definition.isRequired || false);
+    this.colorKey.setValue(definition.colorKey || null);
+    this.groupKey.setValue(definition.groupKey || null);
+    this.sortKey.setValue(definition.sortKey || null);
     this.form.markAsPristine();
   }
 
