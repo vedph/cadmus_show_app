@@ -10,8 +10,7 @@
     - hint (string): a short textual hint used to better explain or motivate the datation point.
   - b (Datation)
 - references (DocReference[]):
+  - type (string)
   - tag (string)
-  - author* (string)
-  - work* (string)
-  - location (string)
+  - citation (string)
   - note (string)
