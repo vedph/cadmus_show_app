@@ -1,5 +1,5 @@
 - location* (string)
 - eid (string)
-- types (string[], thesaurus: epi-ligature-types)
+- types (string[], 📚 epi-ligature-types)
 - groupId (string)
 - note (string)

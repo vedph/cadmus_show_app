@@ -1,8 +1,23 @@
-- events (HistoricalEvent[]):
+- units* (CodUnit[]):
   - eid (string)
-  - type (string, 📚 event-types)
-  - chronotopes (AssertedChronotope[]):
-    - place (AssertedPlace):
+  - tag (string) 📚 cod-unit-tags
+  - material* (string) 📚 cod-unit-materials
+  - format* (string) 📚 cod-unit-formats
+  - state* (string) 📚 cod-unit-states
+  - ranges* (CodLocationRange[]):
+    - start* (CodLocation):
+      - endleaf (int): 0=none 1=start 2=end
+      - s (string): system
+      - n* (int): sheet number
+      - rmn (boolean): Roman system for n
+      - sfx (string): arbitrary suffix
+      - v (boolean?): verso or recto or unspecified/not-applicable
+      - c (string): column
+      - l (string): line
+      - word (string): reference word
+    - end* (CodLocation)
+  - chronotopes* (AssertedChronotope[]):
+    - place (AssertedPlace)
       - tag (string 📚 chronotope-tags)
       - value (string)
       - assertion (Assertion):
@@ -13,7 +28,7 @@
           - tag (string 📚 doc-reference-tags)
           - citation (string)
           - note (string)
-    - date (HistoricalDate):
+    - date (AssertedDate):
       - a* (Datation):
         - value* (int): the numeric value of the point. Its interpretation depends on other points properties: it may represent a year or a century, or a span between two consecutive Gregorian years.
         - isCentury (boolean): true if value is a century number; false if it's a Gregorian year.
@@ -25,25 +40,12 @@
         - hint (string): a short textual hint used to better explain or motivate the datation point.
       - b (Datation)
       - tag (string)
-    - references (DocReference[])
-  - assertion (Assertion)
-  - description (string)
-  - relatedEntities (RelatedEntity[]):
-    - relation (string)
-    - id (AssertedCompositeId):
-      - target (PinTarget):
-        - gid* (string)
-        - label* (string)
-        - itemId (string)
-        - partId (string)
-        - partTypeId (string)
-        - roleId (string)
-        - name (string)
-        - value (string)
-      - scope (string, 📚 comment-id-scopes)
-      - tag (string, 📚 comment-id-tags)
-      - assertion (Assertion):
-        - tag (string, 📚 assertion-tags)
-        - rank (short)
-        - references (DocReference[])
+      - assertion (Assertion)
+  - noGregory (boolean)
   - note (string)
+- palimpsests (CodPalimpsest[]):
+  - range* (CodLocationRange)
+  - chronotope (AssertedChronotope) 📚 chronotope-tags, 📚 assertion-tags, 📚 doc-reference-types, 📚 doc-reference-tags:
+  - note (string)
+
+Note: endleaves are described in [sheet labels](cod-sheet-labels.md).

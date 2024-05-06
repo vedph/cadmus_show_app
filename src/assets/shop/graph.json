@@ -8,8 +8,6 @@
     { "id": "it.vedph.external-ids", "label": "ext-ids" },
     { "id": "it.vedph.geo-asserted-locations", "label": "geo-ass-locs" },
     { "id": "it.vedph.geo-asserted-toponyms", "label": "geo-ass-topos" },
-    { "id": "it.vedph.epigraphy-support", "label": "epi-support" },
-    { "id": "it.vedph.epigraphy-writing", "label": "epi-writing" },
     { "id": "it.vedph.historical-date", "label": "historical-date" },
     { "id": "it.vedph.historical-events", "label": "historical-events" },
     { "id": "it.vedph.index-keywords", "label": "index-keywords" },
@@ -17,10 +15,12 @@
     { "id": "it.vedph.metadata", "label": "metadata" },
     { "id": "it.vedph.names", "label": "names" },
     { "id": "it.vedph.note", "label": "note" },
-    { "id": "it.vedph.pin-links", "label": "pin-links" },
+    { "id": "it.vedph.pin-links", "label": "links" },
     { "id": "it.vedph.tiled-text", "label": "tiled-text" },
     { "id": "it.vedph.token-text", "label": "token-text" },
     { "id": "it.vedph.token-text-layer", "label": "token-text-layer" },
+
+    { "id": "it.vedph.chgc.image-annotations", "label": "img-ann" },
 
     { "id": "it.vedph.ingra.drawing-info", "label": "drawing" },
     { "id": "it.vedph.ingra.graffiti-info", "label": "graffiti" },
@@ -38,6 +38,10 @@
     { "id": "it.vedph.codicology.cod-sheet-labels", "label": "cod-labels" },
     { "id": "it.vedph.codicology.cod-shelfmarks", "label": "cod-shelfmarks" },
     { "id": "it.vedph.codicology.cod-watermarks", "label": "cod-watermarks" },
+
+    { "id": "it.vedph.epigraphy-support", "label": "epi-support" },
+    { "id": "it.vedph.epigraphy-writing", "label": "epi-writing" },
+    { "id": "it.vedph.epigraphy.formula-patterns", "label": "epi-formula" },
 
     { "id": "it.vedph.itinera.cod-loci", "label": "cod-loci" },
     { "id": "it.vedph.itinera.cod-poem-ranges", "label": "cod-poem-ranges" },
@@ -73,6 +77,7 @@
     { "id": "fr.it.vedph.comment", "label": "comment-fr" },
     { "id": "fr.it.vedph.epigraphy-ligatures-fr", "label": "epi-ligatures-fr" },
     { "id": "fr.it.vedph.orthography", "label": "orthography-fr" },
+    { "id": "fr.it.vedph.pin-links", "label": "links-fr" },
     { "id": "fr.it.vedph.tgr.interpolations", "label": "interpolations-fr" },
     { "id": "fr.it.vedph.pura.lemma-tags", "label": "lemma-tags-fr" },
     { "id": "fr.it.vedph.tgr.ling.tags", "label": "ling-tags-fr" },
@@ -80,15 +85,20 @@
     { "id": "fr.it.vedph.tgr.var-quotations", "label": "var-quotations-fr" },
 
     { "id": "bdm", "label": "BDM" },
+    { "id": "chgc", "label": "CHGC" },
     { "id": "codicology", "label": "CODICOLOGY" },
+    { "id": "epigraphy", "label": "EPIGRAPHY" },
+    { "id": "febo", "label": "FEBO" },
+    { "id": "geography", "label": "GEOGRAPHY" },
+    { "id": "gisarc", "label": "GISARC" },
+    { "id": "imaging", "label": "IMAGING" },
     { "id": "ingra", "label": "INGRA" },
     { "id": "itinera", "label": "ITINERA" },
     { "id": "mqdq", "label": "MQDQ" },
     { "id": "pura", "label": "PURA" },
-    { "id": "tgr", "label": "TGR" },
     { "id": "renovella", "label": "RENOVELLA" },
     { "id": "sidon", "label": "SIDON" },
-    { "id": "gisarc", "label": "GISARC" },
+    { "id": "tgr", "label": "TGR" },
     { "id": "vela", "label": "VELA" }
   ],
   "links": [
@@ -150,6 +160,10 @@
       "target": "it.vedph.codicology.cod-watermarks",
       "label": ""
     },
+
+    { "source": "epigraphy", "target": "it.vedph.epigraphy-support" },
+    { "source": "epigraphy", "target": "it.vedph.epigraphy-writing" },
+    { "source": "epigraphy", "target": "it.vedph.epigraphy.formula-patterns" },
 
     { "source": "itinera", "target": "it.vedph.ext-bibliography", "label": "" },
     {
@@ -292,7 +306,11 @@
     { "source": "tgr", "target": "it.vedph.tgr.ms-places", "label": "" },
     { "source": "tgr", "target": "it.vedph.tgr.ms-scripts", "label": "" },
     { "source": "tgr", "target": "it.vedph.tgr.ms-units", "label": "" },
-    { "source": "tgr", "target": "fr.it.vedph.tgr.available-witnesses", "label": "" },
+    {
+      "source": "tgr",
+      "target": "fr.it.vedph.tgr.available-witnesses",
+      "label": ""
+    },
 
     { "source": "bdm", "target": "it.vedph.bibliography", "label": "" },
     { "source": "bdm", "target": "it.vedph.categories", "label": "" },
@@ -381,6 +399,49 @@
     { "source": "sidon", "target": "it.vedph.token-text-layer", "label": "" },
     { "source": "sidon", "target": "fr.it.vedph.apparatus", "label": "" },
 
+    {
+      "source": "chgc",
+      "target": "it.vedph.chgc.image-annotations",
+      "label": ""
+    },
+    { "source": "chgc", "target": "it.vedph.bibliography", "label": "" },
+    { "source": "chgc", "target": "it.vedph.categories", "label": "" },
+    { "source": "chgc", "target": "it.vedph.comment", "label": "" },
+    { "source": "chgc", "target": "it.vedph.doc-references", "label": "" },
+    { "source": "chgc", "target": "it.vedph.external-ids", "label": "" },
+    { "source": "chgc", "target": "it.vedph.index-keywords", "label": "" },
+    { "source": "chgc", "target": "it.vedph.metadata", "label": "" },
+    { "source": "chgc", "target": "it.vedph.note", "label": "" },
+
+    { "source": "febo", "target": "it.vedph.bibliography", "label": "" },
+    { "source": "febo", "target": "it.vedph.categories", "label": "" },
+    { "source": "febo", "target": "it.vedph.comment", "label": "" },
+    { "source": "febo", "target": "it.vedph.doc-references", "label": "" },
+    { "source": "febo", "target": "it.vedph.historical-events", "label": "" },
+    { "source": "febo", "target": "it.vedph.external-ids", "label": "" },
+    { "source": "febo", "target": "it.vedph.index-keywords", "label": "" },
+    { "source": "febo", "target": "it.vedph.metadata", "label": "" },
+    { "source": "febo", "target": "it.vedph.epigraphy-support", "label": "" },
+    { "source": "febo", "target": "it.vedph.epigraphy-writing", "label": "" },
+    { "source": "febo", "target": "it.vedph.note", "label": "" },
+    {
+      "source": "febo",
+      "target": "it.vedph.geo-asserted-locations",
+      "label": ""
+    },
+    {
+      "source": "febo",
+      "target": "it.vedph.geo-asserted-toponyms",
+      "label": ""
+    },
+    { "source": "febo", "target": "it.vedph.historical-date", "label": "" },
+    { "source": "febo", "target": "it.vedph.token-text", "label": "" },
+    { "source": "febo", "target": "it.vedph.token-text-layer", "label": "" },
+    { "source": "febo", "target": "fr.it.vedph.apparatus", "label": "" },
+    { "source": "febo", "target": "fr.it.vedph.comment", "label": "" },
+    { "source": "febo", "target": "fr.it.vedph.chronology", "label": "" },
+    { "source": "febo", "target": "fr.it.vedph.orthography", "label": "" },
+
     { "source": "gisarc", "target": "it.vedph.bibliography", "label": "" },
     { "source": "gisarc", "target": "it.vedph.categories", "label": "" },
     { "source": "gisarc", "target": "it.vedph.comment", "label": "" },
@@ -397,11 +458,28 @@
     { "source": "gisarc", "target": "fr.it.vedph.comment", "label": "" },
     { "source": "gisarc", "target": "fr.it.vedph.chronology", "label": "" },
     { "source": "gisarc", "target": "fr.it.vedph.orthography", "label": "" },
-    { "source": "gisarc", "target": "it.vedph.geo-asserted-locations", "label": "" },
-    { "source": "gisarc", "target": "it.vedph.geo-asserted-toponyms", "label": "" },
+    {
+      "source": "gisarc",
+      "target": "it.vedph.geo-asserted-locations",
+      "label": ""
+    },
+    {
+      "source": "gisarc",
+      "target": "it.vedph.geo-asserted-toponyms",
+      "label": ""
+    },
     { "source": "gisarc", "target": "it.vedph.epigraphy-support", "label": "" },
     { "source": "gisarc", "target": "it.vedph.epigraphy-writing", "label": "" },
-    { "source": "gisarc", "target": "fr.it.vedph.epigraphy-ligatures-fr", "label": "" },
+    {
+      "source": "gisarc",
+      "target": "it.vedph.epigraphy.formula-patterns",
+      "label": ""
+    },
+    {
+      "source": "gisarc",
+      "target": "fr.it.vedph.epigraphy-ligatures-fr",
+      "label": ""
+    },
 
     { "source": "vela", "target": "it.vedph.bibliography", "label": "" },
     { "source": "vela", "target": "it.vedph.categories", "label": "" },
@@ -418,10 +496,22 @@
     { "source": "vela", "target": "fr.it.vedph.comment", "label": "" },
     { "source": "vela", "target": "fr.it.vedph.chronology", "label": "" },
     { "source": "vela", "target": "fr.it.vedph.orthography", "label": "" },
-    { "source": "vela", "target": "it.vedph.geo-asserted-locations", "label": "" },
-    { "source": "vela", "target": "it.vedph.geo-asserted-toponyms", "label": "" },
+    {
+      "source": "vela",
+      "target": "it.vedph.geo-asserted-locations",
+      "label": ""
+    },
+    {
+      "source": "vela",
+      "target": "it.vedph.geo-asserted-toponyms",
+      "label": ""
+    },
     { "source": "vela", "target": "it.vedph.epigraphy-support", "label": "" },
     { "source": "vela", "target": "it.vedph.epigraphy-writing", "label": "" },
-    { "source": "vela", "target": "fr.it.vedph.epigraphy-ligatures-fr", "label": "" }
+    {
+      "source": "vela",
+      "target": "fr.it.vedph.epigraphy-ligatures-fr",
+      "label": ""
+    }
   ]
 }

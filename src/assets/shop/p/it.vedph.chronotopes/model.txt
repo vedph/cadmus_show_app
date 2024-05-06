@@ -1,13 +1,13 @@
 - chronotopes (AssertedChronotope[]):
   - place (AssertedPlace)
-    - tag (string) T:chronotope-tags
+    - tag (string, 📚 chronotope-tags)
     - value (string)
     - assertion (Assertion):
-      - tag (string) T:assertion-tags
+      - tag (string, 📚 assertion-tags)
       - rank (short)
       - references (DocReference[]):
-        - type (string) T:doc-reference-types
-        - tag (string) T:doc-reference-tags
+        - type (string, 📚 doc-reference-types)
+        - tag (string, 📚 doc-reference-tags)
         - citation (string)
         - note (string)
   - date (AssertedDate):

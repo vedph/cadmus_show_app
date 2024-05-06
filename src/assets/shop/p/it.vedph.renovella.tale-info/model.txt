@@ -5,8 +5,8 @@
 - author (CitedPerson):
   - ids (string[])
   - sources (DocReference[]):
-    - type (string) T:doc-reference-types
-    - tag (string) T:doc-reference-tags
+    - type (string📚 doc-reference-types)
+    - tag (string📚 doc-reference-tags)
     - citation (string)
     - note (string)
   - name (ProperName):

@@ -1,8 +1,8 @@
 - entries (QuotationEntry[]):
   - author (string)
-  - work (string)
+  - work (string, 📚 quotation-works)
   - citation (string)
   - citationUri (string)
   - variant (string)
-  - tag (string)
+  - tag (string, 📚 quotation-tags)
   - note (string)

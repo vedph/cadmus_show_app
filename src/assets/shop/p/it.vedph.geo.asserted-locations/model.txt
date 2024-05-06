@@ -1,3 +1,4 @@
+- tag (string, 📚 geo-location-tags)
 - point* (LocationPoint):
   - lat (number)
   - lon (number)
@@ -10,8 +11,8 @@
   - tag (string)
   - rank (short)
 - references (DocReference[]):
-  - type (string)
-  - tag (string)
+  - type (string, 📚 doc-reference-types)
+  - tag (string, 📚 doc-reference-tags)
   - citation (string)
   - note (string)
 - note (string)

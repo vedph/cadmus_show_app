@@ -1,3 +1,4 @@
+- location (string)
 - links (AssertedCompositeId[]):
   - target (PinTarget):
     - gid* (string)

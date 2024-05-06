@@ -1,2 +1,3 @@
-- standard (string)
+- location* (string)
+- standard* (string)
 - operations (string[])

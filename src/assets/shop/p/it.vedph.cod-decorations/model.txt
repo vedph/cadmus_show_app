@@ -1,41 +1,41 @@
 - decorations (CodDecoration[]):
   - eid (string)
   - name* (string)
-  - flags (string[]) T:cod-decoration-flags
-  - chronotopes (AssertedChronotope[]) T:assertion-tags, T:doc-reference-types, T:doc-reference-tags
+  - flags (string[], 📚 cod-decoration-flags)
+  - chronotopes (AssertedChronotope[], 📚 assertion-tags, 📚 doc-reference-types, 📚 doc-reference-tags)
   - artists (CodDecorationArtist[]):
     - eid (string)
-    - type* (string) T:cod-decoration-artist-types
+    - type* (string, 📚 cod-decoration-artist-types)
     - name* (string)
     - ids (ExternalId[])
     - styles (CodDecorationArtistStyle[]):
-      - name* (string) T:cod-decoration-artist-style-names
+      - name* (string, 📚 cod-decoration-artist-style-names)
       - chronotope (AssertedChronotope)
       - assertion (Assertion)
     - elementKeys (string[])
     - note (string)
   - note (string)
-  - references (DocReference[]) T:doc-reference-types, T:doc-reference-tags
+  - references (DocReference[], 📚 doc-reference-types, 📚 doc-reference-tags)
   - elements (CodDecorationElement[]):
     - key (string)
     - parentKey (string)
-    - type* (string) T:cod-decoration-element-types
-    - flags (string[]) T:cod-decoration-element-flags
+    - type* (string, 📚 cod-decoration-element-types)
+    - flags (string[], 📚 cod-decoration-element-flags)
     - ranges* (CodLocationRange[])
     - instanceCount (int)
-    - typologies (string) T:cod-decoration-element-typologies
+    - typologies (string, 📚 cod-decoration-element-typologies)
     - subject (string)
-    - colors (string[]) T:cod-decoration-element-colors
-    - gildings (string[]) T:cod-decoration-element-gildings
-    - techniques (string[]) T:cod-decoration-element-techniques
-    - tools (string[]) T:cod-decoration-element-tools
-    - positions (string[]) T:cod-decoration-element-positions
+    - colors (string[], 📚 cod-decoration-element-colors)
+    - gildings (string[], 📚 cod-decoration-element-gildings)
+    - techniques (string[], 📚 cod-decoration-element-techniques)
+    - tools (string[], 📚 cod-decoration-element-tools)
+    - positions (string[], 📚 cod-decoration-element-positions)
     - lineHeight (int)
     - textRelation (string)
     - description (string MD)
     - images (CodImage[]):
       - id* (string)
-      - type* (string) T:cod-image-types
+      - type* (string, 📚 cod-image-types)
       - sourceId (string)
       - label (string)
       - copyright (string)

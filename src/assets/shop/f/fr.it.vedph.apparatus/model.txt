@@ -1,14 +1,19 @@
-- tag (string)
+- location (string)
+- tag (string, 📚 !apparatus-tags)
 - entries (ApparatusEntry[]):
-  - type (int): 0=replacement, 1=addition before, 2=addition after, 3=note
+  - type (int): 0=replacement, 1=addition before, 2=addition after, 3=note.
+  - tag (string)
   - subrange (string)
   - value (string)
-  - tag (string)
   - normValue (string)
-  - note (string)
-  - witnesses (AnnotatedValue[]):
-    - value (string)
-    - note (string)
-  - authors (AnnotatedValue[])
   - isAccepted (boolean)
   - groupId (string)
+  - note (string)
+  - witnesses (AnnotatedValue[], 📚 apparatus-witnesses):
+    - value (string)
+    - note (string)
+  - authors (LocAnnotatedValue[], 📚 apparatus-authors):
+    - value (string)
+    - note (string)
+    - tag (string, 📚 !apparatus-author-tags)
+    - location (string)

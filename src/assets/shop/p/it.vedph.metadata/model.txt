@@ -1,4 +1,4 @@
 - metadata (Metadatum[]):
-  - type (string)
+  - type (string, 📚 metadata-types)
   - name (string)
   - value (string)

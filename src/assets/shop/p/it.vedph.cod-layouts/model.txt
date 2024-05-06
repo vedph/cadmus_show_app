@@ -2,14 +2,14 @@
   - sample* (CodLocation)
   - ranges* (CodLocationRange[])
   - dimensions (PhysicalDimension[]) T for dimension tag: cod-layout-dimension-tags, T:physical-size-dim-tags, T:physical-size-units
-  - rulingTechnique (string) T:cod-layout-ruling-techniques
-  - derolez (string) T:cod-layout-derolez
-  - pricking (string) T:cod-layout-prickings
+  - rulingTechnique (string, 📚 cod-layout-ruling-techniques)
+  - derolez (string, 📚 cod-layout-derolez)
+  - pricking (string, 📚 cod-layout-prickings)
   - columnCount* (int)
   - counts (DecoratedCount[]):
-    - id* (string) T:cod-layout-counts
+    - id* (string, 📚 cod-layout-counts)
     - value* (int)
     - tag (string)
     - note (string)
-  - tag (string) T:cod-layout-tags
+  - tag (string, 📚 cod-layout-tags)
   - note (string)

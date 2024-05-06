@@ -19,17 +19,20 @@ ng build --base-href /apps/cadmus-show/
 🐋 Docker:
 
 ```bash
-docker build . -t vedph2020/cadmus-show-app:3.0.0 -t vedph2020/cadmus-show-app:latest
+docker build . -t vedph2020/cadmus-show-app:3.0.1 -t vedph2020/cadmus-show-app:latest
 ```
 
 For GitHub pages see [this tool](https://github.com/angular-schule/angular-cli-ghpages).
 
 ## History
 
+### 3.0.1
+
 - 2024-05-06:
   - updated Angular and packages.
   - refactored imports for new [standalone bricks V2](https://github.com/vedph/cadmus-bricks-shell-v2/).
   - replaced `ngx-monaco-editor` with `@cisstech/nge`.
+  - updated models.
 
 ### 3.0.0
 

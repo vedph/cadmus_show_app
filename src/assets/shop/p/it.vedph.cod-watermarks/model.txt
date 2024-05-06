@@ -2,7 +2,7 @@
   - name* (string)
   - sampleRange* (CodLocationRange)
   - ranges (CodLocationRange[])
-  - ids (RankedExternalId[]) T:external-id-tags, T:external-id-scopes
-  - size (PhysicalSize) T:physical-size-tags, T:physical-size-dim-tags, T:physical-size-units
-  - chronotope (AssertedChronotope) T:chronotope-tags, T:assertion-tags, T:doc-reference-types, T:doc-reference-tags
+  - ids (RankedExternalId[], 📚 external-id-tags, 📚 external-id-scopes)
+  - size (PhysicalSize, 📚 physical-size-tags, 📚 physical-size-dim-tags, 📚 physical-size-units)
+  - chronotope (AssertedChronotope, 📚 chronotope-tags, 📚 assertion-tags, 📚 doc-reference-types, 📚 doc-reference-tags)
   - description (string)

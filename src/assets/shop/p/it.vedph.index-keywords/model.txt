@@ -1,6 +1,6 @@
 - keywords (IndexKeyword[]):
-  - indexId
-  - language*
-  - value
-  - note
-  - tag
+  - indexId (string 📚 keyword-indexes)
+  - language (string 📚 languages)
+  - value (string)
+  - note (string)
+  - tag (string 📚 keyword-tags)

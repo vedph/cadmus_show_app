@@ -1,1 +1,6 @@
-TODO
+- entries (ExtBibEntry[]):
+  - id (string)
+  - label (string)
+  - payload (string)
+  - tag (string)
+  - note (string)

@@ -1,6 +1,6 @@
 - shelfmarks (CodShelfmark[]):
-  - tag (string) T:cod-shelfmark-tags
+  - tag (string, 📚 cod-shelfmark-tags)
   - city* (string)
-  - library* (string) T:cod-shelfmark-libraries
+  - library* (string, 📚 cod-shelfmark-libraries)
   - fund (string)
   - location* (string)

@@ -1,0 +1,63 @@
+- rows (CodSheetRow[])
+  - id* (string): the physical sheet ID, equal to the physical sheet CodLocation string value (1r, 1v, 2r, 2v... etc).
+  - columns (CodSheetColumn[]):
+    - id* (string): assigned according to a convention (see below).
+    - value: the cell's value.
+    - note
+- endleaves (CodEndleaf[]):
+  - location* (string): the endleaf location. This links these data to the endleaf row's ID in the table.
+  - material* (string) T:cod-endleaf-materials
+  - chronotope (AssertedChronotope):
+    - place (AssertedPlace):
+      - tag (string)
+      - value* (string)
+      - assertion (Assertion):
+        - tag (string)
+        - rank (short)
+        - references (DocReference[]):
+          - type (string)
+          - tag (string)
+          - citation* (string)
+          - note (string)
+    - date (AssertedDate):
+      - a* (Datation):
+        - value* (int): the numeric value of the point. Its interpretation depends on other points properties: it may represent a year or a century, or a span between two consecutive Gregorian years.
+        - isCentury (boolean): true if value is a century number; false if it's a Gregorian year.
+        - isSpan (boolean): true if the value is the first year of a pair of two consecutive years. This is used for calendars which span across two Gregorian years, e.g. 776/5 BC.
+        - month (short): the month number (1-12) or 0.
+        - day (short): the day number (1-31) or 0.
+        - isApproximate (boolean): true if the point is approximate ("about").
+        - isDubious (boolean): true if the point is dubious ("perhaphs").
+        - hint (string): a short textual hint used to better explain or motivate the datation point.
+      - b (Datation)
+      - tag (string)
+      - assertion (Assertion)
+- nDefinitions (CodSheetNColumnDefinition[]): numbering on sheets:
+  - id* (string)
+  - rank (short): a generic rank property which defines the rank for N definitions of the same type: e.g. the main numbering has rank=1, the second has rank=2, etc. Two numberings might also have the same rank if neither prevails. Also, this has the advantage of allowing several columns for quires, signatures, etc. should this be ever required because of different, conflicting descriptions.
+  - note (string)
+  - isPagination (bool)
+  - isByScribe (bool)
+  - system* (string) T:cod-numbering-systems
+  - technique* (string) T:cod-numbering-techniques
+  - position* (string) T:cod-numbering-positions
+  - colors (string[])
+  - date (HistoricalDate)
+- cDefinitions (CodSheetCColumnDefinition[]): catchwords on sheets:
+  - id* (string)
+  - rank (short)
+  - note (string)
+  - position* (string) T:cod-catchwords-positions
+  - isVertical (bool)
+  - decoration (string)
+- sDefinitions (CodSheetSColumnDefinition[]): quire signatures on sheets:
+  - id* (string)
+  - rank (short)
+  - note (string)
+  - system* (string) T:cod-quiresig-systems
+  - position* (string) T:cod-quiresig-positions
+- rDefinitions (CodSheetRColumnDefinition[]): quire register signatures:
+  - id* (string)
+  - rank (short)
+  - note (string)
+  - position* (string) T:cod-quiresig-positions

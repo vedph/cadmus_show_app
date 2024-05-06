@@ -1,4 +1,5 @@
-- tag (string)
+- location (string)
+- tag (string, 📚 chronology-tags)
 - label (string)
 - eventId (string)
 - date (HistoricalDate):
@@ -12,3 +13,4 @@
     - isDubious (boolean): true if the point is dubious ("perhaphs").
     - hint (string): a short textual hint used to better explain or motivate the datation point.
   - b (Datation)
+  - tag (string)

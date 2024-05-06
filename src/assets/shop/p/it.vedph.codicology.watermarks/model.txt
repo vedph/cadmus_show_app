@@ -1,8 +1,40 @@
-- events (HistoricalEvent[]):
-  - eid (string)
-  - type (string, 📚 event-types)
+- watermarks (CodWatermark[]):
+  - name* (string)
+  - sampleRange* (CodLocationRange):
+    - start* (CodLocation):
+      - endleaf (int): 0=none 1=start 2=end
+      - s (string): system
+      - n* (int): sheet number
+      - rmn (boolean): Roman system for n
+      - sfx (string): arbitrary suffix
+      - v (boolean?): verso or recto or unspecified/not-applicable
+      - c (string): column
+      - l (string): line
+      - word (string): reference word
+    - end* (CodLocation)
+  - ranges (CodLocationRange[])
+  - ids (AssertedCompositeId[]):
+    - target (PinTarget):
+      - gid* (string)
+      - label* (string)
+      - itemId (string)
+      - partId (string)
+      - partTypeId (string)
+      - roleId (string)
+      - name (string)
+      - value (string)
+    - scope (string)
+    - assertion (Assertion)
+  - size (PhysicalSize):
+    - tag (string 📚 physical-size-tags)
+    - w (PhysicalDimension):
+      - value* (number)
+      - unit* (string 📚 physical-size-units)
+      - tag (string 📚 physical-size-dim-tags)
+    - h (PhysicalDimension)
+    - d (PhysicalDimension)
   - chronotopes (AssertedChronotope[]):
-    - place (AssertedPlace):
+    - place (AssertedPlace)
       - tag (string 📚 chronotope-tags)
       - value (string)
       - assertion (Assertion):
@@ -13,7 +45,7 @@
           - tag (string 📚 doc-reference-tags)
           - citation (string)
           - note (string)
-    - date (HistoricalDate):
+    - date (AssertedDate):
       - a* (Datation):
         - value* (int): the numeric value of the point. Its interpretation depends on other points properties: it may represent a year or a century, or a span between two consecutive Gregorian years.
         - isCentury (boolean): true if value is a century number; false if it's a Gregorian year.
@@ -25,25 +57,5 @@
         - hint (string): a short textual hint used to better explain or motivate the datation point.
       - b (Datation)
       - tag (string)
-    - references (DocReference[])
-  - assertion (Assertion)
+      - assertion (Assertion)
   - description (string)
-  - relatedEntities (RelatedEntity[]):
-    - relation (string)
-    - id (AssertedCompositeId):
-      - target (PinTarget):
-        - gid* (string)
-        - label* (string)
-        - itemId (string)
-        - partId (string)
-        - partTypeId (string)
-        - roleId (string)
-        - name (string)
-        - value (string)
-      - scope (string, 📚 comment-id-scopes)
-      - tag (string, 📚 comment-id-tags)
-      - assertion (Assertion):
-        - tag (string, 📚 assertion-tags)
-        - rank (short)
-        - references (DocReference[])
-  - note (string)

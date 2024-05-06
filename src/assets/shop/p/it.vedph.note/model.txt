@@ -1,2 +1,2 @@
-- tag (string): generic tag.
+- tag (string, 📚 note-tags): generic tag.
 - note (string): Markdown text.

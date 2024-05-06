@@ -2,21 +2,21 @@
   - eid (string)
   - name (string)
   - instances (CodHandInstance)
-    - script* (string) T:cod-hand-scripts
-    - typologies* (string[]) T:cod-hand-typologies
-    - colors (string[]) T:cod-hand-colors
+    - script* (string, 📚 cod-hand-scripts)
+    - typologies* (string[], 📚 cod-hand-typologies)
+    - colors (string[], 📚 cod-hand-colors)
     - ranges* (CodLocationRange[])
     - rank (short)
     - descriptionKey (string)
-    - chronotope (AssertedChronotope) T:assertion-tags, T:doc-reference-types, T:doc-reference-tags
+    - chronotope (AssertedChronotope, 📚 assertion-tags, 📚 doc-reference-types, 📚 doc-reference-tags)
     - images (CodImage[]):
       - id* (string)
-      - type* (string) T:cod-image-types
+      - type* (string, 📚 cod-image-types)
       - sourceId (string)
       - label (string)
       - copyright (string)
   - descriptions (CodHandDescription[]):
-    - key (string): this is referenced by `CodHandInstance.descriptionKey`
+    - key (string): this is referenced by CodHandInstance.descriptionKey
     - description (string)
     - initials (string)
     - corrections (string)
@@ -24,12 +24,12 @@
     - abbreviations (string)
     - signs (CodHandSign[]):
       - eid (string)
-      - type* (string) T:cod-hand-sign-types
+      - type* (string, 📚 cod-hand-sign-types)
       - sampleLocation* (CodLocation)
       - description (string)
   - subscriptions (CodHandSubscription[]):
     - range* (CodLocationRange)
-    - language* (string) T:cod-hand-subscription-languages
+    - language* (string, 📚 cod-hand-subscription-languages)
     - text (string)
     - note (string)
-  - references (DocReference[]) T:doc-reference-types, T:doc-reference-tags
+  - references (DocReference[], 📚 doc-reference-types, 📚 doc-reference-tags)

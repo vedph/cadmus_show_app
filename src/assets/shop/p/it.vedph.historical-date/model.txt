@@ -9,8 +9,9 @@
     - isDubious (boolean): true if the point is dubious ("perhaphs").
     - hint (string): a short textual hint used to better explain or motivate the datation point.
   - b (Datation)
-- references (DocReference[]):
-  - type (string)
   - tag (string)
+- references (DocReference[]):
+  - type (string, 📚 doc-reference-types)
+  - tag (string, 📚 doc-reference-tags)
   - citation (string)
   - note (string)
