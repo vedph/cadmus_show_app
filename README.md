@@ -26,6 +26,11 @@ For GitHub pages see [this tool](https://github.com/angular-schule/angular-cli-g
 
 ## History
 
+- 2024-05-06:
+  - updated Angular and packages.
+  - refactored imports for new [standalone bricks V2](https://github.com/vedph/cadmus-bricks-shell-v2/).
+  - replaced `ngx-monaco-editor` with `@cisstech/nge`.
+
 ### 3.0.0
 
 - 2024-01-18: updated Angular and packages.
